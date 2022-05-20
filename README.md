@@ -8,3 +8,5 @@ We will be creating a Pokémon remake with some main features, mainly from Poké
 
 **Full Documentation**:  
 https://docs.google.com/document/d/1yVzZRDgaRQPYU-O_Df970VfCovaV3XTKwuiIwCcpgyU/edit?usp=sharing
+
+I am editing README for classwork
