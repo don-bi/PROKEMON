@@ -14,7 +14,9 @@ void setup(){
       map.setTile(j,i,new Tile(16));
     }
   }
+  map.getTile(0,0).modifyTile("BLOCK",true);
 }
 
 void draw(){
+  image(map.getTile(j,i).texture, 0, 0);
 }
