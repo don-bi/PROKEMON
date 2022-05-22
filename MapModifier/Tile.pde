@@ -23,6 +23,19 @@ public class Tile{
     size = s;
     comment = "";
   }
+  
+  PImage colorChecker(){
+    PImage temp = createImage(size, size, ARGB);
+    color clr = color(0,1);
+
+    if (!isWalkable) clr = color(255, 0, 0, 100);
+
+    for (int i = 0; i < temp.pixels.length; i ++){
+      temp.pixels[i] = clr;
+    }
+    temp.updatePixels();
+    return temp;
+  }
 
   void resetTile(){
     isWalkable = true;
