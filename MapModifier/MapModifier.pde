@@ -18,5 +18,6 @@ void setup(){
 }
 
 void draw(){
-  image(map.getTile(j,i).texture, 0, 0);
+  background(255);
+  image(map.getTile(0,0).texture, 0, 0);
 }
