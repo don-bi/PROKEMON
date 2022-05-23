@@ -31,6 +31,15 @@ public class Tile{
   
   //determines size of combined image to place correctly
   
+  char condenseData(boolean bool){
+    if(bool) return 't';
+    return 'f';
+  }
+  
+  String toString(){
+    return "" + condenseData(isWalkable) + ',' + condenseData(isInteractable)  + ',' + condenseData(isWarp) + ',' + condenseData(isDoor) + ',' + condenseData(isEvent) + ',' + condenseData(isForeground) + ',' + condenseData(isGrass);
+  }
+  
   PImage colorChecker(){
     PImage temp = createImage(size, size, ARGB);
     temp.loadPixels();

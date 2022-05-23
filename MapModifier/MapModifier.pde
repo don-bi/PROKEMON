@@ -44,7 +44,7 @@ void draw() {
 void mouseTile() {
   int x = (((int)mouseX)/16);
   int y = (((int)mouseY)/16);
-  map.getTile(x, y).modifyTile("BLOCK", "add");
+  map.getTile(x, y).modifyTile(mode, "add");
 }
 
 void mousePressed() {
