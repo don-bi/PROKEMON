@@ -7,7 +7,7 @@ public class Tile{
   boolean isForeground;
   boolean isGrass;
   int size;
-  String comment;  
+  String comment;
   PImage texture;
   String warpMap;
   int[] warpCoord;
@@ -22,13 +22,21 @@ public class Tile{
     isGrass = false;
     size = s;
     comment = "";
+    texture = colorChecker();
   }
-  
+
   PImage colorChecker(){
     PImage temp = createImage(size, size, ARGB);
+    temp.loadPixels();
     color clr = color(0,1);
 
     if (!isWalkable) clr = color(255, 0, 0, 100);
+    if (isInteractable) clr = color(232, 247, 89, 100);
+    if (isWarp) clr = color(173, 44, 242, 100);
+    if (isDoor) clr = color(176, 123, 99, 100);
+    if (isEvent) clr = color(101, 235, 94, 100);
+    if (isForeground) clr = color(8, 214, 255, 100);
+    if (isGrass) clr = color(0,100);
 
     for (int i = 0; i < temp.pixels.length; i ++){
       temp.pixels[i] = clr;
@@ -47,8 +55,8 @@ public class Tile{
     isGrass = false;
   }
 
-  void modifyTile(String mode, boolean b){
-    boolean bool = b;
+  void modifyTile(String mode, String s){
+    boolean bool = s.equals("add");
     switch(mode){
       case "ERASE": resetTile(); break;
       case "BLOCK": isWalkable = !bool; break;
@@ -59,5 +67,6 @@ public class Tile{
       case "FOREGROUND": isForeground = bool; break;
       case "GRASS": isGrass = bool; break;
     }
+    texture = colorChecker();
   }
 }
