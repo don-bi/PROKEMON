@@ -60,15 +60,30 @@ void keyPressed() {
       commandmode = false;
       currentcommand = "";
     }
-  } else if (commandmode){
-      if (key == BACKSPACE && currentcommand.length()>0){
-        currentcommand = currentcommand.substring(0,currentcommand.length()-1);
-      } else {
-        currentcommand += key;
-      }
+  } else if (commandmode) {
+    if (key == BACKSPACE && currentcommand.length()>0) {
+      currentcommand = currentcommand.substring(0, currentcommand.length()-1);
+    } else {
+      currentcommand += key;
+    }
   }
 }
 
-void execute(){
-  mode = currentcommand.toUpperCase();
+void execute() {
+  if (currentcommand.length() > 0) {
+    //for slash commands
+    if (currentcommand.charAt(0) == '/') {
+
+      //export current map data into a file named after what's typed next
+      if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("export")) {
+        String exportfile = currentcommand.substring(8) + ".txt";
+        PrintWriter export = createWriter(exportfile);
+        export.println(map.toString());
+        export.flush();
+        export.close();
+      }
+    } else {
+      mode = currentcommand.toUpperCase();
+    }
+  }
 }
