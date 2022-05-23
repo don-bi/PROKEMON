@@ -5,6 +5,7 @@ PImage currentMap;
 Map map;
 boolean commandmode = false;
 String currentcommand = "";
+String mode = "";
 
 void setup() {
   size(256, 224); //remember to change size to map width*16 by map height * 16 before start
@@ -16,7 +17,6 @@ void setup() {
       map.setTile(j, i, new Tile(16));
     }
   }
-  map.getTile(0, 0).modifyTile("BLOCK", "add");
 }
 
 void draw() {
@@ -56,6 +56,7 @@ void keyPressed() {
     if (!commandmode) {
       commandmode = true;
     } else {
+      execute();
       commandmode = false;
       currentcommand = "";
     }
@@ -66,4 +67,8 @@ void keyPressed() {
         currentcommand += key;
       }
   }
+}
+
+void execute(){
+  mode = currentcommand.toUpperCase();
 }
