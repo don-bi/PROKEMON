@@ -82,7 +82,30 @@ void execute() {
         export.flush();
         export.close();
       }
-    } else {
+    }  
+    
+    //import
+    if (currentcommand.length() > 7 && currentcommand.substring(1,7).equals("import")){
+        BufferedReader reader = createReader(currentcommand.substring(8) + ".txt");
+        String[] line = reader.readLine().split(" ");
+        for (int imY = 0; imY < map.HEIGHT; imY++){
+          for (int imX = 0; imX < map.WIDTH; imX++) {
+            String element = line[imX];
+            String[] modifiers = element.split(",");
+            String[] mods = {"INTERACT","WARP","DOOR","EVENT","FOREGROUND","GRASS"};
+            String change = "remove";
+            if (modifiers[0].equals("f")) change = "add";
+            map.getTile(imX,imY).modifyTile("BLOCK", change);
+            for (int i = 0; i < mods.length; i ++){
+              change = "remove";
+              if (modifiers[i+1].equals("t")) change = "add";
+              map.getTile(imX,imY).modifyTile(mods[i], change);
+            }
+          }
+        }
+      }
+    
+    else {
       mode = currentcommand.toUpperCase();
     }
   }
