@@ -3,6 +3,8 @@ import java.io.*;
 
 PImage currentMap;
 Map map;
+boolean commandmode = false;
+String currentcommand = "";
 
 void setup() {
   size(256, 224); //remember to change size to map width*16 by map height * 16 before start
@@ -18,15 +20,21 @@ void setup() {
 }
 
 void draw() {
-  background(255);
-  image(currentMap, 0, 0);
-  image(map.getTile(0, 0).texture, 0, 0);
-  for (int i = 0; i < map.HEIGHT; i ++) {
-    for (int j = 0; j < map.WIDTH; j ++) {
-      int x = j*16;
-      int y = i*16;
-      image(map.getTile(j, i).texture, x, y);
+  if (!commandmode) {
+    background(255);
+    image(currentMap, 0, 0);
+    image(map.getTile(0, 0).texture, 0, 0);
+    for (int i = 0; i < map.HEIGHT; i ++) {
+      for (int j = 0; j < map.WIDTH; j ++) {
+        int x = j*16;
+        int y = i*16;
+        image(map.getTile(j, i).texture, x, y);
+      }
     }
+  } else {
+    fill(255);
+    image(currentMap, 0, 0);
+    rect(0, height/2, width, 20);
   }
 }
 
@@ -38,4 +46,15 @@ void mouseTile() {
 
 void mousePressed() {
   mouseTile();
+}
+
+void keyPressed() {
+  if (key == ENTER) {
+    if (!commandmode) {
+      commandmode = true;
+    } else {
+      commandmode = false;
+      currentcommand = "";
+    }
+  }
 }
