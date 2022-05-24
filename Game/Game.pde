@@ -9,10 +9,21 @@ ScreenAnimations animations;
 String currentMap;
 Map currentMapTiles;
 
-void setup(){
-
+void setup() {
+  frameRate(60);
+  data = new Data();
+  
+  currentMapTiles = new Map();
+  try {
+    currentMapTiles.loadMap("HomeTop.txt");
+  } 
+  catch (IOException e) {
+    println("bad file");
+  }
 }
 
 void draw(){
-
+  background(255);
+  
+  image(data.getMap(currentMap, "fg"), 0, 0);
 }
