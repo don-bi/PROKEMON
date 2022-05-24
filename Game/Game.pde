@@ -23,7 +23,7 @@ void setup() {
   }
   size(1440, 864);
   player = new Player();
-  player.teleport(4,4);
+  player.teleport(7,7);
 }
 
 void draw(){
@@ -37,5 +37,6 @@ void keyPressed() {
   switch ((""+key).toUpperCase()){
     case "W": case "A": case "S": case "D":
     player.changeDirection();
+    player.move();
   }
 }
