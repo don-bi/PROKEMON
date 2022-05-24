@@ -8,7 +8,6 @@ public class Data {
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
   
-  
   public Data() {
     //maps every map name to two images, its background nad its foreground
     String[] mapNames = {"HomeTop","Home"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS

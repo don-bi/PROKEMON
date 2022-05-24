@@ -17,6 +17,7 @@ public class ScreenAnimations {
       animations.fadein = true;
     }
     
+    pushMatrix();
     if (frameCount > 0) {
       if (fadein) {
         if (frame >= 255) {
@@ -47,5 +48,6 @@ public class ScreenAnimations {
         }
       }
     }
+    popMatrix();
   }
 }

@@ -48,6 +48,8 @@ public class Player extends Character {
     int ymoveOffset = pixel*6;
     int playerxpos = -xpos*16*6 + width/2 - sprite.width/2 - 6;
     int playerypos = -ypos*16*6 + height/2 - sprite.height/2 + 15;
+    
+    //math to make it so the view never moves past the border, only moving the character
     if (xpos < 7) {
       playerxpos = -7*16*6 + width/2 - sprite.width/2 - 6;
     }
@@ -66,6 +68,8 @@ public class Player extends Character {
       || (xpos >= xborder && !(xpos == xborder && direction == 'l'))) xmoveOffset = 0;
     if ((ypos <= 4 && !(ypos == 4 && direction == 'd')) 
       || (ypos >= yborder && !(ypos == yborder && direction == 'u'))) ymoveOffset = 0;
+    //---------------------------------------------------------------------------------
+      
     switch (direction) {
     case 'u':
       translate(playerxpos, playerypos + ymoveOffset);
