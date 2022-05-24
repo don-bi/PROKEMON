@@ -2,14 +2,39 @@ public class Data {
   //Maps
   HashMap<String, PImage[]> mapImages = new HashMap<String, PImage[]>();
   
+  //Map maskings
+  HashMap<String, PImage> mapMasks = new HashMap<String, PImage>();
+  
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
   
   
   public Data() {
+    //maps every map name to two images, its background nad its foreground
     String[] mapNames = {"HomeTop","Home"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name:mapNames){
       mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
+    }
+    
+    //creates a map mask for every map
+    String[] mapSet= mapImages.keySet().toArray(new String[0]);
+    for (String map:mapSet){
+      PImage currentFG = mapImages.get(map)[0];
+      PImage currentBG = mapImages.get(map)[1];
+      PImage mask = createImage(currentFG.width,currentBG.height,ARGB);
+      loadPixels();
+      color transparent = currentBG.get(0,0);
+      for (int r = 0; r < currentFG.height; r ++){
+        for (int c = 0; c < currentFG.width; c ++){
+          if (currentBG.pixels[r*currentFG.width+c] != transparent && currentFG.pixels[r*currentFG.width+c] != currentBG.pixels[r*currentFG.width+c]){
+            mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c];
+          } else {
+            mask.pixels[r*currentFG.width+c] = color(255,0);
+          }
+        }
+      }
+      updatePixels();
+      mapMasks.put(map, mask);
     }
     
     PImage playerSprites = loadImage("player.png");

@@ -9,9 +9,17 @@ ScreenAnimations animations;
 String currentMap;
 Map currentMapTiles;
 
+/*REMINDERS***
+resize map pngs to 6x the size in pixlr or another program first
+add PDEKEMON DATAFILE to top of txt data files
+map size right after, width height format
+^ first two lines
+after map data, add warp data
+*/
+
 void setup() {
   frameRate(60);
-  //info classes being loaded
+  //info classes being loaded  
   data = new Data();
   animations = new ScreenAnimations();
 
