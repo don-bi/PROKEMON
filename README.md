@@ -12,5 +12,9 @@ https://docs.google.com/document/d/1yVzZRDgaRQPYU-O_Df970VfCovaV3XTKwuiIwCcpgyU/
 **5/22/2022**
 Donald: Made MapModifier and finished the display, with color and tile classes. Added changing to different modes of placing and ways to print the map data too.
 
+<<<<<<< HEAD
+Adding change to fix merge
+=======
 **5/23/2022**
 Donald: Finished MapModifier and finished walking animations and teleportation through doors for player
+>>>>>>> 0eb6544bc7354e5ccec06c8a2a51adb54b19d4d5
