@@ -6,13 +6,13 @@ Map map;
 boolean commandmode = false;
 String currentcommand = "";
 String mode = "";
-Boolean modifymode = false;
+boolean modifymode = false;
 
 void setup() {
-  size(256, 224); //remember to change size to map width*16 by map height * 16 before start
+  size(240, 256); //remember to change size to map width*16 by map height * 16 before start
   currentMap = loadImage("HomeTopFG.png");
-  currentMap.resize(256, 224); //same size as size()
-  map = new Map(16, 14); //should be (width/16,height/16)
+  currentMap.resize(240, 256);
+  map = new Map(15, 16);
   for (int i = 0; i < map.HEIGHT; i ++) {
     for (int j = 0; j < map.WIDTH; j ++) {
       map.setTile(j, i, new Tile(16));
@@ -22,9 +22,10 @@ void setup() {
 
 void draw() {
   if (!commandmode) {
+    stroke(255, 0);
+    //fills the screen with tile textures
     background(255);
     image(currentMap, 0, 0);
-    image(map.getTile(0, 0).texture, 0, 0);
     if (modifymode) {
       for (int i = 0; i < map.HEIGHT; i ++) {
         for (int j = 0; j < map.WIDTH; j ++) {
@@ -36,8 +37,12 @@ void draw() {
     }
     textSize(15);
     fill(255);
-    text(mode,10,40);
-    if (mousePressed && mouseInBounds() && mouseButton == LEFT) mouseTile();
+    text(mode, 10, 40);
+    //while left click is being pressed it places tile at spot, right click displays data
+    if (mousePressed && mouseInBounds()) {
+      if (mouseButton == LEFT) mouseTile();
+      if (mouseButton == RIGHT) mouseTileData();
+    }
   } else {
     fill(255);
     image(currentMap, 0, 0);
@@ -48,15 +53,24 @@ void draw() {
   }
 }
 
+//mouse methods
+void mouseTileData() {
+  int x = (((int)mouseX)/16);
+  int y = (((int)mouseY)/16);
+  map.getTile(x, y).printData();
+}
+
 void mouseTile() {
   int x = (((int)mouseX)/16);
   int y = (((int)mouseY)/16);
   map.getTile(x, y).modifyTile(mode, "add");
 }
 
-void mousePressed() {
-  mouseTile();
+boolean mouseInBounds() {
+  return mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height;
 }
+
+
 
 void keyPressed() {
   if (key == ENTER) {
@@ -64,10 +78,11 @@ void keyPressed() {
       commandmode = true;
     } else {
       try {
-        execute(currentcommand);
-      } catch (NullPointerException e){
-        println("No such file to import");
-        } catch (IOException e) {}
+        execute();
+      } //catch (NullPointerException e){
+      //println("No such file to import");
+      /*}*/      catch (IOException e) {
+      }
       commandmode = false;
       currentcommand = "";
     }
@@ -82,10 +97,10 @@ void keyPressed() {
   }
 }
 
-void execute(String s) throws IOException, NullPointerException {
-  if (s.length() > 0) {
+void execute() throws IOException, NullPointerException {
+  if (currentcommand.length() > 0) {
     //for slash commands
-    if (s.charAt(0) == '/') {
+    if (currentcommand.charAt(0) == '/') {
 
       //export current map data into a file named after what's typed next
       if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("export")) {
@@ -97,27 +112,7 @@ void execute(String s) throws IOException, NullPointerException {
       }
 
       //import
-      if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("import")) {
-        BufferedReader reader = createReader(currentcommand.substring(8) + ".txt");
-        String[] line = reader.readLine().split(" ");
-        for (int imY = 0; imY < map.HEIGHT; imY++) {
-          for (int imX = 0; imX < map.WIDTH; imX++) {
-            String element = line[imX];
-            String[] modifiers = element.split(",");
-            String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND"};
-            String change = "remove";
-            if (modifiers[0].equals("f")) change = "add";
-            map.getTile(imX, imY).modifyTile("BLOCK", change);
-            for (int i = 0; i < mods.length; i ++) {
-              change = "remove";
-              if (modifiers[i+1].equals("t")) change = "add";
-              map.getTile(imX, imY).modifyTile(mods[i], change);
-            }
-          }
-          String lineString = reader.readLine();
-          if (lineString != null) line = lineString.split(" ");
-        }
-      }
+      if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("import")) importData();
     } else {
       //if no slash command, sets mode to what's typed
       mode = currentcommand.toUpperCase();
@@ -125,6 +120,25 @@ void execute(String s) throws IOException, NullPointerException {
   }
 }
 
-boolean mouseInBounds(){
-  return mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height;
+
+void importData() throws IOException {
+  BufferedReader reader = createReader(currentcommand.substring(8) + ".txt");
+  String[] line = reader.readLine().split(" ");
+  for (int imY = 0; imY < map.HEIGHT; imY++) {
+    for (int imX = 0; imX < map.WIDTH; imX++) {
+      String element = line[imX];
+      String[] modifiers = element.split(",");
+      String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND", "GRASS"};
+      String change = "remove";
+      if (modifiers[0].equals("f")) change = "add";
+      map.getTile(imX, imY).modifyTile("BLOCK", change);
+      for (int i = 0; i < mods.length; i ++) {
+        change = "remove";
+        if (modifiers[i+1].equals("t")) change = "add";
+        map.getTile(imX, imY).modifyTile(mods[i], change);
+      }
+    }
+    String lineString = reader.readLine();
+    if (lineString != null) line = lineString.split(" ");
+  }
 }
