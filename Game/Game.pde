@@ -20,6 +20,7 @@ void setup() {
   catch (IOException e) {
     println("bad file");
   }
+  size(1440, 864);
 }
 
 void draw(){
