@@ -24,7 +24,7 @@ public class Map {
         for (int imX = 0; imX < WIDTH; imX++) {
           String element = line[imX];
           String[] modifiers = element.split(",");
-          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND"};
+          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND", "GRASS"};
           String change = "remove";
           if (modifiers[0].equals("f")) change = "add";
           getTile(imX, imY).modifyTile("BLOCK", change);

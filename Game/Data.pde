@@ -5,9 +5,9 @@ public class Data {
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
   
+  
   public Data() {
     String[] mapNames = {"HomeTop"};
-    
     for (String name:mapNames){
       mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
     }
