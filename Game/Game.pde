@@ -32,9 +32,12 @@ void setup() {
 void draw() {
   background(255);
   
+  //push and pop matrices make it so that translating the screen only affects the screen and player
+  pushMatrix();
   player.moveScreen();
   image(data.getMap(currentMap, "fg"), 0, 0);
   player.showPlayer();
+  popMatrix();
 }
 
 void keyPressed() {
