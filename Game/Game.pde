@@ -11,7 +11,9 @@ Map currentMapTiles;
 
 void setup() {
   frameRate(60);
+  //info classes being loaded
   data = new Data();
+  animations = new ScreenAnimations();
 
   //loads initial hometop map
   currentMap = "HomeTop";
