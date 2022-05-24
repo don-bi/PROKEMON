@@ -6,6 +6,7 @@ Map map;
 boolean commandmode = false;
 String currentcommand = "";
 String mode = "";
+Boolean modifymode = false;
 
 void setup() {
   size(256, 224); //remember to change size to map width*16 by map height * 16 before start
@@ -24,13 +25,19 @@ void draw() {
     background(255);
     image(currentMap, 0, 0);
     image(map.getTile(0, 0).texture, 0, 0);
-    for (int i = 0; i < map.HEIGHT; i ++) {
-      for (int j = 0; j < map.WIDTH; j ++) {
-        int x = j*16;
-        int y = i*16;
-        image(map.getTile(j, i).texture, x, y);
+    if (modifymode) {
+      for (int i = 0; i < map.HEIGHT; i ++) {
+        for (int j = 0; j < map.WIDTH; j ++) {
+          int x = j*16;
+          int y = i*16;
+          image(map.getTile(j, i).texture, x, y);
+        }
       }
     }
+    textSize(15);
+    fill(255);
+    text(mode,10,40);
+    if (mousePressed) mouseTile();
   } else {
     fill(255);
     image(currentMap, 0, 0);
@@ -57,8 +64,10 @@ void keyPressed() {
       commandmode = true;
     } else {
       try {
-        execute();
-      } catch (IOException e){
+        execute(currentcommand);
+      } //catch (NullPointerException e){
+      //println("No such file to import");
+      /*}*/      catch (IOException e) {
       }
       commandmode = false;
       currentcommand = "";
@@ -69,13 +78,15 @@ void keyPressed() {
     } else {
       currentcommand += key;
     }
+  } else if (key == ' ') {
+    modifymode = !modifymode;
   }
 }
 
-void execute() throws IOException, NullPointerException{
-  if (currentcommand.length() > 0) {
+void execute(String s) throws IOException, NullPointerException {
+  if (s.length() > 0) {
     //for slash commands
-    if (currentcommand.charAt(0) == '/') {
+    if (s.charAt(0) == '/') {
 
       //export current map data into a file named after what's typed next
       if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("export")) {
@@ -109,6 +120,7 @@ void execute() throws IOException, NullPointerException{
         }
       }
     } else {
+      //if no slash command, sets mode to what's typed
       mode = currentcommand.toUpperCase();
     }
   }
