@@ -9,7 +9,7 @@ public class Data {
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
 
   //Pokemon data
-  HashMap<String, HashMap<String, String>> pokeData = new HashMap<String, HashMap<String, String>>();
+  HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
   
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
@@ -70,20 +70,27 @@ public class Data {
       for (int i = 0; i < data.length-1; i++){
         speciedata.put(categories[i],data[i]);
       }
-      pokeData.put(speciename,speciedata);
+      pokemonData.put(speciename,speciedata);
     }
     
     String[] pokemonSet = pokemonData.keySet().toArray(new String[0]); //set of all the keys in pokemonData
-    for (pokemon:pokemonSet){ 
-      String id = pokemonData.get(pokemon);
+    for (String pokemon:pokemonSet){ 
+      String id = pokemonData.get(pokemon).get("id");
       idName.put(id,pokemon); //fills idName with pokemon ids as keys and pokemon names as values
     }
     
     reader = createReader("pokemon_evolution.csv");
+    line = reader.readLine();
     categories = line.split(",");
     while (line != null){
       line = reader.readLine();
       String[] data = line.split(",");
+      String id = data[0];
+      String pokemon = getPokename(id);
+      pokemonData.get(pokemon).put(categories[1],data[1]);
+      pokemonData.get(pokemon).put(categories[2],data[2]);
+    }
+      
       
       
       
@@ -95,5 +102,9 @@ public class Data {
     int lay = 0;
     if (layer == "bg") lay = 1; 
     return mapImages.get(m)[lay];
+  }
+  
+  private String getPokename(String id){
+    return idName.get(id);
   }
 }
