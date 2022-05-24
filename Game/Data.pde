@@ -9,7 +9,10 @@ public class Data {
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
 
   //Pokemon data
-  HashMap<String, HashMap<String, String>> pokedata = new HashMap<String, HashMap<String, String>>();
+  HashMap<String, HashMap<String, String>> pokeData = new HashMap<String, HashMap<String, String>>();
+  
+  //Pokemon id to pokemon name data
+  HashMap<String, String> idName = new HashMap<String, String>();
   
   
   public Data() throws IOException{
@@ -54,6 +57,8 @@ public class Data {
     playerAnimations.put("playerRLeftWalk",playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk",playerSprites.get(299, 264, 84, 126));
     
+    
+    //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
     BufferedReader reader = createReader("pokemon.csv");
     String line = reader.readLine();
     String[] categories = line.split(",");
@@ -65,8 +70,16 @@ public class Data {
       for (int i = 0; i < data.length-1; i++){
         speciedata.put(categories[i],data[i]);
       }
-      pokedata.put(speciename,speciedata);
+      pokeData.put(speciename,speciedata);
     }
+    
+    reader = createReader("pokemon_evolution.csv");
+    categories = line.split(",");
+    while (line != null){
+      line = reader.readLine();
+      String[] data = line.split(",");
+      
+      
       
     
   }
