@@ -37,7 +37,7 @@ void draw() {
     textSize(15);
     fill(255);
     text(mode,10,40);
-    if (mousePressed) mouseTile();
+    if (mousePressed && mouseInBounds() && mouseButton == LEFT) mouseTile();
   } else {
     fill(255);
     image(currentMap, 0, 0);
@@ -65,10 +65,9 @@ void keyPressed() {
     } else {
       try {
         execute(currentcommand);
-      } //catch (NullPointerException e){
-      //println("No such file to import");
-      /*}*/      catch (IOException e) {
-      }
+      } catch (NullPointerException e){
+        println("No such file to import");
+        } catch (IOException e) {}
       commandmode = false;
       currentcommand = "";
     }
@@ -124,4 +123,8 @@ void execute(String s) throws IOException, NullPointerException {
       mode = currentcommand.toUpperCase();
     }
   }
+}
+
+boolean mouseInBounds(){
+  return mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height;
 }
