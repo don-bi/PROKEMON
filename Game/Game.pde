@@ -38,6 +38,8 @@ void draw() {
   image(data.getMap(currentMap, "fg"), 0, 0);
   player.showPlayer();
   popMatrix();
+  
+  animations.animate();
 }
 
 void keyPressed() {
