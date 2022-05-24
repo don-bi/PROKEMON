@@ -53,4 +53,16 @@ public class Character {
     xpos = x;
     ypos = y;
   }
+  
+  Tile getFrontTile(){
+    switch (direction){
+      case 'u':
+        return currentMapTiles.getTile(xpos,ypos-1);
+      case 'd':
+        return currentMapTiles.getTile(xpos,ypos+1);
+      case 'l':
+        return currentMapTiles.getTile(xpos-1,ypos);
+    }
+    return currentMapTiles.getTile(xpos+1,ypos);
+  }
 }

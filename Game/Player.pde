@@ -9,6 +9,21 @@ public class Player extends Character {
     isRunning = false;
   }
   
+  void move() {
+    if (getFrontTile().isWalkable) {
+      super.move();
+      if (leftFoot) {
+        sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "LeftWalk");
+      } else {
+        sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "RightWalk");
+      }
+      if (pixel == 0) {
+        leftFoot = !leftFoot;
+        changeDirection();
+      }
+    }
+  }
+  
   void changeDirection() {
     switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
     case "W":
@@ -25,5 +40,14 @@ public class Player extends Character {
       break;
     }
     sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "Stand");
+  }
+  
+  void showPlayer() {
+    if (frameCount > 0  && inWalkAnimation) {
+      move();
+      display();
+    } else { 
+      display();
+    }
   }
 }

@@ -34,12 +34,7 @@ void draw() {
 
   image(data.getMap(currentMap, "fg"), 0, 0);
   player.display();
-  if (frameCount % 1 == 0 && player.inWalkAnimation) {
-    player.move();
-    player.display();
-  } else {
-    player.display();
-  }
+  player.showPlayer();
 }
 
 void keyPressed() {
