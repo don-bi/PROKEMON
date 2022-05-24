@@ -48,6 +48,24 @@ public class Player extends Character {
     int ymoveOffset = pixel*6;
     int playerxpos = -xpos*16*6 + width/2 - sprite.width/2 - 6;
     int playerypos = -ypos*16*6 + height/2 - sprite.height/2 + 15;
+    if (xpos < 7) {
+      playerxpos = -7*16*6 + width/2 - sprite.width/2 - 6;
+    }
+    if (ypos < 4) {
+      playerypos = -4*16*6 + height/2 - sprite.height/2 + 15;
+    }
+    int xborder = currentMapTiles.WIDTH-8;
+    if (xpos > xborder) {
+      playerxpos = -(xborder)*16*6 + width/2 - sprite.width/2 - 6;
+    }
+    int yborder = currentMapTiles.HEIGHT-5;
+    if (ypos > yborder) {
+      playerypos = -(yborder)*16*6 + height/2 - sprite.height/2 + 15;
+    }
+    if ((xpos <= 7 && !(xpos == 7 && direction == 'r')) 
+      || (xpos >= xborder && !(xpos == xborder && direction == 'l'))) xmoveOffset = 0;
+    if ((ypos <= 4 && !(ypos == 4 && direction == 'd')) 
+      || (ypos >= yborder && !(ypos == yborder && direction == 'u'))) ymoveOffset = 0;
     switch (direction) {
     case 'u':
       translate(playerxpos, playerypos + ymoveOffset);
