@@ -83,11 +83,12 @@ public class Player extends Character {
   }
   
   void showPlayer() {
-    if (frameCount > 0  && inWalkAnimation) {
+    if (frameCount > 0  && inWalkAnimation && !animations.inAnimation) {
       move();
       display();
     } else { 
       display();
     }
+    image(data.mapMasks.get(currentMap), 0, 0);
   }
 }
