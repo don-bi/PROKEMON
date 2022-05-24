@@ -9,10 +9,9 @@ public class Character {
   
   void move() {
     if (inWalkAnimation == false) inWalkAnimation = true;
-    while (pixel < 16) {
+    if (pixel < 16) {
       pixel ++;
-      display();
-    }
+    } else {
       pixel = 0;
       if (!isBiking && !isRunning) {
         switch (direction) {
@@ -32,6 +31,7 @@ public class Character {
       }
       inWalkAnimation = false;
     }
+  }
   
   void display() {
     int[] movingOffsets = new int[2];

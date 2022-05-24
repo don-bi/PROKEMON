@@ -12,7 +12,8 @@ Map currentMapTiles;
 void setup() {
   frameRate(60);
   data = new Data();
-  
+
+  //loads initial hometop map
   currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
@@ -21,22 +22,35 @@ void setup() {
   catch (IOException e) {
     println("bad file");
   }
+  //-------------------------
+
   size(1440, 864);
   player = new Player();
-  player.teleport(7,7);
+  player.teleport(7, 7);
 }
 
-void draw(){
+void draw() {
   background(255);
-  
+
   image(data.getMap(currentMap, "fg"), 0, 0);
   player.display();
+  if (frameCount % 1 == 0 && player.inWalkAnimation) {
+    player.move();
+    player.display();
+  } else {
+    player.display();
+  }
 }
 
 void keyPressed() {
-  switch ((""+key).toUpperCase()){
-    case "W": case "A": case "S": case "D":
-    player.changeDirection();
-    player.move();
+  switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
+  case "W": 
+  case "A": 
+  case "S": 
+  case "D":
+    if (!player.inWalkAnimation) {
+      player.changeDirection();
+      player.move();
+    }
   }
 }
