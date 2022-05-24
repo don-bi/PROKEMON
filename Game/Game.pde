@@ -20,13 +20,13 @@ after map data, add warp data
 void setup() {
   frameRate(60);
   //info classes being loaded  
-  data = new Data();
   animations = new ScreenAnimations();
 
   //loads initial hometop map
   currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
+    data = new Data();
     currentMapTiles.loadMap("HomeTop.txt");
   } 
   catch (IOException e) {

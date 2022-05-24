@@ -7,10 +7,14 @@ public class Data {
   
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
+
+  //Pokemon data
+  HashMap<String, HashMap<String, String>> pokedata = new HashMap<String, HashMap<String, String>>();
   
-  public Data() {
+  
+  public Data() throws IOException{
     //maps every map name to two images, its background nad its foreground
-    String[] mapNames = {"HomeTop","Home"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+    String[] mapNames = {"HomeTop","Home","Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name:mapNames){
       mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
     }
@@ -49,6 +53,22 @@ public class Data {
     playerAnimations.put("playerRStand",playerSprites.get(299, 0, 84, 126));
     playerAnimations.put("playerRLeftWalk",playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk",playerSprites.get(299, 264, 84, 126));
+    
+    BufferedReader reader = createReader("pokemon.csv");
+    String line = reader.readLine();
+    String[] categories = line.split(",");
+    while (line != null){
+      line = reader.readLine();
+      String[] data = line.split(",");
+      HashMap<String, String> speciedata = new HashMap<String, String>();
+      String speciename = data[data.length-1];
+      for (int i = 0; i < data.length-1; i++){
+        speciedata.put(categories[i],data[i]);
+      }
+      pokedata.put(speciename,speciedata);
+    }
+      
+    
   }
   
   PImage getMap(String m, String layer) {

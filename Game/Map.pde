@@ -25,7 +25,7 @@ public class Map {
         for (int imX = 0; imX < WIDTH; imX++) {
           String element = line[imX]; //elements are a single string of (t,f,f,f,f,f,f) or other t/f's
           String[] modifiers = element.split(",");
-          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND", "GRASS"};
+          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND"};
           String change = "remove"; //if the modifier is f, removes it
           if (modifiers[0].equals("f")) change = "add";
           getTile(imX, imY).modifyTile("BLOCK", change);
