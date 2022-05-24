@@ -61,16 +61,17 @@ public class Data {
     //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
     BufferedReader reader = createReader("pokemon.csv");
     String line = reader.readLine();
-    String[] categories = line.split(",");
+    String[] categories = line.split(","); //categories are attack,id,etc.
+    line = reader.readLine();
     while (line != null){
-      line = reader.readLine();
-      String[] data = line.split(",");
+      String[] data = line.split(","); //data are the data values
       HashMap<String, String> speciedata = new HashMap<String, String>();
       String speciename = data[data.length-1];
       for (int i = 0; i < data.length-1; i++){
         speciedata.put(categories[i],data[i]);
       }
       pokemonData.put(speciename,speciedata);
+      line = reader.readLine();
     }
     
     String[] pokemonSet = pokemonData.keySet().toArray(new String[0]); //set of all the keys in pokemonData
@@ -82,13 +83,14 @@ public class Data {
     reader = createReader("pokemon_evolution.csv");
     line = reader.readLine();
     categories = line.split(",");
+    line = reader.readLine();
     while (line != null){
-      line = reader.readLine();
       String[] data = line.split(",");
       String id = data[0];
       String pokemon = getPokename(id);
-      pokemonData.get(pokemon).put(categories[1],data[1]);
-      pokemonData.get(pokemon).put(categories[2],data[2]);
+      pokemonData.get(pokemon).put(categories[1],data[1]); //puts evolved_species_id 
+      pokemonData.get(pokemon).put(categories[2],data[2]); //puts minimum_level id
+      line = reader.readLine();
     }
       
       
