@@ -7,10 +7,17 @@ public class Data {
   
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
+
+  //Pokemon data
+  HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
   
-  public Data() {
+  //Pokemon id to pokemon name data
+  HashMap<String, String> idName = new HashMap<String, String>();
+  
+  
+  public Data() throws IOException{
     //maps every map name to two images, its background nad its foreground
-    String[] mapNames = {"HomeTop","Home"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+    String[] mapNames = {"HomeTop","Home","Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name:mapNames){
       mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
     }
@@ -49,11 +56,57 @@ public class Data {
     playerAnimations.put("playerRStand",playerSprites.get(299, 0, 84, 126));
     playerAnimations.put("playerRLeftWalk",playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk",playerSprites.get(299, 264, 84, 126));
+    
+    
+    //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
+    BufferedReader reader = createReader("pokemon.csv");
+    String line = reader.readLine();
+    String[] categories = line.split(","); //categories are attack,id,etc.
+    line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //data are the data values
+      HashMap<String, String> speciedata = new HashMap<String, String>();
+      String speciename = data[data.length-1];
+      for (int i = 0; i < data.length-1; i++){
+        speciedata.put(categories[i],data[i]);
+      }
+      pokemonData.put(speciename,speciedata);
+      line = reader.readLine();
+    }
+    
+    String[] pokemonSet = pokemonData.keySet().toArray(new String[0]); //set of all the keys in pokemonData
+    for (String pokemon:pokemonSet){ 
+      String id = pokemonData.get(pokemon).get("id");
+      idName.put(id,pokemon); //fills idName with pokemon ids as keys and pokemon names as values
+    }
+    
+    reader = createReader("pokemon_evolution.csv");
+    line = reader.readLine();
+    categories = line.split(",");
+    line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(",");
+      String id = data[0];
+      String pokemon = getPokename(id);
+      pokemonData.get(pokemon).put(categories[1],data[1]); //puts evolved_species_id 
+      pokemonData.get(pokemon).put(categories[2],data[2]); //puts minimum_level id
+      line = reader.readLine();
+    }
+      
+      
+      
+      
+      
+    
   }
   
   PImage getMap(String m, String layer) {
     int lay = 0;
     if (layer == "bg") lay = 1; 
     return mapImages.get(m)[lay];
+  }
+  
+  private String getPokename(String id){
+    return idName.get(id);
   }
 }
