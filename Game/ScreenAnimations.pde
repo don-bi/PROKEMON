@@ -36,6 +36,16 @@ public class ScreenAnimations {
           frame += 25;
         }
       }
+      if (fadeout) {
+        if (frame <= 0) {
+          fadeout = false;
+          inAnimation = false;
+        } else {
+          fill(0, frame);
+          rect(0, 0, 1440, 864);
+          frame -= 25;
+        }
+      }
     }
   }
 }
