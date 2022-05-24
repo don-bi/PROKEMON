@@ -1,0 +1,17 @@
+PDEKEMON DATAFILE
+15 11
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,t,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,t,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+3
+3 3 6 6 HomeTop
+3 9 5 30 Woodbury_Town
+4 9 5 30 Woodbury_Town

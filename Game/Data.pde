@@ -7,7 +7,7 @@ public class Data {
   
   
   public Data() {
-    String[] mapNames = {"HomeTop"};
+    String[] mapNames = {"HomeTop","Home"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name:mapNames){
       mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
     }
