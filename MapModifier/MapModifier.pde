@@ -56,7 +56,10 @@ void keyPressed() {
     if (!commandmode) {
       commandmode = true;
     } else {
-      execute();
+      try {
+        execute();
+      } catch (IOException e){
+      }
       commandmode = false;
       currentcommand = "";
     }
@@ -69,7 +72,7 @@ void keyPressed() {
   }
 }
 
-void execute() {
+void execute() throws IOException, NullPointerException{
   if (currentcommand.length() > 0) {
     //for slash commands
     if (currentcommand.charAt(0) == '/') {
@@ -82,30 +85,30 @@ void execute() {
         export.flush();
         export.close();
       }
-    }  
-    
-    //import
-    if (currentcommand.length() > 7 && currentcommand.substring(1,7).equals("import")){
+
+      //import
+      if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("import")) {
         BufferedReader reader = createReader(currentcommand.substring(8) + ".txt");
         String[] line = reader.readLine().split(" ");
-        for (int imY = 0; imY < map.HEIGHT; imY++){
+        for (int imY = 0; imY < map.HEIGHT; imY++) {
           for (int imX = 0; imX < map.WIDTH; imX++) {
             String element = line[imX];
             String[] modifiers = element.split(",");
-            String[] mods = {"INTERACT","WARP","DOOR","EVENT","FOREGROUND","GRASS"};
+            String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND"};
             String change = "remove";
             if (modifiers[0].equals("f")) change = "add";
-            map.getTile(imX,imY).modifyTile("BLOCK", change);
-            for (int i = 0; i < mods.length; i ++){
+            map.getTile(imX, imY).modifyTile("BLOCK", change);
+            for (int i = 0; i < mods.length; i ++) {
               change = "remove";
               if (modifiers[i+1].equals("t")) change = "add";
-              map.getTile(imX,imY).modifyTile(mods[i], change);
+              map.getTile(imX, imY).modifyTile(mods[i], change);
             }
           }
+          String lineString = reader.readLine();
+          if (lineString != null) line = lineString.split(" ");
         }
       }
-    
-    else {
+    } else {
       mode = currentcommand.toUpperCase();
     }
   }
