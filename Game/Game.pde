@@ -32,3 +32,10 @@ void draw(){
   image(data.getMap(currentMap, "fg"), 0, 0);
   player.display();
 }
+
+void keyPressed() {
+  switch ((""+key).toUpperCase()){
+    case "W": case "A": case "S": case "D":
+    player.changeDirection();
+  }
+}

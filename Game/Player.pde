@@ -8,4 +8,22 @@ public class Player extends Character {
     isBiking = false;
     isRunning = false;
   }
+  
+  void changeDirection() {
+    switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
+    case "W":
+      direction = 'u';
+      break;
+    case "A":
+      direction = 'l';
+      break;
+    case "S":
+      direction = 'd';
+      break;
+    case  "D":
+      direction = 'r';
+      break;
+    }
+    sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "Stand");
+  }
 }
