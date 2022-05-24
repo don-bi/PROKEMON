@@ -14,17 +14,20 @@ void setup() {
   data = new Data();
   
   currentMapTiles = new Map();
-  try {
-    currentMapTiles.loadMap("HomeTop.txt");
+  /*try {
+    currentMapTiles.loadMap();
   } 
   catch (IOException e) {
     println("bad file");
-  }
+  }*/
   size(1440, 864);
+  player = new Player();
+  player.teleport(4,4);
 }
 
 void draw(){
   background(255);
   
-  image(data.getMap(currentMap, "fg"), 0, 0);
+  //image(data.getMap(currentMap, "fg"), 0, 0);
+  player.display();
 }
