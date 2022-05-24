@@ -21,3 +21,4 @@ Hanson: Fixed importing issues and added nullpointer exception otherwise
 
 **5/24/2022**
 Hanson: Testing merge from lessons in class
+>>>>>>> main
