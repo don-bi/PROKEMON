@@ -73,11 +73,18 @@ public class Data {
       pokeData.put(speciename,speciedata);
     }
     
+    String[] pokemonSet = pokemonData.keySet().toArray(new String[0]); //set of all the keys in pokemonData
+    for (pokemon:pokemonSet){ 
+      String id = pokemonData.get(pokemon);
+      idName.put(id,pokemon); //fills idName with pokemon ids as keys and pokemon names as values
+    }
+    
     reader = createReader("pokemon_evolution.csv");
     categories = line.split(",");
     while (line != null){
       line = reader.readLine();
       String[] data = line.split(",");
+      
       
       
       
