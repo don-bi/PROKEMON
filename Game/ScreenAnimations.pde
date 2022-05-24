@@ -10,6 +10,13 @@ public class ScreenAnimations {
   }
   
   void animate() {
+    Tile currentTile = currentMapTiles.getTile(player.xpos, player.ypos);
+    //animation conditions
+    if (currentTile.isDoor) {
+      animations.inAnimation = true;
+      animations.fadein = true;
+    }
+    
     if (frameCount > 0) {
       if (fadein) {
         if (frame >= 255) {
