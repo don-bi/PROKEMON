@@ -34,6 +34,7 @@ public class Character {
   }
   
   void display() {
+    //offsets for during move animation
     int[] movingOffsets = new int[2];
     if (direction == 'u') movingOffsets[1] = pixel*6;
     if (direction == 'd') movingOffsets[1] = -pixel*6;

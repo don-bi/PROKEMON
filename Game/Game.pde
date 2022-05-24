@@ -31,9 +31,9 @@ void setup() {
 
 void draw() {
   background(255);
-
+  
+  player.moveScreen();
   image(data.getMap(currentMap, "fg"), 0, 0);
-  player.display();
   player.showPlayer();
 }
 
