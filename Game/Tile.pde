@@ -47,7 +47,10 @@ public class Tile{
     }
   }
   
-  //determines size of combined image to place correctly
+  void setWarp(int x, int y, String loc){
+    warpMap = loc;
+    warpCoord = new int[]{x,y};
+  }
   
   char condenseData(boolean bool){
     if(bool) return 't';
