@@ -9,17 +9,19 @@ We will be creating a Pokémon remake with some main features, mainly from Poké
 **Full Documentation**:  
 https://docs.google.com/document/d/1yVzZRDgaRQPYU-O_Df970VfCovaV3XTKwuiIwCcpgyU/edit?usp=sharing
 
-**5/22/2022**
+### 5/22/2022 ###
 Donald: Made MapModifier and finished the display, with color and tile classes. Added changing to different modes of placing and ways to print the map data too.
 
 Hanson: Added color when tile has modifier by updating texture, edited mouseTile() and mousePressed() for whatever mode is given, made commandline appear, haven't resolved merge
 
-**5/23/2022**
+### 5/23/2022 ###
 Donald: Finished MapModifier and finished walking animations and teleportation through doors for player
 
 Hanson: Fixed importing issues and added nullpointer exception otherwise
 
-**5/24/2022**
+### 5/24/2022 ###
+Donald: Made two new programs, pokemon_moves_fixer to get rid of useless data in pokemon_moves.csv and SpriteResizer to resize the sprites that were originally 96x96(too small). Started on battlemode, but not much done yet.
+
 Hanson: Testing merge from lessons in class
 
 **5/25/2022**

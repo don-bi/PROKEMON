@@ -24,7 +24,7 @@ public class ScreenAnimations {
           fadein = false;
           currentMap = currentTile.warpMap;
           try {
-            currentMapTiles.loadMap(currentMap + ".txt");
+            currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
           } 
           catch (IOException e) {
             println("bad file");

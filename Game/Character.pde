@@ -6,6 +6,7 @@ public class Character {
   boolean isBiking, isRunning;
   boolean inWalkAnimation = false;
   boolean leftFoot = true;
+  Pokemon[] team;
   
   void move() {
     if (inWalkAnimation == false) inWalkAnimation = true;

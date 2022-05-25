@@ -9,6 +9,8 @@ ScreenAnimations animations;
 String currentMap;
 Map currentMapTiles;
 
+BattleMode battle;
+
 /*REMINDERS***
 resize map pngs to 6x the size in pixlr or another program first
 add PDEKEMON DATAFILE to top of txt data files
@@ -20,14 +22,14 @@ after map data, add warp data
 void setup() {
   frameRate(60);
   //info classes being loaded  
-  data = new Data();
   animations = new ScreenAnimations();
 
   //loads initial hometop map
   currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap("HomeTop.txt");
+    data = new Data();
+    currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -37,19 +39,26 @@ void setup() {
   size(1440, 864);
   player = new Player();
   player.teleport(7, 7);
+  
+  //TESTING BATTLEMODE
+  battle = new BattleMode(new Pokemon());
 }
 
 void draw() {
-  background(255);
-  
-  //push and pop matrices make it so that translating the screen only affects the screen and player
-  pushMatrix();
-  player.moveScreen();
-  image(data.getMap(currentMap, "fg"), 0, 0);
-  player.showPlayer();
-  popMatrix();
-  
-  animations.animate();
+  if (battle == null){
+    background(255);
+    
+    //push and pop matrices make it so that translating the screen only affects the screen and player
+    pushMatrix();
+    player.moveScreen();
+    image(data.getMap(currentMap, "fg"), 0, 0);
+    player.showPlayer();
+    popMatrix();
+    
+    animations.animate();
+  } else {
+    battle.display();
+  }
 }
 
 void keyPressed() {
@@ -63,4 +72,8 @@ void keyPressed() {
       player.move();
     }
   }
+}
+
+String getSubDir(String sub, String file){
+  return dataPath(sub)+'/'+file;
 }
