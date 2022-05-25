@@ -7,6 +7,7 @@ public class Player extends Character {
     int pixel = 0;
     isBiking = false;
     isRunning = false;
+    team = new Pokemon[6];
   }
   
   void move() {

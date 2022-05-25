@@ -27,7 +27,7 @@ void setup() {
   currentMapTiles = new Map();
   try {
     data = new Data();
-    currentMapTiles.loadMap("HomeTop.txt");
+    currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -63,4 +63,8 @@ void keyPressed() {
       player.move();
     }
   }
+}
+
+String getSubDir(String sub, String file){
+  return dataPath(sub)+'/'+file;
 }
