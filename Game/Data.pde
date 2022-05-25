@@ -14,6 +14,9 @@ public class Data {
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
+  //Pokemon sprites
+  HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
+  
   PImage battleBG, battleCircles;
   
   
@@ -98,8 +101,27 @@ public class Data {
       pokemonData.get(pokemon).put(categories[2],data[2]); //puts minimum_level id
       line = reader.readLine();
     }
-      
-      
+    
+    //loads front sprites
+    File dir = new File(dataPath("Pokemon Sprites"));
+    File[] files = dir.listFiles();
+    for (File file:files){
+      String filename = file.getName(); //"386-speed.png"
+      String pokeid = ""+parseInt(filename.substring(0,3)); //"386"
+      String pokename = getPokename(pokeid); //"deoxys"
+      String form = "regular";
+      if (filename.charAt(3) != '.'){
+        form = filename.substring(3,filename.indexOf("."));
+      }
+      HashMap<String, PImage> forms = new HashMap<String, PImage>();
+      if (frontSprites.containsKey(pokename)){ //if the pokemon already has a form, gets the hashmap it's mapped to and puts another form
+        frontSprites.get(pokename).put(form,loadImage(filename));
+      } else { //else, puts into temp hashmap forms and maps the pokename to it
+        forms.put(form,loadImage(filename));
+        frontSprites.put(pokename,forms);
+      }
+    }
+    
       
       
       
