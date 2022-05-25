@@ -14,12 +14,14 @@ public class Data {
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
+  PImage battleBG, battleCircles;
+  
   
   public Data() throws IOException{
     //maps every map name to two images, its background nad its foreground
     String[] mapNames = {"HomeTop","Home","Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name:mapNames){
-      mapImages.put(name, new PImage[]{loadImage(name+"FG.png"), loadImage(name+"BG.png")});
+      mapImages.put(name, new PImage[]{loadImage(getSubDir("Maps",name+"FG.png")), loadImage(getSubDir("Maps",name+"BG.png"))});
     }
     
     //creates a map mask for every map
@@ -56,6 +58,10 @@ public class Data {
     playerAnimations.put("playerRStand",playerSprites.get(299, 0, 84, 126));
     playerAnimations.put("playerRLeftWalk",playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk",playerSprites.get(299, 264, 84, 126));
+    
+    //Sets images for battlemode
+    battleBG = loadImage("battlebackground.png");
+    battleCircles = loadImage("battlecircles.png");
     
     
     //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
