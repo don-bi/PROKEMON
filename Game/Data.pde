@@ -14,6 +14,9 @@ public class Data {
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
+  //Pokemon sprites
+  HashMap<String, ArrayList<PImage>> sprites = new HashMap<String, ArrayList<PImage>>();
+  
   PImage battleBG, battleCircles;
   
   
@@ -99,7 +102,7 @@ public class Data {
       line = reader.readLine();
     }
       
-      
+    File dir = new File(dataPath("Pokemon Sprites"));
       
       
       
