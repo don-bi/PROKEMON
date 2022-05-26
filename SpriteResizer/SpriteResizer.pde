@@ -1,6 +1,6 @@
 import java.io.File;
 
-int scale = 4;
+int scale = 6;
 PGraphics pg;
 
 void setup() {

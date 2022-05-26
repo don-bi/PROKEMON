@@ -1,9 +1,12 @@
 public class Pokemon{
   String nickname,name;
   HashMap<String, Integer> basestats,IVs,EVs;
-  int hp,atk,def,spatk,spdef,spd;
+  int level,hp;
+  int atk,def,spatk,spdef,spd;
   String type1,type2;
   PImage sprite;
+  String evolution;
+  int evolutionlevel;
   String mode;
   
   public Pokemon(String n){
@@ -13,10 +16,12 @@ public class Pokemon{
     for (String stat:statnames){
       basestats.put(stat,parseInt(data.getPokeData(name,stat)));
     }
-    mode = "regular";
     type1 = data.getPokeData(name,"type1");
     type2 = data.getPokeData(name,"type2");
     sprite = data.frontSprites.get(name).get(mode);
+    evolution = data.getPokename(data.getPokeData(name,"evolved_id"));
+    evolutionlevel = parseInt(data.getPokeData(name,"minimum_level")); 
+    mode = "regular";
   }
   
   public Pokemon(String n, String m){
@@ -28,7 +33,6 @@ public class Pokemon{
   public Pokemon(String n, boolean ally){
     this(n);
     if (ally) {
-      println("???");
       sprite = data.backSprites.get(name).get(mode);
     }
   }

@@ -10,7 +10,13 @@ public class Data {
 
   //Pokemon data
   HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
+  
+  //When each pokemon learns each move data
+  HashMap<String, HashMap<Integer, String>> learnMoves = new HashMap<String, HashMap<Integer, String>>();
 
+  //All the moves and their data
+  HashMap<String, HashMap<String, String>> moveData = new HashMap<String, HashMap<String, String>>();
+  
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
 
@@ -22,11 +28,6 @@ public class Data {
 
 
   public Data() throws IOException {
-    background(0);
-    textSize(100);
-    fill(255);
-    text("LOADING...", width/2-250, height/2);
-
     //maps every map name to two images, its background nad its foreground
     String[] mapNames = {"HomeTop", "Home", "Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
     for (String name : mapNames) {
@@ -96,7 +97,7 @@ public class Data {
     }
     reader.close();
 
-    reader = createReader("pokemon_evolution.csv");
+    /*reader = createReader("pokemon_evolution.csv");  //POKEMON EVOLUTION DATA WRONG RN, MIGHT COME BACK TO FIX LATER IDK
     line = reader.readLine();
     categories = line.split(",");
     line = reader.readLine();
@@ -107,7 +108,7 @@ public class Data {
       pokemonData.get(pokemon).put(categories[1], data[1]); //puts evolved_species_id 
       pokemonData.get(pokemon).put(categories[2], data[2]); //puts minimum_level id
       line = reader.readLine();
-    }
+    }*/ 
 
     //loads front sprites
     String frontSpritePath = dataPath("Front Sprites");
@@ -150,6 +151,8 @@ public class Data {
         backSprites.put(pokename, forms);
       }
     }
+    
+    
   }
 
   PImage getMap(String m, String layer) {
