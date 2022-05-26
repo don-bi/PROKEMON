@@ -4,12 +4,12 @@ int scale = 4;
 PGraphics pg;
 
 void setup() {
-  File dir = new File(sketchPath("data"));
+  File dir = new File(sketchPath("data2"));
   File[] files = dir.listFiles();  //creates array of all the files, gonna use this to get the names
   
-  for (int i = 0; i < 4; i++) { //goes through all the pokemon
+  for (int i = 0; i < files.length; i++) { //goes through all the pokemon
     String filename = files[i].getName();
-    PImage sprite = loadImage(filename);
+    PImage sprite = loadImage(dir.getAbsolutePath() + '/' + filename);
     
     color transparent = sprite.get(0,0);
     int startingrow = sprite.height; //first row with color

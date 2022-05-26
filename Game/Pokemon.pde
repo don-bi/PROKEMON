@@ -18,4 +18,24 @@ public class Pokemon{
     type2 = data.getPokeData(name,"type2");
     sprite = data.frontSprites.get(name).get(mode);
   }
+  
+  public Pokemon(String n, String m){
+    this(n);
+    mode = m;
+    sprite = data.frontSprites.get(name).get(mode);
+  }
+  
+  public Pokemon(String n, boolean ally){
+    this(n);
+    if (ally) {
+      println("???");
+      sprite = data.backSprites.get(name).get(mode);
+    }
+  }
+  
+  public Pokemon(String n, String m, boolean ally){
+    this(n);
+    mode = m;
+    if (ally) sprite = data.backSprites.get(name).get(mode);
+  }
 }

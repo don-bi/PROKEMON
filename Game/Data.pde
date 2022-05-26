@@ -16,6 +16,7 @@ public class Data {
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
+  HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
   PImage battleBG, battleCircles;
 
@@ -93,6 +94,7 @@ public class Data {
       String id = pokemonData.get(pokemon).get("id");
       idName.put(id, pokemon); //fills idName with pokemon ids as keys and pokemon names as values
     }
+    reader.close();
 
     reader = createReader("pokemon_evolution.csv");
     line = reader.readLine();
@@ -108,7 +110,7 @@ public class Data {
     }
 
     //loads front sprites
-    String frontSpritePath = dataPath("Pokemon Sprites");
+    String frontSpritePath = dataPath("Front Sprites");
     File dir = new File(frontSpritePath);
     File[] files = dir.listFiles();
     for (File file : files) {
@@ -117,7 +119,7 @@ public class Data {
       String pokename = getPokename(pokeid); //"deoxys"
       String form = "regular";
       if (filename.charAt(3) != '.') {
-        form = filename.substring(3, filename.indexOf("."));
+        form = filename.substring(4, filename.indexOf("."));
       }
       HashMap<String, PImage> forms = new HashMap<String, PImage>();
       if (frontSprites.containsKey(pokename)) { //if the pokemon already has a form, gets the hashmap it's mapped to and puts another form
@@ -125,6 +127,27 @@ public class Data {
       } else { //else, puts into temp hashmap forms and maps the pokename to it
         forms.put(form, loadImage(frontSpritePath + '/' + filename));
         frontSprites.put(pokename, forms);
+      }
+    }
+
+    //loads back sprites
+    String backSpritePath = dataPath("Back Sprites");
+    dir = new File(backSpritePath);
+    files = dir.listFiles();
+    for (File file : files) {
+      String filename = file.getName(); //"386-speed.png"
+      String pokeid = ""+parseInt(filename.substring(0, 3)); //"386"
+      String pokename = getPokename(pokeid); //"deoxys"
+      String form = "regular";
+      if (filename.charAt(3) != '.') {
+        form = filename.substring(4, filename.indexOf("."));
+      }
+      HashMap<String, PImage> forms = new HashMap<String, PImage>();
+      if (backSprites.containsKey(pokename)) { //if the pokemon already has a form, gets the hashmap it's mapped to and puts another form
+        backSprites.get(pokename).put(form, loadImage(backSpritePath + '/' + filename));
+      } else { //else, puts into temp hashmap forms and maps the pokename to it
+        forms.put(form, loadImage(backSpritePath + '/' + filename));
+        backSprites.put(pokename, forms);
       }
     }
   }

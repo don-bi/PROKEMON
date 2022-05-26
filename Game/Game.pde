@@ -41,7 +41,10 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  battle = new BattleMode(new Pokemon("Bulbasaur"));
+  Pokemon poke2 = new Pokemon("Venusaur", true);
+  Pokemon poke = new Pokemon("Arceus", "water");
+  battle = new BattleMode(poke);
+  battle.ally = poke2;
 }
 
 void draw() {
