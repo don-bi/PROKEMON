@@ -25,5 +25,6 @@ public class BattleMode{
   void display(){
     image(data.battleBG,0,0);
     image(data.battleCircles,0,0);
+    image(enemy.sprite,940,50);
   }
 }
