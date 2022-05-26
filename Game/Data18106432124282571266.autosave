@@ -1,3 +1,4 @@
+import java.util.*;
 public class Data {
   //Maps
   HashMap<String, PImage[]> mapImages = new HashMap<String, PImage[]>();
@@ -8,6 +9,9 @@ public class Data {
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
   
+  //Sounds
+  HashMap<String, String> capitalCities = new HashMap<String, String>();
+  // FIND SOUND VARIABLE AND DO BATTLE SOUNDS AND NAME FOR MAP SOUNDS
   
   public Data() {
     //maps every map name to two images, its background nad its foreground

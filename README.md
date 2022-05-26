@@ -24,3 +24,6 @@ Hanson: Testing merge from lessons in class
 
 **5/25/2022**
 Hanson: starting sounds hashmap and creating battlesounds/ researching hashmaps with sound osc
+
+**5/25/2022**
+Hanson: Sounds class and working with library downloads for sounds
