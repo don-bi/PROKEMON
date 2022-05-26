@@ -47,8 +47,8 @@ void setup() {
   //TESTING BATTLEMODE
   Pokemon poke2 = new Pokemon("Charmeleon", true);
   Pokemon poke = new Pokemon("Kyogre");
-  //battle = new BattleMode(poke);
-  //battle.ally = poke2;
+  battle = new BattleMode(poke);
+  battle.ally = poke2;
 }
 
 void draw() {

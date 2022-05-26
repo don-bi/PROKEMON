@@ -27,5 +27,7 @@ public class BattleMode{
     image(data.battleCircles,0,0);
     image(enemy.sprite,940,380-enemy.sprite.height);
     image(ally.sprite,130,800-ally.sprite.height);
+    fill(0,100);
+    rect(0,650,1440,214);
   }
 }
