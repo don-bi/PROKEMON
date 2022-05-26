@@ -41,7 +41,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  battle = new BattleMode(new Pokemon("Arceus"));
+  battle = new BattleMode(new Pokemon("Bulbasaur"));
 }
 
 void draw() {
