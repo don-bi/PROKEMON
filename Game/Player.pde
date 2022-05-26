@@ -4,7 +4,8 @@ public class Player extends Character {
     direction = 'd';
     xpos = 0;
     ypos = 0;
-    int pixel = 0;
+    pixel = 0;
+    delay = 0;
     isBiking = false;
     isRunning = false;
     team = new Pokemon[6];

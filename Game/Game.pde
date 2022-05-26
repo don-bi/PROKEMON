@@ -47,11 +47,8 @@ void setup() {
   //TESTING BATTLEMODE
   Pokemon poke2 = new Pokemon("Charmeleon", true);
   Pokemon poke = new Pokemon("Kyogre");
-  battle = new BattleMode(poke);
-  battle.ally = poke2;
-  println(poke2.type1);
-  println(poke2.type2);
-  println(poke2.basestats);
+  //battle = new BattleMode(poke);
+  //battle.ally = poke2;
 }
 
 void draw() {
@@ -66,23 +63,33 @@ void draw() {
     popMatrix();
     
     animations.animate();
+    checkWASD();
   } else {
     battle.display();
   }
 }
 
-void keyPressed() {
-  switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
-  case "W": 
-  case "A": 
-  case "S": 
-  case "D":
-    if (!player.inWalkAnimation) {
-      player.changeDirection();
-      player.move();
+void checkWASD(){
+  if (keyPressed){
+    switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
+    case "W": 
+    case "A": 
+    case "S": 
+    case "D":
+      if (!player.inWalkAnimation) {
+        player.changeDirection();
+        if (player.delay == 0 ){
+          player.move();
+        } else {
+          player.delay ++;
+          if (player.delay == 4) player.delay = 0;
+        }
+      }
     }
   }
 }
+  
+
 
 String getSubDir(String sub, String file){
   return dataPath(sub)+'/'+file;

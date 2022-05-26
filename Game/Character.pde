@@ -1,4 +1,5 @@
 public class Character {
+  int delay;
   PImage sprite;
   char direction;
   int xpos, ypos;
@@ -13,6 +14,7 @@ public class Character {
     if (pixel < 16) {
       pixel ++;
     } else {
+      delay ++;
       pixel = 0;
       if (!isBiking && !isRunning) {
         switch (direction) {

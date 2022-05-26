@@ -16,12 +16,6 @@ public class Pokemon{
     for (String stat:statnames){
       basestats.put(stat,parseInt(data.getPokeData(name,stat)));
     }
-    type1 = data.getPokeData(name,"type1");
-    type2 = data.getPokeData(name,"type2");
-    sprite = data.frontSprites.get(name).get(mode);
-    evolution = data.getPokename(data.getPokeData(name,"evolved_id"));
-    evolutionlevel = parseInt(data.getPokeData(name,"minimum_level")); 
-    mode = "regular";
   }
   
   public Pokemon(String n, String m){
