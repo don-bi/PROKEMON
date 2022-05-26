@@ -23,3 +23,6 @@ Hanson: Fixed importing issues and added nullpointer exception otherwise
 Donald: Made two new programs, pokemon_moves_fixer to get rid of useless data in pokemon_moves.csv and SpriteResizer to resize the sprites that were originally 96x96(too small). Started on battlemode, but not much done yet.
 
 Hanson: Testing merge from lessons in class
+
+**5/25/2022**
+Hanson: starting sounds hashmap and creating battlesounds/ researching hashmaps with sound osc
