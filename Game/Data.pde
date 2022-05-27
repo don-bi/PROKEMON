@@ -27,6 +27,7 @@ public class Data {
   PImage battleBG, battleCircles;
   
   //GUIS AND BUTTONS
+  Gui homeScreen;
   Gui fightOptions;
   Gui moveOptions;
   Button fight;
@@ -184,6 +185,7 @@ public class Data {
   
   private void loadGuis(){
     //rect(0,650,1440,214);
+    homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     
@@ -193,7 +195,7 @@ public class Data {
     pokemon.texture = createImage(220,107,RGB);
     bag = new Button(fightOptions,moveOptions,1000,757);
     bag.texture = createImage(220,107,RGB);
-    run = new Button(fightOptions,moveOptions,1220,650);
+    run = new Button(fightOptions,moveOptions,1220,757);
     run.texture = createImage(220,107,RGB);
     
     
