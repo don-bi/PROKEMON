@@ -10,6 +10,7 @@ String currentMap;
 Map currentMapTiles;
 
 BattleMode battle;
+Gui currentGui;
 
 /*REMINDERS***
 resize map pngs to 6x the size in pixlr or another program first
@@ -49,6 +50,7 @@ void setup() {
   Pokemon poke = new Pokemon("Kyogre");
   battle = new BattleMode(poke);
   battle.ally = poke2;
+  currentGui = data.fightOptions;
 }
 
 void draw() {
@@ -67,6 +69,10 @@ void draw() {
   } else {
     battle.display();
   }
+}
+
+void mouseClicked(){
+  currentGui.processButtons();
 }
 
 void checkWASD(){

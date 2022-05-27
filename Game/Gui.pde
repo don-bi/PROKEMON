@@ -1,6 +1,6 @@
 public class Gui{
   int x,y;
-  ArrayList<Button> buttons;
+  ArrayList<Button> buttons = new ArrayList<Button>(0);
   Gui prev;
   boolean on, overlay;
   PImage texture;

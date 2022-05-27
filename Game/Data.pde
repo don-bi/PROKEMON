@@ -27,9 +27,15 @@ public class Data {
   PImage battleBG, battleCircles;
   
   //GUIS AND BUTTONS
-  Gui fightOptions = new Gui(0,0);
-  Gui moveOptions = new Gui(0,0);
-  Button fight = new Button(moveOptions);
+  Gui fightOptions;
+  Gui moveOptions;
+  Button fight;
+  Button pokemon;
+  Button bag;
+  Button run;
+
+
+
 
 
   public Data(){
@@ -65,8 +71,16 @@ public class Data {
   
       //loads back sprites
       loadBackSprites();
+      
+      //loads guis and buttons
+      loadGuis();
     } catch (IOException e){}
   }
+
+
+
+
+
 
   private void loadMapMasks(){
     String[] mapSet= mapImages.keySet().toArray(new String[0]);
@@ -168,7 +182,24 @@ public class Data {
     }
   }
   
-  private void loadGuis(){}
+  private void loadGuis(){
+    //rect(0,650,1440,214);
+    fightOptions = new Gui(0,0);
+    moveOptions = new Gui(0,0);
+    
+    fight = new Button(fightOptions,moveOptions,1000,650);
+    fight.texture = loadImage("fight.png");
+    pokemon = new Button(fightOptions,moveOptions,1220,650);
+    pokemon.texture = createImage(220,107,RGB);
+    bag = new Button(fightOptions,moveOptions,1000,757);
+    bag.texture = createImage(220,107,RGB);
+    run = new Button(fightOptions,moveOptions,1220,650);
+    run.texture = createImage(220,107,RGB);
+    
+    
+    
+    moveOptions.prev = fightOptions;
+  }
     
   
   PImage getMap(String m, String layer) {
