@@ -198,6 +198,8 @@ public class Data {
     run = new Button(fightOptions,moveOptions,1220,757);
     run.texture = createImage(220,107,RGB);
     
+    move1 = new Button(moveOptions, 
+    
     
     
     moveOptions.prev = fightOptions;
