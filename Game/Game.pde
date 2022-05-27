@@ -10,6 +10,7 @@ String currentMap;
 Map currentMapTiles;
 
 BattleMode battle;
+Gui currentGui;
 
 /*REMINDERS***
 resize map pngs to 6x the size in pixlr or another program first
@@ -24,15 +25,15 @@ void setup() {
   background(0);
   textSize(100);
   fill(255);
-  text("LOADING...", width/2-250, height/2);
+  text("LOADING...", width/2-250, height/2);  
   //info classes being loaded  
   animations = new ScreenAnimations();
-
+  data = new Data();
+  
   //loads initial hometop map
   currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
-    data = new Data();
     currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
   } 
   catch (IOException e) {
@@ -40,15 +41,17 @@ void setup() {
   }
   //-------------------------
 
+  currentGui = data.homeScreen;
   size(1440, 864);
   player = new Player();
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmeleon", true);
+  /*Pokemon poke2 = new Pokemon("Charmeleon", true);
   Pokemon poke = new Pokemon("Kyogre");
   battle = new BattleMode(poke);
   battle.ally = poke2;
+  currentGui = data.fightOptions;*/
 }
 
 void draw() {
@@ -67,6 +70,11 @@ void draw() {
   } else {
     battle.display();
   }
+  currentGui.display();
+}
+
+void mouseClicked(){
+  currentGui.processButtons();
 }
 
 void checkWASD(){
