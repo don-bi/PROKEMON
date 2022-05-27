@@ -187,6 +187,23 @@ public class Data {
     }
   }
   
+  private void loadMoveData() throws IOException{
+    BufferedReader reader = createReader("pokemon moves");
+    String line = reader.readLine(); //just to get past the category headings
+    line = reader.readLine();
+    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
+      String[] data = line.split(" ");
+      String pokename = getPokename(data[0]);
+      int level = parse
+      if (learnMoves.containsKey(pokename)) {
+        HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
+        if (leveltomove.containsKey(level)){
+          
+        
+    }
+    
+  }
+  
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);

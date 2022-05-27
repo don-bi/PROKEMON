@@ -40,4 +40,6 @@ public class Pokemon{
     mode = m;
     if (ally) sprite = data.backSprites.get(name).get(mode);
   }
+  
+  
 }
