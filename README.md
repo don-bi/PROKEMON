@@ -24,8 +24,12 @@ Donald: Made two new programs, pokemon_moves_fixer to get rid of useless data in
 
 Hanson: Testing merge from lessons in class
 
-**5/25/2022**
-Hanson: starting sounds hashmap and creating battlesounds/ researching hashmaps with sound osc
+### 5/25/2022 ###
+Donald: Changed SpriteResizer to make images be has high as it has colors and also added loading in pokemon stats and other data
 
-**5/25/2022**
+Hanson: Starting sounds hashmap and creating battlesounds/ researching hashmaps with sound osc
+
+### 5/26/2022 ###
+Donald: Added loading in the sprites for both front and back, fixed walking animation, and started Guis and Buttons
+
 Hanson: Sounds class and working with library downloads for sounds
