@@ -29,5 +29,7 @@ public class BattleMode{
     image(ally.sprite,130,800-ally.sprite.height);
     fill(0,100);
     rect(0,650,1440,214);
+    if (currentGui.buttons.size() > 0) text("fighting",300,300);
+    else {text("worked",300,300);}
   }
 }
