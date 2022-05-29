@@ -28,9 +28,24 @@ public class Button{
   
   void display(){
     if (texture != null) image(texture,x,y);
-    /*switch (special){
-      case "move1":
-    }*/
+    if (special != null){
+      textSize(50);
+      fill(0);
+      switch (special){
+        case "move1":
+          text(battle.ally.moves[0].toString(),x+10,y+texture.height/2);
+          break;
+        case "move2":
+          text(battle.ally.moves[1].toString(),x+10,y+texture.height/2);
+          break;
+        case "move3":
+          text(battle.ally.moves[2].toString(),x+10,y+texture.height/2);
+          break;
+        case "move4":
+          text(battle.ally.moves[3].toString(),x+10,y+texture.height/2);
+          break;
+      }
+    }
   }
   
   void processClick(){

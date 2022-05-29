@@ -25,6 +25,13 @@ public class Move{
   }
   
   String toString(){
-    return name + " " + id;
+    String[] temp = new String[1];
+    temp[0] = name;
+    if (name.indexOf("-") != -1) temp = name.split("-");
+    String result = "";
+    for (String word:temp){
+      result += word.substring(0, 1).toUpperCase() + word.substring(1) + " ";
+    }
+    return result;
   }
 }
