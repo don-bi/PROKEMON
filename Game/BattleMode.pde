@@ -22,6 +22,24 @@ public class BattleMode{
     enemy = p;
   }
   
+  void doTurn(){
+    Move enemymove = enemy.moves[(int)random(4)];
+    enemy.currentMove = enemymove;
+    Pokemon attacker = ally;
+    Pokemon defender = enemy;
+    int allyPriority = ally.currentMove.priority;
+    int enemyPriority = enemy.currentMove.priority;
+    if (allyPriority < enemyPriority) {
+      attacker = enemy;
+      defender = ally;
+    } else if (allyPriority == enemyPriority && ally.stats.get("spd") < enemy.stats.get("spd")) {
+      attacker = enemy;
+      defender = ally;
+    }
+    attacker.attack(defender);
+    defender.attack(attacker);
+  }
+  
   void display(){
     image(data.battleBG,0,0);
     image(data.battleCircles,0,0);

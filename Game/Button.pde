@@ -53,6 +53,26 @@ public class Button{
       if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
         currentGui = opensGui;
       }
+    } else {
+      Pokemon poke = battle.ally;
+      boolean endturn = false;
+      if (special.equals("move1")) {
+        poke.currentMove = poke.moves[0];
+        endturn = true;
+      }
+      if (special.equals("move2")) {
+        poke.currentMove = poke.moves[1];
+        endturn = true;
+      }
+      if (special.equals("move3")) {
+        poke.currentMove = poke.moves[3];
+        endturn = true;
+      }
+      if (special.equals("move4")) {
+        poke.currentMove = poke.moves[4];
+        endturn = true;
+      }
+      if (endturn) battle.doTurn();
     }
   }
 }
