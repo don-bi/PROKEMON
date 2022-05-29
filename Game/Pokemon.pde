@@ -1,9 +1,8 @@
 public class Pokemon{
   String nickname,name;
   String nature;
-  HashMap<String, Integer> basestats,IVs,EVs;
+  HashMap<String, Integer> stats,IVs,EVs;
   int level,hp;
-  int atk,def,spatk,spdef,spd;
   String type1,type2;
   PImage sprite;
   String mode;
@@ -13,20 +12,21 @@ public class Pokemon{
   public Pokemon(String n, int l){
     name = n;
     nature = data.natures[(int)random(data.natures.length)];
-    basestats = new HashMap<String,Integer>();
+    stats = new HashMap<String,Integer>();
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
     String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
     for (String stat:statnames){
-      basestats.put(stat,parseInt(data.getPokeData(name,stat)));
-    }
-    for (String stat:statnames){
-      IVs.put(stat,(int)random(32));
+      IVs.put(stat,(Integer)(int)random(32));
     }
     for (String stat:statnames){
       EVs.put(stat,0);
     }
+    for (String stat:statnames){
+      stats.put(stat,calcStat(stat));
+    }
     level = l;
+    hp = stats.get("hp");
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
     type2 = data.getPokeData(name,"type2");
@@ -90,6 +90,29 @@ public class Pokemon{
       return floor(floor((((2*base+IV+floor(EV/4))*level)/100)+5) * natureVal);
     }
   }
+  
+  int calcDamage(Pokemon other){
+    //A is the attack stat of attacker, D is defense stat of the other
+    int A = stats.get("atk");
+    int D = other.stats.get("def");
+    if (currentmove.damageClass.equals("special")){
+      A = stats.get("spatk");
+      D = other.stats.get("spdef");
+    }
+    
+    
+    
+    //Calculating crit damage
+    int crit = 1;
+    if (currentMove.effect == 44){
+      if (random(8) == 0) crit = 1.5;
+    } else {
+      if (random(24) == 0) crit = 1.5;
+    }
+    
+    
+    
+    
   
   void attack(Pokemon other){
   }
