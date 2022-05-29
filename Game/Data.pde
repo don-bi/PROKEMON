@@ -19,6 +19,9 @@ public class Data {
   
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
+  
+  //Move names to move ids
+  HashMap<String, String> moveNameId = new HashMap<String, String>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
@@ -79,6 +82,12 @@ public class Data {
       
       //loads guis and buttons
       loadGuis();
+      
+      String[] moveidSet = moveData.keySet().toArray(new String[0]); //set of all the move ids in moveData
+      for (String id : moveidSet) { 
+        String move = = moveData.get(id).get("name");
+        moveNameId.put(move, id); //maps moves to their ids in moveNameId
+      }
       
       //loads move data
       loadMoveData();
@@ -274,9 +283,17 @@ public class Data {
   private String getPokename(String id) {
     return idName.get(id);
   }
+  
+  String getMoveId(String name) {
+    return moveNameId.get(name);
+  }
 
   String getPokeData(String name, String dataname) {
     return pokemonData.get(name).get(dataname);
+  }
+  
+  String getMoveData(String id, String dataname) {
+    return moveData.get(id).get(dataname);
   }
   
   

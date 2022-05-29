@@ -1,11 +1,26 @@
 public class Move{
-  String name;
+  String name, id;
   String type;
   int pp;
   int power;
   int accuracy;
   int priority;
-  String effect;
+  int target;
+  String damageClass;
+  int effect;
   int effectChance;
-  boolean isPhysical;
+  
+  public Move(String n){
+    name = n;
+    id = data.getMoveId(name);
+    type = data.getMoveData(id, "type");
+    pp = parseInt(data.getMoveData(id, "pp"));
+    power = parseInt(data.getMoveData(id, "power"));
+    accuracy = parseInt(data.getMoveData(id, "accuracy"));
+    priority = parseInt(data.getMoveData(id, "priority"));
+    target =  parseInt(data.getMoveData(id, "target_id"));
+    damageClass = data.getMoveData(id, "damage_class");
+    effect = parseInt(data.getMoveData(id, "effect_id"));
+    effectChance = parseInt(data.getMoveData(id, "effect_chance");
+  }
 }
