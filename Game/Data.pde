@@ -85,7 +85,7 @@ public class Data {
       
       String[] moveidSet = moveData.keySet().toArray(new String[0]); //set of all the move ids in moveData
       for (String id : moveidSet) { 
-        String move = = moveData.get(id).get("name");
+        String move = moveData.get(id).get("name");
         moveNameId.put(move, id); //maps moves to their ids in moveNameId
       }
       

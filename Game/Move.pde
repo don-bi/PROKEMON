@@ -10,9 +10,9 @@ public class Move{
   int effect;
   int effectChance;
   
-  public Move(String n){
-    name = n;
-    id = data.getMoveId(name);
+  public Move(String ID){
+    id = ID;
+    name = data.moveData.get(ID).get("name");
     type = data.getMoveData(id, "type");
     pp = parseInt(data.getMoveData(id, "pp"));
     power = parseInt(data.getMoveData(id, "power"));
@@ -21,6 +21,10 @@ public class Move{
     target =  parseInt(data.getMoveData(id, "target_id"));
     damageClass = data.getMoveData(id, "damage_class");
     effect = parseInt(data.getMoveData(id, "effect_id"));
-    effectChance = parseInt(data.getMoveData(id, "effect_chance");
+    effectChance = parseInt(data.getMoveData(id, "effect_chance"));
+  }
+  
+  String toString(){
+    return name;
   }
 }

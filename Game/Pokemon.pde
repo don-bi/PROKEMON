@@ -28,6 +28,8 @@ public class Pokemon{
     type1 = data.getPokeData(name,"type1");
     type2 = data.getPokeData(name,"type2");
     sprite = data.frontSprites.get(name).get(mode);
+    moves = new Move[4];
+    makeMoves();
   }
   
   public Pokemon(String n, String m, int l){
@@ -60,7 +62,10 @@ public class Pokemon{
     }
     for (int i = 0; i < 4; i ++){
       if (possiblemoves.size() > 0){
-        moves[i] = possiblemoves.remove((int)random(possiblemoves.length));
+        String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
+        println(randmoveid);
+        Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
+        moves[i] = randmove;
       }
     }
   }

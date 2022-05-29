@@ -53,7 +53,7 @@ void setup() {
   battle = new BattleMode(poke);
   battle.ally = poke2;
   currentGui = data.fightOptions;
-  println(data.learnMoves.get("Bulbasaur"));
+  printArray(poke2.moves);
 }
 
 void draw() {
