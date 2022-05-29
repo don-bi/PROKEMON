@@ -52,6 +52,7 @@ void setup() {
   battle = new BattleMode(poke);
   battle.ally = poke2;
   currentGui = data.fightOptions;
+  println(data.moveData.get("1"));
 }
 
 void draw() {
