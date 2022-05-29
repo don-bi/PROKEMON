@@ -25,7 +25,8 @@ void setup() {
   background(0);
   textSize(100);
   fill(255);
-  text("LOADING...", width/2-250, height/2);  
+  text("LOADING...", width/2-250, height/2);
+  
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
@@ -47,12 +48,12 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmeleon", true);
-  Pokemon poke = new Pokemon("Arceus");
+  Pokemon poke2 = new Pokemon("Charmeleon", 10, true);
+  Pokemon poke = new Pokemon("Arceus", 10);
   battle = new BattleMode(poke);
   battle.ally = poke2;
   currentGui = data.fightOptions;
-  println(data.moveData.get("1"));
+  println(data.learnMoves.get("Bulbasaur"));
 }
 
 void draw() {

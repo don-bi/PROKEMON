@@ -12,7 +12,7 @@ public class Data {
   HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
   
   //When each pokemon learns each move data
-  HashMap<String, HashMap<Integer, String>> learnMoves = new HashMap<String, HashMap<Integer, String>>();
+  HashMap<String, HashMap<Integer, ArrayList<String>>> learnMoves = new HashMap<String, HashMap<Integer, ArrayList<String>>>();
 
   //All the moves and their data
   HashMap<String, HashMap<String, String>> moveData = new HashMap<String, HashMap<String, String>>();
@@ -194,16 +194,26 @@ public class Data {
     BufferedReader reader = createReader("pokemon_moves.csv");
     String line = reader.readLine(); //just to get past the category headings
     line = reader.readLine();
-    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
+    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(THE LEVEL EACH POKEMON LEARNS EACH MOVE)
       String[] data = line.split(","); //[pokemon,level,move_id] (actual values)
       String pokename = getPokename(data[0]);
       int level = parseInt(data[1]);
-      if (learnMoves.containsKey(pokename)) {
-        HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
-        if (leveltomove.containsKey(level)){
-          leveltomove.put(level,data[2]); //final hashMap {"Bulbasaur"={9="22",1="33"},... (level 9 vine whip and level 1 tackle)
+      if (learnMoves.containsKey(pokename)) { //if there is already a bulbasaur
+        HashMap<Integer, ArrayList<String>> leveltomove = learnMoves.get(pokename);
+        if (leveltomove.containsKey(level)){ //if there is already a move bulbasaur learns at level 9
+          leveltomove.get(level).add(data[2]); //add the new move to the arraylist level 9 is mapped to
+        } else { //otherwise, make a new arraylist with the new level 13 move and add it to bulbasaur
+          ArrayList<String> moveid = new ArrayList<String>();
+          moveid.add(data[2]);
+          learnMoves.get(pokename).put(level,moveid);
         }
-      } 
+      } else { //if there is no bulbasaur, map bulbasaur to a new move
+        HashMap<Integer, ArrayList<String>> leveltomove = new HashMap<Integer,ArrayList<String>>(); 
+        ArrayList<String> moveid = new ArrayList<String>();
+        moveid.add(data[2]);
+        leveltomove.put(level, moveid);
+        learnMoves.put(pokename,leveltomove);
+      }
       line = reader.readLine();
     }
     reader.close();

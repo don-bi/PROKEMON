@@ -9,7 +9,7 @@ void setup(){
     line = reader.readLine();
     while (line != null){
       String[] data = line.split(",");
-      if (data[1].equals("8") && data[3].equals("1")){
+      if (data[1].equals("11") && data[3].equals("1")){
         export.println(line);
       }
       line = reader.readLine();
