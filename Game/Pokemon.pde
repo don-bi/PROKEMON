@@ -47,7 +47,22 @@ public class Pokemon{
     if (ally) sprite = data.backSprites.get(name).get(mode);
   }
   
-  private void makeMoves(){
+  private void makeMoves(){ //makes a random moveset for the pokemon based on moves it can learn at its level
+    Integer[] levels = data.learnMoves.get(name).keySet().toArray(new Integer[0]);
+    ArrayList<String> possiblemoves = new ArrayList<String>();
+    for (int learnlevel:levels){
+      if (level >= learnlevel){
+        ArrayList<String> temp = data.learnMoves.get(name).get(learnlevel);
+        for (int i = 0; i < temp.size(); i ++){
+          possiblemoves.add(temp.get(i));
+        }
+      }
+    }
+    for (int i = 0; i < 4; i ++){
+      if (possiblemoves.size() > 0){
+        moves[i] = possiblemoves.remove((int)random(possiblemoves.length));
+      }
+    }
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){
