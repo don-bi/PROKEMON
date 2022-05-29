@@ -79,6 +79,9 @@ public class Data {
       
       //loads guis and buttons
       loadGuis();
+      
+      //loads move data
+      loadMoveData();
     } catch (IOException e){}
   }
 
@@ -188,21 +191,38 @@ public class Data {
   }
   
   private void loadMoveData() throws IOException{
-    BufferedReader reader = createReader("pokemon moves");
+    BufferedReader reader = createReader("pokemon_moves.csv");
     String line = reader.readLine(); //just to get past the category headings
     line = reader.readLine();
     while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
-      String[] data = line.split(" ");
+      String[] data = line.split(","); //[pokemon,level,move_id] (actual values)
       String pokename = getPokename(data[0]);
-      //int level = parse
+      int level = parseInt(data[1]);
       if (learnMoves.containsKey(pokename)) {
         HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
-        //if (leveltomove.containsKey(level)){
-        //}
-      }
-        
+        if (leveltomove.containsKey(level)){
+          leveltomove.put(level,data[2]); //final hashMap {"Bulbasaur"={9="22",1="33"},... (level 9 vine whip and level 1 tackle)
+        }
+      } 
+      line = reader.readLine();
     }
+    reader.close();
     
+    //reading in data such as power, accuracy, etc. of moves now
+    reader = createReader("moves.csv");
+    line = reader.readLine();
+    String[] categories = line.split(","); //[id,name,type,power,etc.]
+    line = reader.readLine();
+    while (line != null) {
+      String[] data = line.split(",");
+      String moveid = data[0];
+      moveData.put(moveid,new HashMap<String, String>());
+      for (int i = 1; i < categories.length; i ++){
+        moveData.get(moveid).put(categories[i],data[i]); //final hashMap {"1"={"name"="pound","type"="normal",...}...
+      }
+      line = reader.readLine();
+    }
+    reader.close();
   }
   
   private void loadGuis(){
