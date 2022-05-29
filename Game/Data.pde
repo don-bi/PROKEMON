@@ -22,6 +22,11 @@ public class Data {
   
   //Move names to move ids
   HashMap<String, String> moveNameId = new HashMap<String, String>();
+  
+  //Natures
+  String[] natures = {"Adamant","Bashful","Bold","Brave","Calm","Careful","Docile","Gentle","Hardy","Hasty","Impish","Jolly","Lax","Lonely","Mild","Modest","Naive","Naughty","Quiet","Quirky","Rash","Relaxed","Sassy","Serious","Timid"}
+  
+  HashMap<String, String[]> natureStats = new HashMap<String, String[]>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
@@ -93,10 +98,6 @@ public class Data {
       loadMoveData();
     } catch (IOException e){}
   }
-
-
-
-
 
 
   private void loadMapMasks(){
@@ -242,6 +243,15 @@ public class Data {
       line = reader.readLine();
     }
     reader.close();
+  }
+  
+  private loadNatures(){
+    BufferedReader reader = createReader("natures.csv");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //[nature,stat increase, statdecrease]
+      natureStats.put(data[0],new String[]{data[1],data[2]}); // {"Gentle"=[spdef,def],...}
+    }
   }
   
   private void loadGuis(){

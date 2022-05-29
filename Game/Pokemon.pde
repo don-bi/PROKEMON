@@ -7,6 +7,7 @@ public class Pokemon{
   PImage sprite;
   String mode;
   Move[] moves;
+  Move currentMove;
   
   public Pokemon(String n, int l){
     name = n;
@@ -67,6 +68,20 @@ public class Pokemon{
         moves[i] = randmove;
       }
     }
+  }
+  
+  int calcStat(String statname){
+    int base = parseInt(data.getPokeData(name,statname));
+    int IV = parseInt(IVs.get(statname));
+    int EV = parseInt(EVs.get(statname));
+    //got formulas from https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats
+    if (statname.equals("hp")){
+      return floor(((2*base+IV+floor(EV/4))*level)/100) + level + 10;
+    } else {
+      return floor((((2*base+IV+floor(EV/4))*level)/100)+5)
+  }
+  
+  void attack(Pokemon other){
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){
