@@ -1,5 +1,5 @@
 public class BattleMode{
-  String weather;
+  String weather = "none";
   NPC opponent;
   Pokemon ally, enemy;
   
@@ -38,6 +38,7 @@ public class BattleMode{
     }
     attacker.attack(defender);
     defender.attack(attacker);
+    currentGui = data.fightOptions;
   }
   
   void display(){

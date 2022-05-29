@@ -65,14 +65,17 @@ public class Button{
         endturn = true;
       }
       if (special.equals("move3")) {
-        poke.currentMove = poke.moves[3];
+        poke.currentMove = poke.moves[2];
         endturn = true;
       }
       if (special.equals("move4")) {
-        poke.currentMove = poke.moves[4];
+        poke.currentMove = poke.moves[3];
         endturn = true;
       }
-      if (endturn) battle.doTurn();
+      if (endturn) {
+        currentGui = null;
+        battle.doTurn();
+      }
     }
   }
 }

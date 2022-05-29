@@ -37,6 +37,8 @@ public class Pokemon{
     sprite = data.frontSprites.get(name).get(mode);
     moves = new Move[4];
     makeMoves();
+    nonvolStatus = "none";
+    nonvolTurns = 0;
   }
   
   public Pokemon(String n, String m, int l){
