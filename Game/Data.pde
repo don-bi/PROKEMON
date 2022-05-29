@@ -253,20 +253,20 @@ public class Data {
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");
     pokemon = new Button(fightOptions,moveOptions,1220,650);
-    pokemon.texture = createImage(220,107,RGB);
+    pokemon.texture = loadImage("pokemon.png");
     bag = new Button(fightOptions,moveOptions,1000,757);
-    bag.texture = createImage(220,107,RGB);
+    bag.texture = loadImage("bag.png");
     run = new Button(fightOptions,moveOptions,1220,757);
-    run.texture = createImage(220,107,RGB);
+    run.texture = loadImage("run.png");
     
     move1 = new Button(moveOptions,1000,650,"move1");
-    move1.texture = createImage(220,107,RGB);
+    move1.texture = loadImage("blank.png");
     move2 = new Button(moveOptions,1220,650,"move2");
-    move2.texture = createImage(220,107,RGB);
+    move2.texture = loadImage("blank.png");
     move3 = new Button(moveOptions,1000,757,"move3");
-    move3.texture = createImage(220,107,RGB);
+    move3.texture = loadImage("blank.png");
     move4 = new Button(moveOptions,1220,757,"move4");
-    move4.texture = createImage(220,107,RGB);
+    move4.texture = loadImage("blank.png");
     
     
     

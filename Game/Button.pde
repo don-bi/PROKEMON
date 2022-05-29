@@ -28,6 +28,9 @@ public class Button{
   
   void display(){
     if (texture != null) image(texture,x,y);
+    /*switch (special){
+      case "move1":
+    }*/
   }
   
   void processClick(){
