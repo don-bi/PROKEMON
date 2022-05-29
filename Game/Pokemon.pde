@@ -1,5 +1,6 @@
 public class Pokemon{
   String nickname,name;
+  String nature;
   HashMap<String, Integer> basestats,IVs,EVs;
   int level,hp;
   int atk,def,spatk,spdef,spd;
@@ -11,6 +12,7 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
+    nature = data.natures[(int)random(data.natures.length)];
     basestats = new HashMap<String,Integer>();
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
@@ -74,11 +76,19 @@ public class Pokemon{
     int base = parseInt(data.getPokeData(name,statname));
     int IV = parseInt(IVs.get(statname));
     int EV = parseInt(EVs.get(statname));
+    String[] natureEffects = data.natureStats.get(nature);
+    String natureInc = natureEffects[0];
+    String natureDec = natureEffects[1];
+    float natureVal = 1;
+    if (statname == natureInc) natureVal += 0.1;
+    if (statname == natureDec) natureVal -= 0.1;
+    
     //got formulas from https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats
     if (statname.equals("hp")){
       return floor(((2*base+IV+floor(EV/4))*level)/100) + level + 10;
     } else {
-      return floor((((2*base+IV+floor(EV/4))*level)/100)+5)
+      return floor(floor((((2*base+IV+floor(EV/4))*level)/100)+5) * natureVal);
+    }
   }
   
   void attack(Pokemon other){
