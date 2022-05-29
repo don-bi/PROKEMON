@@ -8,6 +8,10 @@ public class Pokemon{
   String mode;
   Move[] moves;
   Move currentMove;
+  String nonvolStatus;
+  int nonvolTurns;
+  ArrayList<String> volStatus;
+  ArrayList<String> volTurns;
   
   public Pokemon(String n, int l){
     name = n;
@@ -91,17 +95,17 @@ public class Pokemon{
     }
   }
   
-  int calcDamage(Pokemon other){
+  float calcDamage(Pokemon other){    
     //A is the attack stat of attacker, D is defense stat of the other
     int A = stats.get("atk");
     int D = other.stats.get("def");
-    if (currentmove.damageClass.equals("special")){
+    if (currentMove.damageClass.equals("special")){
       A = stats.get("spatk");
       D = other.stats.get("spdef");
     }
     
     //Calculating weather damage modifier
-    int weather = 1;
+    float weather = 1;
     if (battle.weather.equals("rain")){
       if (currentMove.type.equals("water")) weather = 1.5;
       if (currentMove.type.equals("fire")) weather = 0.5;
@@ -112,14 +116,29 @@ public class Pokemon{
     }
     
     //Calculating crit damage modifier
-    int crit = 1;
+    float crit = 1;
     if (currentMove.effect == 44){
       if (random(8) == 0) crit = 1.5;
     } else {
       if (random(24) == 0) crit = 1.5;
     }
     
+    //Random modifier
+    float random = ((int)random(16) + 85) / 100.0;
     
+    //STAB modifier
+    float STAB = 1;
+    if (currentMove.type.equals(type1) || currentMove.type.equals(type2)) STAB = 1.5;
+    
+    float effectiveness = 1;
+    effectiveness *= data.effectiveness.get(currentMove.type).get(other.type1); //gets effectiveness against other's type1
+    if (other.type2.equals("")) effectiveness *= data.effectiveness.get(currentMove.type).get(other.type1); //gets effectiveness against other's type2
+    
+    float burn = 1;
+    if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
+    
+    return ((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn;
+  }
     
     
   
