@@ -100,9 +100,18 @@ public class Pokemon{
       D = other.stats.get("spdef");
     }
     
+    //Calculating weather damage modifier
+    int weather = 1;
+    if (battle.weather.equals("rain")){
+      if (currentMove.type.equals("water")) weather = 1.5;
+      if (currentMove.type.equals("fire")) weather = 0.5;
+    }
+    if (battle.weather.equals("harsh sunlight")){
+      if (currentMove.type.equals("water")) weather = 0.5;
+      if (currentMove.type.equals("fire")) weather = 1.5;
+    }
     
-    
-    //Calculating crit damage
+    //Calculating crit damage modifier
     int crit = 1;
     if (currentMove.effect == 44){
       if (random(8) == 0) crit = 1.5;
