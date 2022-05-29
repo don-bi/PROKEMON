@@ -194,11 +194,12 @@ public class Data {
     while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
       String[] data = line.split(" ");
       String pokename = getPokename(data[0]);
-      int level = parse
+      //int level = parse
       if (learnMoves.containsKey(pokename)) {
         HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
-        if (leveltomove.containsKey(level)){
-          
+        //if (leveltomove.containsKey(level)){
+        //}
+      }
         
     }
     
