@@ -71,16 +71,12 @@ public class Pokemon{
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
-        if (checkMoveEffects(randmove) == 0) {
-          moves[i] = randmove;
-        } else {
-          i --;
-        }
+        moves[i] = randmove;
       }
     }
   }
   
-  private int calcStat(String statname){
+  int calcStat(String statname){
     int base = parseInt(data.getPokeData(name,statname));
     int IV = parseInt(IVs.get(statname));
     int EV = parseInt(EVs.get(statname));
@@ -99,7 +95,7 @@ public class Pokemon{
     }
   }
   
-  private float calcDamage(Pokemon other){    
+  float calcDamage(Pokemon other){    
     //A is the attack stat of attacker, D is defense stat of the other
     int A = stats.get("atk");
     int D = other.stats.get("def");
@@ -144,18 +140,10 @@ public class Pokemon{
     return ((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn;
   }
     
-  private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
-    return 0;
-  }
+    
   
   void attack(Pokemon other){
-    int damage = 0;
-    if (!currentMove.damageClass.equals("status")){
-      damage = (int)calcDamage(other);
-    } else {
-      damage = checkMoveEffects(currentMove);
-    }
-    other.hp -= damage;
+    
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){
