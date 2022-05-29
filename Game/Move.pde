@@ -25,6 +25,6 @@ public class Move{
   }
   
   String toString(){
-    return name;
+    return name + " " + id;
   }
 }

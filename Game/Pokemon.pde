@@ -54,16 +54,15 @@ public class Pokemon{
     ArrayList<String> possiblemoves = new ArrayList<String>();
     for (int learnlevel:levels){
       if (level >= learnlevel){
-        ArrayList<String> temp = data.learnMoves.get(name).get(learnlevel);
+        ArrayList<String> temp = data.learnMoves.get(name).get(learnlevel); //temp to store all the moves that a certain level has
         for (int i = 0; i < temp.size(); i ++){
-          possiblemoves.add(temp.get(i));
+          if (!possiblemoves.contains(temp.get(i))) possiblemoves.add(temp.get(i)); //if the move is not in the list already, then add the move to the possible moves list
         }
       }
     }
     for (int i = 0; i < 4; i ++){
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
-        println(randmoveid);
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
         moves[i] = randmove;
       }
