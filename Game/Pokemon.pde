@@ -41,7 +41,7 @@ public class Pokemon{
     if (ally) sprite = data.backSprites.get(name).get(mode);
   }
   
-  public pokemonChooser(int level, int min, int max, String[] names){
+  void pokemonChooser(int level, int min, int max, String[] names){
     //choose random pokemon from names
     //call constrcutors to create new pokemon
     //set level randomly between min and max

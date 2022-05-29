@@ -30,12 +30,16 @@ public class Data {
   Gui homeScreen;
   Gui fightOptions;
   Gui moveOptions;
+  
   Button fight;
   Button pokemon;
   Button bag;
   Button run;
-
-
+  
+  Button move1;
+  Button move2;
+  Button move3;
+  Button move4;
 
 
 
@@ -183,6 +187,24 @@ public class Data {
     }
   }
   
+  private void loadMoveData() throws IOException{
+    BufferedReader reader = createReader("pokemon moves");
+    String line = reader.readLine(); //just to get past the category headings
+    line = reader.readLine();
+    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
+      String[] data = line.split(" ");
+      String pokename = getPokename(data[0]);
+      //int level = parse
+      if (learnMoves.containsKey(pokename)) {
+        HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
+        //if (leveltomove.containsKey(level)){
+        //}
+      }
+        
+    }
+    
+  }
+  
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
@@ -198,7 +220,14 @@ public class Data {
     run = new Button(fightOptions,moveOptions,1220,757);
     run.texture = createImage(220,107,RGB);
     
-    move1 = new Button(moveOptions, 
+    move1 = new Button(moveOptions,1000,650,"move1");
+    move1.texture = createImage(220,107,RGB);
+    move2 = new Button(moveOptions,1220,650,"move2");
+    move2.texture = createImage(220,107,RGB);
+    move3 = new Button(moveOptions,1000,757,"move3");
+    move3.texture = createImage(220,107,RGB);
+    move4 = new Button(moveOptions,1220,757,"move4");
+    move4.texture = createImage(220,107,RGB);
     
     
     

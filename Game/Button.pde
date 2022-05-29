@@ -20,6 +20,11 @@ public class Button{
    special = s;
  }
  
+ public Button(Gui in, int X, int Y, String s){
+   this(in,X,Y);
+   special = s;
+ }
+ 
   
   void display(){
     if (texture != null) image(texture,x,y);
