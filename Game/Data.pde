@@ -27,6 +27,9 @@ public class Data {
   String[] natures = {"Adamant","Bashful","Bold","Brave","Calm","Careful","Docile","Gentle","Hardy","Hasty","Impish","Jolly","Lax","Lonely","Mild","Modest","Naive","Naughty","Quiet","Quirky","Rash","Relaxed","Sassy","Serious","Timid"};
   
   HashMap<String, String[]> natureStats = new HashMap<String, String[]>();
+  
+  //Type effectivenesses
+  HashMap<String, HashMap<String, Integer>> effectiveness = new HashMap<String, HashMap<String, Integer>>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
@@ -99,6 +102,10 @@ public class Data {
       
       //loads nature data
       loadNatures();
+      
+      //loads move effectiveness data
+      loadEffectiveness();
+      
     } catch (IOException e){}
   }
 
@@ -259,6 +266,25 @@ public class Data {
     reader.close();
   }
   
+  private void loadEffectiveness() throws IOException{
+    BufferedReader reader = createReader("effectiveness.csv");
+    String line = reader.readLine();
+    String[] categories = line.split(","); //type names ([attacking normal, fire,...]
+    line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //values of [normal, fire, water,...]
+      String attackingtype = data[0];
+      HashMap<String, Integer> defensetype = new HashMap<String, Integer>();
+      firstDtype.put(categories[1],data[1]);
+      effectiveness.put(attackingtype,firstDtype); // puts normal effectivness first to initialize what attackingtype maps to
+      for (int i = 2; i < categories.length; i ++){
+        effectiveness.get(attackingtype).put(categories[i],data[i]);
+      }
+      line = reader.readLine();
+    }
+    reader.close();
+  }
+      
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
