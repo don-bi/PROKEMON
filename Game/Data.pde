@@ -275,10 +275,10 @@ public class Data {
       String[] data = line.split(","); //values of [normal, fire, water,...]
       String attackingtype = data[0];
       HashMap<String, Integer> defensetype = new HashMap<String, Integer>();
-      firstDtype.put(categories[1],data[1]);
-      effectiveness.put(attackingtype,firstDtype); // puts normal effectivness first to initialize what attackingtype maps to
+      defensetype.put(categories[1],parseInt(data[1]));
+      effectiveness.put(attackingtype,defensetype); // puts normal effectivness first to initialize what attackingtype maps to
       for (int i = 2; i < categories.length; i ++){
-        effectiveness.get(attackingtype).put(categories[i],data[i]);
+        effectiveness.get(attackingtype).put(categories[i],parseInt(data[i]));
       }
       line = reader.readLine();
     }

@@ -76,7 +76,7 @@ public class Pokemon{
     }
   }
   
-  int calcStat(String statname){
+  private int calcStat(String statname){
     int base = parseInt(data.getPokeData(name,statname));
     int IV = parseInt(IVs.get(statname));
     int EV = parseInt(EVs.get(statname));
@@ -95,7 +95,7 @@ public class Pokemon{
     }
   }
   
-  float calcDamage(Pokemon other){    
+  private float calcDamage(Pokemon other){    
     //A is the attack stat of attacker, D is defense stat of the other
     int A = stats.get("atk");
     int D = other.stats.get("def");
@@ -143,6 +143,11 @@ public class Pokemon{
     
   
   void attack(Pokemon other){
+    if (!currentMove.damageClass.equals("status")){
+      if (currentMove.power == -1){
+        
+      }
+    }
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){
