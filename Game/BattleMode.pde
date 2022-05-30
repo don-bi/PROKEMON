@@ -69,13 +69,20 @@ public class BattleMode{
       }
     }
     
-    if (winner == ally){
+    if (opponent == null && winner == ally){ //if there is no npc being fought, battle ends after enemy is dead
       battle = null;
       currentGui = data.homeScreen;
-    }
-    if (winner == enemy){
-      battle = null;
-      currentGui = data.homeScreen;
+    } else if (winner == enemy){
+      boolean alive = false;
+      for (Pokemon pokemon:player.team) {
+        if (pokemon.hp > 0) alive = true;
+      }
+      if (alive) {
+        currentGui = data.deadPokemon;
+      } else {
+        battle = null;
+        currentGui = data.homeScreen;
+      }
     }
   }
   
@@ -96,7 +103,7 @@ public class BattleMode{
     }
   }
   
-  private void addSwitchButtons(){ //adds buttons for switching based on pokemon on team
+  private void addSwitchButtons(){ //adds buttons for switching based on pokemon on team and for when own pokemon dies
     data.switchPokemon.buttons = new ArrayList<Button>();
     data.deadPokemon.buttons = new ArrayList<Button>();
     ArrayList<Button> deadPokeButtons = data.deadPokemon.buttons;

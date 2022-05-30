@@ -142,9 +142,13 @@ public class Button{
           }
         }
         if (endturn) {
-          currentGui = null;
-          battle.playerchoice = choice;
-          battle.doTurn();
+          if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
+            currentGui = data.fightOptions;
+          } else { //regular switching just ends turn
+            currentGui = null;
+            battle.playerchoice = choice;
+            battle.doTurn();
+          }
         }
       }
     }
