@@ -12,21 +12,20 @@ public class ScreenAnimations {
   void animate() {
     Tile currentTile = currentMapTiles.getTile(player.xpos, player.ypos);
     //animation conditions
-    if (currentTile.isDoor) {
-      animations.inAnimation = true;
-      animations.fadein = true;
+    if (currentTile.isDoor && !inAnimation) {
+      inAnimation = true;
+      fadein = true;
     }
     
     pushMatrix();
     if (frameCount > 0) {
       if (fadein) {
-        if (frame >= 255) {
+        if (frame >= 250) {
           fadein = false;
           currentMap = currentTile.warpMap;
           try {
             currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
-          } 
-          catch (IOException e) {
+          } catch (IOException e) {
             println("bad file");
           }
           player.teleport(currentTile.warpCoord[0], currentTile.warpCoord[1]);

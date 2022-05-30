@@ -7,15 +7,16 @@ boolean commandmode = false;
 String currentcommand = "";
 String mode = "";
 boolean modifymode = false;
+final int tileSize = 16; //pixel size of each tile (HAS TO BE MULTIPLE OF 16)
 
 void setup() {
-  size(240, 256); //remember to change size to map width*16 by map height * 16 before start
-  currentMap = loadImage("HomeTopFG.png");
-  currentMap.resize(240, 256);
-  map = new Map(15, 16);
+  size(640, 640); //remember to change size to map width*16 by map height * 16 before start
+  currentMap = loadImage("Woodbury_Town.png");
+  currentMap.resize(width, height);
+  map = new Map(width/tileSize, height/tileSize);
   for (int i = 0; i < map.HEIGHT; i ++) {
     for (int j = 0; j < map.WIDTH; j ++) {
-      map.setTile(j, i, new Tile(16));
+      map.setTile(j, i, new Tile(tileSize));
     }
   }
 }
@@ -29,8 +30,8 @@ void draw() {
     if (modifymode) {
       for (int i = 0; i < map.HEIGHT; i ++) {
         for (int j = 0; j < map.WIDTH; j ++) {
-          int x = j*16;
-          int y = i*16;
+          int x = j*tileSize;
+          int y = i*tileSize;
           image(map.getTile(j, i).texture, x, y);
         }
       }
@@ -55,14 +56,14 @@ void draw() {
 
 //mouse methods
 void mouseTileData() {
-  int x = (((int)mouseX)/16);
-  int y = (((int)mouseY)/16);
+  int x = (((int)mouseX)/tileSize);
+  int y = (((int)mouseY)/tileSize);
   map.getTile(x, y).printData();
 }
 
 void mouseTile() {
-  int x = (((int)mouseX)/16);
-  int y = (((int)mouseY)/16);
+  int x = (((int)mouseX)/tileSize);
+  int y = (((int)mouseY)/tileSize);
   map.getTile(x, y).modifyTile(mode, "add");
 }
 
@@ -106,6 +107,7 @@ void execute() throws IOException, NullPointerException {
       if (currentcommand.length() > 7 && currentcommand.substring(1, 7).equals("export")) {
         String exportfile = currentcommand.substring(8) + ".txt";
         PrintWriter export = createWriter(exportfile);
+        export.println("PROKEMON DATAFILE");
         export.println(map.toString());
         export.flush();
         export.close();
@@ -123,14 +125,15 @@ void execute() throws IOException, NullPointerException {
 
 void importData() throws IOException {
   BufferedReader reader = createReader(currentcommand.substring(8) + ".txt");
-  String[] line = reader.readLine().split(" ");
+  String skip = reader.readLine(); //skips the PROKEMON DATAFILE first line
+  String[] line = reader.readLine().split(" "); //creates array with  each block of t/f's as each element
   for (int imY = 0; imY < map.HEIGHT; imY++) {
     for (int imX = 0; imX < map.WIDTH; imX++) {
-      String element = line[imX];
+      String element = line[imX]; //element is each block of t,f,f,t,f,t,f's
       String[] modifiers = element.split(",");
       String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND", "GRASS"};
       String change = "remove";
-      if (modifiers[0].equals("f")) change = "add";
+      if (modifiers[0].equals("f")) change = "add"; //does 'BLOCK' separately because f in the data is what changes the tile
       map.getTile(imX, imY).modifyTile("BLOCK", change);
       for (int i = 0; i < mods.length; i ++) {
         change = "remove";

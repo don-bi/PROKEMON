@@ -27,7 +27,8 @@ public class BattleMode{
   
   void doTurn(){
     //TURN SYSTEM
-    Move enemymove = enemy.moves[(int)random(4)];
+    Move enemymove = null;
+    while (enemymove == null) enemymove = enemy.moves[(int)random(4)];
     enemy.currentMove = enemymove;
     Pokemon attacker = ally;
     Pokemon defender = enemy;
@@ -57,11 +58,13 @@ public class BattleMode{
     }
     
     if (winner == ally){
+      battle = null;
+      currentGui = data.homeScreen;
     }
     if (winner == enemy){
+      battle = null;
+      currentGui = data.homeScreen;
     }
-    battle = null;
-    currentGui = data.homeScreen;
   }
   
   void display(){

@@ -11,7 +11,7 @@ public class Map {
     BufferedReader reader = createReader(file);
     String confirmation = reader.readLine();
     
-    if (confirmation.equals("PDEKEMON DATAFILE")){ //confirms that the file is legit
+    if (confirmation.equals("PROKEMON DATAFILE")){ //confirms that the file is legit
       String[] size = reader.readLine().split(" "); 
       //the two numbers below confirmation give the width and height
       WIDTH = parseInt(size[0]);

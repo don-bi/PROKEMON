@@ -52,11 +52,12 @@ void setup() {
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Torterra", 34, true);
   player.team.add(poke3);
-  Pokemon poke = new Pokemon("Arceus", 30);
+  Pokemon poke = new Pokemon("Snivy", 15);
   battle = new BattleMode(poke);
   battle.ally = poke2;
   currentGui = data.fightOptions;
-  //print(poke2.level);
+  printArray(poke.moves);
+  printArray(poke3.moves);
 }
 
 void draw() {
@@ -69,12 +70,16 @@ void draw() {
     image(data.getMap(currentMap, "fg"), 0, 0);
     player.showPlayer();
     popMatrix();
+    
     checkWASD();
+    animations.animate();
   } else {
     battle.display();
   }
-  animations.animate();
   if (currentGui != null) currentGui.display();
+  
+  //println(currentMap);
+  //println("(" + player.xpos + ", " + player.ypos + ")");
 }
 
 void mouseClicked(){

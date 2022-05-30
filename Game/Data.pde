@@ -63,7 +63,7 @@ public class Data {
   public Data(){
     try {
       //maps every map name to two images, its background and its foreground
-      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town", "RightHouse", "LeftHouse"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
       for (String name : mapNames) {
         mapImages.put(name, new PImage[]{loadImage(getSubDir("Maps", name+"FG.png")), loadImage(getSubDir("Maps", name+"BG.png"))});
       }
@@ -128,13 +128,13 @@ public class Data {
         PImage currentBG = mapImages.get(map)[1];
         PImage mask = createImage(currentFG.width, currentBG.height, ARGB);
         loadPixels();
-        color transparent = currentBG.get(0, 0);
+        color transparent = currentBG.get(0, 0); //gets transparent color
         for (int r = 0; r < currentFG.height; r ++) {
           for (int c = 0; c < currentFG.width; c ++) {
             if (currentBG.pixels[r*currentFG.width+c] != transparent && currentFG.pixels[r*currentFG.width+c] != currentBG.pixels[r*currentFG.width+c]) {
-              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c];
+              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c]; //if the colors are not equalin the foreground and background, then it adds the color from the foregound to the mask
             } else {
-              mask.pixels[r*currentFG.width+c] = color(255, 0);
+              mask.pixels[r*currentFG.width+c] = color(255, 0); //if the color in the foreground matches the one in the background, then it makes that pixel in the mask transparents
             }
           }
         }
