@@ -53,7 +53,11 @@ public class Map {
   }
   
   Tile getTile(int x, int y){
-    return map[y][x];
+    if (x > -1 && x < WIDTH && y > -1 && y < HEIGHT){
+      return map[y][x];
+    } else {
+      return new Tile(96);
+    }
   }
   
   void fillTiles(){

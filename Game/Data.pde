@@ -65,7 +65,7 @@ public class Data {
   public Data(){
     try {
       //maps every map name to two images, its background and its foreground
-      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town", "RightHouse", "LeftHouse", "Route1"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town", "RightHouse", "LeftHouse", "Route1", "PokeCenter"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
       for (String name : mapNames) {
         mapImages.put(name, new PImage[]{loadImage(getSubDir("Maps", name+"FG.png")), loadImage(getSubDir("Maps", name+"BG.png"))});
       }
