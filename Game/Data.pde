@@ -35,7 +35,7 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniSmallPoke, miniHpBar;
   
   //GUIS AND BUTTONS
   Gui homeScreen;
@@ -84,6 +84,8 @@ public class Data {
       smallChosenPoke = loadImage("smallchosenpoke.png");
       smallPoke = loadImage("smallpoke.png");
       hpBar = loadImage("hpbar.png");
+      miniSmallPoke = loadImage("minismallpoke.png");
+      miniHpBar = loadImage("minihpbar.png");
       
       //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
       loadPokemonData();

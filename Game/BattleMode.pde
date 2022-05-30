@@ -95,12 +95,23 @@ public class BattleMode{
       textSize(40);
       fill(0);
       image(enemy.sprite,940,400-enemy.sprite.height);
-      text(enemy.hp,940,400);
       image(ally.sprite,130,800-ally.sprite.height);
-      text(ally.hp,130,800);
       fill(0,100);
       rect(0,650,1440,214);
     }
+    
+    //Displays hp bars
+    textSize(15);
+    fill(0);
+    image(data.miniSmallPoke,640,500);
+    image(data.miniHpBar.get(0,0,ally.hp*240/ally.stats.get("hp"),15),928,524);
+    text(ally.name,740,530);
+    text("Lv"+ally.level,740,550);
+    //enemy
+    image(data.miniSmallPoke,400,160);
+    image(data.miniHpBar.get(0,0,enemy.hp*240/enemy.stats.get("hp"),15),688,184);
+    text(enemy.name,500,190);
+    text("Lv"+enemy.level,500,210);
   }
   
   private void addSwitchButtons(){ //adds buttons for switching based on pokemon on team and for when own pokemon dies

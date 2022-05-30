@@ -75,7 +75,7 @@ void draw() {
   if (currentGui != null) currentGui.display();
   
   //println(currentMap);
-  currentMapTiles.getTile(player.xpos,player.ypos).printData();
+  //currentMapTiles.getTile(player.xpos,player.ypos).printData();
   //println("(" + player.xpos + ", " + player.ypos + ")");
 }
 
