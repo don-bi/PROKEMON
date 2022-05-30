@@ -48,11 +48,12 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmeleon", 10, true);
-  Pokemon poke = new Pokemon("Arceus", 10);
+  Pokemon poke2 = new Pokemon("Charmeleon", 17, true);
+  Pokemon poke = new Pokemon("Arceus", 30);
   battle = new BattleMode(poke);
   battle.ally = poke2;
   currentGui = data.fightOptions;
+  //print(poke2.level);
 }
 
 void draw() {

@@ -44,8 +44,11 @@ public class BattleMode{
   void display(){
     image(data.battleBG,0,0);
     image(data.battleCircles,0,0);
+    fill(0);
     image(enemy.sprite,940,380-enemy.sprite.height);
+    text(enemy.hp,940,400);
     image(ally.sprite,130,800-ally.sprite.height);
+    text(ally.hp,130,800);
     fill(0,100);
     rect(0,650,1440,214);
   }

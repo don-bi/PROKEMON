@@ -19,17 +19,13 @@ public class Pokemon{
     stats = new HashMap<String,Integer>();
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
+    level = l;
     String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
     for (String stat:statnames){
       IVs.put(stat,(Integer)(int)random(32));
-    }
-    for (String stat:statnames){
       EVs.put(stat,0);
-    }
-    for (String stat:statnames){
       stats.put(stat,calcStat(stat));
     }
-    level = l;
     hp = stats.get("hp");
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
@@ -95,9 +91,9 @@ public class Pokemon{
     
     //got formulas from https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats
     if (statname.equals("hp")){
-      return floor(((2*base+IV+floor(EV/4))*level)/100) + level + 10;
+      return floor(((2.0*base+IV+floor(EV/4.0))*level)/100.0) + level + 10;
     } else {
-      return floor(floor((((2*base+IV+floor(EV/4))*level)/100)+5) * natureVal);
+      return floor(floor((((2.0*base+IV+floor(EV/4.0))*level)/100.0)+5) * natureVal);
     }
   }
   
