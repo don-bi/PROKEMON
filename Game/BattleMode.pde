@@ -104,12 +104,12 @@ public class BattleMode{
     textSize(15);
     fill(0);
     image(data.miniSmallPoke,640,500);
-    image(data.miniHpBar.get(0,0,ally.hp*240/ally.stats.get("hp"),15),928,524);
+    image(data.miniHpBar.get(0,0,ally.hp*144/ally.stats.get("hp"),9),928,524);
     text(ally.name,740,530);
     text("Lv"+ally.level,740,550);
     //enemy
     image(data.miniSmallPoke,400,160);
-    image(data.miniHpBar.get(0,0,enemy.hp*240/enemy.stats.get("hp"),15),688,184);
+    image(data.miniHpBar.get(0,0,enemy.hp*144/enemy.stats.get("hp"),9),688,184);
     text(enemy.name,500,190);
     text("Lv"+enemy.level,500,210);
   }
