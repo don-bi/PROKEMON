@@ -46,8 +46,8 @@ public class Character {
     //offsets for sprite size
     int YOffset = sprite.height - 90 + movingOffsets[1];
     int XOffset = (96 - sprite.width)/2 + movingOffsets[0];
-    if (currentMapTiles.getTile(player.xpos, player.ypos).isGrass) {
-      image(sprite, xpos*16*6 + XOffset, ypos*16*6 - YOffset, sprite.width, sprite.height/2);
+    if (currentMapTiles.getTile(player.xpos, player.ypos).isGrass && player.pixel == 0) {
+      image(sprite.get(0,0,sprite.width,96), xpos*16*6 + XOffset, ypos*16*6 - YOffset);
     } else {
       image(sprite, xpos*16*6 + XOffset, ypos*16*6 - YOffset);
     }

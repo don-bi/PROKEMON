@@ -32,10 +32,10 @@ void setup() {
   data = new Data();
   
   //loads initial hometop map
-  currentMap = "HomeTop";
+  currentMap = "Route1";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
+    currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -75,6 +75,7 @@ void draw() {
   if (currentGui != null) currentGui.display();
   
   //println(currentMap);
+  currentMapTiles.getTile(player.xpos,player.ypos).printData();
   //println("(" + player.xpos + ", " + player.ypos + ")");
 }
 

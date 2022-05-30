@@ -14,6 +14,7 @@ public class BattleMode{
     }
     ally = player.team.get(i);
     enemy = opponent.team.get(i);
+    currentGui = data.fightOptions;
     addSwitchButtons();
   }
   
@@ -24,6 +25,7 @@ public class BattleMode{
     }
     ally = player.team.get(i);
     enemy = p;
+    currentGui = data.fightOptions;
     addSwitchButtons();
   }
   
@@ -85,7 +87,7 @@ public class BattleMode{
     if (!animations.inAnimation) {
       textSize(40);
       fill(0);
-      image(enemy.sprite,940,380-enemy.sprite.height);
+      image(enemy.sprite,940,400-enemy.sprite.height);
       text(enemy.hp,940,400);
       image(ally.sprite,130,800-ally.sprite.height);
       text(ally.hp,130,800);

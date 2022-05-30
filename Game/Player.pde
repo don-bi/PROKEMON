@@ -22,11 +22,15 @@ public class Player extends Character {
       if (pixel == 0) {
         leftFoot = !leftFoot;
         changeDirection();
-      }
-      if (currentMapTiles.getTile(xpos,ypos).isGrass){
-        if ((int)random(10) == 2){
-          Pokemon randpoke = new Pokemon(data.getPokename(""+(int)random(649)+1),10);
-          battle = new BattleMode(randpoke);
+        if (currentMapTiles.getTile(xpos,ypos).isGrass){
+          if ((int)random(100) < 20){
+            int randnum = (int)random(649)+1;
+            println(""+randnum);
+            String randpokeid = data.getPokename(""+randnum);
+            println(randpokeid);
+            Pokemon randpoke = new Pokemon(randpokeid,10);
+            battle = new BattleMode(randpoke);
+          }
         }
       }
     }
