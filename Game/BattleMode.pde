@@ -115,5 +115,7 @@ public class BattleMode{
         data.poke1 = new Button(data.switchPokemon,130,122,"poke1");
         data.poke1.texture = data.bigChosenPoke;
     }
+    data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
+    data.cancel.texture = loadImage("cancel.png");
   }
 }
