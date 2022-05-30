@@ -27,9 +27,20 @@ public class Data {
   PImage battleBG, battleCircles;
   
   //GUIS AND BUTTONS
-  Gui fightOptions = new Gui(0,0);
-  Gui moveOptions = new Gui(0,0);
-  Button fight = new Button(moveOptions);
+  Gui homeScreen;
+  Gui fightOptions;
+  Gui moveOptions;
+  
+  Button fight;
+  Button pokemon;
+  Button bag;
+  Button run;
+  
+  Button move1;
+  Button move2;
+  Button move3;
+  Button move4;
+
 
 
   public Data(){
@@ -65,8 +76,19 @@ public class Data {
   
       //loads back sprites
       loadBackSprites();
+      
+      //loads guis and buttons
+      loadGuis();
+      
+      //loads move data
+      loadMoveData();
     } catch (IOException e){}
   }
+
+
+
+
+
 
   private void loadMapMasks(){
     String[] mapSet= mapImages.keySet().toArray(new String[0]);
@@ -168,7 +190,69 @@ public class Data {
     }
   }
   
-  private void loadGuis(){}
+  private void loadMoveData() throws IOException{
+    BufferedReader reader = createReader("pokemon_moves.csv");
+    String line = reader.readLine(); //just to get past the category headings
+    line = reader.readLine();
+    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
+      String[] data = line.split(","); //[pokemon,level,move_id] (actual values)
+      String pokename = getPokename(data[0]);
+      int level = parseInt(data[1]);
+      if (learnMoves.containsKey(pokename)) {
+        HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
+        if (leveltomove.containsKey(level)){
+          leveltomove.put(level,data[2]); //final hashMap {"Bulbasaur"={9="22",1="33"},... (level 9 vine whip and level 1 tackle)
+        }
+      } 
+      line = reader.readLine();
+    }
+    reader.close();
+    
+    //reading in data such as power, accuracy, etc. of moves now
+    reader = createReader("moves.csv");
+    line = reader.readLine();
+    String[] categories = line.split(","); //[id,name,type,power,etc.]
+    line = reader.readLine();
+    while (line != null) {
+      String[] data = line.split(",");
+      String moveid = data[0];
+      moveData.put(moveid,new HashMap<String, String>());
+      for (int i = 1; i < categories.length; i ++){
+        moveData.get(moveid).put(categories[i],data[i]); //final hashMap {"1"={"name"="pound","type"="normal",...}...
+      }
+      line = reader.readLine();
+    }
+    reader.close();
+  }
+  
+  private void loadGuis(){
+    //rect(0,650,1440,214);
+    homeScreen = new Gui(0,0);
+    fightOptions = new Gui(0,0);
+    moveOptions = new Gui(0,0);
+    
+    fight = new Button(fightOptions,moveOptions,1000,650);
+    fight.texture = loadImage("fight.png");
+    pokemon = new Button(fightOptions,moveOptions,1220,650);
+    pokemon.texture = createImage(220,107,RGB);
+    bag = new Button(fightOptions,moveOptions,1000,757);
+    bag.texture = createImage(220,107,RGB);
+    run = new Button(fightOptions,moveOptions,1220,757);
+    run.texture = createImage(220,107,RGB);
+    
+    move1 = new Button(moveOptions,1000,650,"move1");
+    move1.texture = createImage(220,107,RGB);
+    move2 = new Button(moveOptions,1220,650,"move2");
+    move2.texture = createImage(220,107,RGB);
+    move3 = new Button(moveOptions,1000,757,"move3");
+    move3.texture = createImage(220,107,RGB);
+    move4 = new Button(moveOptions,1220,757,"move4");
+    move4.texture = createImage(220,107,RGB);
+    
+    
+    
+    moveOptions.prev = fightOptions;
+  }
     
   
   PImage getMap(String m, String layer) {

@@ -34,5 +34,14 @@ Donald: Added loading in the sprites for both front and back, fixed walking anim
 
 Hanson: Sounds class and working with library downloads for sounds
 
-### 5/29/2022 ###
-Hanson: finished pokemon choosing method for random between levels and random pokemon
+### 5/27/2022 ###
+Donald: Finished Gui and Buttons, Buttons could open up Guis now and Guis properly contain buttons, also started to load in the two move csvs
+
+Hanson: resolved sounds conflict and started pokemon choosing method
+
+### 5/28/2022 ###
+Donald: Finished loading in the move csvs
+
+### 5/28/2022 ###
+Donald:
+Hanson: finished pokemon choosing method constructor 
