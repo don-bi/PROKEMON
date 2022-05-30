@@ -35,12 +35,13 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, cancel;
   
   //GUIS AND BUTTONS
   Gui homeScreen;
   Gui fightOptions;
   Gui moveOptions;
+  Gui switchPokemon;
   
   Button fight;
   Button pokemon;
@@ -52,7 +53,12 @@ public class Data {
   Button move3;
   Button move4;
 
-
+  Button poke1;
+  Button poke2;
+  Button poke3;
+  Button poke4;
+  Button poke5;
+  Button poke6;
 
   public Data(){
     try {
@@ -71,8 +77,13 @@ public class Data {
       //Sets images for battlemode
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
-  
-  
+      bigChosenPoke = loadImage("bigchosenpoke.png");
+      bigPoke = loadImage("bigpoke.png");
+      smallChosenPoke = loadImage("smallchosenpoke.png");
+      smallPoke = loadImage("smallpoke.png");
+      hpBar = loadImage("hpbar.png");
+      cancel = loadImage("cancel.png");
+      
       //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
       loadPokemonData();
   
@@ -290,6 +301,7 @@ public class Data {
     homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
+    switchPokemon = new Gui(loadImage("pokemonmenu.png"),120,32));
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

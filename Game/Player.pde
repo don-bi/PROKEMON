@@ -8,7 +8,7 @@ public class Player extends Character {
     delay = 0;
     isBiking = false;
     isRunning = false;
-    team = new Pokemon[6];
+    team = new ArrayList<Pokemon>();
   }
   
   void move() {
