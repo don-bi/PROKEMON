@@ -49,32 +49,32 @@ public class Button{
   }
   
   void processClick(){
-    if (special == null){
-      if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
+    if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
+      if (special == null){
         currentGui = opensGui;
-      }
-    } else {
-      Pokemon poke = battle.ally;
-      boolean endturn = false;
-      if (special.equals("move1")) {
-        poke.currentMove = poke.moves[0];
-        endturn = true;
-      }
-      if (special.equals("move2")) {
-        poke.currentMove = poke.moves[1];
-        endturn = true;
-      }
-      if (special.equals("move3")) {
-        poke.currentMove = poke.moves[2];
-        endturn = true;
-      }
-      if (special.equals("move4")) {
-        poke.currentMove = poke.moves[3];
-        endturn = true;
-      }
-      if (endturn) {
-        currentGui = null;
-        battle.doTurn();
+      } else {
+        Pokemon poke = battle.ally;
+        boolean endturn = false;
+        if (special.equals("move1")) {
+          poke.currentMove = poke.moves[0];
+          endturn = true;
+        }
+        if (special.equals("move2")) {
+          poke.currentMove = poke.moves[1];
+          endturn = true;
+        }
+        if (special.equals("move3")) {
+          poke.currentMove = poke.moves[2];
+          endturn = true;
+        }
+        if (special.equals("move4")) {
+          poke.currentMove = poke.moves[3];
+          endturn = true;
+        }
+        if (endturn) {
+          currentGui = null;
+          battle.doTurn();
+        }
       }
     }
   }

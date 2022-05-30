@@ -154,6 +154,7 @@ public class Pokemon{
       damage = checkMoveEffects(currentMove);
     }
     other.hp -= damage;
+    if (other.hp < 0) other.hp = 0;
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){

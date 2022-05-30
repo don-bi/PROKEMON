@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout;
+  boolean inAnimation, fadein, fadeout, delay;
   int frame;
   
   public ScreenAnimations() {
@@ -47,7 +47,21 @@ public class ScreenAnimations {
           frame -= 25;
         }
       }
+      if (delay) {
+        if (frame <= 0) {
+          delay = false;
+          inAnimation = false;
+        } else {
+          frame --;
+        }
+      }
     }
     popMatrix();
+  }
+  
+  void wait(int time){
+    delay = true;
+    inAnimation = true;
+    frame = time;
   }
 }
