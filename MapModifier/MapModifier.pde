@@ -7,11 +7,11 @@ boolean commandmode = false;
 String currentcommand = "";
 String mode = "";
 boolean modifymode = false;
-final int tileSize = 16; //pixel size of each tile (HAS TO BE MULTIPLE OF 16)
+final int tileSize = 32; //pixel size of each tile (HAS TO BE MULTIPLE OF 16)
 
 void setup() {
   size(640, 640); //remember to change size to map width*16 by map height * 16 before start
-  currentMap = loadImage("Woodbury_Town.png");
+  currentMap = loadImage("route1.png");
   currentMap.resize(width, height);
   map = new Map(width/tileSize, height/tileSize);
   for (int i = 0; i < map.HEIGHT; i ++) {

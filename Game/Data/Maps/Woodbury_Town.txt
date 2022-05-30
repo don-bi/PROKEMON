@@ -40,7 +40,9 @@ t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,
 t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,t,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
 t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
 t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
-3
+5
 8 26 3 8 Home
 21 30 11 8 RightHouse
 30 23 3 8 LeftHouse
+39 8 1 8 Route1
+39 9 1 9 Route1

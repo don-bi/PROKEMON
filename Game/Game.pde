@@ -54,12 +54,6 @@ void setup() {
   player.team.add(poke3);
   Pokemon poke4 = new Pokemon("Zekrom", 20, true);
   player.team.add(poke4);
-  Pokemon poke = new Pokemon("Snivy", 15);
-  battle = new BattleMode(poke);
-  battle.ally = poke2;
-  currentGui = data.fightOptions;
-  printArray(poke.moves);
-  printArray(poke3.moves);
 }
 
 void draw() {
