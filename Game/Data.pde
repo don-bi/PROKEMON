@@ -301,7 +301,7 @@ public class Data {
     homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
-    switchPokemon = new Gui(loadImage("pokemonmenu.png"),120,32);
+    switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

@@ -85,23 +85,23 @@ public class BattleMode{
     data.switchPokemon.buttons = new ArrayList<Button>();
     switch(player.team.size()){
       case(6):
-        data.poke6 = new Button(data.switchPokemon,600,562);
+        data.poke6 = new Button(data.switchPokemon,560,562,"poke6");
         data.poke6.texture = data.smallPoke;
       case(5):
-        data.poke5 = new Button(data.switchPokemon,600,442);
+        data.poke5 = new Button(data.switchPokemon,560,442,"poke5");
         data.poke5.texture = data.smallPoke;
       case(4):
-        data.poke4 = new Button(data.switchPokemon,600,322);
+        data.poke4 = new Button(data.switchPokemon,560,322,"poke4");
         data.poke4.texture = data.smallPoke;
       case(3):
-        data.poke3 = new Button(data.switchPokemon,600,202);
+        data.poke3 = new Button(data.switchPokemon,560,202,"poke3");
         data.poke3.texture = data.smallPoke;
       case(2):
-        data.poke2 = new Button(data.switchPokemon,600,82);
+        data.poke2 = new Button(data.switchPokemon,560,82,"poke2");
         data.poke2.texture = data.smallPoke;
       case(1):
-        data.poke1 = new Button(data.switchPokemon,160,162);
-        data.poke1.texture = data.bigPoke;
+        data.poke1 = new Button(data.switchPokemon,130,122,"poke1");
+        data.poke1.texture = data.bigChosenPoke;
     }
   }
 }
