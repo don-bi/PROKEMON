@@ -2,6 +2,7 @@ public class BattleMode{
   String weather = "none";
   NPC opponent;
   Pokemon ally, enemy;
+  Pokemon winner;
   
   public BattleMode(NPC opp){ //Trainer encounter
     opponent = opp;
@@ -40,22 +41,25 @@ public class BattleMode{
     attacker.attack(defender);
     //checks if defender is dead
     if (defender.hp == 0){
-      animations.wait(300);
-      battle = null;
-      currentGui = data.homeScreen;
+      winner = attacker;
     }
-    if (battle != null) {
+    if (winner != null) {
       defender.attack(attacker);
       //checks if attacker is dead
       if (attacker.hp == 0){
-        animations.wait(300);
-        battle = null;
-        currentGui = data.homeScreen;
+        winner = defender;
       }
-      if (battle != null) {
+      if (winner != null) {
         currentGui = data.fightOptions;
       }
     }
+    
+    if (winner == ally){
+    }
+    if (winner == enemy){
+    }
+    battle = null;
+    currentGui = data.homeScreen;
   }
   
   void display(){

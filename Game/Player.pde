@@ -89,7 +89,7 @@ public class Player extends Character {
   }
   
   void showPlayer() {
-    if (frameCount > 0  && inWalkAnimation && !animations.inAnimation && battle != null) {
+    if (frameCount > 0  && inWalkAnimation && !animations.inAnimation && battle == null) {
       move();
       display();
     } else { 

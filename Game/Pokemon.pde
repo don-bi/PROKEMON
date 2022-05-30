@@ -69,7 +69,7 @@ public class Pokemon{
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
-        if (checkMoveEffects(randmove) == 0) {
+        if (!(randmove.damageClass.equals("status") && checkMoveEffects(randmove) == 0)) { //if the effect is not implemented, then it won't be added as a move
           moves[i] = randmove;
         } else {
           i --;
@@ -155,6 +155,7 @@ public class Pokemon{
     }
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
+    println(name + ' ' + currentMove + ' ' + damage);
   }
   
   void pokemonChooser(int level, int min, int max, String[] names){
