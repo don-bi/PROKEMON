@@ -3,6 +3,7 @@ public class BattleMode{
   NPC opponent;
   Pokemon ally, enemy;
   Pokemon winner;
+  String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
   
   public BattleMode(NPC opp){ //Trainer encounter
     opponent = opp;
@@ -32,27 +33,35 @@ public class BattleMode{
     enemy.currentMove = enemymove;
     Pokemon attacker = ally;
     Pokemon defender = enemy;
-    int allyPriority = ally.currentMove.priority;
-    int enemyPriority = enemy.currentMove.priority;
-    if (allyPriority < enemyPriority) {
-      attacker = enemy;
-      defender = ally;
-    } else if (allyPriority == enemyPriority && ally.stats.get("spd") < enemy.stats.get("spd")) {
-      attacker = enemy;
-      defender = ally;
+    
+    if (playerchoice.equals("fight")) {
+      int allyPriority = ally.currentMove.priority;
+      int enemyPriority = enemy.currentMove.priority;
+      if (allyPriority < enemyPriority) {
+        attacker = enemy;
+        defender = ally;
+      } else if (allyPriority == enemyPriority && ally.stats.get("spd") < enemy.stats.get("spd")) {
+        attacker = enemy;
+        defender = ally;
+      }
+      attacker.attack(defender);
+    } else if (playerchoice.equals("bag")) {
+    } else {
+      ally = player.team.get(parseInt(playerchoice));
+      attacker = ally;
     }
-    attacker.attack(defender);
+    
     //checks if defender is dead
     if (defender.hp == 0){
       winner = attacker;
     }
-    if (winner != null) {
+    if (winner == null) {
       defender.attack(attacker);
       //checks if attacker is dead
       if (attacker.hp == 0){
         winner = defender;
       }
-      if (winner != null) {
+      if (winner == null) {
         currentGui = data.fightOptions;
       }
     }

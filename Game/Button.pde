@@ -96,24 +96,54 @@ public class Button{
       } else {
         Pokemon poke = battle.ally; //special cases for move buttons
         boolean endturn = false;
+        String choice = "";
         if (special.equals("move1") && poke.moves[0] != null) {
           poke.currentMove = poke.moves[0];
+          choice = "fight";
           endturn = true;
         }
         if (special.equals("move2") && poke.moves[0] != null) {
           poke.currentMove = poke.moves[1];
+          choice = "fight";
           endturn = true;
         }
         if (special.equals("move3") && poke.moves[0] != null) {
           poke.currentMove = poke.moves[2];
+          choice = "fight";
           endturn = true;
         }
         if (special.equals("move4") && poke.moves[0] != null) {
           poke.currentMove = poke.moves[3];
+          choice = "fight";
+          endturn = true;
+        }
+        if (special.equals("poke1")) {
+          choice = "0";
+          endturn = true;
+        }
+        if (special.equals("poke2")) {
+          choice = "1";
+          endturn = true;
+        }
+        if (special.equals("poke3")) {
+          choice = "2";
+          endturn = true;
+        }
+        if (special.equals("poke4")) {
+          choice = "3";
+          endturn = true;
+        }
+        if (special.equals("poke5")) {
+          choice = "4";
+          endturn = true;
+        }
+        if (special.equals("poke6")) {
+          choice = "5";
           endturn = true;
         }
         if (endturn) {
           currentGui = null;
+          battle.playerchoice = choice;
           battle.doTurn();
         }
       }
