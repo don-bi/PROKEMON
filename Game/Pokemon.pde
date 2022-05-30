@@ -134,7 +134,8 @@ public class Pokemon{
     
     float effectiveness = 1;
     effectiveness *= data.effectiveness.get(currentMove.type).get(other.type1); //gets effectiveness against other's type1
-    if (other.type2.equals("")) effectiveness *= data.effectiveness.get(currentMove.type).get(other.type1); //gets effectiveness against other's type2
+    if (other.type2.equals("")) effectiveness *= data.effectiveness.get(currentMove.type).get(other.type2); //gets effectiveness against other's type2
+    println(effectiveness);
     
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;

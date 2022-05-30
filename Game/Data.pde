@@ -29,7 +29,7 @@ public class Data {
   HashMap<String, String[]> natureStats = new HashMap<String, String[]>();
   
   //Type effectivenesses
-  HashMap<String, HashMap<String, Integer>> effectiveness = new HashMap<String, HashMap<String, Integer>>();
+  HashMap<String, HashMap<String, Float>> effectiveness = new HashMap<String, HashMap<String, Float>>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
@@ -285,11 +285,11 @@ public class Data {
     while (line != null){
       String[] data = line.split(","); //values of [normal, fire, water,...]
       String attackingtype = data[0];
-      HashMap<String, Integer> defensetype = new HashMap<String, Integer>();
-      defensetype.put(categories[1],parseInt(data[1]));
+      HashMap<String, Float> defensetype = new HashMap<String, Float>();
+      defensetype.put(categories[1],parseFloat(data[1]));
       effectiveness.put(attackingtype,defensetype); // puts normal effectivness first to initialize what attackingtype maps to
       for (int i = 2; i < categories.length; i ++){
-        effectiveness.get(attackingtype).put(categories[i],parseInt(data[i]));
+        effectiveness.get(attackingtype).put(categories[i],parseFloat(data[i]));
       }
       line = reader.readLine();
     }
