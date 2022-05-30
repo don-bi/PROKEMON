@@ -2,6 +2,7 @@ public class BattleMode{
   String weather = "none";
   NPC opponent;
   Pokemon ally, enemy;
+  Button chosenButton; //this is to track which pokemon is chosen in the switch menu;
   Pokemon winner;
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
   
@@ -117,5 +118,6 @@ public class BattleMode{
     }
     data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
     data.cancel.texture = loadImage("cancel.png");
+    chosenButton = data.poke1;
   }
 }

@@ -48,7 +48,7 @@ public class Button{
       }
       textSize(40);
       fill(0);
-      switch (special){
+      switch (special){ //Displays the pokemon name and level in the switchpokemon screen
         case "poke1":
           poke = player.team.get(0);
           text(poke.name,270,250);
@@ -63,27 +63,27 @@ public class Button{
           break;
         case "poke3":
           poke = player.team.get(2);
-          text(poke.name,690,200);
-          text("Lv"+poke.level,720,240);
-          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,202);
+          text(poke.name,690,240);
+          text("Lv"+poke.level,720,280);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,242);
           break;
         case "poke4":
           poke = player.team.get(3);
-          text(poke.name,690,280);
-          text("Lv"+poke.level,720,320);
-          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,282);
-          break;
-        case "poke5":
-          poke = player.team.get(4);
-          text(poke.name,690,360);
+          text(poke.name,690,320);
           text("Lv"+poke.level,720,400);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,362);
           break;
-        case "poke6":
-          poke = player.team.get(5);
+        case "poke5":
+          poke = player.team.get(4);
           text(poke.name,690,440);
           text("Lv"+poke.level,720,480);
-          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,442);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
+          break;
+        case "poke6":
+          poke = player.team.get(5);
+          text(poke.name,690,560);
+          text("Lv"+poke.level,720,600);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
           break;
       }
     }
@@ -97,49 +97,49 @@ public class Button{
         Pokemon poke = battle.ally; //special cases for move buttons
         boolean endturn = false;
         String choice = "";
-        if (special.equals("move1") && poke.moves[0] != null) {
-          poke.currentMove = poke.moves[0];
-          choice = "fight";
-          endturn = true;
+        poke.currentMove = null;
+        
+        if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons
+          if (special.equals("move1") && poke.moves[0] != null) poke.currentMove = poke.moves[0];
+          if (special.equals("move2") && poke.moves[1] != null) poke.currentMove = poke.moves[1];
+          if (special.equals("move3") && poke.moves[2] != null) poke.currentMove = poke.moves[2];
+          if (special.equals("move4") && poke.moves[3] != null) poke.currentMove = poke.moves[3];
+          if (poke.currentMove != null) {
+            choice = "fight";
+            endturn = true;
+          }
         }
-        if (special.equals("move2") && poke.moves[0] != null) {
-          poke.currentMove = poke.moves[1];
-          choice = "fight";
-          endturn = true;
-        }
-        if (special.equals("move3") && poke.moves[0] != null) {
-          poke.currentMove = poke.moves[2];
-          choice = "fight";
-          endturn = true;
-        }
-        if (special.equals("move4") && poke.moves[0] != null) {
-          poke.currentMove = poke.moves[3];
-          choice = "fight";
-          endturn = true;
-        }
-        if (special.equals("poke1")) {
-          choice = "0";
-          endturn = true;
-        }
-        if (special.equals("poke2")) {
-          choice = "1";
-          endturn = true;
-        }
-        if (special.equals("poke3")) {
-          choice = "2";
-          endturn = true;
-        }
-        if (special.equals("poke4")) {
-          choice = "3";
-          endturn = true;
-        }
-        if (special.equals("poke5")) {
-          choice = "4";
-          endturn = true;
-        }
-        if (special.equals("poke6")) {
-          choice = "5";
-          endturn = true;
+        
+        if (special.length() > 3 && special.substring(0,4).equals("poke")) { //special interactions for switching pokemon buttons
+          if (special.equals("poke1") && battle.ally != player.team.get(0)) {
+            choice = "0";
+            endturn = true;
+            texture = data.bigChosenPoke;
+            y -= 10;
+            battle.chosenButton.texture = data.smallPoke;
+            battle.chosenButton.y += 5;
+            battle.chosenButton = this;
+          } else {
+            if (special.equals("poke2") && battle.ally != player.team.get(1)) choice = "1";
+            if (special.equals("poke3") && battle.ally != player.team.get(2)) choice = "2";
+            if (special.equals("poke4") && battle.ally != player.team.get(3)) choice = "3";
+            if (special.equals("poke5") && battle.ally != player.team.get(4)) choice = "4";
+            if (special.equals("poke6") && battle.ally != player.team.get(5)) choice = "5";
+            if (!choice.equals("")) {
+              println(choice);
+              endturn = true;
+              texture = data.smallChosenPoke;
+              if (battle.chosenButton.special.equals("poke1")) {
+                battle.chosenButton.texture = data.bigPoke;
+                battle.chosenButton.y += 10;
+              } else {
+                battle.chosenButton.texture = data.smallPoke;
+                battle.chosenButton.y += 5;
+              }
+              y -= 5;
+              battle.chosenButton = this;
+            }
+          }
         }
         if (endturn) {
           currentGui = null;
@@ -148,5 +148,9 @@ public class Button{
         }
       }
     }
+  }
+  
+  String toString(){
+    return special;
   }
 }

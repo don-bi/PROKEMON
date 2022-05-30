@@ -52,6 +52,8 @@ void setup() {
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Torterra", 34, true);
   player.team.add(poke3);
+  Pokemon poke4 = new Pokemon("Zekrom", 20, true);
+  player.team.add(poke4);
   Pokemon poke = new Pokemon("Snivy", 15);
   battle = new BattleMode(poke);
   battle.ally = poke2;

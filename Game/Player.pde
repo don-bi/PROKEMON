@@ -23,6 +23,12 @@ public class Player extends Character {
         leftFoot = !leftFoot;
         changeDirection();
       }
+      if (currentMapTiles.getTile(xpos,ypos).isGrass){
+        if ((int)random(10) == 2){
+          Pokemon randpoke = new Pokemon(data.getPokename(""+(int)random(649)+1),10);
+          battle = new BattleMode(randpoke);
+        }
+      }
     }
   }
   
