@@ -28,7 +28,7 @@ public class Player extends Character {
             println(""+randnum);
             String randpokeid = data.getPokename(""+randnum);
             println(randpokeid);
-            Pokemon randpoke = new Pokemon(randpokeid,10);
+            Pokemon randpoke = new Pokemon(randpokeid,40);
             battle = new BattleMode(randpoke);
           }
         }

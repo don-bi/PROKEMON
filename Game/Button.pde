@@ -111,7 +111,7 @@ public class Button{
         }
         
         if (special.length() > 3 && special.substring(0,4).equals("poke")) { //special interactions for switching pokemon buttons
-          if (special.equals("poke1") && battle.ally != player.team.get(0)) {
+          if (special.equals("poke1") && battle.ally != player.team.get(0) && player.team.get(0).hp > 0) {
             choice = "0";
             endturn = true;
             texture = data.bigChosenPoke;
@@ -120,11 +120,11 @@ public class Button{
             battle.chosenButton.y += 5;
             battle.chosenButton = this;
           } else {
-            if (special.equals("poke2") && battle.ally != player.team.get(1)) choice = "1";
-            if (special.equals("poke3") && battle.ally != player.team.get(2)) choice = "2";
-            if (special.equals("poke4") && battle.ally != player.team.get(3)) choice = "3";
-            if (special.equals("poke5") && battle.ally != player.team.get(4)) choice = "4";
-            if (special.equals("poke6") && battle.ally != player.team.get(5)) choice = "5";
+            if (special.equals("poke2") && battle.ally != player.team.get(1) && player.team.get(1).hp > 0) choice = "1";
+            if (special.equals("poke3") && battle.ally != player.team.get(2) && player.team.get(2).hp > 0) choice = "2";
+            if (special.equals("poke4") && battle.ally != player.team.get(3) && player.team.get(3).hp > 0) choice = "3";
+            if (special.equals("poke5") && battle.ally != player.team.get(4) && player.team.get(4).hp > 0) choice = "4";
+            if (special.equals("poke6") && battle.ally != player.team.get(5) && player.team.get(5).hp > 0) choice = "5";
             if (!choice.equals("")) {
               println(choice);
               endturn = true;
@@ -144,6 +144,8 @@ public class Button{
         if (endturn) {
           if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
             currentGui = data.fightOptions;
+            battle.ally = player.team.get(parseInt(choice));
+            battle.winner = null;
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;
