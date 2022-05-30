@@ -42,6 +42,7 @@ public class Data {
   Gui fightOptions;
   Gui moveOptions;
   Gui switchPokemon;
+  Gui deadPokemon;
   
   Button fight;
   Button pokemon;
@@ -302,6 +303,7 @@ public class Data {
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
+    deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

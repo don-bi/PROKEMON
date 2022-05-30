@@ -98,25 +98,33 @@ public class BattleMode{
   
   private void addSwitchButtons(){ //adds buttons for switching based on pokemon on team
     data.switchPokemon.buttons = new ArrayList<Button>();
+    data.deadPokemon.buttons = new ArrayList<Button>();
+    ArrayList<Button> deadPokeButtons = data.deadPokemon.buttons;
     switch(player.team.size()){
       case(6):
         data.poke6 = new Button(data.switchPokemon,560,562,"poke6");
         data.poke6.texture = data.smallPoke;
+        deadPokeButtons.add(data.poke6);
       case(5):
         data.poke5 = new Button(data.switchPokemon,560,442,"poke5");
         data.poke5.texture = data.smallPoke;
+        deadPokeButtons.add(data.poke5);
       case(4):
         data.poke4 = new Button(data.switchPokemon,560,322,"poke4");
         data.poke4.texture = data.smallPoke;
+        deadPokeButtons.add(data.poke4);
       case(3):
         data.poke3 = new Button(data.switchPokemon,560,202,"poke3");
         data.poke3.texture = data.smallPoke;
+        deadPokeButtons.add(data.poke3);
       case(2):
         data.poke2 = new Button(data.switchPokemon,560,82,"poke2");
         data.poke2.texture = data.smallPoke;
+        deadPokeButtons.add(data.poke2);
       case(1):
         data.poke1 = new Button(data.switchPokemon,130,122,"poke1");
         data.poke1.texture = data.bigChosenPoke;
+        deadPokeButtons.add(data.poke1);
     }
     data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
     data.cancel.texture = loadImage("cancel.png");
