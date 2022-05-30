@@ -301,11 +301,11 @@ public class Data {
     homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
-    switchPokemon = new Gui(loadImage("pokemonmenu.png"),120,32));
+    switchPokemon = new Gui(loadImage("pokemonmenu.png"),120,32);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");
-    pokemon = new Button(fightOptions,moveOptions,1220,650);
+    pokemon = new Button(fightOptions,switchPokemon,1220,650);
     pokemon.texture = loadImage("pokemon.png");
     bag = new Button(fightOptions,moveOptions,1000,757);
     bag.texture = loadImage("bag.png");

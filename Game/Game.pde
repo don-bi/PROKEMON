@@ -49,6 +49,7 @@ void setup() {
   
   //TESTING BATTLEMODE
   Pokemon poke2 = new Pokemon("Charmeleon", 17, true);
+  player.team.add(poke2);
   Pokemon poke = new Pokemon("Arceus", 30);
   battle = new BattleMode(poke);
   battle.ally = poke2;

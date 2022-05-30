@@ -12,15 +12,17 @@ public class BattleMode{
     }
     ally = player.team.get(i);
     enemy = opponent.team.get(i);
+    addSwitchButtons();
   }
   
   public BattleMode(Pokemon p){ //Wild pokemon encounter
     int i = 0;
-    /*while (player.team[i].hp == 0 && i != 6){
+    while (player.team.get(i).hp == 0 && i != 6){
       i ++;
-    }*/
+    }
     ally = player.team.get(i);
     enemy = p;
+    addSwitchButtons();
   }
   
   void doTurn(){
@@ -83,23 +85,23 @@ public class BattleMode{
     data.switchPokemon.buttons = new ArrayList<Button>();
     switch(player.team.size()){
       case(6):
-        data.poke6 = new Button(data.switchPokemon,480,530);
+        data.poke6 = new Button(data.switchPokemon,600,562);
         data.poke6.texture = data.smallPoke;
       case(5):
-        data.poke5 = new Button(data.switchPokemon,480,410);
+        data.poke5 = new Button(data.switchPokemon,600,442);
         data.poke5.texture = data.smallPoke;
       case(4):
-        data.poke4 = new Button(data.switchPokemon,480,290);
+        data.poke4 = new Button(data.switchPokemon,600,322);
         data.poke4.texture = data.smallPoke;
       case(3):
-        data.poke3 = new Button(data.switchPokemon,480,170);
+        data.poke3 = new Button(data.switchPokemon,600,202);
         data.poke3.texture = data.smallPoke;
       case(2):
-        data.poke2 = new Button(data.switchPokemon,480,50);
+        data.poke2 = new Button(data.switchPokemon,600,82);
         data.poke2.texture = data.smallPoke;
       case(1):
-        data.poke1 = new Button(data.switchPokemon,40,130);
-        data.poke1.texture = data.smallPoke;
+        data.poke1 = new Button(data.switchPokemon,160,162);
+        data.poke1.texture = data.bigPoke;
     }
   }
 }
