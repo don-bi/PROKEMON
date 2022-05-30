@@ -33,3 +33,6 @@ Hanson: Starting sounds hashmap and creating battlesounds/ researching hashmaps 
 Donald: Added loading in the sprites for both front and back, fixed walking animation, and started Guis and Buttons
 
 Hanson: Sounds class and working with library downloads for sounds
+
+### 5/29/2022 ###
+Hanson: finished pokemon choosing method for random between levels and random pokemon
