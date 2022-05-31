@@ -6,6 +6,7 @@ public class BattleMode{
   Pokemon winner;
   int escapeAttempts = 0;
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
+  String comment = "";
   
   public BattleMode(NPC opp){ //Trainer encounter
     opponent = opp;
@@ -38,6 +39,7 @@ public class BattleMode{
     Pokemon attacker = ally;
     Pokemon defender = enemy;
     boolean escaped = false;
+    comment = "";
     
     //the four different options that happens depending on the button chosen
     if (playerchoice.equals("fight")) {
@@ -50,7 +52,7 @@ public class BattleMode{
         attacker = enemy;
         defender = ally;
       }
-      attacker.attack(defender);
+      comment += attacker.attack(defender);
     } else if (playerchoice.equals("bag")) {
     } else if (playerchoice.equals("run")) {
       int escapeOdds = (floor((ally.stats.get("spd")*128.0)/enemy.stats.get("spd")) + 30 * escapeAttempts) % 256;
@@ -58,10 +60,12 @@ public class BattleMode{
       if (rand < escapeOdds) {
         escaped = true;
       } else {
+        comment += "You couldn't successfully escape.\n";
         escapeAttempts ++;
       }
     } else {
       ally = player.team.get(parseInt(playerchoice));
+      comment += "You sent out " + ally.name + "!\n";
       attacker = ally;
     }
     
@@ -72,7 +76,7 @@ public class BattleMode{
         winner = attacker;
       }
       if (winner == null) {
-        defender.attack(attacker);
+        comment += defender.attack(attacker);
         //checks if attacker is dead
         if (attacker.hp == 0){
           winner = defender;
@@ -97,13 +101,14 @@ public class BattleMode{
       if (alive) { //able to choose what to switch to if there is an alive pokemon
         currentGui = data.deadPokemon;
       } else { //otherwise, ends battle and tps to pokecenter, heal all pokemon
+        animations.inAnimation = true;
+        animations.fadein = true;
+        animations.frame = -300;
         battle = null;
         currentGui = data.homeScreen;
         for (Pokemon pokemon:player.team){
           pokemon.hp = pokemon.stats.get("hp");
         }
-        animations.inAnimation = true;
-        animations.fadein = true;
       }
     }
   }
@@ -120,7 +125,10 @@ public class BattleMode{
       image(ally.sprite,130,800-ally.sprite.height);
       fill(0,100);
       rect(0,650,1440,214);
-    }
+      fill(255);
+      textSize(30);
+      text(comment,50,730);
+    } 
     
     //Displays hp bars
     textSize(15);

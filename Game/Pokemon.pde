@@ -135,7 +135,7 @@ public class Pokemon{
     float effectiveness = 1;
     effectiveness *= data.effectiveness.get(currentMove.type).get(other.type1); //gets effectiveness against other's type1
     if (!other.type2.equals("")) effectiveness *= data.effectiveness.get(currentMove.type).get(other.type2); //gets effectiveness against other's type2
-    println(effectiveness);
+    
     
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
@@ -147,7 +147,7 @@ public class Pokemon{
     return 0;
   }
   
-  void attack(Pokemon other){
+  String attack(Pokemon other){
     int damage = 0;
     if (!currentMove.damageClass.equals("status")){
       damage = (int)calcDamage(other);
@@ -157,11 +157,6 @@ public class Pokemon{
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
-  }
-  
-  void pokemonChooser(int level, int min, int max, String[] names){
-    //choose random pokemon from names
-    //call constrcutors to create new pokemon
-    //set level randomly between min and max
+    return name + " used " + currentMove + "\n";
   }
 }

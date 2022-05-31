@@ -150,6 +150,7 @@ public class Button{
             currentGui = data.fightOptions;
             battle.ally = player.team.get(parseInt(choice));
             battle.winner = null;
+            battle.comment += "You sent out " + battle.ally.name + "!\n";
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;
