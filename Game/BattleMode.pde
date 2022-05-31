@@ -4,6 +4,7 @@ public class BattleMode{
   Pokemon ally, enemy;
   Button chosenButton; //this is to track which pokemon is chosen in the switch menu;
   Pokemon winner;
+  int escapeAttempts = 0;
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
   
   public BattleMode(NPC opp){ //Trainer encounter
@@ -13,7 +14,7 @@ public class BattleMode{
       i ++;
     }
     ally = player.team.get(i);
-    enemy = opponent.team.get(i);
+    enemy = opponent.team.get(0);
     currentGui = data.fightOptions;
     addSwitchButtons();
   }
@@ -36,7 +37,9 @@ public class BattleMode{
     enemy.currentMove = enemymove;
     Pokemon attacker = ally;
     Pokemon defender = enemy;
+    boolean escaped = false;
     
+    //the four different options that happens depending on the button chosen
     if (playerchoice.equals("fight")) {
       int allyPriority = ally.currentMove.priority;
       int enemyPriority = enemy.currentMove.priority;
@@ -49,27 +52,41 @@ public class BattleMode{
       }
       attacker.attack(defender);
     } else if (playerchoice.equals("bag")) {
+    } else if (playerchoice.equals("run")) {
+      int escapeOdds = (floor((ally.stats.get("spd")*128.0)/enemy.stats.get("spd")) + 30 * escapeAttempts) % 256;
+      int rand = (int)random(256);
+      if (rand < escapeOdds) {
+        escaped = true;
+      } else {
+        escapeAttempts ++;
+      }
     } else {
       ally = player.team.get(parseInt(playerchoice));
       attacker = ally;
     }
     
+    
     //checks if defender is dead
-    if (defender.hp == 0){
-      winner = attacker;
-    }
-    if (winner == null) {
-      defender.attack(attacker);
-      //checks if attacker is dead
-      if (attacker.hp == 0){
-        winner = defender;
+    if (!escaped) {
+      if (defender.hp == 0){
+        winner = attacker;
       }
       if (winner == null) {
-        currentGui = data.fightOptions;
+        defender.attack(attacker);
+        //checks if attacker is dead
+        if (attacker.hp == 0){
+          winner = defender;
+        }
+        if (winner == null) {
+          currentGui = data.fightOptions;
+        }
       }
     }
     
-    if (opponent == null && winner == ally){ //if there is no NPC being fought, battle ends after enemy is dead
+    if (escaped) {
+      battle = null;
+      currentGui = data.homeScreen;
+    } else if (opponent == null && winner == ally){ //if there is no NPC being fought, battle ends after enemy is dead
       battle = null;
       currentGui = data.homeScreen;
     } else if (winner == enemy){

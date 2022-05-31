@@ -313,7 +313,7 @@ public class Data {
     pokemon.texture = loadImage("pokemon.png");
     bag = new Button(fightOptions,moveOptions,1000,757);
     bag.texture = loadImage("bag.png");
-    run = new Button(fightOptions,moveOptions,1220,757);
+    run = new Button(fightOptions,1220,757,"run");
     run.texture = loadImage("run.png");
     
     move1 = new Button(moveOptions,1000,650,"move1");

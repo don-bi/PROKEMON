@@ -86,7 +86,7 @@ public class Button{
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
           break;
       }
-    }
+    } //ends if (special !null)
   }
   
   void processClick(){
@@ -140,6 +140,10 @@ public class Button{
               battle.chosenButton = this;
             }
           }
+        }
+        if (special.equals("run")){
+          endturn = true;
+          choice = "run";
         }
         if (endturn) {
           if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
