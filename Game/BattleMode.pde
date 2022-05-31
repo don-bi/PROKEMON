@@ -69,7 +69,7 @@ public class BattleMode{
       }
     }
     
-    if (opponent == null && winner == ally){ //if there is no npc being fought, battle ends after enemy is dead
+    if (opponent == null && winner == ally){ //if there is no NPC being fought, battle ends after enemy is dead
       battle = null;
       currentGui = data.homeScreen;
     } else if (winner == enemy){
@@ -82,6 +82,14 @@ public class BattleMode{
       } else {
         battle = null;
         currentGui = data.homeScreen;
+        player.teleport(8,5); //TPS TO POKECENTER AFTER ALL POKEMON DIES
+        currentMap = "PokeCenter";
+        try {
+          currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
+        } catch (IOException e){}
+        for (Pokemon pokemon:player.team){
+          pokemon.hp = pokemon.stats.get("hp");
+        }
       }
     }
   }
