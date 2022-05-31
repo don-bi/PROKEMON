@@ -54,6 +54,7 @@ public class Pokemon{
     if (ally) sprite = data.backSprites.get(name).get(mode);
   }
   
+<<<<<<< HEAD
   private void makeMoves(){ //makes a random moveset for the pokemon based on moves it can learn at its level
     Integer[] levels = data.learnMoves.get(name).keySet().toArray(new Integer[0]);
     ArrayList<String> possiblemoves = new ArrayList<String>();
@@ -158,5 +159,17 @@ public class Pokemon{
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
     return name + " used " + currentMove + "\n";
+=======
+<<<<<<< HEAD
+  public Pokemon(int min, int max, String[] names){
+    this(names[(int)(Math.random() * names.length)]);
+    level = (int)(Math.random() * max - min + 1) + min;
+=======
+  void pokemonChooser(int level, int min, int max, String[] names){
+>>>>>>> main
+    //choose random pokemon from names
+    //call constrcutors to create new pokemon
+    //set level randomly between min and max
+>>>>>>> main
   }
 }
