@@ -32,10 +32,10 @@ void setup() {
   data = new Data();
   
   //loads initial hometop map
-  currentMap = "HomeTop";
+  currentMap = "Route1";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
+    currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -48,11 +48,12 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  /*Pokemon poke2 = new Pokemon("Charmeleon", 10, true);
-  Pokemon poke = new Pokemon("Arceus", 10);
-  battle = new BattleMode(poke);
-  battle.ally = poke2;
-  currentGui = data.fightOptions;*/
+  Pokemon poke2 = new Pokemon("Charmeleon", 17, true);
+  player.team.add(poke2);
+  Pokemon poke3 = new Pokemon("Torterra", 34, true);
+  player.team.add(poke3);
+  Pokemon poke4 = new Pokemon("Zekrom", 20, true);
+  player.team.add(poke4);
 }
 
 void draw() {
@@ -66,12 +67,16 @@ void draw() {
     player.showPlayer();
     popMatrix();
     
-    animations.animate();
     checkWASD();
   } else {
     battle.display();
   }
-  currentGui.display();
+  if (currentGui != null) currentGui.display();
+  animations.animate();
+  
+  //println(currentMap);
+  //currentMapTiles.getTile(player.xpos,player.ypos).printData();
+  //println("(" + player.xpos + ", " + player.ypos + ")");
 }
 
 void mouseClicked(){

@@ -29,18 +29,20 @@ public class Data {
   HashMap<String, String[]> natureStats = new HashMap<String, String[]>();
   
   //Type effectivenesses
-  HashMap<String, HashMap<String, Integer>> effectiveness = new HashMap<String, HashMap<String, Integer>>();
+  HashMap<String, HashMap<String, Float>> effectiveness = new HashMap<String, HashMap<String, Float>>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniSmallPoke, miniHpBar;
   
   //GUIS AND BUTTONS
   Gui homeScreen;
   Gui fightOptions;
   Gui moveOptions;
+  Gui switchPokemon;
+  Gui deadPokemon;
   
   Button fight;
   Button pokemon;
@@ -52,12 +54,18 @@ public class Data {
   Button move3;
   Button move4;
 
-
+  Button poke1;
+  Button poke2;
+  Button poke3;
+  Button poke4;
+  Button poke5;
+  Button poke6;
+  Button cancel;
 
   public Data(){
     try {
       //maps every map name to two images, its background and its foreground
-      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town", "RightHouse", "LeftHouse", "Route1", "PokeCenter"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
       for (String name : mapNames) {
         mapImages.put(name, new PImage[]{loadImage(getSubDir("Maps", name+"FG.png")), loadImage(getSubDir("Maps", name+"BG.png"))});
       }
@@ -71,8 +79,14 @@ public class Data {
       //Sets images for battlemode
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
-  
-  
+      bigChosenPoke = loadImage("bigchosenpoke.png");
+      bigPoke = loadImage("bigpoke.png");
+      smallChosenPoke = loadImage("smallchosenpoke.png");
+      smallPoke = loadImage("smallpoke.png");
+      hpBar = loadImage("hpbar.png");
+      miniSmallPoke = loadImage("minismallpoke.png");
+      miniHpBar = loadImage("minihpbar.png");
+      
       //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
       loadPokemonData();
   
@@ -117,13 +131,13 @@ public class Data {
         PImage currentBG = mapImages.get(map)[1];
         PImage mask = createImage(currentFG.width, currentBG.height, ARGB);
         loadPixels();
-        color transparent = currentBG.get(0, 0);
+        color transparent = currentBG.get(0, 0); //gets transparent color
         for (int r = 0; r < currentFG.height; r ++) {
           for (int c = 0; c < currentFG.width; c ++) {
             if (currentBG.pixels[r*currentFG.width+c] != transparent && currentFG.pixels[r*currentFG.width+c] != currentBG.pixels[r*currentFG.width+c]) {
-              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c];
+              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c]; //if the colors are not equalin the foreground and background, then it adds the color from the foregound to the mask
             } else {
-              mask.pixels[r*currentFG.width+c] = color(255, 0);
+              mask.pixels[r*currentFG.width+c] = color(255, 0); //if the color in the foreground matches the one in the background, then it makes that pixel in the mask transparents
             }
           }
         }
@@ -274,11 +288,11 @@ public class Data {
     while (line != null){
       String[] data = line.split(","); //values of [normal, fire, water,...]
       String attackingtype = data[0];
-      HashMap<String, Integer> defensetype = new HashMap<String, Integer>();
-      defensetype.put(categories[1],parseInt(data[1]));
+      HashMap<String, Float> defensetype = new HashMap<String, Float>();
+      defensetype.put(categories[1],parseFloat(data[1]));
       effectiveness.put(attackingtype,defensetype); // puts normal effectivness first to initialize what attackingtype maps to
       for (int i = 2; i < categories.length; i ++){
-        effectiveness.get(attackingtype).put(categories[i],parseInt(data[i]));
+        effectiveness.get(attackingtype).put(categories[i],parseFloat(data[i]));
       }
       line = reader.readLine();
     }
@@ -290,14 +304,16 @@ public class Data {
     homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
+    switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
+    deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");
-    pokemon = new Button(fightOptions,moveOptions,1220,650);
+    pokemon = new Button(fightOptions,switchPokemon,1220,650);
     pokemon.texture = loadImage("pokemon.png");
     bag = new Button(fightOptions,moveOptions,1000,757);
     bag.texture = loadImage("bag.png");
-    run = new Button(fightOptions,moveOptions,1220,757);
+    run = new Button(fightOptions,1220,757,"run");
     run.texture = loadImage("run.png");
     
     move1 = new Button(moveOptions,1000,650,"move1");
@@ -308,10 +324,9 @@ public class Data {
     move3.texture = loadImage("blank.png");
     move4 = new Button(moveOptions,1220,757,"move4");
     move4.texture = loadImage("blank.png");
-    
-    
-    
+
     moveOptions.prev = fightOptions;
+    switchPokemon.prev = fightOptions;
   }
     
   
