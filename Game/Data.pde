@@ -12,24 +12,37 @@ public class Data {
   HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
   
   //When each pokemon learns each move data
-  HashMap<String, HashMap<Integer, String>> learnMoves = new HashMap<String, HashMap<Integer, String>>();
+  HashMap<String, HashMap<Integer, ArrayList<String>>> learnMoves = new HashMap<String, HashMap<Integer, ArrayList<String>>>();
 
   //All the moves and their data
   HashMap<String, HashMap<String, String>> moveData = new HashMap<String, HashMap<String, String>>();
   
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
+  
+  //Move names to move ids
+  HashMap<String, String> moveNameId = new HashMap<String, String>();
+  
+  //Natures
+  String[] natures = {"Adamant","Bashful","Bold","Brave","Calm","Careful","Docile","Gentle","Hardy","Hasty","Impish","Jolly","Lax","Lonely","Mild","Modest","Naive","Naughty","Quiet","Quirky","Rash","Relaxed","Sassy","Serious","Timid"};
+  
+  HashMap<String, String[]> natureStats = new HashMap<String, String[]>();
+  
+  //Type effectivenesses
+  HashMap<String, HashMap<String, Float>> effectiveness = new HashMap<String, HashMap<String, Float>>();
 
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniSmallPoke, miniHpBar;
   
   //GUIS AND BUTTONS
   Gui homeScreen;
   Gui fightOptions;
   Gui moveOptions;
+  Gui switchPokemon;
+  Gui deadPokemon;
   
   Button fight;
   Button pokemon;
@@ -41,12 +54,18 @@ public class Data {
   Button move3;
   Button move4;
 
-
+  Button poke1;
+  Button poke2;
+  Button poke3;
+  Button poke4;
+  Button poke5;
+  Button poke6;
+  Button cancel;
 
   public Data(){
     try {
       //maps every map name to two images, its background and its foreground
-      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
+      String[] mapNames = {"HomeTop", "Home", "Woodbury_Town", "RightHouse", "LeftHouse", "Route1", "PokeCenter"}; //REMEMBER TO ADD TO ARRAY WHENEVER ADDING NEW MAPS
       for (String name : mapNames) {
         mapImages.put(name, new PImage[]{loadImage(getSubDir("Maps", name+"FG.png")), loadImage(getSubDir("Maps", name+"BG.png"))});
       }
@@ -60,8 +79,14 @@ public class Data {
       //Sets images for battlemode
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
-  
-  
+      bigChosenPoke = loadImage("bigchosenpoke.png");
+      bigPoke = loadImage("bigpoke.png");
+      smallChosenPoke = loadImage("smallchosenpoke.png");
+      smallPoke = loadImage("smallpoke.png");
+      hpBar = loadImage("hpbar.png");
+      miniSmallPoke = loadImage("minismallpoke.png");
+      miniHpBar = loadImage("minihpbar.png");
+      
       //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
       loadPokemonData();
   
@@ -80,14 +105,23 @@ public class Data {
       //loads guis and buttons
       loadGuis();
       
+      String[] moveidSet = moveData.keySet().toArray(new String[0]); //set of all the move ids in moveData
+      for (String id : moveidSet) { 
+        String move = moveData.get(id).get("name");
+        moveNameId.put(move, id); //maps moves to their ids in moveNameId
+      }
+      
       //loads move data
       loadMoveData();
+      
+      //loads nature data
+      loadNatures();
+      
+      //loads move effectiveness data
+      loadEffectiveness();
+      
     } catch (IOException e){}
   }
-
-
-
-
 
 
   private void loadMapMasks(){
@@ -97,13 +131,13 @@ public class Data {
         PImage currentBG = mapImages.get(map)[1];
         PImage mask = createImage(currentFG.width, currentBG.height, ARGB);
         loadPixels();
-        color transparent = currentBG.get(0, 0);
+        color transparent = currentBG.get(0, 0); //gets transparent color
         for (int r = 0; r < currentFG.height; r ++) {
           for (int c = 0; c < currentFG.width; c ++) {
             if (currentBG.pixels[r*currentFG.width+c] != transparent && currentFG.pixels[r*currentFG.width+c] != currentBG.pixels[r*currentFG.width+c]) {
-              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c];
+              mask.pixels[r*currentFG.width+c] = currentFG.pixels[r*currentFG.width+c]; //if the colors are not equalin the foreground and background, then it adds the color from the foregound to the mask
             } else {
-              mask.pixels[r*currentFG.width+c] = color(255, 0);
+              mask.pixels[r*currentFG.width+c] = color(255, 0); //if the color in the foreground matches the one in the background, then it makes that pixel in the mask transparents
             }
           }
         }
@@ -194,16 +228,26 @@ public class Data {
     BufferedReader reader = createReader("pokemon_moves.csv");
     String line = reader.readLine(); //just to get past the category headings
     line = reader.readLine();
-    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(WHEN EACH POKEMON LEARNS EACH MOVE)
+    while (line != null) { //READING IN POKEMON_MOVES RIGHT NOW(THE LEVEL EACH POKEMON LEARNS EACH MOVE)
       String[] data = line.split(","); //[pokemon,level,move_id] (actual values)
       String pokename = getPokename(data[0]);
       int level = parseInt(data[1]);
-      if (learnMoves.containsKey(pokename)) {
-        HashMap<Integer, String> leveltomove = learnMoves.get(pokename);
-        if (leveltomove.containsKey(level)){
-          leveltomove.put(level,data[2]); //final hashMap {"Bulbasaur"={9="22",1="33"},... (level 9 vine whip and level 1 tackle)
+      if (learnMoves.containsKey(pokename)) { //if there is already a bulbasaur
+        HashMap<Integer, ArrayList<String>> leveltomove = learnMoves.get(pokename);
+        if (leveltomove.containsKey(level)){ //if there is already a move bulbasaur learns at level 9
+          leveltomove.get(level).add(data[2]); //add the new move to the arraylist level 9 is mapped to
+        } else { //otherwise, make a new arraylist with the new level 13 move and add it to bulbasaur
+          ArrayList<String> moveid = new ArrayList<String>();
+          moveid.add(data[2]);
+          learnMoves.get(pokename).put(level,moveid);
         }
-      } 
+      } else { //if there is no bulbasaur, map bulbasaur to a new move
+        HashMap<Integer, ArrayList<String>> leveltomove = new HashMap<Integer,ArrayList<String>>(); 
+        ArrayList<String> moveid = new ArrayList<String>();
+        moveid.add(data[2]);
+        leveltomove.put(level, moveid);
+        learnMoves.put(pokename,leveltomove);
+      }
       line = reader.readLine();
     }
     reader.close();
@@ -225,33 +269,64 @@ public class Data {
     reader.close();
   }
   
+  private void loadNatures() throws IOException{
+    BufferedReader reader = createReader("natures.csv");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //[nature,stat increase, statdecrease]
+      natureStats.put(data[0],new String[]{data[1],data[2]}); // {"Gentle"=[spdef,def],...}
+      line = reader.readLine();
+    }
+    reader.close();
+  }
+  
+  private void loadEffectiveness() throws IOException{
+    BufferedReader reader = createReader("effectiveness.csv");
+    String line = reader.readLine();
+    String[] categories = line.split(","); //type names ([attacking normal, fire,...]
+    line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //values of [normal, fire, water,...]
+      String attackingtype = data[0];
+      HashMap<String, Float> defensetype = new HashMap<String, Float>();
+      defensetype.put(categories[1],parseFloat(data[1]));
+      effectiveness.put(attackingtype,defensetype); // puts normal effectivness first to initialize what attackingtype maps to
+      for (int i = 2; i < categories.length; i ++){
+        effectiveness.get(attackingtype).put(categories[i],parseFloat(data[i]));
+      }
+      line = reader.readLine();
+    }
+    reader.close();
+  }
+      
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
+    switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
+    deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");
-    pokemon = new Button(fightOptions,moveOptions,1220,650);
-    pokemon.texture = createImage(220,107,RGB);
+    pokemon = new Button(fightOptions,switchPokemon,1220,650);
+    pokemon.texture = loadImage("pokemon.png");
     bag = new Button(fightOptions,moveOptions,1000,757);
-    bag.texture = createImage(220,107,RGB);
-    run = new Button(fightOptions,moveOptions,1220,757);
-    run.texture = createImage(220,107,RGB);
+    bag.texture = loadImage("bag.png");
+    run = new Button(fightOptions,1220,757,"run");
+    run.texture = loadImage("run.png");
     
     move1 = new Button(moveOptions,1000,650,"move1");
-    move1.texture = createImage(220,107,RGB);
+    move1.texture = loadImage("blank.png");
     move2 = new Button(moveOptions,1220,650,"move2");
-    move2.texture = createImage(220,107,RGB);
+    move2.texture = loadImage("blank.png");
     move3 = new Button(moveOptions,1000,757,"move3");
-    move3.texture = createImage(220,107,RGB);
+    move3.texture = loadImage("blank.png");
     move4 = new Button(moveOptions,1220,757,"move4");
-    move4.texture = createImage(220,107,RGB);
-    
-    
-    
+    move4.texture = loadImage("blank.png");
+
     moveOptions.prev = fightOptions;
+    switchPokemon.prev = fightOptions;
   }
     
   
@@ -264,9 +339,17 @@ public class Data {
   private String getPokename(String id) {
     return idName.get(id);
   }
+  
+  String getMoveId(String name) {
+    return moveNameId.get(name);
+  }
 
   String getPokeData(String name, String dataname) {
     return pokemonData.get(name).get(dataname);
+  }
+  
+  String getMoveData(String id, String dataname) {
+    return moveData.get(id).get(dataname);
   }
   
   

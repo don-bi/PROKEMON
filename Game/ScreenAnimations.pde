@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout;
+  boolean inAnimation, fadein, fadeout, delay;
   int frame;
   
   public ScreenAnimations() {
@@ -12,24 +12,29 @@ public class ScreenAnimations {
   void animate() {
     Tile currentTile = currentMapTiles.getTile(player.xpos, player.ypos);
     //animation conditions
-    if (currentTile.isDoor) {
-      animations.inAnimation = true;
-      animations.fadein = true;
+    if (currentTile.isDoor && !inAnimation) {
+      inAnimation = true;
+      fadein = true;
     }
     
     pushMatrix();
     if (frameCount > 0) {
       if (fadein) {
-        if (frame >= 255) {
+        if (frame >= 250) {
           fadein = false;
-          currentMap = currentTile.warpMap;
-          try {
-            currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
-          } 
-          catch (IOException e) {
-            println("bad file");
+          if (currentTile.isDoor) {
+            currentMap = currentTile.warpMap;
+            try {
+              currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
+            } catch (IOException e) {}
+            player.teleport(currentTile.warpCoord[0], currentTile.warpCoord[1]);
+          } else { //TPS TO POKECENTER AFTER ALL POKEMON DIES
+            player.teleport(8,5);
+            currentMap = "PokeCenter";
+            try {
+              currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
+            } catch (IOException e){}
           }
-          player.teleport(currentTile.warpCoord[0], currentTile.warpCoord[1]);
           fadeout = true;
         } else {
           fill(0, frame);

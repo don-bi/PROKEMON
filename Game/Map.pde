@@ -11,7 +11,7 @@ public class Map {
     BufferedReader reader = createReader(file);
     String confirmation = reader.readLine();
     
-    if (confirmation.equals("PDEKEMON DATAFILE")){ //confirms that the file is legit
+    if (confirmation.equals("PROKEMON DATAFILE")){ //confirms that the file is legit
       String[] size = reader.readLine().split(" "); 
       //the two numbers below confirmation give the width and height
       WIDTH = parseInt(size[0]);
@@ -25,7 +25,7 @@ public class Map {
         for (int imX = 0; imX < WIDTH; imX++) {
           String element = line[imX]; //elements are a single string of (t,f,f,f,f,f,f) or other t/f's
           String[] modifiers = element.split(",");
-          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND"};
+          String[] mods = {"INTERACT", "WARP", "DOOR", "EVENT", "FOREGROUND", "GRASS"};
           String change = "remove"; //if the modifier is f, removes it
           if (modifiers[0].equals("f")) change = "add";
           getTile(imX, imY).modifyTile("BLOCK", change);
@@ -53,7 +53,11 @@ public class Map {
   }
   
   Tile getTile(int x, int y){
-    return map[y][x];
+    if (x > -1 && x < WIDTH && y > -1 && y < HEIGHT){
+      return map[y][x];
+    } else {
+      return new Tile(96);
+    }
   }
   
   void fillTiles(){

@@ -8,7 +8,7 @@ public class Player extends Character {
     delay = 0;
     isBiking = false;
     isRunning = false;
-    team = new Pokemon[6];
+    team = new ArrayList<Pokemon>();
   }
   
   void move() {
@@ -22,6 +22,16 @@ public class Player extends Character {
       if (pixel == 0) {
         leftFoot = !leftFoot;
         changeDirection();
+        if (currentMapTiles.getTile(xpos,ypos).isGrass){
+          if ((int)random(100) < 20){
+            int randnum = (int)random(649)+1;
+            println(""+randnum);
+            String randpokeid = data.getPokename(""+randnum);
+            println(randpokeid);
+            Pokemon randpoke = new Pokemon(randpokeid,(int)random(20)+15);
+            battle = new BattleMode(randpoke);
+          }
+        }
       }
     }
   }
@@ -89,7 +99,7 @@ public class Player extends Character {
   }
   
   void showPlayer() {
-    if (frameCount > 0  && inWalkAnimation && !animations.inAnimation) {
+    if (frameCount > 0  && inWalkAnimation && !animations.inAnimation && battle == null) {
       move();
       display();
     } else { 
