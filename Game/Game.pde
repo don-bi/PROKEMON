@@ -68,11 +68,11 @@ void draw() {
     popMatrix();
     
     checkWASD();
-    animations.animate();
   } else {
     battle.display();
   }
   if (currentGui != null) currentGui.display();
+  animations.animate();
   
   //println(currentMap);
   //currentMapTiles.getTile(player.xpos,player.ypos).printData();

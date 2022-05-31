@@ -22,13 +22,19 @@ public class ScreenAnimations {
       if (fadein) {
         if (frame >= 250) {
           fadein = false;
-          currentMap = currentTile.warpMap;
-          try {
-            currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
-          } catch (IOException e) {
-            println("bad file");
+          if (currentTile.isDoor) {
+            currentMap = currentTile.warpMap;
+            try {
+              currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
+            } catch (IOException e) {}
+            player.teleport(currentTile.warpCoord[0], currentTile.warpCoord[1]);
+          } else { //TPS TO POKECENTER AFTER ALL POKEMON DIES
+            player.teleport(8,5);
+            currentMap = "PokeCenter";
+            try {
+              currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
+            } catch (IOException e){}
           }
-          player.teleport(currentTile.warpCoord[0], currentTile.warpCoord[1]);
           fadeout = true;
         } else {
           fill(0, frame);

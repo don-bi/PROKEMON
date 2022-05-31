@@ -91,22 +91,19 @@ public class BattleMode{
       currentGui = data.homeScreen;
     } else if (winner == enemy){
       boolean alive = false;
-      for (Pokemon pokemon:player.team) {
+      for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
         if (pokemon.hp > 0) alive = true;
       }
-      if (alive) {
+      if (alive) { //able to choose what to switch to if there is an alive pokemon
         currentGui = data.deadPokemon;
-      } else {
+      } else { //otherwise, ends battle and tps to pokecenter, heal all pokemon
         battle = null;
         currentGui = data.homeScreen;
-        player.teleport(8,5); //TPS TO POKECENTER AFTER ALL POKEMON DIES
-        currentMap = "PokeCenter";
-        try {
-          currentMapTiles.loadMap(getSubDir("Maps",currentMap + ".txt"));
-        } catch (IOException e){}
         for (Pokemon pokemon:player.team){
           pokemon.hp = pokemon.stats.get("hp");
         }
+        animations.inAnimation = true;
+        animations.fadein = true;
       }
     }
   }
