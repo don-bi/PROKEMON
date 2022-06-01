@@ -41,7 +41,11 @@ Hanson: resolved sounds conflict and started pokemon choosing method
 
 ### 5/28/2022 ###
 Donald: Finished loading in the move csvs
+Hanson: finished pokemon choosing method constructor
+
+### 5/28/2022 ###
+Hanson: displayed MVP, researched methods and calculations after
 
 ### 5/28/2022 ###
 Donald:
-Hanson: finished pokemon choosing method constructor 
+Hanson: updated dev logs and README with current classes and battle mechanics
