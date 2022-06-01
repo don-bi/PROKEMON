@@ -127,6 +127,7 @@ public class BattleMode{
       rect(0,650,1440,214);
       fill(255);
       textSize(30);
+      textFont(data.font);
       text(comment,50,730);
     } 
     
