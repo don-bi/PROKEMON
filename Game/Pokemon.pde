@@ -158,9 +158,5 @@ public class Pokemon{
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
     return name + " used " + currentMove + "\n";
-
-  public Pokemon(int min, int max, String[] names){
-    this(names[(int)(Math.random() * names.length)]);
-    level = (int)(Math.random() * max - min + 1) + min;
   }
 }

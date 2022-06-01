@@ -21,6 +21,7 @@ after map data, add warp data
 */
 
 void setup() {
+  PFont.list();
   frameRate(60);
   background(0);
   textSize(100);

@@ -37,6 +37,8 @@ public class Data {
 
   PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniSmallPoke, miniHpBar;
   
+  PFont font;
+  
   //GUIS AND BUTTONS
   Gui homeScreen;
   Gui fightOptions;
@@ -86,6 +88,9 @@ public class Data {
       hpBar = loadImage("hpbar.png");
       miniSmallPoke = loadImage("minismallpoke.png");
       miniHpBar = loadImage("minihpbar.png");
+      
+      //loads the font
+      font = createFont("font.ttf",72);
       
       //makes keys pokemon names, makes value hashmaps with keys of the data (attack,id,etc.)
       loadPokemonData();
