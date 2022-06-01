@@ -1,0 +1,16 @@
+PROKEMON DATAFILE
+15 11
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,t,f t,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f
+2
+11 9 21 31 Woodbury_Town
+10 9 21 31 Woodbury_Town

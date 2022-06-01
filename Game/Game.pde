@@ -25,7 +25,8 @@ void setup() {
   background(0);
   textSize(100);
   fill(255);
-  text("LOADING...", width/2-250, height/2);  
+  text("LOADING...", width/2-250, height/2);
+  
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
@@ -47,12 +48,12 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmeleon", true);
-  Pokemon poke = new Pokemon("Arceus");
-  battle = new BattleMode(poke);
-  battle.ally = poke2;
-  currentGui = data.fightOptions;
-  println(data.moveData.get("1"));
+  Pokemon poke2 = new Pokemon("Charmeleon", 17, true);
+  player.team.add(poke2);
+  Pokemon poke3 = new Pokemon("Torterra", 34, true);
+  player.team.add(poke3);
+  Pokemon poke4 = new Pokemon("Zekrom", 20, true);
+  player.team.add(poke4);
 }
 
 void draw() {
@@ -66,12 +67,16 @@ void draw() {
     player.showPlayer();
     popMatrix();
     
-    animations.animate();
     checkWASD();
   } else {
     battle.display();
   }
-  currentGui.display();
+  if (currentGui != null) currentGui.display();
+  animations.animate();
+  
+  //println(currentMap);
+  //currentMapTiles.getTile(player.xpos,player.ypos).printData();
+  //println("(" + player.xpos + ", " + player.ypos + ")");
 }
 
 void mouseClicked(){

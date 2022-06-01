@@ -1,0 +1,12 @@
+PROKEMON DATAFILE
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f
+f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f t,f,f,f,f,t,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f
+f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f
+t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f t,f,f,f,f,f,f

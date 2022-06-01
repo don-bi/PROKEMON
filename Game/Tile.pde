@@ -62,6 +62,6 @@ public class Tile{
   }
   
   void printData(){
-    println("isWalkable:"+isWalkable+" isInteractable:"+isInteractable+" isWarp:"+isWarp+" isDoor:"+isDoor+" isEvent:"+isEvent+" isForeground:"+isForeground);
+    println("isWalkable:"+isWalkable+" isInteractable:"+isInteractable+" isWarp:"+isWarp+" isDoor:"+isDoor+" isEvent:"+isEvent+" isForeground:"+isForeground + " isGrass:"+isGrass);
   }
 }

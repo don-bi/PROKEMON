@@ -43,9 +43,17 @@ Hanson: resolved sounds conflict and started pokemon choosing method
 Donald: Finished loading in the move csvs
 Hanson: finished pokemon choosing method constructor
 
-### 5/28/2022 ###
+### 5/29/2022 ###
+Donald: Made battle calculations such as damage for moves and also for pokemon stats. Made basic turn based attacking and started working on the switching pokemon mechanics.
+
+Hanson: finished pokemon choosing method constructor
+
+### 5/30/2022 ###
+Donald: Finished the switch pokemon menu, added new maps, implemented choosing a new pokemon when current one dies, and made player tp to the pokecenter when all your pokemon is knocked out.
+
+### 5/31/2022 ###
+Donald: Finished the switch pokemon menu, added new maps, implemented choosing a new pokemon when current one dies, and made player tp to the pokecenter when all your pokemon is knocked out
 Hanson: displayed MVP, researched methods and calculations after
 
-### 5/28/2022 ###
-Donald:
-Hanson: updated dev logs and README with current classes and battle mechanics
+### 5/31/2022 ###
+Hanson: updated documentation with battle mechanics and switch phases
