@@ -15,17 +15,19 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
-    nature = data.natures[(int)random(data.natures.length)];
-    stats = new HashMap<String,Integer>();
+    nature = data.natures[(int)random(data.natures.length)]; 
+    stats = new HashMap<String,Integer>(); //initializes stat data structures
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
     level = l;
-    String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
+    exp = 0;
+    String[] statnames = {"hp","atk","def","spatk","spdef","spd"}; //stats
     for (String stat:statnames){
       IVs.put(stat,(Integer)(int)random(32));
       EVs.put(stat,0);
       stats.put(stat,calcStat(stat));
     }
+    stats.put("exp",Integer.parseInt(data.getPokeData(name,"experience_growth"))); //initializes total exp needed
     hp = stats.get("hp");
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
@@ -159,4 +161,10 @@ public class Pokemon{
     println(name + ' ' + currentMove + ' ' + damage);
     return name + " used " + currentMove + "\n";
   }
+  
+  void levelUp(){
+    level ++;
+    exp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+  }
+    
 }

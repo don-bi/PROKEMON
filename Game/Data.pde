@@ -353,6 +353,7 @@ public class Data {
       for (int i = 2; i < categories.length; i ++){
         expData.get(currentLevel).put(parseInt(categories[i]),parseInt(data[i]));
       }
+      line = reader.readLine();
     }
   }
     
