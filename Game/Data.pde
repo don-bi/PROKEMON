@@ -17,6 +17,9 @@ public class Data {
   //All the moves and their data
   HashMap<String, HashMap<String, String>> moveData = new HashMap<String, HashMap<String, String>>();
   
+  //exp data
+  HashMap<Integer, HashMap<Integer, Integer>> expData = new HashMap<Integer, HashMap<Integer, Integer>>();
+  
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
@@ -124,6 +127,9 @@ public class Data {
       
       //loads move effectiveness data
       loadEffectiveness();
+      
+      //loads exp data
+      loadExp();
       
     } catch (IOException e){}
   }
@@ -332,6 +338,22 @@ public class Data {
 
     moveOptions.prev = fightOptions;
     switchPokemon.prev = fightOptions;
+  }
+  
+  private void loadExp() throws IOException{
+    BufferedReader reader = createReader("exp.csv");
+    String[] categories = reader.readLine().split(",");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //exp needed for the level
+      int currentLevel = parseInt(data[0]);
+      HashMap<Integer,Integer> totalToLevel = new HashMap<Integer,Integer>(); //creates the value hashmaps for expData
+      totalToLevel.put(parseInt(categories[1]),parseInt(data[1])); //keys will be the total exp of the pokemon(found in pokemonData), values will be what's required for the level
+      expData.put(currentLevel, totalToLevel);
+      for (int i = 2; i < categories.length; i ++){
+        expData.get(currentLevel).put(parseInt(categories[i]),parseInt(data[i]));
+      }
+    }
   }
     
   
