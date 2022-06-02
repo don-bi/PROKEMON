@@ -55,5 +55,8 @@ Donald: Finished the switch pokemon menu, added new maps, implemented choosing a
 Donald: Finished the switch pokemon menu, added new maps, implemented choosing a new pokemon when current one dies, and made player tp to the pokecenter when all your pokemon is knocked out
 Hanson: displayed MVP, researched methods and calculations after
 
-### 5/31/2022 ###
+### 6/1/2022 ###
 Hanson: updated documentation with battle mechanics and switch phases
+
+### 6/2/2022 ###
+Hanson: fixed memory problems and updated used functions 
