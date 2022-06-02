@@ -158,4 +158,5 @@ public class Pokemon{
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
     return name + " used " + currentMove + "\n";
+  }
 }
