@@ -1,5 +1,6 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, delay;
+  boolean inAnimation, fadein, fadeout, delay, commenting;
+  String battlecomment;
   int frame;
   
   public ScreenAnimations() {
@@ -53,6 +54,31 @@ public class ScreenAnimations {
         }
       }
     }
+    if (frameCount % 1 == 0){
+      if (commenting) {
+        if (frame < battlecomment.length()) {
+          frame++;
+        } else {
+          commenting = false;
+          inAnimation = false;
+          //battle.comment = battlecomment;
+        }
+      }
+    }
+    if (battlecomment != null) {
+      fill(255);
+      textSize(30);
+      textFont(data.font);
+      String section = battlecomment.substring(0,frame);
+      text(section,50,730);
+    }
     popMatrix();
+  }
+  
+  void battleComment(String s, String nextChoice){
+    frame = 0;
+    battlecomment = s;
+    commenting = true;
+    inAnimation = true;
   }
 }

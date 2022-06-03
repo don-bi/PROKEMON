@@ -118,18 +118,16 @@ public class BattleMode{
     image(data.battleCircles,0,0);
     
     //The bottom transparent rectangle and options
-    if (!animations.inAnimation) {
-      textSize(40);
-      fill(0);
-      image(enemy.sprite,940,400-enemy.sprite.height);
-      image(ally.sprite,130,800-ally.sprite.height);
-      fill(0,100);
-      rect(0,650,1440,214);
-      fill(255);
-      textSize(30);
-      textFont(data.font);
-      text(comment,50,730);
-    } 
+    textSize(40);
+    fill(0);
+    image(enemy.sprite,940,400-enemy.sprite.height);
+    image(ally.sprite,130,800-ally.sprite.height);
+    fill(0,100);
+    rect(0,650,1440,214);
+    fill(255);
+    textSize(30);
+    textFont(data.font);
+    text(comment,50,730);
     
     //Displays hp bars
     textSize(45);
