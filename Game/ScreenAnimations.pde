@@ -1,6 +1,7 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, delay, commenting;
+  boolean inAnimation, fadein, fadeout, delay, commenting, allyhp, hp, exp;
   Pokemon attacker,defender;
+  int prevHp,newHp,prevExp,newExp;
   String battlecomment;
   String choice;
   int frame;
@@ -55,6 +56,9 @@ public class ScreenAnimations {
           frame -= 25;
         }
       }
+      if (hp) {
+        if (allyhp){
+          
     }
     if (frameCount % 2 == 0){
       if (commenting) {
@@ -125,5 +129,15 @@ public class ScreenAnimations {
     battle = null;
     currentGui = data.homeScreen;
     battlecomment = null;
+  }
+  
+  void hpBar(Pokemon p){
+    if (p == battle.ally){
+      allyhp = true;
+    } else {
+      allyhp = false;
+    }
+    frame = 0;
+    hp = true;
   }
 }
