@@ -81,8 +81,7 @@ void draw() {
 }
 
 void mouseClicked(){
-  currentGui.processButtons();
-  animations.battleComment("hello this is a test wooo!!!!!!!!!","");
+  if (currentGui != null) currentGui.processButtons();
 }
 
 void checkWASD(){

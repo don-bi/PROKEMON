@@ -150,7 +150,7 @@ public class Pokemon{
     return 0;
   }
   
-  String attack(Pokemon other){
+  void attack(Pokemon other){
     int damage = 0;
     if (!currentMove.damageClass.equals("status")){
       damage = (int)calcDamage(other);
@@ -160,7 +160,6 @@ public class Pokemon{
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
-    return name + " used " + currentMove + "\n";
   }
   
   void levelUp(){

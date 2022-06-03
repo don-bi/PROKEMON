@@ -1,6 +1,8 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, delay, commenting;
+  Pokemon attacker,defender;
   String battlecomment;
+  String choice;
   int frame;
   
   public ScreenAnimations() {
@@ -61,7 +63,27 @@ public class ScreenAnimations {
         } else {
           commenting = false;
           inAnimation = false;
-          //battle.comment = battlecomment;
+          
+          if (choice.equals("fight")) {
+            battle.attacker.attack(battle.defender);
+            if (battle.checkDefenderAlive()) {
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
+            } else {
+              if (battle.opponent == null) {
+                battle = null;
+                currentGui = data.homeScreen;
+              }
+            }
+          }
+          
+          if (choice.equals("secondAttack")) {
+            battle.defender.attack(battle.attacker);
+            if (battle != null && battle.checkAttackerAlive()) {
+              battleComment("What should " + battle.ally.name + " do?","");
+              currentGui = data.fightOptions;
+            }
+          }
+          
         }
       }
     }
@@ -80,5 +102,6 @@ public class ScreenAnimations {
     battlecomment = s;
     commenting = true;
     inAnimation = true;
+    choice = nextChoice;
   }
 }
