@@ -93,12 +93,13 @@ void checkWASD(){
     case "D":
       if (!player.inWalkAnimation) {
         player.changeDirection();
-        if (player.delay == 0 ){
-          player.move();
-        } else {
-          player.delay ++;
-          if (player.delay == 4) player.delay = 0;
-        }
+        //if (player.delay == 0 ){
+        //  player.move();
+        //} else {
+        //  player.delay ++;
+        //  if (player.delay == 1) player.delay = 0;
+        //}
+        player.move();
       }
     }
   }
