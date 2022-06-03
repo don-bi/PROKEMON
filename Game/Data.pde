@@ -35,7 +35,7 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniSmallPoke, miniHpBar;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar;
   
   PFont font;
   
@@ -86,8 +86,10 @@ public class Data {
       smallChosenPoke = loadImage("smallchosenpoke.png");
       smallPoke = loadImage("smallpoke.png");
       hpBar = loadImage("hpbar.png");
-      miniSmallPoke = loadImage("minismallpoke.png");
       miniHpBar = loadImage("minihpbar.png");
+      enemyUi = loadImage("enemyui.png");
+      allyUi = loadImage("allyui.png");
+      expBar = loadImage("expbar.png");
       
       //loads the font
       font = createFont("font.ttf",72);
