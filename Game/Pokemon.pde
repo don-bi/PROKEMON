@@ -2,7 +2,7 @@ public class Pokemon{
   String nickname,name;
   String nature;
   HashMap<String, Integer> stats,IVs,EVs;
-  int level,hp,exp;
+  int level,hp,exp,neededExp;
   String type1,type2;
   PImage sprite;
   String mode;
@@ -20,7 +20,7 @@ public class Pokemon{
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
     level = l;
-    exp = 0;
+    exp = 500;
     String[] statnames = {"hp","atk","def","spatk","spdef","spd"}; //stats
     for (String stat:statnames){
       IVs.put(stat,(Integer)(int)random(32));
@@ -28,6 +28,7 @@ public class Pokemon{
       stats.put(stat,calcStat(stat));
     }
     stats.put("exp",Integer.parseInt(data.getPokeData(name,"experience_growth"))); //initializes total exp needed
+    neededExp = data.expData.get(level).get(stats.get("exp")); //initializes needed exp for the current level
     hp = stats.get("hp");
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
@@ -164,7 +165,8 @@ public class Pokemon{
   
   void levelUp(){
     level ++;
-    exp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+    exp = 0;
+    neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
   }
     
 }
