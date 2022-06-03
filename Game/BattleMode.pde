@@ -51,9 +51,9 @@ public class BattleMode{
       int escapeOdds = (floor((ally.stats.get("spd")*128.0)/enemy.stats.get("spd")) + 30 * escapeAttempts) % 256;
       int rand = (int)random(256);
       if (rand < escapeOdds) {
-        escaped = true;
+        animations.battleComment("You have successfully escaped!","escape");
       } else {
-        comment += "You couldn't successfully escape.\n";
+        animations.battleComment("You couldn't successfully escape.","noescape");
         escapeAttempts ++;
       }
     } else {
@@ -75,21 +75,6 @@ public class BattleMode{
   }
   
   void secondAttack() {
-
-     if (escaped) {
-      battle = null;
-      currentGui = data.homeScreen;
-      } else if (opponent == null && winner == ally){ //if there is no NPC being fought, battle ends after enemy is dead
-        battle = null;
-        currentGui = data.homeScreen;
-      } else if (winner == enemy){
-        boolean alive = false;
-        for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
-          if (pokemon.hp > 0) alive = true;
-        }
-        if (alive) { //able to choose what to switch to if there is an alive pokemon
-          currentGui = data.deadPokemon;
-        } else { //otherwise, ends battle and tps to pokecenter, heal all pokemon
           animations.inAnimation = true;
           animations.fadein = true;
           animations.frame = -300;
@@ -98,8 +83,6 @@ public class BattleMode{
           for (Pokemon pokemon:player.team){
             pokemon.hp = pokemon.stats.get("hp");
           }
-        }
-      }
    }
   
   
