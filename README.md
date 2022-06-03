@@ -52,3 +52,9 @@ Donald: Finished the switch pokemon menu, added new maps, implemented choosing a
 
 ### 5/31/2022 ###
 Donald: Added exp csv for later implementation and also added more images for battle uis and exp bar. Added a new pixel that'll be used for everything now.
+
+### 6/1/2022 ###
+Donald: Started working on loading in exp.csv for level ups.
+
+### 6/2/2022 ###
+Donald: Finished loading in exp.csv and initialized the data for Pokemon classes. Changed battle Uis to better ones and made the exp bar show on them. Started working on battle comments slowly animating.
