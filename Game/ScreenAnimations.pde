@@ -1,6 +1,6 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, delay, commenting, allyhp, hp, exp;
-  Pokemon attacker,defender;
+  boolean inAnimation, fadein, fadeout, delay, commenting, hp, exp, transition;
+  Pokemon attacker,defender,hplowerer;
   int prevHp,newHp,prevExp,newExp;
   String battlecomment;
   String choice;
@@ -57,8 +57,15 @@ public class ScreenAnimations {
         }
       }
       if (hp) {
-        if (allyhp){
-          
+        if (frame < 20) {
+          frame ++;
+          hplowerer.hp += (newHp-prevHp)/20;
+        } else {
+          hplowerer.hp = newHp;
+          inAnimation = false;
+          hp = false;
+        }
+      }
     }
     if (frameCount % 2 == 0){
       if (commenting) {
@@ -69,8 +76,13 @@ public class ScreenAnimations {
           inAnimation = false;
           
           if (choice.equals("fight")) {
-            battle.attacker.attack(battle.defender);
-            if (battle.checkDefenderAlive()) {
+            if (!transition) {
+              prevHp = defender.hp;
+              battle.attacker.attack(battle.defender);
+              newHp = defender.hp;
+              hpBar(defender);
+            }
+            if (battle.checkDefenderAlive() && !hp) {
               battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
             } else {
               if (battle.opponent == null) {
@@ -88,8 +100,13 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("secondAttack")) {
-            battle.defender.attack(battle.attacker);
-            if (battle != null && battle.checkAttackerAlive()) {
+            if (!transition) {
+              prevHp = attacker.hp;
+              battle.defender.attack(battle.attacker);
+              newHp = attacker.hp;
+              hpBar(attacker);
+            }
+            if (battle != null && battle.checkAttackerAlive() && !hp) {
               battleComment("What should " + battle.ally.name + " do?","");
               currentGui = data.fightOptions;
             } 
@@ -123,6 +140,7 @@ public class ScreenAnimations {
     commenting = true;
     inAnimation = true;
     choice = nextChoice;
+    transition = false;
   }
   
   void returnHome(){
@@ -132,12 +150,10 @@ public class ScreenAnimations {
   }
   
   void hpBar(Pokemon p){
-    if (p == battle.ally){
-      allyhp = true;
-    } else {
-      allyhp = false;
-    }
-    frame = 0;
+    hplowerer = p;
+    frame = 1;
     hp = true;
+    inAnimation = true;
+    transition = true;
   }
 }
