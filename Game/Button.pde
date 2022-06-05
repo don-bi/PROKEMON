@@ -90,6 +90,7 @@ public class Button{
   }
   
   void processClick(){
+    if (texture == data.switchPokemon.texture) animations.battlecomment = null;
     if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
       if (special == null){
         currentGui = opensGui;
@@ -149,7 +150,7 @@ public class Button{
           if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
             currentGui = data.fightOptions;
             battle.ally = player.team.get(parseInt(choice));
-            battle.winner = null;
+            animations.battleComment("You sent out " + battle.ally.name + "!","deadPokemon");
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;

@@ -4,11 +4,8 @@ public class BattleMode{
   Pokemon ally, enemy;
   Pokemon attacker, defender;
   Button chosenButton; //this is to track which pokemon is chosen in the switch menu;
-  Pokemon winner;
-  boolean escaped;
   int escapeAttempts = 0;
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
-  String comment = "";
   
   public BattleMode(NPC opp){ //Trainer encounter
     opponent = opp;
@@ -40,8 +37,6 @@ public class BattleMode{
     enemy.currentMove = enemymove;
     attacker = ally;
     defender = enemy;
-    boolean escaped = false;
-    comment = "";
     
     //the four different options that happens depending on the button chosen
     if (playerchoice.equals("fight")) {
@@ -58,13 +53,9 @@ public class BattleMode{
       }
     } else {
       ally = player.team.get(parseInt(playerchoice));
-      comment += "You sent out " + ally.name + "!\n";
-      attacker = ally;
+      animations.battleComment("You sent out " + battle.ally.name + "!","switchPokemon");
     }
-    
-    
-    //checks if defender is dead
-    
+
   }
   
   boolean checkDefenderAlive(){
@@ -113,7 +104,6 @@ public class BattleMode{
     fill(255);
     textSize(30);
     textFont(data.font);
-    text(comment,50,730);
     
     //Displays hp bars
     textSize(45);

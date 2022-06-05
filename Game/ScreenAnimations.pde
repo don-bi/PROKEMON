@@ -97,7 +97,7 @@ public class ScreenAnimations {
             if (!transition) hpBar(battle.attacker, battle.defender);
           } 
           
-          if (choice.equals("effective1")) {
+          else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
               battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
             } else {
@@ -107,6 +107,14 @@ public class ScreenAnimations {
                 returnHome();
               }
             }
+          }
+          
+          else if (choice.equals("switchPokemon")) {
+            effectivenessMessage(1,1);
+          }
+          
+          else if (choice.equals("deadPokemon")) {
+            battleComment("What will " + battle.ally.name + " do?","");
           }
           
           else if (choice.equals("escape")) {
@@ -121,9 +129,9 @@ public class ScreenAnimations {
             if (!transition) hpBar(battle.defender, battle.attacker);
           }
           
-          if (choice.equals("effective2")) {
+          else if (choice.equals("effective2")) {
             if (battle != null && battle.checkAttackerAlive()) {
-                battleComment("What should " + battle.ally.name + " do?","");
+                battleComment("What will " + battle.ally.name + " do?","");
                 currentGui = data.fightOptions;
             } 
             else if (!battle.checkAttackerAlive()){
@@ -153,7 +161,7 @@ public class ScreenAnimations {
   
   void battleComment(String s, String nextChoice){
     frame = 0;
-    battlecomment = s;
+    battlecomment = s + "             ";
     commenting = true;
     inAnimation = true;
     choice = nextChoice;
@@ -173,7 +181,6 @@ public class ScreenAnimations {
     if (effectiveness == 0) comment = "It had no effect...";
     if (effectiveness > 1) comment = "It was super effective!";
     if (effectiveness < 1) comment = "It wasn't very effective...";
-    comment += "             ";
     if (attack == 1){
       battleComment(comment,"effective1");
     } else if (attack == 2){
