@@ -2,7 +2,7 @@ public class Pokemon{
   String nickname,name;
   String nature;
   HashMap<String, Integer> stats,IVs,EVs;
-  int level,hp;
+  int level,hp,exp,neededExp;
   String type1,type2;
   PImage sprite;
   String mode;
@@ -15,17 +15,20 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
-    nature = data.natures[(int)random(data.natures.length)];
-    stats = new HashMap<String,Integer>();
+    nature = data.natures[(int)random(data.natures.length)]; 
+    stats = new HashMap<String,Integer>(); //initializes stat data structures
     IVs = new HashMap<String,Integer>();
     EVs = new HashMap<String,Integer>();
     level = l;
-    String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
+    exp = 500;
+    String[] statnames = {"hp","atk","def","spatk","spdef","spd"}; //stats
     for (String stat:statnames){
       IVs.put(stat,(Integer)(int)random(32));
       EVs.put(stat,0);
       stats.put(stat,calcStat(stat));
     }
+    stats.put("exp",Integer.parseInt(data.getPokeData(name,"experience_growth"))); //initializes total exp needed
+    neededExp = data.expData.get(level).get(stats.get("exp")); //initializes needed exp for the current level
     hp = stats.get("hp");
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
@@ -97,7 +100,7 @@ public class Pokemon{
     }
   }
   
-  private float calcDamage(Pokemon other){    
+  private float[] calcDamage(Pokemon other){    
     //A is the attack stat of attacker, D is defense stat of the other
     int A = stats.get("atk");
     int D = other.stats.get("def");
@@ -140,23 +143,33 @@ public class Pokemon{
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
     
-    return ((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn;
+    return new float[]{((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
   private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
     return 0;
   }
   
-  String attack(Pokemon other){
+  float attack(Pokemon other){
     int damage = 0;
+    float effectiveness = -1;
     if (!currentMove.damageClass.equals("status")){
-      damage = (int)calcDamage(other);
+      float[] holder = calcDamage(other);
+      damage = (int)holder[0];
+      effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
     } else {
       damage = checkMoveEffects(currentMove);
     }
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
-    return name + " used " + currentMove + "\n";
+    return  effectiveness;
   }
+  
+  void levelUp(){
+    level ++;
+    exp = 0;
+    neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+  }
+    
 }

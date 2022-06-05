@@ -1,11 +1,17 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, delay;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition;
+  Pokemon hplowerer;
+  int prevHp,newHp,prevExp,newExp;
+  String battlecomment;
+  String choice;
   int frame;
+  float effectiveness;
   
   public ScreenAnimations() {
     inAnimation = false;
     fadein = false;
     fadeout = false;
+    transition = false;
     frame = 0;
   }
   
@@ -53,6 +59,155 @@ public class ScreenAnimations {
         }
       }
     }
+    if (hp) {
+        if (frame < 20) {
+          frame ++;
+          int x = 1048;
+          int y = 498;
+          if (hplowerer == battle.enemy) {
+            x = 476;
+            y = 218;
+          }
+          image(data.miniHpBar.get(0,0,(int)(prevHp-(prevHp-newHp)/20.0*frame)*192/hplowerer.stats.get("hp"),8),x,y);
+        } else {
+          hplowerer.hp = newHp;
+          image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
+          image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
+          hplowerer = null;
+          hp = false;
+          if (choice.equals("fight")) {
+            effectivenessMessage(effectiveness,1);
+          }
+          else if (choice.equals("secondAttack")) {
+            effectivenessMessage(effectiveness,2);
+          }
+        }
+      }
+    
+    if (frameCount % 2 == 0){ 
+       if (commenting) {
+        if (frame < battlecomment.length()) {
+          frame++;
+          if (choice.equals("effective1")) println(frame);
+        } else {
+          commenting = false;
+          inAnimation = false;
+          
+          if (choice.equals("fight")) {
+            if (!transition) hpBar(battle.attacker, battle.defender);
+          } 
+          
+          else if (choice.equals("effective1")) {
+            if (battle.checkDefenderAlive()) {
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
+            } else {
+              if (battle.defender == battle.ally) {
+                checkAllyAlive();
+              } else if (battle.opponent == null) {
+                returnHome();
+              }
+            }
+          }
+          
+          else if (choice.equals("switchPokemon")) {
+            effectivenessMessage(1,1);
+          }
+          
+          else if (choice.equals("deadPokemon")) {
+            battleComment("What will " + battle.ally.name + " do?","");
+          }
+          
+          else if (choice.equals("escape")) {
+            returnHome();
+          }
+          
+          else if (choice.equals("noescape")) {
+            battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
+          }
+          
+          else if (choice.equals("secondAttack")) {
+            if (!transition) hpBar(battle.defender, battle.attacker);
+          }
+          
+          else if (choice.equals("effective2")) {
+            if (battle != null && battle.checkAttackerAlive()) {
+                battleComment("What will " + battle.ally.name + " do?","");
+                currentGui = data.fightOptions;
+            } 
+            else if (!battle.checkAttackerAlive()){
+              if (battle.attacker == battle.ally) {
+                checkAllyAlive();
+              } else if (battle.opponent == null) {
+                returnHome();
+              }
+            }
+          }
+          
+        }
+      }
+    }
+    if (battlecomment != null) {
+      fill(255);
+      textSize(30);
+      textFont(data.font);
+      String section = battlecomment;
+      if (!hp && frame < battlecomment.length()) {
+        section = battlecomment.substring(0,frame);
+      }
+      text(section,50,730);
+    }
     popMatrix();
+  }
+  
+  void battleComment(String s, String nextChoice){
+    frame = 0;
+    battlecomment = s + "             ";
+    commenting = true;
+    inAnimation = true;
+    choice = nextChoice;
+    transition = false;
+    hp = false;
+  }
+  
+  void returnHome(){
+    battle = null;
+    currentGui = data.homeScreen;
+    battlecomment = null;
+    inAnimation = false;
+  }
+  
+  void effectivenessMessage(float effectiveness, int attack){
+    String comment = "       ";
+    if (effectiveness == 0) comment = "It had no effect...";
+    if (effectiveness > 1) comment = "It was super effective!";
+    if (effectiveness < 1) comment = "It wasn't very effective...";
+    if (attack == 1){
+      battleComment(comment,"effective1");
+    } else if (attack == 2){
+      battleComment(comment,"effective2");
+    }
+  }
+  
+  void hpBar(Pokemon attacker, Pokemon attacked){
+    prevHp = attacked.hp;
+    effectiveness = attacker.attack(attacked);
+    newHp = attacked.hp;
+    hplowerer = attacked;
+    frame = 1;
+    hp = true;
+    inAnimation = true;
+    transition = true;
+    commenting = false;
+  }
+  
+  void checkAllyAlive(){
+    boolean alive = false;
+    for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
+      if (pokemon.hp > 0) alive = true;
+    }
+    if (alive) { //able to choose what to switch to if there is an alive pokemon
+      currentGui = data.deadPokemon;
+      battlecomment = null;
+    }
   }
 }

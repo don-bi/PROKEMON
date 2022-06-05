@@ -51,12 +51,18 @@ Hanson: finished pokemon choosing method constructor
 ### 5/30/2022 ###
 Donald: Finished the switch pokemon menu, added new maps, implemented choosing a new pokemon when current one dies, and made player tp to the pokecenter when all your pokemon is knocked out.
 
-### 5/31/2022 ###
-Donald: Finished the switch pokemon menu, added new maps, implemented choosing a new pokemon when current one dies, and made player tp to the pokecenter when all your pokemon is knocked out
 Hanson: displayed MVP, researched methods and calculations after
 
+### 5/31/2022 ###
+Donald: Added exp csv for later implementation and also added more images for battle uis and exp bar. Added a new pixel that'll be used for everything now.
+
 ### 6/1/2022 ###
+Donald: Started working on loading in exp.csv for level ups.
+
 Hanson: updated documentation with battle mechanics and switch phases
 
 ### 6/2/2022 ###
-Hanson: fixed memory problems and updated used functions 
+Donald: Finished loading in exp.csv and initialized the data for Pokemon classes. Changed battle Uis to better ones and made the exp bar show on them. Started working on battle comments slowly animating.
+
+Hanson: fixed memory problems and updated used functions
+>>>>>>> main

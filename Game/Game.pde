@@ -21,6 +21,7 @@ after map data, add warp data
 */
 
 void setup() {
+  PFont.list();
   frameRate(60);
   background(0);
   textSize(100);
@@ -32,10 +33,10 @@ void setup() {
   data = new Data();
   
   //loads initial hometop map
-  currentMap = "HomeTop";
+  currentMap = "Route1";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap(getSubDir("Maps","HomeTop.txt"));
+    currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -48,7 +49,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmeleon", 17, true);
+  Pokemon poke2 = new Pokemon("Salamence", 5, true);
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Torterra", 34, true);
   player.team.add(poke3);
@@ -80,7 +81,7 @@ void draw() {
 }
 
 void mouseClicked(){
-  currentGui.processButtons();
+  if (currentGui != null) currentGui.processButtons();
 }
 
 void checkWASD(){
@@ -92,12 +93,13 @@ void checkWASD(){
     case "D":
       if (!player.inWalkAnimation) {
         player.changeDirection();
-        if (player.delay == 0 ){
-          player.move();
-        } else {
-          player.delay ++;
-          if (player.delay == 4) player.delay = 0;
-        }
+        //if (player.delay == 0 ){
+        //  player.move();
+        //} else {
+        //  player.delay ++;
+        //  if (player.delay == 1) player.delay = 0;
+        //}
+        player.move();
       }
     }
   }
