@@ -99,7 +99,7 @@ public class ScreenAnimations {
           
           if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
-              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
             } else {
               if (battle.defender == battle.ally) {
                 checkAllyAlive();
@@ -114,7 +114,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("noescape")) {
-            battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
+            battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
           }
           
           else if (choice.equals("secondAttack")) {
@@ -169,7 +169,7 @@ public class ScreenAnimations {
   }
   
   void effectivenessMessage(float effectiveness, int attack){
-    String comment = "             ";
+    String comment = "       ";
     if (effectiveness == 0) comment = "It had no effect...";
     if (effectiveness > 1) comment = "It was super effective!";
     if (effectiveness < 1) comment = "It wasn't very effective...";
@@ -200,6 +200,7 @@ public class ScreenAnimations {
     }
     if (alive) { //able to choose what to switch to if there is an alive pokemon
       currentGui = data.deadPokemon;
+      battlecomment = null;
     }
   }
 }

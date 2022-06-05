@@ -96,7 +96,7 @@ public class BattleMode{
       attacker = enemy;
       defender = ally;
     }
-    animations.battleComment(attacker.name + " used " + attacker.currentMove + "\n","fight");
+    animations.battleComment(attacker.name + " used " + attacker.currentMove + ".","fight");
   }
   
   void display(){
