@@ -100,7 +100,7 @@ public class Pokemon{
     }
   }
   
-  private float calcDamage(Pokemon other){    
+  private float[] calcDamage(Pokemon other){    
     //A is the attack stat of attacker, D is defense stat of the other
     int A = stats.get("atk");
     int D = other.stats.get("def");
@@ -143,23 +143,27 @@ public class Pokemon{
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
     
-    return ((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn;
+    return new float[]{((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
   private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
     return 0;
   }
   
-  void attack(Pokemon other){
+  float attack(Pokemon other){
     int damage = 0;
+    float effectiveness = -1;
     if (!currentMove.damageClass.equals("status")){
-      damage = (int)calcDamage(other);
+      float[] holder = calcDamage(other);
+      damage = (int)holder[0];
+      effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
     } else {
       damage = checkMoveEffects(currentMove);
     }
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage);
+    return  effectiveness;
   }
   
   void levelUp(){

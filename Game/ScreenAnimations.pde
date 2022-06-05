@@ -58,20 +58,29 @@ public class ScreenAnimations {
         }
       }
     }
-    if (frameCount % 2 == 0){
-      if (hp) {
-        if (frame < 20) {
+    if (hp) {
+        if (frame < 40) {
           frame ++;
-          hplowerer.hp = prevHp - (prevHp-newHp)/20*frame;
+          int x = 1048;
+          int y = 498;
+          if (hplowerer == battle.enemy) {
+            x = 476;
+            y = 218;
+          }
+          image(data.miniHpBar.get(0,0,(int)(prevHp-(prevHp-newHp)/40.0*frame)*192/hplowerer.stats.get("hp"),8),x,y);
         } else {
           hplowerer.hp = newHp;
+          image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
+          image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
+          hplowerer = null;
           hp = false;
-          inAnimation = false;
           if (choice.equals("fight")) {
             if (battle.checkDefenderAlive()) {
               battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
             } else {
-              if (battle.opponent == null) {
+              if (battle.defender == battle.ally) {
+                checkAllyAlive();
+              } else if (battle.opponent == null) {
                 returnHome();
               }
             }
@@ -82,19 +91,18 @@ public class ScreenAnimations {
                 currentGui = data.fightOptions;
             } 
             else if (!battle.checkAttackerAlive()){
-              boolean alive = false;
-              for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
-                if (pokemon.hp > 0) alive = true;
-              }
-              if (alive) { //able to choose what to switch to if there is an alive pokemon
-                currentGui = data.deadPokemon;
+              if (battle.attacker == battle.ally) {
+                checkAllyAlive();
+              } else if (battle.opponent == null) {
+                returnHome();
               }
             }
           }
         }
       }
-      
-      if (commenting) {
+    
+    if (frameCount % 2 == 0){ 
+       if (commenting) {
         if (frame < battlecomment.length()) {
           frame++;
         } else {
@@ -123,7 +131,10 @@ public class ScreenAnimations {
       fill(255);
       textSize(30);
       textFont(data.font);
-      String section = battlecomment.substring(0,frame);
+      String section = battlecomment;
+      if (!hp && frame < battlecomment.length()) {
+        section = battlecomment.substring(0,frame);
+      }
       text(section,50,730);
     }
     popMatrix();
@@ -143,6 +154,7 @@ public class ScreenAnimations {
     battle = null;
     currentGui = data.homeScreen;
     battlecomment = null;
+    inAnimation = false;
   }
   
   void hpBar(Pokemon attacker, Pokemon attacked){
@@ -154,5 +166,16 @@ public class ScreenAnimations {
     hp = true;
     inAnimation = true;
     transition = true;
+    commenting = false;
+  }
+  
+  void checkAllyAlive(){
+    boolean alive = false;
+    for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
+      if (pokemon.hp > 0) alive = true;
+    }
+    if (alive) { //able to choose what to switch to if there is an alive pokemon
+      currentGui = data.deadPokemon;
+    }
   }
 }
