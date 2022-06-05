@@ -12,24 +12,26 @@ public class Player extends Character {
   }
   
   void move() {
-    if (getFrontTile().isWalkable) {
-      super.move();
-      if (leftFoot) {
-        sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "LeftWalk");
-      } else {
-        sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "RightWalk");
-      }
-      if (pixel == 0) {
-        leftFoot = !leftFoot;
-        changeDirection();
-        if (currentMapTiles.getTile(xpos,ypos).isGrass){
-          if ((int)random(100) < 20){
-            int randnum = (int)random(649)+1;
-            println(""+randnum);
-            String randpokeid = data.getPokename(""+randnum);
-            println(randpokeid);
-            Pokemon randpoke = new Pokemon(randpokeid,(int)random(20)+15);
-            battle = new BattleMode(randpoke);
+    if (battle == null) {
+      if (getFrontTile().isWalkable) {
+        super.move();
+        if (leftFoot) {
+          sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "LeftWalk");
+        } else {
+          sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "RightWalk");
+        }
+        if (pixel == 0) {
+          leftFoot = !leftFoot;
+          changeDirection();
+          if (currentMapTiles.getTile(xpos,ypos).isGrass){
+            if ((int)random(100) < 20){
+              int randnum = (int)random(649)+1;
+              println(""+randnum);
+              String randpokeid = data.getPokename(""+randnum);
+              println(randpokeid);
+              Pokemon randpoke = new Pokemon(randpokeid,(int)random(20)+15);
+              battle = new BattleMode(randpoke);
+            }
           }
         }
       }

@@ -1,6 +1,6 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, delay, commenting, hp, exp, transition;
-  Pokemon attacker,defender,hplowerer;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition;
+  Pokemon hplowerer;
   int prevHp,newHp,prevExp,newExp;
   String battlecomment;
   String choice;
@@ -10,6 +10,7 @@ public class ScreenAnimations {
     inAnimation = false;
     fadein = false;
     fadeout = false;
+    transition = false;
     frame = 0;
   }
   
@@ -56,18 +57,43 @@ public class ScreenAnimations {
           frame -= 25;
         }
       }
+    }
+    if (frameCount % 2 == 0){
       if (hp) {
         if (frame < 20) {
           frame ++;
-          hplowerer.hp += (newHp-prevHp)/20;
+          hplowerer.hp = prevHp - (prevHp-newHp)/20*frame;
         } else {
           hplowerer.hp = newHp;
-          inAnimation = false;
           hp = false;
+          inAnimation = false;
+          if (choice.equals("fight")) {
+            if (battle.checkDefenderAlive()) {
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
+            } else {
+              if (battle.opponent == null) {
+                returnHome();
+              }
+            }
+          }
+          else if (choice.equals("secondAttack")) {
+            if (battle != null && battle.checkAttackerAlive()) {
+                battleComment("What should " + battle.ally.name + " do?","");
+                currentGui = data.fightOptions;
+            } 
+            else if (!battle.checkAttackerAlive()){
+              boolean alive = false;
+              for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
+                if (pokemon.hp > 0) alive = true;
+              }
+              if (alive) { //able to choose what to switch to if there is an alive pokemon
+                currentGui = data.deadPokemon;
+              }
+            }
+          }
         }
       }
-    }
-    if (frameCount % 2 == 0){
+      
       if (commenting) {
         if (frame < battlecomment.length()) {
           frame++;
@@ -76,19 +102,7 @@ public class ScreenAnimations {
           inAnimation = false;
           
           if (choice.equals("fight")) {
-            if (!transition) {
-              prevHp = defender.hp;
-              battle.attacker.attack(battle.defender);
-              newHp = defender.hp;
-              hpBar(defender);
-            }
-            if (battle.checkDefenderAlive() && !hp) {
-              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "\n","secondAttack");
-            } else {
-              if (battle.opponent == null) {
-                returnHome();
-              }
-            }
+            if (!transition) hpBar(battle.attacker, battle.defender);
           } 
           
           else if (choice.equals("escape")) {
@@ -100,26 +114,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("secondAttack")) {
-            if (!transition) {
-              prevHp = attacker.hp;
-              battle.defender.attack(battle.attacker);
-              newHp = attacker.hp;
-              hpBar(attacker);
-            }
-            if (battle != null && battle.checkAttackerAlive() && !hp) {
-              battleComment("What should " + battle.ally.name + " do?","");
-              currentGui = data.fightOptions;
-            } 
-            
-            else if (!battle.checkAttackerAlive()){
-              boolean alive = false;
-              for (Pokemon pokemon:player.team) { //Checks remaining pokemon if they are alive
-                if (pokemon.hp > 0) alive = true;
-              }
-              if (alive) { //able to choose what to switch to if there is an alive pokemon
-                currentGui = data.deadPokemon;
-              }
-            }
+            if (!transition) hpBar(battle.defender, battle.attacker);
           }
         }
       }
@@ -141,6 +136,7 @@ public class ScreenAnimations {
     inAnimation = true;
     choice = nextChoice;
     transition = false;
+    hp = false;
   }
   
   void returnHome(){
@@ -149,8 +145,11 @@ public class ScreenAnimations {
     battlecomment = null;
   }
   
-  void hpBar(Pokemon p){
-    hplowerer = p;
+  void hpBar(Pokemon attacker, Pokemon attacked){
+    prevHp = attacked.hp;
+    attacker.attack(attacked);
+    newHp = attacked.hp;
+    hplowerer = attacked;
     frame = 1;
     hp = true;
     inAnimation = true;
