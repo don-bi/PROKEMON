@@ -65,4 +65,12 @@ Hanson: updated documentation with battle mechanics and switch phases
 Donald: Finished loading in exp.csv and initialized the data for Pokemon classes. Changed battle Uis to better ones and made the exp bar show on them. Started working on battle comments slowly animating.
 
 Hanson: fixed memory problems and updated used functions
->>>>>>> main
+
+### 6/3/2022 ###
+Donald: Started working on the hp bar animation.
+
+### 6/4/2022 ###
+Donald: N/A
+
+### 6/5/2022 ###
+Donald: Finished fixing up hp bar animation and also finished effectiveness messages. Started working on using items, currently only have the images.
