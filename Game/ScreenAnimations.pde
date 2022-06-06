@@ -60,14 +60,14 @@ public class ScreenAnimations {
         }
       }
       if (faint) {
-        if (frame < fainter.sprite.height){
+        if (frame < fainter.sprite.height/6){
           int x = 940;
           int y = 400;
           if (fainter == battle.ally) {
             x = 130;
             y = 800;
           }
-          PImage faintsprite = fainter.sprite.get(0,0,width,height-frame);
+          PImage faintsprite = fainter.sprite.get(0,0,fainter.sprite.width,fainter.sprite.height-frame*6);
           image(faintsprite,x,y-faintsprite.height);
           frame ++;
         } else {
@@ -119,11 +119,7 @@ public class ScreenAnimations {
             if (battle.checkDefenderAlive()) {
               battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
             } else {
-              if (battle.defender == battle.ally) {
-                checkAllyAlive();
-              } else if (battle.opponent == null) {
-                returnHome();
-              }
+              faint(battle.defender);
             }
           }
           
@@ -165,14 +161,15 @@ public class ScreenAnimations {
             } else {
               //NPC SENDS OUT POKEMON HERE
             }
-            fainter = null;
           }
           
           else if (choice.equals("win")) {
+            fainter = null;
             returnHome();
           }
           
           else if (choice.equals("lose")) {
+            fainter = null;
             returnHome();
           }
           
@@ -184,7 +181,7 @@ public class ScreenAnimations {
       textSize(30);
       textFont(data.font);
       String section = battlecomment;
-      if (!hp && frame < battlecomment.length()) {
+      if (!hp && !faint && frame < battlecomment.length()) {
         section = battlecomment.substring(0,frame);
       }
       text(section,50,730);
@@ -240,6 +237,7 @@ public class ScreenAnimations {
     }
     if (alive) { //able to choose what to switch to if there is an alive pokemon
       currentGui = data.deadPokemon;
+      fainter = null;
       battlecomment = null;
     } else {
       battleComment("You have lost the battle...","lose");

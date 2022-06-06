@@ -20,6 +20,9 @@ public class Data {
   //exp data
   HashMap<Integer, HashMap<Integer, Integer>> expData = new HashMap<Integer, HashMap<Integer, Integer>>();
   
+  //the exp each pokemon gives when beaten
+  HashMap<String, HashMap<String, Integer>> expGain = new HashMap<String, HashMap<String, Integer>>();
+  
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
@@ -140,6 +143,9 @@ public class Data {
       
       //loads exp data
       loadExp();
+      
+      //loads exp and EVs gained from each pokemon data
+      loadExpGain();
       
     } catch (IOException e){}
   }
@@ -366,6 +372,23 @@ public class Data {
       expData.put(currentLevel, totalToLevel);
       for (int i = 2; i < categories.length; i ++){
         expData.get(currentLevel).put(parseInt(categories[i]),parseInt(data[i]));
+      }
+      line = reader.readLine();
+    }
+  }
+  
+  private void loadExpGain() throws IOException{
+    BufferedReader reader = createReader("expgain.csv");
+    String[] categories = reader.readLine().split(",");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //exp given for each pokemon and also their evs given
+      String pokename = data[0];
+      HashMap<String,Integer> statToEVs = new HashMap<String,Integer>(); //creates the value hashmaps for expGain
+      statToEVs.put(categories[1],parseInt(data[1])); //keys will be the total exp of the pokemon(found in pokemonData), values will be what's required for the level
+      expGain.put(pokename, statToEVs);
+      for (int i = 2; i < categories.length; i ++){
+        expGain.get(pokename).put(categories[i],parseInt(data[i]));
       }
       line = reader.readLine();
     }
