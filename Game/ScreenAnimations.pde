@@ -2,11 +2,11 @@ public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint;
   PImage savedSprite;
   Pokemon hplowerer, fainter;
-  int prevHp,newHp,prevExp;
+  int prevHp,newHp,prevExp,gainedExp;
   String battlecomment;
   String choice;
   int frame;
-  float effectiveness, gainedExp;
+  float effectiveness;
   
   public ScreenAnimations() {
     inAnimation = false;
@@ -104,19 +104,28 @@ public class ScreenAnimations {
     if (exp) {
       if (frame < 20) {
         frame ++;
-        battle.ally.exp += gainedExp/20;
+        battle.ally.exp += gainedExp/20.0;
         if (battle.ally.exp > battle.ally.neededExp) {
           float expOver = battle.ally.exp - battle.ally.neededExp;
-          battle.ally.levelUp;
+          battle.ally.levelUp();
+          battle.ally.exp += expOver;
+          println(battle.ally.exp);
         }
       } else {
-        
+        exp = false;
+        if (battle.opponent == null) {
+          battleComment("You have won the battle!","win");
+        } else {
+          //NPC SENDS OUT POKEMON HERE
+        }
+      }
+    }
     
     if (frameCount % 2 == 0){ 
        if (commenting) {
         if (frame < battlecomment.length()) {
           frame++;
-          if (choice.equals("effective1")) println(frame);
+          //if (choice.equals("effective1")) println(frame);
         } else {
           commenting = false;
           inAnimation = false;
@@ -166,11 +175,16 @@ public class ScreenAnimations {
           else if (choice.equals("faint")) {
             if (fainter == battle.ally) {
               checkAllyAlive();
-            } else if (battle.opponent == null) {
-              battleComment("You have won the battle!","win");
             } else {
-              //NPC SENDS OUT POKEMON HERE
+              expBar();
             }
+          }
+          
+          else if (choice.equals("exp")) {
+            frame = 0;
+            exp = true;
+            inAnimation = true;
+            transition = true;
           }
           
           else if (choice.equals("win")) {
@@ -191,7 +205,7 @@ public class ScreenAnimations {
       textSize(30);
       textFont(data.font);
       String section = battlecomment;
-      if (!hp && !faint && frame < battlecomment.length()) {
+      if (!hp && !faint && !exp && frame < battlecomment.length()) {
         section = battlecomment.substring(0,frame);
       }
       text(section,50,730);
@@ -242,10 +256,7 @@ public class ScreenAnimations {
   void expBar(){
     prevExp = battle.ally.exp;
     gainedExp = battle.ally.gainExp(fainter);
-    frame = 0;
-    exp = true;
-    inAnimation = true;
-    transition = true;
+    battleComment(battle.ally.name + " has gained " + gainedExp + " experience!", "exp");
   }
   
   void checkAllyAlive(){

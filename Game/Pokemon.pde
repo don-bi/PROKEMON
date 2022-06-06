@@ -166,19 +166,22 @@ public class Pokemon{
     return  effectiveness;
   }
   
-  float gainExp(Pokemon other){ //formula from https://bulbapedia.bulbagarden.net/wiki/Experience
+  int gainExp(Pokemon other){ //formula from https://bulbapedia.bulbagarden.net/wiki/Experience
     float a = 1.0;
     if (battle.opponent != null) a = 1.5; // a is 1 if wild pokemon, 1.5 if trainer owned
     int b = data.expGain.get(other.name).get("exp"); //base exp of the enemy pokemon
+    println(b);
     float e = 1;
     float f = 1;
     float L = other.level;
+    println(L);
     float Lp = level;
+    println(level);
     float p  = 1;
     float s = 1;
     float t = 1;
     float v = 1;
-    return  ((b*L*f*v)/(5*s)*((2*L+10)/pow((L+Lp+10),25)))*t*e*p;
+    return (int)(((b*L*f*v)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5))*t*e*p);
   }
     
   void recalcStats(){
@@ -192,7 +195,7 @@ public class Pokemon{
     level ++;
     exp = 0;
     neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
-    
+    recalcStats();
   }
     
 }
