@@ -101,6 +101,8 @@ public class Button{
         
         if (special.equals("endComment")) {
           animations.battlecomment = null;
+          animations.inAnimation = false;
+          animations.commenting = false;
           currentGui = opensGui;
         }
         

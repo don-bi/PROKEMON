@@ -1,6 +1,7 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition;
-  Pokemon hplowerer;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint;
+  PImage savedSprite;
+  Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,newExp;
   String battlecomment;
   String choice;
@@ -58,31 +59,48 @@ public class ScreenAnimations {
           frame -= 25;
         }
       }
-    }
-    if (hp) {
-        if (frame < 20) {
+      if (faint) {
+        if (frame < fainter.sprite.height){
+          int x = 940;
+          int y = 400;
+          if (fainter == battle.ally) {
+            x = 130;
+            y = 800;
+          }
+          PImage faintsprite = fainter.sprite.get(0,0,width,height-frame);
+          image(faintsprite,x,y-faintsprite.height);
           frame ++;
-          int x = 1048;
-          int y = 498;
-          if (hplowerer == battle.enemy) {
-            x = 476;
-            y = 218;
-          }
-          image(data.miniHpBar.get(0,0,(int)(prevHp-(prevHp-newHp)/20.0*frame)*192/hplowerer.stats.get("hp"),8),x,y);
         } else {
-          hplowerer.hp = newHp;
-          image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
-          image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
-          hplowerer = null;
-          hp = false;
-          if (choice.equals("fight")) {
-            effectivenessMessage(effectiveness,1);
-          }
-          else if (choice.equals("secondAttack")) {
-            effectivenessMessage(effectiveness,2);
-          }
+          faint = false;
+          inAnimation = false;
+          battleComment(fainter.name + " has fainted.","faint");
         }
       }
+    }
+    if (hp) {
+      if (frame < 20) {
+        frame ++;
+        int x = 1048;
+        int y = 498;
+        if (hplowerer == battle.enemy) {
+          x = 476;
+          y = 218;
+        }
+        image(data.miniHpBar.get(0,0,(int)(prevHp-(prevHp-newHp)/20.0*frame)*192/hplowerer.stats.get("hp"),8),x,y);
+      } else {
+        hplowerer.hp = newHp;
+        image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
+        image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
+        hplowerer = null;
+        hp = false;
+        if (choice.equals("fight")) {
+          effectivenessMessage(effectiveness,1);
+        }
+        else if (choice.equals("secondAttack")) {
+          effectivenessMessage(effectiveness,2);
+        }
+      }
+    }
     
     if (frameCount % 2 == 0){ 
        if (commenting) {
@@ -135,12 +153,27 @@ public class ScreenAnimations {
                 currentGui = data.fightOptions;
             } 
             else if (!battle.checkAttackerAlive()){
-              if (battle.attacker == battle.ally) {
-                checkAllyAlive();
-              } else if (battle.opponent == null) {
-                returnHome();
-              }
+              faint(battle.attacker);
             }
+          }
+          
+          else if (choice.equals("faint")) {
+            if (fainter == battle.ally) {
+              checkAllyAlive();
+            } else if (battle.opponent == null) {
+              battleComment("You have won the battle!","win");
+            } else {
+              //NPC SENDS OUT POKEMON HERE
+            }
+            fainter = null;
+          }
+          
+          else if (choice.equals("win")) {
+            returnHome();
+          }
+          
+          else if (choice.equals("lose")) {
+            returnHome();
           }
           
         }
@@ -208,6 +241,15 @@ public class ScreenAnimations {
     if (alive) { //able to choose what to switch to if there is an alive pokemon
       currentGui = data.deadPokemon;
       battlecomment = null;
+    } else {
+      battleComment("You have lost the battle...","lose");
     }
+  }
+  
+  void faint(Pokemon f){
+    fainter = f;
+    frame = 0;
+    faint = true;
+    inAnimation = true;
   }
 }
