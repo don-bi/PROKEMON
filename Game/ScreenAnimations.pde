@@ -2,11 +2,11 @@ public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint;
   PImage savedSprite;
   Pokemon hplowerer, fainter;
-  int prevHp,newHp,prevExp,newExp;
+  int prevHp,newHp,prevExp;
   String battlecomment;
   String choice;
   int frame;
-  float effectiveness;
+  float effectiveness, gainedExp;
   
   public ScreenAnimations() {
     inAnimation = false;
@@ -101,6 +101,16 @@ public class ScreenAnimations {
         }
       }
     }
+    if (exp) {
+      if (frame < 20) {
+        frame ++;
+        battle.ally.exp += gainedExp/20;
+        if (battle.ally.exp > battle.ally.neededExp) {
+          float expOver = battle.ally.exp - battle.ally.neededExp;
+          battle.ally.levelUp;
+        }
+      } else {
+        
     
     if (frameCount % 2 == 0){ 
        if (commenting) {
@@ -227,7 +237,15 @@ public class ScreenAnimations {
     hp = true;
     inAnimation = true;
     transition = true;
-    commenting = false;
+  }
+  
+  void expBar(){
+    prevExp = battle.ally.exp;
+    gainedExp = battle.ally.gainExp(fainter);
+    frame = 0;
+    exp = true;
+    inAnimation = true;
+    transition = true;
   }
   
   void checkAllyAlive(){
