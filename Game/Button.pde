@@ -90,7 +90,6 @@ public class Button{
   }
   
   void processClick(){
-    if (texture == data.switchPokemon.texture) animations.battlecomment = null;
     if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
       if (special == null){
         currentGui = opensGui;
@@ -99,6 +98,11 @@ public class Button{
         boolean endturn = false;
         String choice = "";
         poke.currentMove = null;
+        
+        if (special.equals("endComment")) {
+          animations.battlecomment = null;
+          currentGui = opensGui;
+        }
         
         if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons
           if (special.equals("move1") && poke.moves[0] != null) poke.currentMove = poke.moves[0];

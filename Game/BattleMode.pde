@@ -134,7 +134,7 @@ public class BattleMode{
         data.poke6 = new Button(data.switchPokemon,560,562,"poke6");
         data.poke6.texture = data.smallPoke;
         if (ally == player.team.get(5)) {
-          data.poke6.x -= 5;
+          data.poke6.y -= 5;
           data.poke6.texture = data.smallChosenPoke;
         }
         deadPokeButtons.add(data.poke6);
@@ -142,7 +142,7 @@ public class BattleMode{
         data.poke5 = new Button(data.switchPokemon,560,442,"poke5");
         data.poke5.texture = data.smallPoke;
         if (ally == player.team.get(4)) {
-          data.poke5.x -= 5;
+          data.poke5.y -= 5;
           data.poke5.texture = data.smallChosenPoke;
         }
         deadPokeButtons.add(data.poke4);
@@ -150,7 +150,7 @@ public class BattleMode{
         data.poke4 = new Button(data.switchPokemon,560,322,"poke4");
         data.poke4.texture = data.smallPoke;
         if (ally == player.team.get(3)) {
-          data.poke4.x -= 5;
+          data.poke4.y -= 5;
           data.poke4.texture = data.smallChosenPoke;
         }
         deadPokeButtons.add(data.poke4);
@@ -158,7 +158,7 @@ public class BattleMode{
         data.poke3 = new Button(data.switchPokemon,560,202,"poke3");
         data.poke3.texture = data.smallPoke;
         if (ally == player.team.get(2)) {
-          data.poke3.x -= 5;
+          data.poke3.y -= 5;
           data.poke3.texture = data.smallChosenPoke;
         }
         deadPokeButtons.add(data.poke3);
@@ -166,7 +166,7 @@ public class BattleMode{
         data.poke2 = new Button(data.switchPokemon,560,82,"poke2");
         data.poke2.texture = data.smallPoke;
         if (ally == player.team.get(1)) {
-          data.poke2.x -= 5;
+          data.poke2.y -= 5;
           data.poke2.texture = data.smallChosenPoke;
         }
         deadPokeButtons.add(data.poke2);
@@ -174,7 +174,6 @@ public class BattleMode{
         data.poke1 = new Button(data.switchPokemon,130,122,"poke1");
         data.poke1.texture = data.bigPoke;
         if (ally == player.team.get(0)) {
-          data.poke1.x -= 10;
           data.poke1.texture = data.bigChosenPoke;
         }
         deadPokeButtons.add(data.poke1);
