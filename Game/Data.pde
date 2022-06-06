@@ -348,9 +348,9 @@ public class Data {
     move4 = new Button(moveOptions,1220,757,"move4");
     move4.texture = loadImage("blank.png");
   
-    rightButton = new Button(itembag,pokeballbag,771,51);
+    rightButton = new Button(itembag,pokeballbag,580,72);
     rightButton.texture = loadImage("rightbutton.png");
-    leftButton = new Button(pokeballbag,itembag,285,54);
+    leftButton = new Button(pokeballbag,itembag,220,72);
     leftButton.texture = loadImage("leftbutton.png");
   }
   
