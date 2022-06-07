@@ -1,6 +1,6 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint;
-  PImage savedSprite;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling;
+  PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
   String battlecomment;
@@ -74,6 +74,17 @@ public class ScreenAnimations {
           faint = false;
           inAnimation = false;
           battleComment(fainter.name + " has fainted.","faint");
+        }
+      }
+      if (balling) {
+        if (frame < 20) {
+          frame ++;
+          image(ballType,frame*30,frame*15);
+        } else {
+          balling = false;
+          inAnimation = false;
+          fainter = battle.enemy;
+          battleComment("capture???","capture");
         }
       }
     }
@@ -278,5 +289,13 @@ public class ScreenAnimations {
     frame = 0;
     faint = true;
     inAnimation = true;
+  }
+  
+  void throwball(PImage balltype){
+    ballType = balltype;
+    currentGui = null;
+    frame = 0;
+    inAnimation = true;
+    balling = true;
   }
 }

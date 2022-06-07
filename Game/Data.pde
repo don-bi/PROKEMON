@@ -41,7 +41,7 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   
   PFont font;
   
@@ -74,9 +74,9 @@ public class Data {
   
   Button rightButton;
   Button leftButton;
-  Button pokeball;
-  Button masterball;
-  Button potion;
+  Button pokeballButton;
+  Button masterballButton;
+  Button potionButton;
   
   public Data(){
     try {
@@ -104,6 +104,9 @@ public class Data {
       enemyUi = loadImage("enemyui.png");
       allyUi = loadImage("allyui.png");
       expBar = loadImage("expbar.png");
+      PImage pokeballSet = loadImage("pokeballs.png"); //The pokeball set for being thrown when capturing
+      pokeball = pokeballSet.get(192,0,96,96);
+      masterball = pokeballSet.get(576,0,96,96);
       
       //loads the font
       font = createFont("font.ttf",72);
@@ -358,12 +361,12 @@ public class Data {
     rightButton.texture = loadImage("rightbutton.png");
     leftButton = new Button(pokeballbag,itembag,220,72);
     leftButton.texture = loadImage("leftbutton.png");
-    pokeball = new Button(pokeballbag,680,112,"pokeball");
-    pokeball.texture = createImage(600,118,ARGB);
-    masterball = new Button(pokeballbag,680,170,"masterball");
-    masterball.texture = createImage(600,118,ARGB);
-    potion = new Button(itembag,680,112,"potion");
-    potion.texture = createImage(600,118,ARGB);
+    pokeballButton = new Button(pokeballbag,680,112,"pokeball");
+    pokeballButton.texture = createImage(600,118,ARGB);
+    masterballButton = new Button(pokeballbag,680,170,"masterball");
+    masterballButton.texture = createImage(600,118,ARGB);
+    potionButton = new Button(itembag,680,112,"potion");
+    potionButton.texture = createImage(600,118,ARGB);
   }
   
   private void loadExp() throws IOException{

@@ -90,15 +90,15 @@ public class Button{
       switch (special) {
         case "pokeball":
           text("POKé BALL",690,158);
-          text("x"+player.bag.pokeballs,1090,158);
+          text("x"+player.bag.pokeballs,1170,158);
           break;
         case "masterball":
           text("MASTER BALL",690,216);
-          text("x"+player.bag.masterballs,1090,216);
+          text("x"+player.bag.masterballs,1170,216);
           break;
         case "potion":
           text("POTION",690,158);
-          text("x"+player.bag.potions,1090,158);
+          text("x"+player.bag.potions,1170,158);
           break;
       }
     } //ends if (special !null)
@@ -122,6 +122,15 @@ public class Button{
           animations.inAnimation = false;
           animations.commenting = false;
           currentGui = opensGui;
+        }
+        
+        if (special.equals("pokeball")) {
+          animations.throwball(data.pokeball);
+        }
+        if (special.equals("masterball")) {
+          animations.throwball(data.masterball);
+        }
+        if (special.equals("potion")) {
         }
         
         if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons
