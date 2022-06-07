@@ -53,6 +53,9 @@ public class Button{
           poke = player.team.get(0);
           text(poke.name,270,250);
           text("Lv"+poke.level,300,290);
+          PImage icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,96);
+          image(icon,100,100);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,327);
           break;
         case "poke2":
@@ -69,20 +72,20 @@ public class Button{
           break;
         case "poke4":
           poke = player.team.get(3);
-          text(poke.name,690,320);
+          text(poke.name,690,360);
           text("Lv"+poke.level,720,400);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,362);
           break;
         case "poke5":
           poke = player.team.get(4);
-          text(poke.name,690,440);
-          text("Lv"+poke.level,720,480);
+          text(poke.name,690,480);
+          text("Lv"+poke.level,720,520);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
           break;
         case "poke6":
           poke = player.team.get(5);
-          text(poke.name,690,560);
-          text("Lv"+poke.level,720,600);
+          text(poke.name,690,600);
+          text("Lv"+poke.level,720,640);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
           break;
       }

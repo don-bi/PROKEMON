@@ -116,14 +116,11 @@ public class Player extends Character {
   }
   
   void capturePoke(Pokemon p){
-    int i = 0;
-    while (i != team.size() && team.get(i) != null) {
-      i ++;
-    }
-    if (i == team.size()) {
-      pc.put(p);
-    } else {
+    p.sprite = data.backSprites.get(p.name).get(p.mode);
+    if (team.size() < 6) {
       team.add(p);
+    } else {
+      pc.put(p);
     }
   }
 }

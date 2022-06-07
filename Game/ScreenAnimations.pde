@@ -80,7 +80,9 @@ public class ScreenAnimations {
         if (frame < 50) {
           frame ++;
           pushMatrix();
-          translate(98+frame*20,178+frame*4);
+          int x = 98+frame*20;
+          int y = round(0.001030*pow(x,2)-1.361*x+623.5);
+          translate(x,y);
           rotate(radians(frame*36));
           image(ballType,-48,-48);
           popMatrix();
@@ -98,16 +100,16 @@ public class ScreenAnimations {
       if (ballshake) {
         pushMatrix();
         translate(1098,378);
-        if (frame <= 15) {
+        if (frame <= 9) {
           frame ++;
-          rotate(radians(frame*3));
-        } else if (frame <= 45) {
+          rotate(radians(frame*5));
+        } else if (frame <= 27) {
           frame ++;
-          rotate(radians((frame-15)*-3+45));
-        } else if (frame <= 60) {
+          rotate(radians((frame-9)*-5+45));
+        } else if (frame <= 36) {
           frame ++;
-          rotate(radians((frame-45)*3-45));
-        } else if (frame <= 150) {
+          rotate(radians((frame-27)*5-45));
+        } else if (frame <= 120) {
           frame ++;
         } else {
           ballshake = false;
@@ -222,13 +224,12 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("freed")) {
-            currentGui = data.fightOptions;
-            fainter = null;
+            effectivenessMessage(1,1);
           }
           
           else if (choice.equals("capture")) {
-            currentGui = data.fightOptions;
-            fainter = null;
+            player.capturePoke(battle.enemy);
+            expBar();
           }
           
           else if (choice.equals("exp")) {
@@ -308,7 +309,31 @@ public class ScreenAnimations {
   void expBar(){
     prevExp = battle.ally.exp;
     gainedExp = battle.ally.gainExp(fainter);
+    trainEVs();
     battleComment(battle.ally.name + " has gained " + gainedExp + " experience!", "exp");
+  }
+  
+  private void trainEVs(){
+    int sum = 0;
+    HashMap<String,Integer> allyEVs = battle.ally.EVs;
+    String[] statnames = {"hp","atk","def","spatk","spdef","spd"}; //stats
+    for (String stat:statnames){
+      sum += allyEVs.get(stat); //finds the total value of all EVs combined first
+    }
+    for (String stat:statnames){
+      if (allyEVs.get(stat) < 252 && sum < 510){ //max limit of EVs for a stat is 252, checks that, and max limit for total is 510
+        int evGain = data.expGain.get(fainter.name).get(stat); //gets data for the exp gained from the enemy pokemon for that stat
+        allyEVs.put(stat,allyEVs.get(stat)+evGain); //adds it to the current EV of that stat
+        sum += evGain; //adds to sum too
+        if (sum > 510) { //makes sure total evs dont go over 510 limit
+          int difference = sum - 510;
+          allyEVs.put(stat,allyEVs.get(stat)-difference);
+        } else if (allyEVs.get(stat) > 252){ //make sure the stat's evs dont go over 252 limit
+          int difference = 252 - allyEVs.get(stat);
+          allyEVs.put(stat,allyEVs.get(stat)-difference);
+        }
+      }
+    }
   }
   
   void checkAllyAlive(){
