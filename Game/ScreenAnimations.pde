@@ -5,7 +5,7 @@ public class ScreenAnimations {
   int prevHp,newHp,prevExp,gainedExp;
   String battlecomment;
   String choice;
-  int frame;
+  int frame, ballshakes;
   float effectiveness;
   
   public ScreenAnimations() {
@@ -77,13 +77,15 @@ public class ScreenAnimations {
         }
       }
       if (balling) {
-        if (frame < 20) {
+        if (frame < 50) {
           frame ++;
-          image(ballType,frame*30,frame*15);
+          image(ballType,50+frame*20,130+frame*4);
+        } else if (frame < 80) {
+          image(ballType,1050,330);
+          fainter = battle.enemy;
         } else {
           balling = false;
           inAnimation = false;
-          fainter = battle.enemy;
           battleComment("capture???","capture");
         }
       }
