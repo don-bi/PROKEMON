@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -79,14 +79,20 @@ public class ScreenAnimations {
       if (balling) {
         if (frame < 50) {
           frame ++;
-          image(ballType,50+frame*20,130+frame*4);
+          pushMatrix();
+          translate(50+frame*20,130+frame*4);
+          rotate(radians(frame*36));
+          image(ballType,-48,-48);
+          popMatrix();
         } else if (frame < 80) {
+          frame ++;
           image(ballType,1050,330);
           fainter = battle.enemy;
         } else {
           balling = false;
           inAnimation = false;
-          battleComment("capture???","capture");
+          currentGui = data.fightOptions;
+          fainter = null;
         }
       }
     }
@@ -299,5 +305,38 @@ public class ScreenAnimations {
     frame = 0;
     inAnimation = true;
     balling = true;
+  }
+  
+  void shakeball(){
+    if (ballType != data.masterball) {
+      float rate = data.capturerates.get(battle.enemy.name);
+      float ball = 1;
+      float bonus = 1;
+      String status = battle.enemy.nonvolStatus;
+      if (status.equals("sleep") || status.equals("freeze")) bonus = 2.5;
+      if (status.equals("paralyze") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
+      float a = ((3*battle.enemy.stats.get("hp")-2*battle.enemy.hp)*rate*ball)/(3.0*battle.enemy.stats.get("hp"))*bonus;
+      int b = floor(65536/(sqrt(sqrt(255/a))));
+      int rand = (int)random(65536);
+      if (rand > b) {
+        if (ballshakes == 3) {
+          battleComment("You have successfully captured " + battle.enemy.name + "!","capture");
+          ballshakes = 0;
+          ballshake = false;
+          inAnimation = false;
+        } else {
+          ballshake = true;
+          inAnimation = true;
+          frame = 0;
+          ballshakes ++;
+        }
+      } else {
+        battleComment("Oh, no! " + battle.enemy.name + " broke free!","freed");
+        ballshakes = 0;
+        ballshake = false;
+        inAnimation = false;
+      }
+      
+    }
   }
 }

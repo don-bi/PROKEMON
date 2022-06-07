@@ -23,6 +23,9 @@ public class Data {
   //the exp each pokemon gives when beaten
   HashMap<String, HashMap<String, Integer>> expGain = new HashMap<String, HashMap<String, Integer>>();
   
+  //capture rates for different pokemon
+  HashMap<String, Integer> capturerates = new HashMap<String, Integer>();
+  
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
@@ -399,6 +402,16 @@ public class Data {
       for (int i = 2; i < categories.length; i ++){
         expGain.get(pokename).put(categories[i],parseInt(data[i]));
       }
+      line = reader.readLine();
+    }
+  }
+  
+  private void loadCaptureRates() throws IOException{
+    BufferedReader reader = createReader("capturerates.csv");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //[pokemon,rate]
+      capturerates.put(data[0],parseInt(data[1]));
       line = reader.readLine();
     }
   }
