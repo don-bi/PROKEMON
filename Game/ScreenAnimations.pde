@@ -97,13 +97,13 @@ public class ScreenAnimations {
       }
       if (ballshake) {
         pushMatrix();
-        translate(1050,330);
+        translate(1098,378);
         if (frame <= 15) {
           frame ++;
           rotate(radians(frame*3));
         } else if (frame <= 45) {
           frame ++;
-          rotate(radians(frame*-3));
+          rotate(radians(frame-15*-3));
         } else {
           ballshake = false;
           inAnimation = false;
@@ -222,6 +222,7 @@ public class ScreenAnimations {
             inAnimation = true;
             transition = true;
           }
+          
           
           else if (choice.equals("win")) {
             fainter = null;
