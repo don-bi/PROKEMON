@@ -97,7 +97,7 @@ public class ScreenAnimations {
       }
       if (ballshake) {
         pushMatrix();
-        translate(1002,282);
+        translate(1050,330);
         if (frame <= 15) {
           frame ++;
           rotate(radians(frame*3));
@@ -107,8 +107,10 @@ public class ScreenAnimations {
         } else {
           ballshake = false;
           inAnimation = false;
+          shakeball();
         }
-        image(ballType,0,0); 
+        image(ballType,-48,-48); 
+        popMatrix();
       }
     }
     if (hp) {
