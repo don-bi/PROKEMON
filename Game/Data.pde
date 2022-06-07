@@ -153,6 +153,9 @@ public class Data {
       //loads exp and EVs gained from each pokemon data
       loadExpGain();
       
+      //loads in capture rates of pokemon
+      loadCaptureRates();
+      
     } catch (IOException e){}
   }
 
@@ -411,7 +414,11 @@ public class Data {
     String line = reader.readLine();
     while (line != null){
       String[] data = line.split(","); //[pokemon,rate]
+      try {
       capturerates.put(data[0],parseInt(data[1]));
+      } catch (ArrayIndexOutOfBoundsException e) {
+      println(data[0]);
+      }
       line = reader.readLine();
     }
   }

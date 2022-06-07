@@ -23,15 +23,13 @@ Fearow,90
 Ekans,255
 Arbok,90
 Pikachu,190
-"Pikachu
-Partner",255
 Raichu,75
 Sandshrew,255
 Sandslash,90
-Nidoran♀,235
+NidoranF,235
 Nidorina,120
 Nidoqueen,45
-Nidoran♂,235
+NidoranM,235
 Nidorino,120
 Nidoking,45
 Clefairy,150
@@ -133,8 +131,6 @@ Gyarados,45
 Lapras,45
 Ditto,35
 Eevee,45
-"Eevee
-Partner",255
 Vaporeon,45
 Jolteon,45
 Flareon,45

@@ -80,7 +80,7 @@ public class ScreenAnimations {
         if (frame < 50) {
           frame ++;
           pushMatrix();
-          translate(50+frame*20,130+frame*4);
+          translate(98+frame*20,178+frame*4);
           rotate(radians(frame*36));
           image(ballType,-48,-48);
           popMatrix();
@@ -91,9 +91,24 @@ public class ScreenAnimations {
         } else {
           balling = false;
           inAnimation = false;
-          currentGui = data.fightOptions;
           fainter = null;
+          shakeball();
         }
+      }
+      if (ballshake) {
+        pushMatrix();
+        translate(1002,282);
+        if (frame <= 15) {
+          frame ++;
+          rotate(radians(frame*3));
+        } else if (frame <= 45) {
+          frame ++;
+          rotate(radians(frame*-3));
+        } else {
+          ballshake = false;
+          inAnimation = false;
+        }
+        image(ballType,0,0); 
       }
     }
     if (hp) {
@@ -327,7 +342,7 @@ public class ScreenAnimations {
         } else {
           ballshake = true;
           inAnimation = true;
-          frame = 0;
+          frame = 1;
           ballshakes ++;
         }
       } else {
@@ -336,7 +351,6 @@ public class ScreenAnimations {
         ballshake = false;
         inAnimation = false;
       }
-      
     }
   }
 }
