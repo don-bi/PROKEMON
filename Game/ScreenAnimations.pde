@@ -98,12 +98,14 @@ public class ScreenAnimations {
       if (ballshake) {
         pushMatrix();
         translate(1098,378);
-        if (frame <= 15) {
+        if (frame <= 45) {
           frame ++;
-          rotate(radians(frame*3));
-        } else if (frame <= 45) {
+          rotate(radians(frame*1));
+        } else if (frame <= 135) {
           frame ++;
-          rotate(radians(frame-15*-3));
+          rotate(radians((frame-45)*-1+45));
+        } else if (frame <= 200) {
+          frame ++;
         } else {
           ballshake = false;
           inAnimation = false;
@@ -214,6 +216,16 @@ public class ScreenAnimations {
             } else {
               expBar();
             }
+          }
+          
+          else if (choice.equals("freed")) {
+            currentGui = data.fightOptions;
+            fainter = null;
+          }
+          
+          else if (choice.equals("capture")) {
+            currentGui = data.fightOptions;
+            fainter = null;
           }
           
           else if (choice.equals("exp")) {
@@ -334,9 +346,10 @@ public class ScreenAnimations {
       if (status.equals("sleep") || status.equals("freeze")) bonus = 2.5;
       if (status.equals("paralyze") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
       float a = ((3*battle.enemy.stats.get("hp")-2*battle.enemy.hp)*rate*ball)/(3.0*battle.enemy.stats.get("hp"))*bonus;
-      int b = floor(65536/(sqrt(sqrt(255/a))));
+      int b = floor(65536.0/(sqrt(sqrt(255/a))));
+      println(b);
       int rand = (int)random(65536);
-      if (rand > b) {
+      if (rand < b) {
         if (ballshakes == 3) {
           battleComment("You have successfully captured " + battle.enemy.name + "!","capture");
           ballshakes = 0;

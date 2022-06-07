@@ -42,10 +42,10 @@ public class BattleMode{
     if (playerchoice.equals("fight")) {
       fightOption();
     } else if (playerchoice.equals("bag")) {
-    } else if (playerchoice.equals("run")) {
-      int escapeOdds = (floor((ally.stats.get("spd")*128.0)/enemy.stats.get("spd")) + 30 * escapeAttempts) % 256;
+    } else if (playerchoice.equals("run")) { //escape odds formula found in https://bulbapedia.bulbagarden.net/wiki/Escape
+      int escapeOdds = (floor((ally.stats.get("spd")*128.0)/(1.0*enemy.stats.get("spd"))) + 30 * escapeAttempts ) % 256;
       int rand = (int)random(256);
-      if (rand < escapeOdds) {
+      if (ally.stats.get("spd") > enemy.stats.get("spd") || escapeOdds > 255 || rand < escapeOdds) {
         animations.battleComment("You have successfully escaped!","escape");
       } else {
         animations.battleComment("You couldn't successfully escape.","noescape");

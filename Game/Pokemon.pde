@@ -143,7 +143,7 @@ public class Pokemon{
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
     
-    return new float[]{((((2*level)/5.0 + 2) * currentMove.power * A/D)/50.0 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
+    return new float[]{((((2*level)/5.0 + 2) * currentMove.power * A/(1.0*D))/50.0 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
   private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
