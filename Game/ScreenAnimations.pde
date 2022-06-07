@@ -179,7 +179,7 @@ public class ScreenAnimations {
           
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
-              battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
             } else {
               faint(battle.defender);
             }
@@ -198,7 +198,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("noescape")) {
-            battleComment(battle.defender.name + " used " + battle.defender.currentMove + ".","secondAttack");
+            effectivenessMessage(1,1);
           }
           
           else if (choice.equals("secondAttack")) {
@@ -224,6 +224,8 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("freed")) {
+            battle.playerchoice = "bag";
+            battle.doTurn();
             effectivenessMessage(1,1);
           }
           
@@ -373,7 +375,7 @@ public class ScreenAnimations {
       float bonus = 1;
       String status = battle.enemy.nonvolStatus;
       if (status.equals("sleep") || status.equals("freeze")) bonus = 2.5;
-      if (status.equals("paralyze") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
+      if (status.equals("paralysis") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
       float a = ((3*battle.enemy.stats.get("hp")-2*battle.enemy.hp)*rate*ball)/(3.0*battle.enemy.stats.get("hp"))*bonus;
       int b = floor(65536.0/(sqrt(sqrt(255/a))));
       println(b);

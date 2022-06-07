@@ -66,17 +66,22 @@ public class BattleMode{
     return attacker.hp != 0;
   }
   
-  void secondAttack() {
-          animations.inAnimation = true;
-          animations.fadein = true;
-          animations.frame = -300;
-          battle = null;
-          currentGui = data.homeScreen;
-          for (Pokemon pokemon:player.team){
-            pokemon.hp = pokemon.stats.get("hp");
-          }
-   }
-  
+  void checkStatusSkips(Pokemon p){
+    String status = p.nonvolStatus;
+    int whichpoke = 1; //will check as attacker
+    if (p == defender) whichpoke = 2; //the pokemon is the defender, then it switches to defender 
+    if (status.equals("freeze")) {
+      if ((int)random(100) < 20) { //random chance of thawing out
+        animations.battleComment(p + " has thawed out!","thaw"+whichpoke);
+      } else { //random chance of not moving
+        animations.battleComment(p + " is frozen solid!","skip"+whichpoke);
+      }
+    } else if (status.equals("paralysis")) {
+      if ((int)random(100) < 25) { //random chance of not moving
+        animations.battleComment(p + " is paralyzed! It can't move","skip"+whichpoke);
+      }
+    }
+  }
   
   void fightOption(){
     int allyPriority = ally.currentMove.priority;
@@ -88,7 +93,7 @@ public class BattleMode{
       attacker = enemy;
       defender = ally;
     }
-    animations.battleComment(attacker.name + " used " + attacker.currentMove + ".","fight");
+    animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
   }
   
   void display(){
