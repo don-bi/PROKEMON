@@ -86,7 +86,25 @@ public class Button{
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
           break;
       }
+      textSize(72);
+      switch (special) {
+        case "pokeball":
+          text("POKé BALL",690,158);
+          text("x"+player.bag.pokeballs,1090,158);
+          break;
+        case "masterball":
+          text("MASTER BALL",690,216);
+          text("x"+player.bag.masterballs,1090,216);
+          break;
+        case "potion":
+          text("POTION",690,158);
+          text("x"+player.bag.potions,1090,158);
+          break;
+      }
     } //ends if (special !null)
+  }
+  
+  void processHover(){
   }
   
   void processClick(){

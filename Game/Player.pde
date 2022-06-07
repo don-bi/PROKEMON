@@ -1,4 +1,6 @@
 public class Player extends Character {
+  Bag bag;
+  
   public Player() {
     sprite = data.playerAnimations.get("playerDStand");
     direction = 'd';
@@ -8,6 +10,7 @@ public class Player extends Character {
     delay = 0;
     isBiking = false;
     isRunning = false;
+    bag = new Bag();
     team = new ArrayList<Pokemon>();
   }
   
