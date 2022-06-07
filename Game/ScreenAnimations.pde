@@ -98,13 +98,16 @@ public class ScreenAnimations {
       if (ballshake) {
         pushMatrix();
         translate(1098,378);
-        if (frame <= 45) {
+        if (frame <= 15) {
           frame ++;
-          rotate(radians(frame*1));
-        } else if (frame <= 135) {
+          rotate(radians(frame*3));
+        } else if (frame <= 45) {
           frame ++;
-          rotate(radians((frame-45)*-1+45));
-        } else if (frame <= 200) {
+          rotate(radians((frame-15)*-3+45));
+        } else if (frame <= 60) {
+          frame ++;
+          rotate(radians((frame-45)*3-45));
+        } else if (frame <= 150) {
           frame ++;
         } else {
           ballshake = false;
@@ -282,8 +285,8 @@ public class ScreenAnimations {
   void effectivenessMessage(float effectiveness, int attack){
     String comment = "       ";
     if (effectiveness == 0) comment = "It had no effect...";
-    if (effectiveness > 1) comment = "It was super effective!";
-    if (effectiveness < 1) comment = "It wasn't very effective...";
+    else if (effectiveness > 1) comment = "It was super effective!";
+    else if (effectiveness < 1) comment = "It wasn't very effective...";
     if (attack == 1){
       battleComment(comment,"effective1");
     } else if (attack == 2){
@@ -338,6 +341,7 @@ public class ScreenAnimations {
   }
   
   void shakeball(){
+    fainter = battle.enemy;
     if (ballType != data.masterball) {
       float rate = data.capturerates.get(battle.enemy.name);
       float ball = 1;
@@ -363,6 +367,7 @@ public class ScreenAnimations {
         }
       } else {
         battleComment("Oh, no! " + battle.enemy.name + " broke free!","freed");
+        fainter = null;
         ballshakes = 0;
         ballshake = false;
         inAnimation = false;
