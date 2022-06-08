@@ -66,5 +66,19 @@ Donald: Finished loading in exp.csv and initialized the data for Pokemon classes
 
 Hanson: fixed memory problems and updated used functions
 
+### 6/3/2022 ###
+Donald: Started working on the hp bar animation.
+
+### 6/4/2022 ###
+Donald: N/A
+
+### 6/5/2022 ###
+Donald: Finished fixing up hp bar animation and also finished effectiveness messages. Started working on using items, currently only have the images.
+
 ### 6/6/2022 ###
+Donald: Finished implementing exp gain after defeating a pokemon. Also finished the animation for the exp bar moving with the exp gain, along with leveling up. Started working on the bag for catching and potions, only made the buttons so far.
+
 Hanson: Fighting/bag changes + bug testing :)
+
+### 6/7/2022 ###
+Donald: Implented catching pokemon and animated it using the parabolic equation for a very nice curve.

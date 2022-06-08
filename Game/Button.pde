@@ -53,6 +53,9 @@ public class Button{
           poke = player.team.get(0);
           text(poke.name,270,250);
           text("Lv"+poke.level,300,290);
+          PImage icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,96);
+          image(icon,100,100);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,327);
           break;
         case "poke2":
@@ -69,28 +72,45 @@ public class Button{
           break;
         case "poke4":
           poke = player.team.get(3);
-          text(poke.name,690,320);
+          text(poke.name,690,360);
           text("Lv"+poke.level,720,400);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,362);
           break;
         case "poke5":
           poke = player.team.get(4);
-          text(poke.name,690,440);
-          text("Lv"+poke.level,720,480);
+          text(poke.name,690,480);
+          text("Lv"+poke.level,720,520);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
           break;
         case "poke6":
           poke = player.team.get(5);
-          text(poke.name,690,560);
-          text("Lv"+poke.level,720,600);
+          text(poke.name,690,600);
+          text("Lv"+poke.level,720,640);
           image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
+          break;
+      }
+      textSize(72);
+      switch (special) {
+        case "pokeball":
+          text("POKé BALL",690,158);
+          text("x"+player.bag.pokeballs,1170,158);
+          break;
+        case "masterball":
+          text("MASTER BALL",690,216);
+          text("x"+player.bag.masterballs,1170,216);
+          break;
+        case "potion":
+          text("POTION",690,158);
+          text("x"+player.bag.potions,1170,158);
           break;
       }
     } //ends if (special !null)
   }
   
+  void processHover(){
+  }
+  
   void processClick(){
-    if (texture == data.switchPokemon.texture) animations.battlecomment = null;
     if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
       if (special == null){
         currentGui = opensGui;
@@ -99,6 +119,36 @@ public class Button{
         boolean endturn = false;
         String choice = "";
         poke.currentMove = null;
+        
+        if (special.equals("endComment")) {
+          animations.battlecomment = null;
+          animations.inAnimation = false;
+          animations.commenting = false;
+          currentGui = opensGui;
+        }
+        
+        if (special.equals("pokeball")) {
+          if (player.bag.pokeballs <= 0){
+            animations.battleComment("You have no more POKé BALLS!","effective2");
+          } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+            animations.throwball(data.pokeball);
+            player.bag.pokeballs --;
+          } else {
+            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+          }
+        }
+        if (special.equals("masterball")) {
+          if (player.bag.masterballs <= 0){
+            animations.battleComment("You have no more MASTER BALLS!","effective2");
+          } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+            animations.throwball(data.masterball);
+            player.bag.masterballs --;
+          } else {
+            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+          }
+        }
+        if (special.equals("potion")) {
+        }
         
         if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons
           if (special.equals("move1") && poke.moves[0] != null) poke.currentMove = poke.moves[0];

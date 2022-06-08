@@ -42,10 +42,10 @@ public class BattleMode{
     if (playerchoice.equals("fight")) {
       fightOption();
     } else if (playerchoice.equals("bag")) {
-    } else if (playerchoice.equals("run")) {
-      int escapeOdds = (floor((ally.stats.get("spd")*128.0)/enemy.stats.get("spd")) + 30 * escapeAttempts) % 256;
+    } else if (playerchoice.equals("run")) { //escape odds formula found in https://bulbapedia.bulbagarden.net/wiki/Escape
+      int escapeOdds = (floor((ally.stats.get("spd")*128.0)/(1.0*enemy.stats.get("spd"))) + 30 * escapeAttempts ) % 256;
       int rand = (int)random(256);
-      if (rand < escapeOdds) {
+      if (ally.stats.get("spd") > enemy.stats.get("spd") || escapeOdds > 255 || rand < escapeOdds) {
         animations.battleComment("You have successfully escaped!","escape");
       } else {
         animations.battleComment("You couldn't successfully escape.","noescape");
@@ -66,18 +66,6 @@ public class BattleMode{
     return attacker.hp != 0;
   }
   
-  void secondAttack() {
-          animations.inAnimation = true;
-          animations.fadein = true;
-          animations.frame = -300;
-          battle = null;
-          currentGui = data.homeScreen;
-          for (Pokemon pokemon:player.team){
-            pokemon.hp = pokemon.stats.get("hp");
-          }
-   }
-  
-  
   void fightOption(){
     int allyPriority = ally.currentMove.priority;
     int enemyPriority = enemy.currentMove.priority;
@@ -88,7 +76,7 @@ public class BattleMode{
       attacker = enemy;
       defender = ally;
     }
-    animations.battleComment(attacker.name + " used " + attacker.currentMove + ".","fight");
+    animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
   }
   
   void display(){
@@ -98,8 +86,8 @@ public class BattleMode{
     //The bottom transparent rectangle and options
     textSize(40);
     fill(0);
-    image(enemy.sprite,940,400-enemy.sprite.height);
-    image(ally.sprite,130,800-ally.sprite.height);
+    if (animations.fainter != enemy) image(enemy.sprite,940,400-enemy.sprite.height);
+    if (animations.fainter != ally) image(ally.sprite,130,800-ally.sprite.height);
     fill(0,100);
     rect(0,650,1440,214);
     fill(255);
@@ -115,7 +103,7 @@ public class BattleMode{
     if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
     if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
     
-    image(data.expBar.get(0,0,ally.exp*124/ally.neededExp,8),984,562);
+    image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562);
     text(ally.hp + "/ " + ally.stats.get("hp"),1120,545);
     
     text(ally.name,920,475);
@@ -133,26 +121,49 @@ public class BattleMode{
       case(6):
         data.poke6 = new Button(data.switchPokemon,560,562,"poke6");
         data.poke6.texture = data.smallPoke;
+        if (ally == player.team.get(5)) {
+          data.poke6.y -= 5;
+          data.poke6.texture = data.smallChosenPoke;
+        }
         deadPokeButtons.add(data.poke6);
       case(5):
         data.poke5 = new Button(data.switchPokemon,560,442,"poke5");
         data.poke5.texture = data.smallPoke;
-        deadPokeButtons.add(data.poke5);
+        if (ally == player.team.get(4)) {
+          data.poke5.y -= 5;
+          data.poke5.texture = data.smallChosenPoke;
+        }
+        deadPokeButtons.add(data.poke4);
       case(4):
         data.poke4 = new Button(data.switchPokemon,560,322,"poke4");
         data.poke4.texture = data.smallPoke;
+        if (ally == player.team.get(3)) {
+          data.poke4.y -= 5;
+          data.poke4.texture = data.smallChosenPoke;
+        }
         deadPokeButtons.add(data.poke4);
       case(3):
         data.poke3 = new Button(data.switchPokemon,560,202,"poke3");
         data.poke3.texture = data.smallPoke;
+        if (ally == player.team.get(2)) {
+          data.poke3.y -= 5;
+          data.poke3.texture = data.smallChosenPoke;
+        }
         deadPokeButtons.add(data.poke3);
       case(2):
         data.poke2 = new Button(data.switchPokemon,560,82,"poke2");
         data.poke2.texture = data.smallPoke;
+        if (ally == player.team.get(1)) {
+          data.poke2.y -= 5;
+          data.poke2.texture = data.smallChosenPoke;
+        }
         deadPokeButtons.add(data.poke2);
       case(1):
         data.poke1 = new Button(data.switchPokemon,130,122,"poke1");
-        data.poke1.texture = data.bigChosenPoke;
+        data.poke1.texture = data.bigPoke;
+        if (ally == player.team.get(0)) {
+          data.poke1.texture = data.bigChosenPoke;
+        }
         deadPokeButtons.add(data.poke1);
     }
     data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);

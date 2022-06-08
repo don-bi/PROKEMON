@@ -33,7 +33,7 @@ public class Pokemon{
     mode = "regular";
     type1 = data.getPokeData(name,"type1");
     type2 = data.getPokeData(name,"type2");
-    sprite = data.frontSprites.get(name).get(mode);
+    sprite = data.frontSprites.get(name).get(mode); 
     moves = new Move[4];
     makeMoves();
     nonvolStatus = "none";
@@ -143,7 +143,7 @@ public class Pokemon{
     float burn = 1;
     if (nonvolStatus.equals("burned") && currentMove.damageClass.equals("physical")) burn = 0.5;
     
-    return new float[]{((((2*level)/5 + 2) * currentMove.power * A/D)/50 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
+    return new float[]{((((2*level)/5.0 + 2) * currentMove.power * A/(1.0*D))/50.0 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
   private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
@@ -166,10 +166,36 @@ public class Pokemon{
     return  effectiveness;
   }
   
+  int gainExp(Pokemon other){ //formula from https://bulbapedia.bulbagarden.net/wiki/Experience
+    float a = 1.0;
+    if (battle.opponent != null) a = 1.5; // a is 1 if wild pokemon, 1.5 if trainer owned
+    int b = data.expGain.get(other.name).get("exp"); //base exp of the enemy pokemon
+    println(b);
+    float e = 1;
+    float f = 1;
+    float L = other.level;
+    println(L);
+    float Lp = level;
+    println(level);
+    float p  = 1;
+    float s = 1;
+    float t = 1;
+    float v = 1;
+    return (int)(((b*L*f*v)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5))*t*e*p);
+  }
+    
+  void recalcStats(){
+    String[] statnames = {"hp","atk","def","spatk","spdef","spd"}; //stats
+    for (String stat:statnames){
+      stats.put(stat,calcStat(stat));
+    }
+  }
+  
   void levelUp(){
     level ++;
     exp = 0;
     neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+    recalcStats();
   }
     
 }

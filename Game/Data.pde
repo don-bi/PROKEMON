@@ -20,6 +20,12 @@ public class Data {
   //exp data
   HashMap<Integer, HashMap<Integer, Integer>> expData = new HashMap<Integer, HashMap<Integer, Integer>>();
   
+  //the exp each pokemon gives when beaten
+  HashMap<String, HashMap<String, Integer>> expGain = new HashMap<String, HashMap<String, Integer>>();
+  
+  //capture rates for different pokemon
+  HashMap<String, Integer> capturerates = new HashMap<String, Integer>();
+  
   //Pokemon id to pokemon name data
   HashMap<String, String> idName = new HashMap<String, String>();
   
@@ -38,7 +44,7 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar;
+  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   
   PFont font;
   
@@ -48,6 +54,8 @@ public class Data {
   Gui moveOptions;
   Gui switchPokemon;
   Gui deadPokemon;
+  Gui itembag;
+  Gui pokeballbag;
   
   Button fight;
   Button pokemon;
@@ -66,7 +74,13 @@ public class Data {
   Button poke5;
   Button poke6;
   Button cancel;
-
+  
+  Button rightButton;
+  Button leftButton;
+  Button pokeballButton;
+  Button masterballButton;
+  Button potionButton;
+  
   public Data(){
     try {
       //maps every map name to two images, its background and its foreground
@@ -93,6 +107,9 @@ public class Data {
       enemyUi = loadImage("enemyui.png");
       allyUi = loadImage("allyui.png");
       expBar = loadImage("expbar.png");
+      PImage pokeballSet = loadImage("pokeballs.png"); //The pokeball set for being thrown when capturing
+      pokeball = pokeballSet.get(192,0,96,96);
+      masterball = pokeballSet.get(576,0,96,96);
       
       //loads the font
       font = createFont("font.ttf",72);
@@ -132,6 +149,12 @@ public class Data {
       
       //loads exp data
       loadExp();
+      
+      //loads exp and EVs gained from each pokemon data
+      loadExpGain();
+      
+      //loads in capture rates of pokemon
+      loadCaptureRates();
       
     } catch (IOException e){}
   }
@@ -319,12 +342,14 @@ public class Data {
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
     deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
+    itembag = new Gui(loadImage("items.png"),0,0);
+    pokeballbag = new Gui(loadImage("pokeballbag.png"),0,0);
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");
-    pokemon = new Button(fightOptions,switchPokemon,1220,650);
+    pokemon = new Button(fightOptions,switchPokemon,1220,650,"endComment");
     pokemon.texture = loadImage("pokemon.png");
-    bag = new Button(fightOptions,moveOptions,1000,757);
+    bag = new Button(fightOptions,itembag,1000,757,"endComment");
     bag.texture = loadImage("bag.png");
     run = new Button(fightOptions,1220,757,"run");
     run.texture = loadImage("run.png");
@@ -337,9 +362,17 @@ public class Data {
     move3.texture = loadImage("blank.png");
     move4 = new Button(moveOptions,1220,757,"move4");
     move4.texture = loadImage("blank.png");
-
-    moveOptions.prev = fightOptions;
-    switchPokemon.prev = fightOptions;
+  
+    rightButton = new Button(itembag,pokeballbag,580,72);
+    rightButton.texture = loadImage("rightbutton.png");
+    leftButton = new Button(pokeballbag,itembag,220,72);
+    leftButton.texture = loadImage("leftbutton.png");
+    pokeballButton = new Button(pokeballbag,680,112,"pokeball");
+    pokeballButton.texture = createImage(600,118,ARGB);
+    masterballButton = new Button(pokeballbag,680,170,"masterball");
+    masterballButton.texture = createImage(600,118,ARGB);
+    potionButton = new Button(itembag,680,112,"potion");
+    potionButton.texture = createImage(600,118,ARGB);
   }
   
   private void loadExp() throws IOException{
@@ -354,6 +387,37 @@ public class Data {
       expData.put(currentLevel, totalToLevel);
       for (int i = 2; i < categories.length; i ++){
         expData.get(currentLevel).put(parseInt(categories[i]),parseInt(data[i]));
+      }
+      line = reader.readLine();
+    }
+  }
+  
+  private void loadExpGain() throws IOException{
+    BufferedReader reader = createReader("expgain.csv");
+    String[] categories = reader.readLine().split(",");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //exp given for each pokemon and also their evs given
+      String pokename = data[0];
+      HashMap<String,Integer> statToEVs = new HashMap<String,Integer>(); //creates the value hashmaps for expGain
+      statToEVs.put(categories[1],parseInt(data[1])); //keys will be the total exp of the pokemon(found in pokemonData), values will be what's required for the level
+      expGain.put(pokename, statToEVs);
+      for (int i = 2; i < categories.length; i ++){
+        expGain.get(pokename).put(categories[i],parseInt(data[i]));
+      }
+      line = reader.readLine();
+    }
+  }
+  
+  private void loadCaptureRates() throws IOException{
+    BufferedReader reader = createReader("capturerates.csv");
+    String line = reader.readLine();
+    while (line != null){
+      String[] data = line.split(","); //[pokemon,rate]
+      try {
+      capturerates.put(data[0],parseInt(data[1]));
+      } catch (ArrayIndexOutOfBoundsException e) {
+      println(data[0]);
       }
       line = reader.readLine();
     }

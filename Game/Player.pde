@@ -1,4 +1,7 @@
 public class Player extends Character {
+  Bag bag;
+  PC pc;
+  
   public Player() {
     sprite = data.playerAnimations.get("playerDStand");
     direction = 'd';
@@ -8,6 +11,8 @@ public class Player extends Character {
     delay = 0;
     isBiking = false;
     isRunning = false;
+    bag = new Bag();
+    pc = new PC();
     team = new ArrayList<Pokemon>();
   }
   
@@ -108,5 +113,14 @@ public class Player extends Character {
       display();
     }
     image(data.mapMasks.get(currentMap), 0, 0);
+  }
+  
+  void capturePoke(Pokemon p){
+    p.sprite = data.backSprites.get(p.name).get(p.mode);
+    if (team.size() < 6) {
+      team.add(p);
+    } else {
+      pc.put(p);
+    }
   }
 }

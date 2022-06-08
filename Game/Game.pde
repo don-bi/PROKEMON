@@ -36,7 +36,7 @@ void setup() {
   currentMap = "Route1";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
+    currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));
   } 
   catch (IOException e) {
     println("bad file");
@@ -49,7 +49,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Salamence", 5, true);
+  Pokemon poke2 = new Pokemon("Lucario", 32, true);
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Torterra", 34, true);
   player.team.add(poke3);
