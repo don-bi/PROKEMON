@@ -139,12 +139,22 @@ public class ScreenAnimations {
           rect(0,0,1440,864);
         } else if (frame < 100) {
           frame ++;
-          for (int i = 0; i < 12; i ++){
+          image(data.battleBG,0,0);
+          for (int i = 0; i < 12; i ++) {
+            int framediff = frame-60; //makes up for the animation of previous frames
             noStroke();
-            fill(0,255-(frame-60)*7);
+            fill(0,255-framediff*7);
             rect(0,i*72,1440-(frame-60)*36,36);
-            rect((frame-60)*36,36+i*72,1440-(frame-60)*36,36);
+            rect(framediff*36,36+i*72,1440-framediff*36,36);
           }
+        } else if (frame < 160) {
+          frame++;
+          int framediff = frame-100;
+          PImage lefthalf = data.battleCircles.get(0,530,1440,334);
+          PImage righthalf = data.battleCircles.get(0,0,1440,530);
+          image(data.battleBG,0,0);
+          image(lefthalf,-1440+framediff*24,530);
+          image(righthalf,1440-framediff*24,0);
         } else {
           battlestart = false;
           inAnimation = false;

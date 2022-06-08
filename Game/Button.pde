@@ -136,8 +136,7 @@ public class Button{
           } else {
             animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
           }
-        }
-        if (special.equals("masterball")) {
+        } else if (special.equals("masterball")) {
           if (player.bag.masterballs <= 0){
             animations.battleComment("You have no more MASTER BALLS!","effective2");
           } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer

@@ -8,6 +8,7 @@ public class BattleMode{
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
   
   public BattleMode(NPC opp){ //Trainer encounter
+    animations.startBattle();
     opponent = opp;
     int i = 0;
     while (player.team.get(i).hp == 0 && i != 6){
@@ -20,6 +21,7 @@ public class BattleMode{
   }
   
   public BattleMode(Pokemon p){ //Wild pokemon encounter
+  animations.startBattle();
     int i = 0;
     while (player.team.get(i).hp == 0 && i != 6){
       i ++;

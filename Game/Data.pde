@@ -368,11 +368,11 @@ public class Data {
     leftButton = new Button(pokeballbag,itembag,220,72);
     leftButton.texture = loadImage("leftbutton.png");
     pokeballButton = new Button(pokeballbag,680,112,"pokeball");
-    pokeballButton.texture = createImage(600,118,ARGB);
+    pokeballButton.texture = createImage(600,58,ARGB);
     masterballButton = new Button(pokeballbag,680,170,"masterball");
-    masterballButton.texture = createImage(600,118,ARGB);
+    masterballButton.texture = createImage(600,58,ARGB);
     potionButton = new Button(itembag,680,112,"potion");
-    potionButton.texture = createImage(600,118,ARGB);
+    potionButton.texture = createImage(600,58,ARGB);
   }
   
   private void loadExp() throws IOException{
