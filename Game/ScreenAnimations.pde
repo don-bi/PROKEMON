@@ -182,10 +182,10 @@ public class ScreenAnimations {
         hplowerer = null;
         hp = false;
         if (choice.equals("fight")) {
-          effectivenessMessage(effectiveness,1);
+          setNewStatus(1);
         }
         else if (choice.equals("secondAttack")) {
-          effectivenessMessage(effectiveness,2);
+          setNewStatus(1);
         }
       }
     }
@@ -222,6 +222,10 @@ public class ScreenAnimations {
             if (!transition) hpBar(battle.attacker, battle.defender);
           } 
           
+          else if (choice.equals("status1")) {
+            effectivenessMessage(effectiveness,1);
+          }
+          
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
               battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
@@ -248,6 +252,10 @@ public class ScreenAnimations {
           
           else if (choice.equals("secondAttack")) {
             if (!transition) hpBar(battle.defender, battle.attacker);
+          }
+          
+          else if (choice.equals("status2")) {
+            effectivenessMessage(effectiveness,2);
           }
           
           else if (choice.equals("effective2")) {
@@ -466,7 +474,43 @@ public class ScreenAnimations {
     }
   }
   
-  void setNewStatus(Pokemon p){
+  void setNewStatus(int attack){
+    Pokemon attacker = battle.attacker;
+    Pokemon attacked = battle.defender;
+    if (attack == 2) {
+      attacker = battle.defender;
+      attacked = battle.attacker;
+    }
+    if (attacked.nonvolStatus != null) {
+      Move usedmove = attacker.currentMove;
+      if (usedmove.effect != 1) {
+        
+        String statuscomment = "";
+        String newstatus = null;
+        if (usedmove.effect == 7) {
+          statuscomment = "became paralyzed!";
+          newstatus = "paralyze";
+        }
+        else if (usedmove.effect == 6) {
+          statuscomment = "became frozen!";
+          newstatus = "freeze";
+        }
+        else if (usedmove.effect == 5) {
+          statuscomment = "became burned!";
+          newstatus = "burn";
+        }
+        else if (usedmove.effect == 3) {
+          statuscomment = "became poisoned!";
+          newstatus = "poison";
+        }
+        
+        if ((int)random(100) < usedmove.effectChance) {
+          attacked.nonvolStatus = newstatus;
+        }
+        
+        battleComment(attacked.name + " " + statuscomment,"status"+attack);
+      }
+    }
   }
   
   void startBattle(){
