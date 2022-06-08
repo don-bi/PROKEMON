@@ -66,6 +66,7 @@ Donald: Finished loading in exp.csv and initialized the data for Pokemon classes
 
 Hanson: fixed memory problems and updated used functions
 
+<<<<<<< HEAD
 ### 6/3/2022 ###
 Donald: Started working on the hp bar animation.
 
@@ -74,3 +75,7 @@ Donald: N/A
 
 ### 6/5/2022 ###
 Donald: Finished fixing up hp bar animation and also finished effectiveness messages. Started working on using items, currently only have the images.
+=======
+### 6/6/2022 ###
+Hanson: Fighting/bag changes + bug testing :)
+>>>>>>> main
