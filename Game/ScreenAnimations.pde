@@ -185,7 +185,7 @@ public class ScreenAnimations {
           setNewStatus(1);
         }
         else if (choice.equals("secondAttack")) {
-          setNewStatus(1);
+          setNewStatus(2);
         }
       }
     }
@@ -218,17 +218,21 @@ public class ScreenAnimations {
           commenting = false;
           inAnimation = false;
           
-          if (choice.equals("fight")) {
+          if (choice.equals("skip1")) {
+            effectivenessMessage(1,1);
+          }
+          
+          else if (choice.equals("fight")) {
             if (!transition) hpBar(battle.attacker, battle.defender);
           } 
           
           else if (choice.equals("status1")) {
-            effectivenessMessage(effectiveness,1);
+            effectivenessMessage(1,1);
           }
           
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
-              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+              if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
             } else {
               faint(battle.defender);
             }
@@ -248,6 +252,10 @@ public class ScreenAnimations {
           
           else if (choice.equals("noescape")) {
             effectivenessMessage(1,1);
+          }
+          
+          else if (choice.equals("skip2")) {
+            effectivenessMessage(1,2);
           }
           
           else if (choice.equals("secondAttack")) {
@@ -457,21 +465,24 @@ public class ScreenAnimations {
     }
   }
   
-  void checkStatusSkips(Pokemon p){
+  boolean statusSkip(Pokemon p){
     String status = p.nonvolStatus;
     int whichpoke = 1; //will check as attacker
     if (p == battle.defender) whichpoke = 2; //the pokemon is the defender, then it switches to defender 
     if (status.equals("freeze")) {
       if ((int)random(100) < 20) { //random chance of thawing out
-        battleComment(p + " has thawed out!","thaw"+whichpoke);
+        battleComment(p.name + " has thawed out!","thaw"+whichpoke);
       } else { //random chance of not moving
-        battleComment(p + " is frozen solid!","skip"+whichpoke);
+        battleComment(p.name + " is frozen solid! It can't move!","skip"+whichpoke);
+        return true;
       }
     } else if (status.equals("paralysis")) {
       if ((int)random(100) < 25) { //random chance of not moving
-        battleComment(p + " is paralyzed! It can't move","skip"+whichpoke);
+        battleComment(p.name + " is paralyzed! It can't move!","skip"+whichpoke);
+        return true;
       }
     }
+    return false;
   }
   
   void setNewStatus(int attack){
@@ -481,9 +492,9 @@ public class ScreenAnimations {
       attacker = battle.defender;
       attacked = battle.attacker;
     }
-    if (attacked.nonvolStatus != null) {
-      Move usedmove = attacker.currentMove;
-      if (usedmove.effect != 1) {
+    Move usedmove = attacker.currentMove;
+    if (usedmove.effect != 1) {
+      if (attacked.nonvolStatus != null) {
         
         String statuscomment = "";
         String newstatus = null;
@@ -506,10 +517,13 @@ public class ScreenAnimations {
         
         if ((int)random(100) < usedmove.effectChance) {
           attacked.nonvolStatus = newstatus;
+          battleComment(attacked.name + " " + statuscomment,"status"+attack);
+        } else {
+          effectivenessMessage(effectiveness,attack);
         }
-        
-        battleComment(attacked.name + " " + statuscomment,"status"+attack);
       }
+    } else {
+      effectivenessMessage(effectiveness,attack);
     }
   }
   

@@ -162,7 +162,7 @@ public class Pokemon{
     }
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
-    println(name + ' ' + currentMove + ' ' + damage);
+    println(name + ' ' + currentMove + ' ' + damage + ' ' + currentMove.effect);
     return  effectiveness;
   }
   
