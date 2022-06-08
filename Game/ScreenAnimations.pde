@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -123,6 +123,32 @@ public class ScreenAnimations {
         tint(120);
         image(ballType,1050,330);
         noTint();
+      }
+      if (battlestart) {
+        if (frame < 40){
+          frame ++;
+          for (int i = 0; i < 12; i ++){
+            noStroke();
+            fill(0,frame*7);
+            rect(0,i*72,frame*36,36);
+            rect(1440-frame*36,36+i*72,frame*36,36);
+          }
+        } else if (frame < 60) {
+          frame ++;
+          fill(0);
+          rect(0,0,1440,864);
+        } else if (frame < 100) {
+          frame ++;
+          for (int i = 0; i < 12; i ++){
+            noStroke();
+            fill(0,255-(frame-60)*7);
+            rect(0,i*72,1440-(frame-60)*36,36);
+            rect((frame-60)*36,36+i*72,1440-(frame-60)*36,36);
+          }
+        } else {
+          battlestart = false;
+          inAnimation = false;
+        }
       }
     }
     if (hp) {
@@ -427,5 +453,11 @@ public class ScreenAnimations {
   }
   
   void setNewStatus(Pokemon p){
+  }
+  
+  void startBattle(){
+    frame = 0;
+    battlestart = true;
+    inAnimation = true;
   }
 }
