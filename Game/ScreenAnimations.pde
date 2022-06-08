@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -118,6 +118,11 @@ public class ScreenAnimations {
         }
         image(ballType,-48,-48); 
         popMatrix();
+      }
+      if (captured) { //displays a dark ball when you captured the pokemon
+        tint(120);
+        image(ballType,1050,330);
+        noTint();
       }
     }
     if (hp) {
@@ -244,11 +249,13 @@ public class ScreenAnimations {
           
           else if (choice.equals("win")) {
             fainter = null;
+            captured = false;
             returnHome();
           }
           
           else if (choice.equals("lose")) {
             fainter = null;
+            captured = false;
             returnHome();
           }
           
@@ -367,38 +374,58 @@ public class ScreenAnimations {
     balling = true;
   }
   
-  void shakeball(){
-    fainter = battle.enemy;
-    if (ballType != data.masterball) {
-      float rate = data.capturerates.get(battle.enemy.name);
-      float ball = 1;
-      float bonus = 1;
-      String status = battle.enemy.nonvolStatus;
-      if (status.equals("sleep") || status.equals("freeze")) bonus = 2.5;
-      if (status.equals("paralysis") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
-      float a = ((3*battle.enemy.stats.get("hp")-2*battle.enemy.hp)*rate*ball)/(3.0*battle.enemy.stats.get("hp"))*bonus;
-      int b = floor(65536.0/(sqrt(sqrt(255/a))));
-      println(b);
-      int rand = (int)random(65536);
-      if (rand < b) {
-        if (ballshakes == 3) {
-          battleComment("You have successfully captured " + battle.enemy.name + "!","capture");
-          ballshakes = 0;
-          ballshake = false;
-          inAnimation = false;
-        } else {
-          ballshake = true;
-          inAnimation = true;
-          frame = 1;
-          ballshakes ++;
-        }
-      } else {
-        battleComment("Oh, no! " + battle.enemy.name + " broke free!","freed");
-        fainter = null;
+  void shakeball(){ //USED THE FORMULA FROM https://bulbapedia.bulbagarden.net/wiki/Catch_rate
+    fainter = battle.enemy; //does this so that enemy sprite doesnt appear (look display method in BattleMode)
+    float rate = data.capturerates.get(battle.enemy.name);
+    float ball = 1;
+    float bonus = 1;
+    String status = battle.enemy.nonvolStatus;
+    if (status.equals("sleep") || status.equals("freeze")) bonus = 2.5;
+    if (status.equals("paralysis") || status.equals("burn") || status.equals("poison")) bonus = 1.5;
+    float a = ((3*battle.enemy.stats.get("hp")-2*battle.enemy.hp)*rate*ball)/(3.0*battle.enemy.stats.get("hp"))*bonus;
+    int b = floor(65536.0/(sqrt(sqrt(255/a))));
+    if (ballType == data.masterball) b = 65536; //masterball is always b value 65536
+    println(b);
+    int rand = (int)random(65536); //generates random value 0 to 65535 inclusive and if its less than b, shakes
+    if (rand < b) {
+      if (ballshakes == 3) { //needs to shake check 4 times successfully to capture
+        battleComment("You have successfully captured " + battle.enemy.name + "!","capture");
         ballshakes = 0;
         ballshake = false;
         inAnimation = false;
+        captured = true;
+      } else {
+        ballshake = true;
+        inAnimation = true;
+        frame = 1;
+        ballshakes ++;
+      }
+    } else {
+      battleComment("Oh, no! " + battle.enemy.name + " broke free!","freed");
+      fainter = null;
+      ballshakes = 0;
+      ballshake = false;
+      inAnimation = false;
+    }
+  }
+  
+  void checkStatusSkips(Pokemon p){
+    String status = p.nonvolStatus;
+    int whichpoke = 1; //will check as attacker
+    if (p == battle.defender) whichpoke = 2; //the pokemon is the defender, then it switches to defender 
+    if (status.equals("freeze")) {
+      if ((int)random(100) < 20) { //random chance of thawing out
+        battleComment(p + " has thawed out!","thaw"+whichpoke);
+      } else { //random chance of not moving
+        battleComment(p + " is frozen solid!","skip"+whichpoke);
+      }
+    } else if (status.equals("paralysis")) {
+      if ((int)random(100) < 25) { //random chance of not moving
+        battleComment(p + " is paralyzed! It can't move","skip"+whichpoke);
       }
     }
+  }
+  
+  void setNewStatus(Pokemon p){
   }
 }

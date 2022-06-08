@@ -128,10 +128,20 @@ public class Button{
         }
         
         if (special.equals("pokeball")) {
-          animations.throwball(data.pokeball);
+          if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+            animations.throwball(data.pokeball);
+            player.bag.pokeballs --;
+          } else {
+            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+          }
         }
         if (special.equals("masterball")) {
-          animations.throwball(data.masterball);
+          if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+            animations.throwball(data.masterball);
+            player.bag.masterballs --;
+          } else {
+            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+          }
         }
         if (special.equals("potion")) {
         }
