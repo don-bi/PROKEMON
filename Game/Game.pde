@@ -33,10 +33,10 @@ void setup() {
   data = new Data();
   
   //loads initial hometop map
-  currentMap = "Woodbury_Town";
+  currentMap = "Route1";
   currentMapTiles = new Map();
   try {
-    currentMapTiles.loadMap(getSubDir("Maps","Woodbury_Town.txt"));
+    currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));
   } 
   catch (IOException e) {
     println("bad file");
