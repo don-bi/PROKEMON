@@ -155,7 +155,11 @@ public class ScreenAnimations {
           image(data.battleBG,0,0);
           image(lefthalf,-1440+framediff*24,530);
           image(righthalf,1440-framediff*24,0);
+          if (battle.opponent == null) {
+            image(battle.enemy.sprite,2380-framediff*24,400-battle.enemy.sprite.height);
+          }
         } else {
+          currentGui = data.fightOptions;
           battlestart = false;
           inAnimation = false;
         }
@@ -469,5 +473,6 @@ public class ScreenAnimations {
     frame = 0;
     battlestart = true;
     inAnimation = true;
+    currentGui = null;
   }
 }

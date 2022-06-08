@@ -82,7 +82,6 @@ void draw() {
 
 void mouseClicked(){
   if (currentGui != null) currentGui.processButtons();
-  animations.startBattle();
 }
 
 void checkWASD(){

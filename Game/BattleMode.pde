@@ -8,7 +8,6 @@ public class BattleMode{
   String playerchoice; //(switch,fight,run,bag so doturn can tell what to do)
   
   public BattleMode(NPC opp){ //Trainer encounter
-    animations.startBattle();
     opponent = opp;
     int i = 0;
     while (player.team.get(i).hp == 0 && i != 6){
@@ -18,10 +17,10 @@ public class BattleMode{
     enemy = opponent.team.get(0);
     currentGui = data.fightOptions;
     addSwitchButtons();
+    animations.startBattle();
   }
   
   public BattleMode(Pokemon p){ //Wild pokemon encounter
-  animations.startBattle();
     int i = 0;
     while (player.team.get(i).hp == 0 && i != 6){
       i ++;
@@ -30,6 +29,7 @@ public class BattleMode{
     enemy = p;
     currentGui = data.fightOptions;
     addSwitchButtons();
+    animations.startBattle();
   }
   
   void doTurn(){
@@ -82,37 +82,39 @@ public class BattleMode{
   }
   
   void display(){
-    image(data.battleBG,0,0);
-    image(data.battleCircles,0,0);
-    
-    //The bottom transparent rectangle and options
-    textSize(40);
-    fill(0);
-    if (animations.fainter != enemy) image(enemy.sprite,940,400-enemy.sprite.height);
-    if (animations.fainter != ally) image(ally.sprite,130,800-ally.sprite.height);
-    fill(0,100);
-    rect(0,650,1440,214);
-    fill(255);
-    textSize(30);
-    textFont(data.font);
-    
-    //Displays hp bars
-    textSize(45);
-    fill(0);
-    image(data.allyUi,860,430);
-    image(data.enemyUi,320,150);
-    
-    if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
-    if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
-    
-    image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562);
-    text(ally.hp + "/ " + ally.stats.get("hp"),1120,545);
-    
-    text(ally.name,920,475);
-    text(enemy.name,348,195);
-    
-    text("Lv"+ally.level,1160,475);
-    text("Lv"+enemy.level,588,195);
+    if (!animations.battlestart) { //when it's doing the battlestart animation, it doesn't show the stuffs
+      image(data.battleBG,0,0);
+      image(data.battleCircles,0,0);
+      
+      //The bottom transparent rectangle and options
+      textSize(40);
+      fill(0);
+      if (animations.fainter != enemy) image(enemy.sprite,940,400-enemy.sprite.height);
+      if (animations.fainter != ally) image(ally.sprite,130,800-ally.sprite.height);
+      fill(0,100);
+      rect(0,650,1440,214);
+      fill(255);
+      textSize(30);
+      textFont(data.font);
+      
+      //Displays hp bars
+      textSize(45);
+      fill(0);
+      image(data.allyUi,860,430);
+      image(data.enemyUi,320,150);
+      
+      if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
+      if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
+      
+      image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562);
+      text(ally.hp + "/ " + ally.stats.get("hp"),1120,545);
+      
+      text(ally.name,920,475);
+      text(enemy.name,348,195);
+      
+      text("Lv"+ally.level,1160,475);
+      text("Lv"+enemy.level,588,195);
+    }
   }
   
   private void addSwitchButtons(){ //adds buttons for switching based on pokemon on team and for when own pokemon dies
