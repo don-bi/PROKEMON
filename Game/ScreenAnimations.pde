@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -123,6 +123,42 @@ public class ScreenAnimations {
         tint(120);
         image(ballType,1050,330);
         noTint();
+      }
+      if (battlestart) {
+        if (frame < 40){
+          frame ++;
+          for (int i = 0; i < 12; i ++){
+            noStroke();
+            fill(0,frame*7);
+            rect(0,i*72,frame*36,36);
+            rect(1440-frame*36,36+i*72,frame*36,36);
+          }
+        } else if (frame < 60) {
+          frame ++;
+          fill(0);
+          rect(0,0,1440,864);
+        } else if (frame < 100) {
+          frame ++;
+          image(data.battleBG,0,0);
+          for (int i = 0; i < 12; i ++) {
+            int framediff = frame-60; //makes up for the animation of previous frames
+            noStroke();
+            fill(0,255-framediff*7);
+            rect(0,i*72,1440-(frame-60)*36,36);
+            rect(framediff*36,36+i*72,1440-framediff*36,36);
+          }
+        } else if (frame < 160) {
+          frame++;
+          int framediff = frame-100;
+          PImage lefthalf = data.battleCircles.get(0,530,1440,334);
+          PImage righthalf = data.battleCircles.get(0,0,1440,530);
+          image(data.battleBG,0,0);
+          image(lefthalf,-1440+framediff*24,530);
+          image(righthalf,1440-framediff*24,0);
+        } else {
+          battlestart = false;
+          inAnimation = false;
+        }
       }
     }
     if (hp) {
@@ -427,5 +463,11 @@ public class ScreenAnimations {
   }
   
   void setNewStatus(Pokemon p){
+  }
+  
+  void startBattle(){
+    frame = 0;
+    battlestart = true;
+    inAnimation = true;
   }
 }
