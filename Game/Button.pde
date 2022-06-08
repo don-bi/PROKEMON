@@ -128,7 +128,9 @@ public class Button{
         }
         
         if (special.equals("pokeball")) {
-          if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+          if (player.bag.pokeballs <= 0){
+            animations.battleComment("You have no more POKé BALLS!","effective2");
+          } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
             animations.throwball(data.pokeball);
             player.bag.pokeballs --;
           } else {
@@ -136,7 +138,9 @@ public class Button{
           }
         }
         if (special.equals("masterball")) {
-          if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
+          if (player.bag.masterballs <= 0){
+            animations.battleComment("You have no more MASTER BALLS!","effective2");
+          } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
             animations.throwball(data.masterball);
             player.bag.masterballs --;
           } else {
