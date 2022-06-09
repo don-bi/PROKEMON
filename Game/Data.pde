@@ -43,6 +43,9 @@ public class Data {
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
+  
+  //effects tags
+  HashMap<String, PImage> effects = new HashMap<String, PImage>(); 
 
   PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   PFont font;
@@ -157,6 +160,8 @@ public class Data {
       //loads in capture rates of pokemon
       loadCaptureRates();
       
+      //loads in effect tags
+      loadEffectTags();
     } catch (IOException e){}
   }
 
@@ -422,6 +427,15 @@ public class Data {
       }
       line = reader.readLine();
     }
+  }
+  
+  private void loadEffectTags() {
+    PImage effectsheet = loadImage("effects.png");
+    effects.put("poison",effectsheet.get(36,576,120,48));
+    effects.put("burn",effectsheet.get(36,624,120,48));
+    effects.put("paralysis",effectsheet.get(228,576,120,48));
+    effects.put("sleep",effectsheet.get(420,576,120,48));
+    effects.put("freeze",effectsheet.get(612,576,120,48));
   }
     
   

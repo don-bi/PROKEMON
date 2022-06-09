@@ -27,7 +27,7 @@ public class Player extends Character {
         }
         if (pixel == 0) {
           leftFoot = !leftFoot;
-          changeDirection(keyboard.getLast());
+          changeDirection();
           if (currentMapTiles.getTile(xpos,ypos).isGrass){
             if ((int)random(100) < 20){
               int randnum = (int)random(649)+1;
@@ -43,18 +43,18 @@ public class Player extends Character {
     }
   }
   
-  void changeDirection(char c) {
-    switch (c) { //makes it so you can move even with caps lock on
-    case 'W':
+  void changeDirection() {
+    switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
+    case "W":
       direction = 'u';
       break;
-    case 'A':
+    case "A":
       direction = 'l';
       break;
-    case 'S':
+    case "S":
       direction = 'd';
       break;
-    case 'D':
+    case  "D":
       direction = 'r';
       break;
     }
