@@ -57,6 +57,7 @@ public class BattleMode{
       ally = player.team.get(parseInt(playerchoice));
       battle.attacker = ally;
       animations.battleComment("You sent out " + battle.ally.name + "!","switchPokemon");
+      animations.switchPoke();
     }
 
   }
@@ -90,7 +91,7 @@ public class BattleMode{
       textSize(40);
       fill(0);
       if (animations.fainter != enemy) image(enemy.sprite,940,400-enemy.sprite.height);
-      if (animations.fainter != ally) image(ally.sprite,130,800-ally.sprite.height);
+      if (animations.fainter != ally && !animations.switchpoke || (animations.switchpoke && animations.allywhiteflash)) image(ally.sprite,130,800-ally.sprite.height);
       fill(0,100);
       rect(0,650,1440,214);
       fill(255);

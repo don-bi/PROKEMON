@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash;
+  boolean allywhiteflash,enemywhiteflash,switchpoke;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -242,11 +242,31 @@ public class ScreenAnimations {
             popMatrix();
           }
           if (frame == 45) {
-            if (allywhiteflash) currentGui = data.fightOptions;
+            if (switchpoke) {
+              effectivenessMessage(1,1);
+              switchpoke = false;
+            } else if (allywhiteflash) { 
+              currentGui = data.fightOptions;
+            }
             allywhiteflash = false;
             enemywhiteflash = false;
             inAnimation = false;
           }
+        }
+      }
+      if (switchpoke && !allywhiteflash) {
+        if (frame < 20) {
+          frame ++;
+          int x = frame*20;
+          int y = round(0.0027896740029879*pow(x,2)+0.8255781633432*x-0.47562977988958); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+          pushMatrix();
+          translate(x+48,y+48);
+          rotate(frame*54);
+          image(battle.ally.pokeball,-48,-48);
+          popMatrix();
+        } else {
+          commenting = false;
+          allywhiteFlash();
         }
       }
     }
@@ -325,10 +345,6 @@ public class ScreenAnimations {
             } else {
               faint(battle.defender);
             }
-          }
-          
-          else if (choice.equals("switchPokemon")) {
-            effectivenessMessage(1,1);
           }
           
           else if (choice.equals("deadPokemon")) {
@@ -706,6 +722,12 @@ public class ScreenAnimations {
   void allywhiteFlash(){
     frame = 0;
     allywhiteflash = true;
+    inAnimation = true;
+  }
+  
+  void switchPoke() {
+    frame = 0;
+    switchpoke = true;
     inAnimation = true;
   }
 }
