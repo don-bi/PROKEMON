@@ -150,11 +150,9 @@ public class ScreenAnimations {
         } else if (frame < 160) {
           frame++;
           int framediff = frame-100;
-          PImage lefthalf = data.battleCircles.get(0,530,1440,334);
-          PImage righthalf = data.battleCircles.get(0,0,1440,530);
           image(data.battleBG,0,0);
-          image(lefthalf,-1440+framediff*24,530);
-          image(righthalf,1440-framediff*24,0);
+          image(data.lefthalf,-1440+framediff*24,530);
+          image(data.righthalf,1440-framediff*24,0);
           if (battle.opponent == null) {
             image(battle.enemy.sprite,2380-framediff*24,400-battle.enemy.sprite.height);
           }

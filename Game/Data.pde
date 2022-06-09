@@ -44,8 +44,7 @@ public class Data {
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
 
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
-  
+  PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   PFont font;
   
   //GUIS AND BUTTONS
@@ -98,6 +97,8 @@ public class Data {
       //Sets images for battlemode
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
+      lefthalf = battleCircles.get(0,530,1440,334);
+      righthalf = battleCircles.get(0,0,1440,530);
       bigChosenPoke = loadImage("bigchosenpoke.png");
       bigPoke = loadImage("bigpoke.png");
       smallChosenPoke = loadImage("smallchosenpoke.png");

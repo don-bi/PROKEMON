@@ -5,6 +5,7 @@ Player player;
 
 Data data;
 ScreenAnimations animations;
+Keyboard keyboard;
 
 String currentMap;
 Map currentMapTiles;
@@ -31,6 +32,7 @@ void setup() {
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
+  keyboard = new Keyboard();
   
   //loads initial hometop map
   currentMap = "Route1";
@@ -69,13 +71,16 @@ void draw() {
     player.showPlayer();
     popMatrix();
     
-    checkWASD();
   } else {
     battle.display();
   }
   if (currentGui != null) currentGui.display();
   animations.animate();
   
+  if (keyboard.WASD.size() > 0 && !player.inWalkAnimation) {
+    player.changeDirection(keyboard.getLast());
+    player.move();
+  }
   //println(currentMap);
   //currentMapTiles.getTile(player.xpos,player.ypos).printData();
   //println("(" + player.xpos + ", " + player.ypos + ")");
@@ -84,29 +89,6 @@ void draw() {
 void mouseClicked(){
   if (currentGui != null) currentGui.processButtons();
 }
-
-void checkWASD(){
-  if (keyPressed){
-    switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
-    case "W": 
-    case "A": 
-    case "S": 
-    case "D":
-      if (!player.inWalkAnimation) {
-        player.changeDirection();
-        //if (player.delay == 0 ){
-        //  player.move();
-        //} else {
-        //  player.delay ++;
-        //  if (player.delay == 1) player.delay = 0;
-        //}
-        player.move();
-      }
-    }
-  }
-}
-  
-
 
 String getSubDir(String sub, String file){
   return dataPath(sub)+'/'+file;
