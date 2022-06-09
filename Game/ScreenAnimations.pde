@@ -232,10 +232,6 @@ public class ScreenAnimations {
             effectivenessMessage(effectiveness,1);
           }
           
-          else if (choice.equals("alreadystatus1")) {
-            effectivenessMessage(effectiveness,1);
-          }
-          
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
               if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
@@ -280,9 +276,6 @@ public class ScreenAnimations {
             effectivenessMessage(effectiveness,2);
           }
           
-          else if (choice.equals("alreadystatus2")) {
-            effectivenessMessage(effectiveness,2);
-          }
           
           else if (choice.equals("effective2")) {
             if (battle != null && battle.checkAttackerAlive()) {
@@ -508,12 +501,16 @@ public class ScreenAnimations {
             battleComment(p.name + " is fast asleep!","skip"+whichpoke);
           } else { //fails the 50 50
             battleComment(p.name + " woke up!","thaw"+whichpoke);
+            p.nonvolStatus = "none";
+            p.nonvolTurns = 0;
           }
         } else { //first turn always asleep
           battleComment(p.name + " is fast asleep!","skip"+whichpoke);
         }
       } else { //3rd turn always wake up
         battleComment(p.name + " woke up!","thaw"+whichpoke);
+        p.nonvolStatus = "none";
+        p.nonvolTurns = 0;
       }
       return true;
     }
@@ -558,9 +555,19 @@ public class ScreenAnimations {
         }
         
         if (!(newstatus == null) && (int)random(100) < usedmove.effectChance) { //applies status based on effectchance of the move
-          attacked.nonvolStatus = newstatus;
-          print(attacked.nonvolStatus);
-          battleComment(attacked.name + " " + statuscomment,"status"+attack);
+          boolean noeffect = false; //pokemon of certain types don't get affected by certain status effect so this checks for it
+          if (newstatus.equals("paralysis") && attacked.type1.equals("electric") && attacked.type2.equals("electric")) noeffect = true;
+          if (newstatus.equals("burn") && attacked.type1.equals("fire") && attacked.type2.equals("fire")) noeffect = true;
+          if (newstatus.equals("freeze") && attacked.type1.equals("ice") && attacked.type2.equals("ice")) noeffect = true;
+          if (newstatus.equals("poison") && attacked.type1.equals("poison") && attacked.type2.equals("poison")) noeffect = true;
+          
+          if (noeffect) {
+            battleComment("It had no effect..."."status"+attack);
+          } else {
+            attacked.nonvolStatus = newstatus;
+            print(attacked.nonvolStatus);
+            battleComment(attacked.name + " " + statuscomment,"status"+attack);
+          }
         } else {
           effectivenessMessage(effectiveness,attack);
         }
@@ -581,7 +588,7 @@ public class ScreenAnimations {
           if (c2.equals("")) { //only works when the move being used applies another status condition
             effectivenessMessage(effectiveness,attack);
           } else {
-            battleComment(attacked.name + " is already" + c1 + "they cannot" + c2 + "!","alreadystatus" + attack);
+            battleComment(attacked.name + " is already" + c1 + "they cannot" + c2 + "!","status" + attack);
           }
         } else {
           effectivenessMessage(effectiveness,attack);

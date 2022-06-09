@@ -259,7 +259,7 @@ id,name,type,power,pp,accuracy,priority,target_id,damage_class,effect_id,effect_
 258,hail,ice,-1,10,100,0,12,status,165,100
 259,torment,dark,-1,15,100,0,10,status,166,100
 260,flatter,dark,-1,15,100,0,10,status,167,100
-261,will-o-wisp,fire,-1,15,85,0,10,status,168,100
+261,will-o-wisp,fire,-1,15,85,0,10,status,5,100
 262,memento,dark,-1,10,100,0,10,status,169,100
 263,facade,normal,70,20,100,0,10,physical,170,100
 264,focus-punch,fighting,150,20,100,-3,10,physical,171,100
