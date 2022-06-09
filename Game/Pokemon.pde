@@ -72,7 +72,7 @@ public class Pokemon{
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
-        if (!(randmove.damageClass.equals("status") && checkMoveEffects(randmove) == 0)) { //if the effect is not implemented, then it won't be added as a move
+        if (!(randmove.damageClass.equals("status") && checkMoveEffects(randmove))) { //if the effect is not implemented, then it won't be added as a move
           moves[i] = randmove;
         } else {
           i --;
@@ -146,8 +146,12 @@ public class Pokemon{
     return new float[]{((((2*level)/5.0 + 2) * currentMove.power * A/(1.0*D))/50.0 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
-  private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
-    return 0;
+  private boolean checkMoveEffects(Move move){ //Checks if implemented the move's effects
+    switch (move.effect) {
+      case 44: case 7: case 6: case 5:  case 3: case 2:
+      return true;
+    }
+    return false;
   }
   
   float attack(Pokemon other){

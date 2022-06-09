@@ -491,17 +491,33 @@ public class ScreenAnimations {
       if ((int)random(100) < 20) { //random chance of thawing out
         battleComment(p.name + " has thawed out!","thaw"+whichpoke);
         p.nonvolStatus = "none";
-        return true;
       } else { //random chance of not moving
         battleComment(p.name + " is frozen solid! It can't move!","skip"+whichpoke);
-        return true;
       }
+      return true;
     } else if (status.equals("paralysis")) {
       if ((int)random(100) < 25) { //random chance of not moving
         battleComment(p.name + " is paralyzed! It can't move!","skip"+whichpoke);
         return true;
       }
+    } else if (status.equals("sleep")) {
+      p.nonvolTurns ++;
+      if (p.nonvolTurns < 3) { //first turn is always asleep, second turn 50% to wake up, third turn always wakes up
+        if (p.nonvolTurns == 2) {
+          if ((int)random(100) < 50) { //calculates 50 chance to wake up 2nd turn
+            battleComment(p.name + " is fast asleep!","skip"+whichpoke);
+          } else { //fails the 50 50
+            battleComment(p.name + " woke up!","thaw"+whichpoke);
+          }
+        } else { //first turn always asleep
+          battleComment(p.name + " is fast asleep!","skip"+whichpoke);
+        }
+      } else { //3rd turn always wake up
+        battleComment(p.name + " woke up!","thaw"+whichpoke);
+      }
+      return true;
     }
+        
     return false;
   }
   
@@ -514,6 +530,7 @@ public class ScreenAnimations {
     }
     Move usedmove = attacker.currentMove;
     if (usedmove.effect != 1) {
+      println("HIII");
       if (usedmove.damageClass.equals("status")) effectiveness = 1; //if it's a status move, there will be no effectiveness message 
       if (attacked.nonvolStatus.equals("none")) { //checks for applying nonvolatile statuses
         
@@ -545,26 +562,30 @@ public class ScreenAnimations {
           print(attacked.nonvolStatus);
           battleComment(attacked.name + " " + statuscomment,"status"+attack);
         } else {
-          if ((int)random(100) < usedmove.effectChance) {
-            String c1 = "";
-            String c2 = "";
-            if (attacked.nonvolStatus.equals("paralysis")) c1 = " paralyzed ";
-            if (attacked.nonvolStatus.equals("freeze")) c1 = " frozen ";
-            if (attacked.nonvolStatus.equals("burn")) c1 = " burned ";
-            if (attacked.nonvolStatus.equals("poison")) c1 = " poisoned ";
-            if (attacked.nonvolStatus.equals("sleep")) c1 = " asleep ";
-            if (usedmove.effect == 7) c2 = " bcame paralyzed";
-            if (usedmove.effect == 6) c2 = " become frozen";
-            if (usedmove.effect == 5) c2 = " become burned";
-            if (usedmove.effect == 3) c2 = " become poisoned";
-            if (usedmove.effect == 2) c2 = " fall asleep";
-            battleComment(attacked.name + " is already" + c1 + "they cannot" + c2 + "!","alreadystatus" + attack);
-          } else {
-            effectivenessMessage(effectiveness,attack);
-          }
+          effectivenessMessage(effectiveness,attack);
         }
-      } else {
-        effectivenessMessage(effectiveness,attack);
+      } else { //IF there is already a status effect, then it makes a comment that the pokemon already has that status and it can't gain a new one
+        if (usedmove.effectChance == 100) { //only works at 100% chance or else that's weird that ice punch will say it sometimes at 10% and not
+          String c1 = "";
+          String c2 = "";
+          if (attacked.nonvolStatus.equals("paralysis")) c1 = " paralyzed ";
+          if (attacked.nonvolStatus.equals("freeze")) c1 = " frozen ";
+          if (attacked.nonvolStatus.equals("burn")) c1 = " burned ";
+          if (attacked.nonvolStatus.equals("poison")) c1 = " poisoned ";
+          if (attacked.nonvolStatus.equals("sleep")) c1 = " asleep ";
+          if (usedmove.effect == 7) c2 = " bcame paralyzed";
+          if (usedmove.effect == 6) c2 = " become frozen";
+          if (usedmove.effect == 5) c2 = " become burned";
+          if (usedmove.effect == 3) c2 = " become poisoned";
+          if (usedmove.effect == 2) c2 = " fall asleep";
+          if (c2.equals("")) { //only works when the move being used applies another status condition
+            effectivenessMessage(effectiveness,attack);
+          } else {
+            battleComment(attacked.name + " is already" + c1 + "they cannot" + c2 + "!","alreadystatus" + attack);
+          }
+        } else {
+          effectivenessMessage(effectiveness,attack);
+        }
       }
     } else {
       effectivenessMessage(effectiveness,attack);
