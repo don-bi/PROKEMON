@@ -94,11 +94,6 @@ public class BattleMode{
       fill(0,100);
       rect(0,650,1440,214);
       fill(255);
-      textSize(30);
-      textFont(data.font);
-      
-      textSize(45);
-      fill(0);
       
       //Displays the uis
       image(data.allyUi,860,430);
@@ -111,7 +106,8 @@ public class BattleMode{
       //Displays hp bars
       if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
       if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
-
+      
+      fill(0);
       //displays the exp and hp in numbers
       image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562);
       text(ally.hp + "/ " + ally.stats.get("hp"),1120,545);

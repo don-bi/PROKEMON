@@ -215,23 +215,37 @@ public class ScreenAnimations {
           rotate(frame*40);
           image(battle.ally.pokeball,-48,-48);
           popMatrix();
-        } else if (frame < 121) {
+        } else if (frame <= 141) { //screen flashing white when ally pokemon is sent out
           frame ++;
           framediff = frame - 96;
-          fill(0,framediff*5);
+          fill(255,255-framediff*5);
           rect(0,0,1440,864);
-          tint(105,191,235,framediff*5);
           image(battle.ally.sprite,130,800-battle.ally.sprite.height);
-          noTint();
           image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
           image(data.enemyUi,320,150);
           image(data.miniHpBar,476,218);
+          fill(0);
           text(battle.enemy.name,348,195);
           text("Lv"+battle.enemy.level,588,195);
-        } else {
-          allythrow = false;
-          inAnimation = false;
-          currentGui = data.fightOptions;
+          if (frame > 110) { //ally pokemon ui moving in
+            framediff = frame-110;
+            pushMatrix();
+            translate(1440-round(framediff*13.7),0);
+            image(data.allyUi,860,430);
+            image(data.effects.get(battle.ally.nonvolStatus),914,490);
+            image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
+            fill(0);
+            image(data.expBar.get(0,0,battle.ally.exp*256/battle.ally.neededExp,8),984,562);
+            text(battle.ally.hp + "/ " + battle.ally.stats.get("hp"),1120,545);
+            text(battle.ally.name,920,475);
+            text("Lv"+battle.ally.level,1160,475);
+            popMatrix();
+          }
+          if (frame == 141) {
+            allythrow = false;
+            inAnimation = false;
+            currentGui = data.fightOptions;
+          }
         }
       }
     }

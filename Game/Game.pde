@@ -21,7 +21,6 @@ after map data, add warp data
 */
 
 void setup() {
-  PFont.list();
   frameRate(60);
   background(0);
   textSize(100);
@@ -42,7 +41,7 @@ void setup() {
     println("bad file");
   }
   //-------------------------
-
+  textFont(data.font);
   currentGui = data.homeScreen;
   size(1440, 864);
   player = new Player();
