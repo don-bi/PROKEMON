@@ -48,7 +48,7 @@ public class Data {
   HashMap<String, PImage> effects = new HashMap<String, PImage>(); 
 
   PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
-  PImage player1,player2,player3;
+  PImage player1,player2,player3,player4;
   PFont font;
   
   //GUIS AND BUTTONS
@@ -99,6 +99,7 @@ public class Data {
       loadPlayerSprites();
   
       //Sets images for battlemode
+      PImage playerSprites = loadImage("player.png");
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
       lefthalf = battleCircles.get(0,530,1440,334);
@@ -115,6 +116,10 @@ public class Data {
       PImage pokeballSet = loadImage("pokeballs.png"); //The pokeball set for being thrown when capturing
       pokeball = pokeballSet.get(192,0,96,96);
       masterball = pokeballSet.get(576,0,96,96);
+      player1 = playerSprites.get(839,1056,288,312);
+      player2 = playerSprites.get(1139,1062,384,306);
+      player3 = playerSprites.get(1529,1068,228,300);
+      player4 = playerSprites.get(1811,1074,384,294);
       
       //loads the font
       font = createFont("font.ttf",72);

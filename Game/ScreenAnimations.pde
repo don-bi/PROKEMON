@@ -153,6 +153,7 @@ public class ScreenAnimations {
           int framediff = frame-140;
           image(data.battleBG,0,0);
           image(data.lefthalf,-1440+framediff*24,530);
+          image(data.player1,-1303+framediff*24,552);
           image(data.righthalf,1440-framediff*24,0);
           if (battle.opponent == null) {
             image(battle.enemy.sprite,2380-framediff*24,400-battle.enemy.sprite.height);
@@ -162,6 +163,7 @@ public class ScreenAnimations {
             image(data.battleBG,0,0);
             image(data.battleCircles,0,0);
             image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
+            image(data.player1,137,552);
             frame++;
             int framediff = frame-200;
             pushMatrix();
@@ -175,9 +177,40 @@ public class ScreenAnimations {
             popMatrix();
           }
         } else {
-          currentGui = data.fightOptions;
           battlestart = false;
           inAnimation = false;
+          allyThrow();
+        }
+      }
+      if (allythrow){
+        image(data.battleBG,0,0);
+        image(data.battleCircles,0,0);
+        image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
+        image(data.enemyUi,320,150);
+        image(data.miniHpBar,476,218);
+        text(battle.enemy.name,348,195);
+        text("Lv"+battle.enemy.level,588,195);
+        int framediff = frame - 19;
+        if (frame < 20) {
+          frame ++;
+          PImage guy = data.player1;
+          image(guy,425-guy.width,864-guy.height);
+        } else if (frame < 40) {
+          frame ++;
+          PImage guy = data.player2;
+          image(guy,425-guy.width-framediff*6,864-guy.height);
+        } else if (frame < 60) {
+          frame ++;
+          PImage guy = data.player3;
+          image(guy,425-guy.width-framediff*6,864-guy.height);
+        } else if (frame < 80) {
+          frame ++;
+          PImage guy = data.player4;
+          image(guy,425-guy.width-framediff*6,864-guy.height);
+        } else {
+          allythrow = false;
+          inAnimation = false;
+          currentGui = data.fightOptions;
         }
       }
     }
