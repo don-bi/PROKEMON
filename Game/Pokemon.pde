@@ -153,13 +153,10 @@ public class Pokemon{
   float attack(Pokemon other){
     int damage = 0;
     float effectiveness = -1;
-    if (!currentMove.damageClass.equals("status")){
-      float[] holder = calcDamage(other);
-      damage = (int)holder[0];
-      effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
-    } else {
-      damage = checkMoveEffects(currentMove);
-    }
+    float[] holder = calcDamage(other);
+    damage = (int)holder[0];
+    effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
+    if (currentMove.damageClass.equals("status")) damage = 0;
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
     println(name + ' ' + currentMove + ' ' + damage + ' ' + currentMove.effect);
@@ -172,7 +169,6 @@ public class Pokemon{
     int b = data.expGain.get(other.name).get("exp"); //base exp of the enemy pokemon
     println(b);
     float e = 1;
-    float f = 1;
     float L = other.level;
     println(L);
     float Lp = level;
@@ -180,8 +176,7 @@ public class Pokemon{
     float p  = 1;
     float s = 1;
     float t = 1;
-    float v = 1;
-    return (int)(((b*L*f*v)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5))*t*e*p);
+    return (int)(((a*b*L)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5)+1)*t*e*p);
   }
     
   void recalcStats(){

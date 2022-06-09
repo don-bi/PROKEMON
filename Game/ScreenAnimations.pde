@@ -229,7 +229,11 @@ public class ScreenAnimations {
           } 
           
           else if (choice.equals("status1")) {
-            effectivenessMessage(1,1);
+            effectivenessMessage(effectiveness,1);
+          }
+          
+          else if (choice.equals("alreadystatus1")) {
+            effectivenessMessage(effectiveness,1);
           }
           
           else if (choice.equals("effective1")) {
@@ -273,6 +277,10 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("status2")) {
+            effectivenessMessage(effectiveness,2);
+          }
+          
+          else if (choice.equals("alreadystatus2")) {
             effectivenessMessage(effectiveness,2);
           }
           
@@ -506,7 +514,8 @@ public class ScreenAnimations {
     }
     Move usedmove = attacker.currentMove;
     if (usedmove.effect != 1) {
-      if (attacked.nonvolStatus.equals("none")) {
+      if (usedmove.damageClass.equals("status")) effectiveness = 1; //if it's a status move, there will be no effectiveness message 
+      if (attacked.nonvolStatus.equals("none")) { //checks for applying nonvolatile statuses
         
         String statuscomment = "";
         String newstatus = null;
@@ -526,13 +535,33 @@ public class ScreenAnimations {
           statuscomment = "became poisoned!";
           newstatus = "poison";
         }
+        else if (usedmove.effect == 2) {
+          statuscomment = "fell asleep!";
+          newstatus = "sleep";
+        }
         
-        if (!(newstatus == null) && (int)random(100) < usedmove.effectChance) {
+        if (!(newstatus == null) && (int)random(100) < usedmove.effectChance) { //applies status based on effectchance of the move
           attacked.nonvolStatus = newstatus;
           print(attacked.nonvolStatus);
           battleComment(attacked.name + " " + statuscomment,"status"+attack);
         } else {
-          effectivenessMessage(effectiveness,attack);
+          if ((int)random(100) < usedmove.effectChance) {
+            String c1 = "";
+            String c2 = "";
+            if (attacked.nonvolStatus.equals("paralysis")) c1 = " paralyzed ";
+            if (attacked.nonvolStatus.equals("freeze")) c1 = " frozen ";
+            if (attacked.nonvolStatus.equals("burn")) c1 = " burned ";
+            if (attacked.nonvolStatus.equals("poison")) c1 = " poisoned ";
+            if (attacked.nonvolStatus.equals("sleep")) c1 = " asleep ";
+            if (usedmove.effect == 7) c2 = " bcame paralyzed";
+            if (usedmove.effect == 6) c2 = " become frozen";
+            if (usedmove.effect == 5) c2 = " become burned";
+            if (usedmove.effect == 3) c2 = " become poisoned";
+            if (usedmove.effect == 2) c2 = " fall asleep";
+            battleComment(attacked.name + " is already" + c1 + "they cannot" + c2 + "!","alreadystatus" + attack);
+          } else {
+            effectivenessMessage(effectiveness,attack);
+          }
         }
       } else {
         effectivenessMessage(effectiveness,attack);
