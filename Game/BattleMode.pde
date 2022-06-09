@@ -103,6 +103,10 @@ public class BattleMode{
       image(data.allyUi,860,430);
       image(data.enemyUi,320,150);
       
+      //displays effect tags
+      if (ally.nonvolStatus != null) image(data.effects.get(ally.nonvolStatus),54,60);
+      if (enemy.nonvolStatus != null) image(data.effects.get(enemy.nonvolStatus),22,60);
+      
       if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
       if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
       

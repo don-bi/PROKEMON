@@ -431,11 +431,11 @@ public class Data {
   
   private void loadEffectTags() {
     PImage effectsheet = loadImage("effects.png");
-    effects.put("poison",effectsheet.get(36,576,120,48));
-    effects.put("burn",effectsheet.get(36,624,120,48));
-    effects.put("paralysis",effectsheet.get(228,576,120,48));
-    effects.put("sleep",effectsheet.get(420,576,120,48));
-    effects.put("freeze",effectsheet.get(612,576,120,48));
+    effects.put("poison",effectsheet.get(18,288,60,24));
+    effects.put("burn",effectsheet.get(18,312,60,24));
+    effects.put("paralysis",effectsheet.get(114,288,60,24));
+    effects.put("sleep",effectsheet.get(210,288,60,24));
+    effects.put("freeze",effectsheet.get(306,288,60,24));
   }
     
   
