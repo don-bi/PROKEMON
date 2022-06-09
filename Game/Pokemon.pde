@@ -72,7 +72,7 @@ public class Pokemon{
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
-        if (!(randmove.damageClass.equals("status") && checkMoveEffects(randmove))) { //if the effect is not implemented, then it won't be added as a move
+        if (!randmove.damageClass.equals("status") || checkMoveEffects(randmove)) { //if the effect is not implemented, then it won't be added as a move
           moves[i] = randmove;
         } else {
           i --;

@@ -28,7 +28,7 @@ public class Player extends Character {
         if (pixel == 0) {
           leftFoot = !leftFoot;
           changeDirection();
-          if (currentMapTiles.getTile(xpos,ypos).isGrass){
+          if (currentMapTiles.getTile(xpos,ypos).isGrass){ //20% chance to encounter random pokemon when on grass
             if ((int)random(100) < 20){
               int randnum = (int)random(649)+1;
               println(""+randnum);

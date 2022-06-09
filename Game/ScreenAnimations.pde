@@ -1,5 +1,5 @@
 public class ScreenAnimations {
-  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart;
+  boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -125,7 +125,7 @@ public class ScreenAnimations {
         noTint();
       }
       if (battlestart) {
-        if (frame < 40){
+        if (frame < 40){ //initial fade
           frame ++;
           for (int i = 0; i < 12; i ++){
             noStroke();
@@ -133,28 +133,46 @@ public class ScreenAnimations {
             rect(0,i*72,frame*36,36);
             rect(1440-frame*36,36+i*72,frame*36,36);
           }
-        } else if (frame < 60) {
+        } else if (frame < 60) { //delays for 20 frames to look better
           frame ++;
           fill(0);
           rect(0,0,1440,864);
-        } else if (frame < 100) {
+        } else if (frame < 140) { //fade into the battle screen
           frame ++;
+          int framediff = frame-60;
           image(data.battleBG,0,0);
           for (int i = 0; i < 12; i ++) {
-            int framediff = frame-60; //makes up for the animation of previous frames
+            //makes up for the animation of previous frames
             noStroke();
-            fill(0,255-framediff*7);
-            rect(0,i*72,1440-(frame-60)*36,36);
-            rect(framediff*36,36+i*72,1440-framediff*36,36);
+            fill(0,255-framediff*3);
+            rect(0,i*72,1440-(frame-60)*18,36);
+            rect(framediff*18,36+i*72,1440-framediff*18,36);
           }
-        } else if (frame < 160) {
+        } else if (frame < 200) { //battle circles and enemy sprite if it's a wild pokemon moves in
           frame++;
-          int framediff = frame-100;
+          int framediff = frame-140;
           image(data.battleBG,0,0);
           image(data.lefthalf,-1440+framediff*24,530);
           image(data.righthalf,1440-framediff*24,0);
           if (battle.opponent == null) {
             image(battle.enemy.sprite,2380-framediff*24,400-battle.enemy.sprite.height);
+          }
+        } else if (frame < 230) { //enemy ui moves in if it's a wild pokemon
+          if (battle.opponent == null) {
+            image(data.battleBG,0,0);
+            image(data.battleCircles,0,0);
+            image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
+            frame++;
+            int framediff = frame-200;
+            pushMatrix();
+            textSize(40);
+            fill(0);
+            translate(-720+framediff*24,0);
+            image(data.enemyUi,320,150);
+            image(data.miniHpBar,476,218);
+            text(battle.enemy.name,348,195);
+            text("Lv"+battle.enemy.level,588,195);
+            popMatrix();
           }
         } else {
           currentGui = data.fightOptions;
@@ -221,7 +239,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("thaw1")) {
-            animations.battleComment(battle.attacker.name + " used " + battle.attacker.currentMove + "!","fight");
+            battleComment(battle.attacker.name + " used " + battle.attacker.currentMove + "!","fight");
           }
           
           else if (choice.equals("fight")) {
@@ -527,7 +545,6 @@ public class ScreenAnimations {
     }
     Move usedmove = attacker.currentMove;
     if (usedmove.effect != 1) {
-      println("HIII");
       if (usedmove.damageClass.equals("status")) effectiveness = 1; //if it's a status move, there will be no effectiveness message 
       if (attacked.nonvolStatus.equals("none")) { //checks for applying nonvolatile statuses
         
@@ -556,13 +573,17 @@ public class ScreenAnimations {
         
         if (!(newstatus == null) && (int)random(100) < usedmove.effectChance) { //applies status based on effectchance of the move
           boolean noeffect = false; //pokemon of certain types don't get affected by certain status effect so this checks for it
-          if (newstatus.equals("paralysis") && attacked.type1.equals("electric") && attacked.type2.equals("electric")) noeffect = true;
-          if (newstatus.equals("burn") && attacked.type1.equals("fire") && attacked.type2.equals("fire")) noeffect = true;
-          if (newstatus.equals("freeze") && attacked.type1.equals("ice") && attacked.type2.equals("ice")) noeffect = true;
-          if (newstatus.equals("poison") && attacked.type1.equals("poison") && attacked.type2.equals("poison")) noeffect = true;
+          if (newstatus.equals("paralysis") && (attacked.type1.equals("electric") || attacked.type2.equals("electric"))) noeffect = true;
+          if (newstatus.equals("burn") && (attacked.type1.equals("fire") || attacked.type2.equals("fire"))) noeffect = true;
+          if (newstatus.equals("freeze") && (attacked.type1.equals("ice") || attacked.type2.equals("ice"))) noeffect = true;
+          if (newstatus.equals("poison") && (attacked.type1.equals("poison") || attacked.type2.equals("poison"))) noeffect = true;
           
           if (noeffect) {
-            battleComment("It had no effect..."."status"+attack);
+            if (usedmove.effectChance == 100) {
+              battleComment("It had no effect...","status"+attack);
+            } else {
+              battleComment("","status"+attack);
+            }
           } else {
             attacked.nonvolStatus = newstatus;
             print(attacked.nonvolStatus);
@@ -604,5 +625,11 @@ public class ScreenAnimations {
     battlestart = true;
     inAnimation = true;
     currentGui = null;
+  }
+  
+  void allyThrow(){
+    frame = 0;
+    allythrow = true;
+    inAnimation = true;
   }
 }

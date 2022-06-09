@@ -48,6 +48,7 @@ public class Data {
   HashMap<String, PImage> effects = new HashMap<String, PImage>(); 
 
   PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
+  PImage player1,player2,player3;
   PFont font;
   
   //GUIS AND BUTTONS
