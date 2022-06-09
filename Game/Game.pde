@@ -50,8 +50,8 @@ void setup() {
   
   //TESTING BATTLEMODE
   Pokemon poke2 = new Pokemon("Lucario", 32, true);
-  poke2.moves[0] = new Move("58");
-  poke2.nonvolStatus = "freeze";
+  poke2.moves[0] = new Move("395");
+  poke2.stats.put("spatk",0);
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Torterra", 34, true);
   player.team.add(poke3);

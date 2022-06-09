@@ -220,6 +220,10 @@ public class ScreenAnimations {
             effectivenessMessage(1,1);
           }
           
+          else if (choice.equals("thaw1")) {
+            animations.battleComment(battle.attacker.name + " used " + battle.attacker.currentMove + "!","fight");
+          }
+          
           else if (choice.equals("fight")) {
             if (!transition) hpBar(battle.attacker, battle.defender);
           } 
@@ -254,6 +258,14 @@ public class ScreenAnimations {
           
           else if (choice.equals("skip2")) {
             effectivenessMessage(1,2);
+          }
+          
+          else if (choice.equals("thaw2")) {
+            if (battle.checkDefenderAlive()) {
+              battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+            } else {
+              faint(battle.defender);
+            }
           }
           
           else if (choice.equals("secondAttack")) {
@@ -470,6 +482,8 @@ public class ScreenAnimations {
     if (status.equals("freeze")) {
       if ((int)random(100) < 20) { //random chance of thawing out
         battleComment(p.name + " has thawed out!","thaw"+whichpoke);
+        p.nonvolStatus = "none";
+        return true;
       } else { //random chance of not moving
         battleComment(p.name + " is frozen solid! It can't move!","skip"+whichpoke);
         return true;
@@ -492,13 +506,13 @@ public class ScreenAnimations {
     }
     Move usedmove = attacker.currentMove;
     if (usedmove.effect != 1) {
-      if (attacked.nonvolStatus != null) {
+      if (attacked.nonvolStatus.equals("none")) {
         
         String statuscomment = "";
         String newstatus = null;
         if (usedmove.effect == 7) {
           statuscomment = "became paralyzed!";
-          newstatus = "paralyze";
+          newstatus = "paralysis";
         }
         else if (usedmove.effect == 6) {
           statuscomment = "became frozen!";
@@ -513,12 +527,15 @@ public class ScreenAnimations {
           newstatus = "poison";
         }
         
-        if ((int)random(100) < usedmove.effectChance) {
+        if (!(newstatus == null) && (int)random(100) < usedmove.effectChance) {
           attacked.nonvolStatus = newstatus;
+          print(attacked.nonvolStatus);
           battleComment(attacked.name + " " + statuscomment,"status"+attack);
         } else {
           effectivenessMessage(effectiveness,attack);
         }
+      } else {
+        effectivenessMessage(effectiveness,attack);
       }
     } else {
       effectivenessMessage(effectiveness,attack);
