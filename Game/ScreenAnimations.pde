@@ -176,7 +176,7 @@ public class ScreenAnimations {
             text("Lv"+battle.enemy.level,588,195);
             popMatrix();
           }
-        } else {
+        }  else {
           battlestart = false;
           inAnimation = false;
           allyThrow();
@@ -203,10 +203,31 @@ public class ScreenAnimations {
           frame ++;
           PImage guy = data.player3;
           image(guy,425-guy.width-framediff*6,864-guy.height);
-        } else if (frame < 80) {
+        } else if (frame < 96) {
           frame ++;
           PImage guy = data.player4;
           image(guy,425-guy.width-framediff*6,864-guy.height);
+          framediff = frame-60;
+          int x = 40 + framediff*10;
+          int y = round(0.004991958693076*pow(x,2)-1.7730700863382*x+114.93566954461)+570; //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+          pushMatrix();
+          translate(x+48,y+48);
+          rotate(frame*40);
+          image(battle.ally.pokeball,-48,-48);
+          popMatrix();
+        } else if (frame < 121) {
+          frame ++;
+          framediff = frame - 96;
+          fill(0,framediff*5);
+          rect(0,0,1440,864);
+          tint(105,191,235,framediff*5);
+          image(battle.ally.sprite,130,800-battle.ally.sprite.height);
+          noTint();
+          image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
+          image(data.enemyUi,320,150);
+          image(data.miniHpBar,476,218);
+          text(battle.enemy.name,348,195);
+          text("Lv"+battle.enemy.level,588,195);
         } else {
           allythrow = false;
           inAnimation = false;
@@ -353,6 +374,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("capture")) {
+            battle.enemy.pokeball = ballType;
             player.capturePoke(battle.enemy);
             expBar();
           }

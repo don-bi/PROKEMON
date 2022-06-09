@@ -1,5 +1,6 @@
 public class Pokemon{
   String nickname,name;
+  PImage pokeball;
   String nature;
   HashMap<String, Integer> stats,IVs,EVs;
   int level,hp,exp,neededExp;
@@ -15,6 +16,7 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
+    pokeball = data.pokeball;
     nature = data.natures[(int)random(data.natures.length)]; 
     stats = new HashMap<String,Integer>(); //initializes stat data structures
     IVs = new HashMap<String,Integer>();
