@@ -1,5 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
+  boolean allywhiteflash,enemywhiteflash;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -215,24 +216,23 @@ public class ScreenAnimations {
           rotate(frame*40);
           image(battle.ally.pokeball,-48,-48);
           popMatrix();
-        } else if (frame <= 141) { //screen flashing white when ally pokemon is sent out
+        } else {
+          allythrow = false;
+          inAnimation = false;
+          allywhiteFlash();
+        }
+      }
+      if (allywhiteflash || enemywhiteflash) {
+        if (frame <= 45) { //screen flashing white when ally pokemon is sent out
           frame ++;
-          framediff = frame - 96;
-          fill(255,255-framediff*5);
+          fill(255,255-frame*5);
           rect(0,0,1440,864);
-          image(battle.ally.sprite,130,800-battle.ally.sprite.height);
-          image(battle.enemy.sprite,940,400-battle.enemy.sprite.height);
-          image(data.enemyUi,320,150);
-          image(data.miniHpBar,476,218);
-          fill(0);
-          text(battle.enemy.name,348,195);
-          text("Lv"+battle.enemy.level,588,195);
-          if (frame > 110) { //ally pokemon ui moving in
-            framediff = frame-110;
+          if (allywhiteflash && frame > 30) { //ally pokemon ui moving in
             pushMatrix();
-            translate(1440-round(framediff*13.7),0);
+            int framediff = frame - 15;
+            translate(580-round(framediff*19.3),0);
             image(data.allyUi,860,430);
-            image(data.effects.get(battle.ally.nonvolStatus),914,490);
+            if (!battle.ally.nonvolStatus.equals("none")) image(data.effects.get(battle.ally.nonvolStatus),914,490);
             image(data.miniHpBar.get(0,0,battle.ally.hp*192/battle.ally.stats.get("hp"),8),1048,498);
             fill(0);
             image(data.expBar.get(0,0,battle.ally.exp*256/battle.ally.neededExp,8),984,562);
@@ -241,10 +241,11 @@ public class ScreenAnimations {
             text("Lv"+battle.ally.level,1160,475);
             popMatrix();
           }
-          if (frame == 141) {
-            allythrow = false;
+          if (frame == 45) {
+            if (allywhiteflash) currentGui = data.fightOptions;
+            allywhiteflash = false;
+            enemywhiteflash = false;
             inAnimation = false;
-            currentGui = data.fightOptions;
           }
         }
       }
@@ -699,6 +700,12 @@ public class ScreenAnimations {
   void allyThrow(){
     frame = 0;
     allythrow = true;
+    inAnimation = true;
+  }
+  
+  void allywhiteFlash(){
+    frame = 0;
+    allywhiteflash = true;
     inAnimation = true;
   }
 }

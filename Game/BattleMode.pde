@@ -95,28 +95,25 @@ public class BattleMode{
       rect(0,650,1440,214);
       fill(255);
       
-      //Displays the uis
-      image(data.allyUi,860,430);
-      image(data.enemyUi,320,150);
-      
-      //displays effect tags
-      if (!ally.nonvolStatus.equals("none")) image(data.effects.get(ally.nonvolStatus),914,490);
-      if (!enemy.nonvolStatus.equals("none")) image(data.effects.get(enemy.nonvolStatus),342,210);
-      
-      //Displays hp bars
-      if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498);
-      if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218);
-      
       fill(0);
-      //displays the exp and hp in numbers
-      image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562);
-      text(ally.hp + "/ " + ally.stats.get("hp"),1120,545);
+      //displays ally stuff
+      if (!animations.allywhiteflash) {
+        image(data.allyUi,860,430); //ui
+        image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562); //expbar
+        text(ally.hp + "/ " + ally.stats.get("hp"),1120,545); //hp value out of max
+        text(ally.name,920,475); //name
+        text("Lv"+ally.level,1160,475); //level
+        if (!ally.nonvolStatus.equals("none")) image(data.effects.get(ally.nonvolStatus),914,490); //effect tag
+        if (animations.hplowerer != ally) image(data.miniHpBar.get(0,0,ally.hp*192/ally.stats.get("hp"),8),1048,498); //hpbar
+      }
       
-      text(ally.name,920,475);
-      text(enemy.name,348,195);
+      //displays enemy stuff
+      image(data.enemyUi,320,150); //ui
+      text("Lv"+enemy.level,588,195); //level
+      text(enemy.name,348,195); //name
+      if (!enemy.nonvolStatus.equals("none")) image(data.effects.get(enemy.nonvolStatus),342,210); //effect tag
+      if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218); //hpbar
       
-      text("Lv"+ally.level,1160,475);
-      text("Lv"+enemy.level,588,195);
     }
   }
   
