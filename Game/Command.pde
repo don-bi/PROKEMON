@@ -9,19 +9,25 @@ public class Command {
   
   void open(){
     commandmode = true;
-    inAnimation = true;
+    animations.inAnimation = true;
+  }
+  
+  void execute(){
+    commandmode = false;
+    animations.inAnimation = false;
   }
   
   void display(){
     fill(255);
-    rect(0,690,1440,60);
+    rect(0,402,1440,60);
     fill(0);
     textSize(40);
     String c = currentcommand;
-    if (frameCount % 2 == 0) c += "|";
-    text(c,10,720);
+    if (frameCount % 60 < 30) c += "|";
+    text(c,10,412);
   }
     
-  void addLetter(){
+  void add(){
+    currentcommand += key;
   }
 }

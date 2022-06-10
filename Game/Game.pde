@@ -77,6 +77,7 @@ void draw() {
     popMatrix();
     
     checkWASD();
+    if (command.commandmode) command.display();
   } else {
     battle.display();
   }
@@ -93,11 +94,20 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-  if (key ==
+  if (battle == null) {
+    if (key == ENTER) {
+      if (command.commandmode) {
+        command.execute();
+      } else {
+        command.open();
+      }
+    }
+  }
+}
 
 void keyTyped(){
   if (command.commandmode){
-    command.currentCommand
+    command.add();
   }
 }
 
@@ -108,14 +118,8 @@ void checkWASD(){
     case "A": 
     case "S": 
     case "D":
-      if (!player.inWalkAnimation) {
+      if (!player.inWalkAnimation && !animations.inAnimation) {
         player.changeDirection();
-        //if (player.delay == 0 ){
-        //  player.move();
-        //} else {
-        //  player.delay ++;
-        //  if (player.delay == 1) player.delay = 0;
-        //}
         player.move();
       }
     }
