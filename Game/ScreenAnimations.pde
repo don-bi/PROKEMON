@@ -255,13 +255,14 @@ public class ScreenAnimations {
         }
       }
       if (switchpoke && !allywhiteflash) {
-        if (frame < 20) {
+        if (frame < 50) {
           frame ++;
-          int x = frame*20;
-          int y = round(0.0027896740029879*pow(x,2)+0.8255781633432*x-0.47562977988958); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+          int x = frame*8;
+          int y = round(0.0075936347299726*pow(x,2)-2.549953891989*x+575); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+          println(x + "," + y);
           pushMatrix();
           translate(x+48,y+48);
-          rotate(frame*54);
+          rotate(frame*28.8);
           image(battle.ally.pokeball,-48,-48);
           popMatrix();
         } else {
@@ -438,7 +439,7 @@ public class ScreenAnimations {
       textSize(30);
       textFont(data.font);
       String section = battlecomment;
-      if (!hp && !faint && !exp && frame < battlecomment.length()) {
+      if (!hp && !faint && !exp && frame < battlecomment.length() || allywhiteflash) {
         section = battlecomment.substring(0,frame);
       }
       text(section,50,730);

@@ -98,7 +98,7 @@ public class BattleMode{
       
       fill(0);
       //displays ally stuff
-      if (!animations.allywhiteflash) {
+      if (!animations.allywhiteflash && !animations.switchpoke) {
         image(data.allyUi,860,430); //ui
         image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562); //expbar
         text(ally.hp + "/ " + ally.stats.get("hp"),1120,545); //hp value out of max
