@@ -39,6 +39,9 @@ public class Command {
       currentcommand = "";
     } catch (Exception e) {
       println("bad command");
+      commandmode = false;
+      animations.inAnimation = false;
+      currentcommand = "";
     }
   }
   

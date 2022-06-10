@@ -245,7 +245,10 @@ public class ScreenAnimations {
           }
           if (frame == 45) {
             if (switchpoke) {
-              if (currentGui == data.fightOptions) { //if swtiching pokemon when dead, do this instead of letting other poke attack
+              if (choice.equals("deadpokemon")) {
+                battleComment("What will " + battle.ally.name + " do?","");
+                currentGui = data.fightOptions;
+              } else if (currentGui == data.fightOptions) { //if swtiching pokemon when dead, do this instead of letting other poke attack
                 battleComment("What will " + battle.ally.name + " do?","");
               } else {
                 effectivenessMessage(1,1);
