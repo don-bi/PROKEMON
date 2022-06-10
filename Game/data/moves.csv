@@ -76,7 +76,7 @@ id,name,type,power,pp,accuracy,priority,target_id,damage_class,effect_id,effect_
 75,razor-leaf,grass,55,25,95,0,11,physical,44,100
 76,solar-beam,grass,120,10,100,0,10,special,152,100
 77,poison-powder,poison,-1,35,75,0,10,status,67,100
-78,stun-spore,grass,-1,30,75,0,10,status,68,100
+78,stun-spore,grass,-1,30,75,0,10,status,7,100
 79,sleep-powder,grass,-1,15,75,0,10,status,2,100
 80,petal-dance,grass,120,10,100,0,8,special,28,100
 81,string-shot,bug,-1,40,95,0,11,status,61,100
@@ -135,7 +135,7 @@ id,name,type,power,pp,accuracy,priority,target_id,damage_class,effect_id,effect_
 134,kinesis,psychic,-1,15,80,0,10,status,24,100
 135,soft-boiled,normal,-1,10,100,0,7,status,33,100
 136,high-jump-kick,fighting,130,10,90,0,10,physical,46,100
-137,glare,normal,-1,30,100,0,10,status,68,100
+137,glare,normal,-1,30,100,0,10,status,7,100
 138,dream-eater,psychic,100,15,100,0,10,special,9,100
 139,poison-gas,poison,-1,40,90,0,11,status,67,100
 140,barrage,normal,15,20,85,0,10,physical,30,100
