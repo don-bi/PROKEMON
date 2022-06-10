@@ -141,7 +141,7 @@ public class BattleMode{
           data.poke5.texture = data.smallChosenPoke;
           chosenButton = data.poke5;
         }
-        deadPokeButtons.add(data.poke4);
+        deadPokeButtons.add(data.poke5);
       case(4):
         data.poke4 = new Button(data.switchPokemon,560,322,"poke4");
         data.poke4.texture = data.smallPoke;

@@ -452,6 +452,9 @@ public class ScreenAnimations {
             } catch (IOException e) {}
             player.teleport(8,5);
             returnHome();
+            for (int i = 0; i < player.team.size(); i ++) {
+              player.team.get(i).hp = player.team.get(i).stats.get("hp");
+            }
           }
           
         }
