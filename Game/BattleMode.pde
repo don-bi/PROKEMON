@@ -130,6 +130,7 @@ public class BattleMode{
         if (ally == player.team.get(5)) {
           data.poke6.y -= 5;
           data.poke6.texture = data.smallChosenPoke;
+          chosenButton = data.poke6;
         }
         deadPokeButtons.add(data.poke6);
       case(5):
@@ -138,6 +139,7 @@ public class BattleMode{
         if (ally == player.team.get(4)) {
           data.poke5.y -= 5;
           data.poke5.texture = data.smallChosenPoke;
+          chosenButton = data.poke5;
         }
         deadPokeButtons.add(data.poke4);
       case(4):
@@ -146,6 +148,7 @@ public class BattleMode{
         if (ally == player.team.get(3)) {
           data.poke4.y -= 5;
           data.poke4.texture = data.smallChosenPoke;
+          chosenButton = data.poke4;
         }
         deadPokeButtons.add(data.poke4);
       case(3):
@@ -154,6 +157,7 @@ public class BattleMode{
         if (ally == player.team.get(2)) {
           data.poke3.y -= 5;
           data.poke3.texture = data.smallChosenPoke;
+          chosenButton = data.poke3;
         }
         deadPokeButtons.add(data.poke3);
       case(2):
@@ -162,6 +166,7 @@ public class BattleMode{
         if (ally == player.team.get(1)) {
           data.poke2.y -= 5;
           data.poke2.texture = data.smallChosenPoke;
+          chosenButton = data.poke2;
         }
         deadPokeButtons.add(data.poke2);
       case(1):
@@ -169,11 +174,11 @@ public class BattleMode{
         data.poke1.texture = data.bigPoke;
         if (ally == player.team.get(0)) {
           data.poke1.texture = data.bigChosenPoke;
+          chosenButton = data.poke1;
         }
         deadPokeButtons.add(data.poke1);
     }
     data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
     data.cancel.texture = loadImage("cancel.png");
-    chosenButton = data.poke1;
   }
 }

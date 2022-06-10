@@ -213,7 +213,7 @@ public class ScreenAnimations {
           int y = round(0.004991958693076*pow(x,2)-1.7730700863382*x+114.93566954461)+570; //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
           pushMatrix();
           translate(x+48,y+48);
-          rotate(frame*40);
+          rotate(radians(frame*40));
           image(battle.ally.pokeball,-48,-48);
           popMatrix();
         } else {
@@ -267,7 +267,7 @@ public class ScreenAnimations {
           println(x + "," + y);
           pushMatrix();
           translate(x+48,y+48);
-          rotate(frame*28.8);
+          rotate(radians(frame*28.8));
           image(battle.ally.pokeball,-48,-48);
           popMatrix();
         } else {
@@ -294,9 +294,12 @@ public class ScreenAnimations {
         hp = false;
         if (choice.equals("fight")) {
           setNewStatus(1);
-        }
-        else if (choice.equals("secondAttack")) {
+        } else if (choice.equals("secondAttack")) {
           setNewStatus(2);
+        } else if (choice.equals("statusdamage2")) {
+          statusDamage(2);
+        } else if (choice.equals("statusdamage3")) {
+          battleComment("","newturn");
         }
       }
     }
@@ -338,7 +341,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("fight")) {
-            if (!transition) hpBar(battle.attacker, battle.defender);
+            if (!transition) hpBar(battle.attacker, battle.defender, "attack");
           } 
           
           else if (choice.equals("status1")) {
@@ -374,15 +377,30 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("secondAttack")) {
-            if (!transition) hpBar(battle.defender, battle.attacker);
+            if (!transition) hpBar(battle.defender, battle.attacker, "attack");
           }
           
           else if (choice.equals("status2")) {
             effectivenessMessage(effectiveness,2);
           }
           
+          else if (choice.equals("statusdamage1")) {
+            if (!statusDamage(1)) {
+              if (!statusDamage(2)) {
+                battleComment("","newTurn");
+              }
+            }
+          }
           
-          else if (choice.equals("effective2")) {
+          else if (choice.equals("statusdamage2")) {
+            hpBar(battle.enemy,battle.ally,"status");
+          }
+          
+          else if (choice.equals("statusdamage3")) {
+            hpBar(battle.ally,battle.enemy,"status");
+          }
+          
+          else if (choice.equals("newturn")) {
             if (battle != null && battle.checkAttackerAlive()) {
                 battleComment("What will " + battle.ally.name + " do?","");
                 currentGui = data.fightOptions;
@@ -429,7 +447,11 @@ public class ScreenAnimations {
           else if (choice.equals("lose")) {
             fainter = null;
             captured = false;
-            returnHome();
+            currentMap = "PokeCenter";
+            try {
+              currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));
+            } catch (IOException e) {}
+            player.teleport(8,4);
           }
           
         }
@@ -473,13 +495,18 @@ public class ScreenAnimations {
     if (attack == 1){
       battleComment(comment,"effective1");
     } else if (attack == 2){
-      battleComment(comment,"effective2");
+      battleComment(comment,"statusdamage1");
     }
   }
   
-  void hpBar(Pokemon attacker, Pokemon attacked){
+  void hpBar(Pokemon attacker, Pokemon attacked, String damagetype){
     prevHp = attacked.hp;
-    effectiveness = attacker.attack(attacked);
+    if (damagetype.equals("attack")) {
+      effectiveness = attacker.attack(attacked);
+    } else if (damagetype.equals("status")) {
+      attacked.hp -= 0.125 * attacked.stats.get("hp");
+      if (attacked.hp < 0) attacked.hp = 0;
+    }
     newHp = attacked.hp;
     hplowerer = attacked;
     frame = 1;
@@ -706,6 +733,24 @@ public class ScreenAnimations {
     } else {
       effectivenessMessage(effectiveness,attack);
     }
+  }
+  
+  boolean statusDamage(int n){
+    String allyStatus = battle.ally.nonvolStatus;
+    if (n == 1) {
+      println("hello");
+      if (allyStatus.equals("burn") || allyStatus.equals("poison")) {
+        battleComment(battle.ally.name + " is hurt by its " + allyStatus + "!","statusdamage2");
+        return true;
+      }
+    } else {
+      String enemyStatus = battle.enemy.nonvolStatus;
+      if (enemyStatus.equals("burn") || enemyStatus.equals("poison")) {
+        battleComment(battle.enemy.name + " is hurt by its " + enemyStatus + "!","statusdamage3");
+        return true;
+      }
+    }
+    return false;
   }
   
   void startBattle(){

@@ -48,7 +48,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Lucario", 3, true);
+  Pokemon poke2 = new Pokemon("Lucario", 50, true);
   poke2.moves[0] = new Move("79");
   poke2.moves[0].accuracy = 100;
   poke2.moves[1] = new Move("261");
