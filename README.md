@@ -82,3 +82,6 @@ Hanson: Fighting/bag changes + bug testing :)
 
 ### 6/7/2022 ###
 Donald: Implented catching pokemon and animated it using the parabolic equation for a very nice curve.
+
+### 6/10/2022 ###
+Hanson: Out of building moving into barrier- stops character and cannot move
