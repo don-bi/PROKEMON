@@ -5,6 +5,7 @@ Player player;
 
 Data data;
 ScreenAnimations animations;
+Command command;
 
 String currentMap;
 Map currentMapTiles;
@@ -30,6 +31,7 @@ void setup() {
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
+  command = new Command();
   
   //loads initial hometop map
   currentMap = "Route1";
@@ -88,6 +90,15 @@ void draw() {
 
 void mouseClicked(){
   if (currentGui != null) currentGui.processButtons();
+}
+
+void keyPressed(){
+  if (key ==
+
+void keyTyped(){
+  if (command.commandmode){
+    command.currentCommand
+  }
 }
 
 void checkWASD(){
