@@ -66,7 +66,7 @@ public class ScreenAnimations {
           int y = 400;
           if (fainter == battle.ally) {
             x = 130;
-            y = 800;
+            y = 830;
           }
           PImage faintsprite = fainter.sprite.get(0,0,fainter.sprite.width,fainter.sprite.height-frame*6);
           image(faintsprite,x,y-faintsprite.height);
@@ -264,7 +264,6 @@ public class ScreenAnimations {
           frame ++;
           int x = frame*8;
           int y = round(0.0075936347299726*pow(x,2)-2.549953891989*x+575); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
-          println(x + "," + y);
           pushMatrix();
           translate(x+48,y+48);
           rotate(radians(frame*28.8));
@@ -387,7 +386,7 @@ public class ScreenAnimations {
           else if (choice.equals("statusdamage1")) {
             if (!statusDamage(1)) {
               if (!statusDamage(2)) {
-                battleComment("","newTurn");
+                battleComment("","newturn");
               }
             }
           }
@@ -451,7 +450,8 @@ public class ScreenAnimations {
             try {
               currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));
             } catch (IOException e) {}
-            player.teleport(8,4);
+            player.teleport(8,5);
+            returnHome();
           }
           
         }

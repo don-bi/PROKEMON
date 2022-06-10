@@ -48,7 +48,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Lucario", 50, true);
+  Pokemon poke2 = new Pokemon("Charmander", 5, true);
   poke2.moves[0] = new Move("79");
   poke2.moves[0].accuracy = 100;
   poke2.moves[1] = new Move("261");
@@ -57,9 +57,9 @@ void setup() {
   //poke2.moves[0].effectChance = 100;
   poke2.moves[0].power = 0;
   player.team.add(poke2);
-  Pokemon poke3 = new Pokemon("Torterra", 34, true);
+  Pokemon poke3 = new Pokemon("Torterra", 5, true);
   player.team.add(poke3);
-  Pokemon poke4 = new Pokemon("Zekrom", 20, true);
+  Pokemon poke4 = new Pokemon("Zekrom", 5, true);
   player.team.add(poke4);
 }
 
