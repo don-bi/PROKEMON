@@ -49,6 +49,7 @@ public class Data {
 
   PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   PImage player1,player2,player3,player4;
+  PImage potionhover,pokeballhover,masterballhover;
   PFont font;
   
   //GUIS AND BUTTONS
@@ -120,6 +121,9 @@ public class Data {
       player2 = playerSprites.get(1139,1062,384,306);
       player3 = playerSprites.get(1529,1068,228,300);
       player4 = playerSprites.get(1811,1074,384,294);
+      potionhover = loadImage("potion.png");
+      pokeballhover = loadImage("pokeball.png");
+      masterballhover = loadImage("masterball.png");
       
       //loads the font
       font = createFont("font.ttf",72);

@@ -124,6 +124,24 @@ public class Button{
   }
   
   void processHover(){
+    if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
+      if (special != null) {
+        fill(0);
+        textSize(80);
+        if (special.equals("potion")) {
+          image(data.potionhover,160,392);
+          text("Heals your current\npokemon 50 HP.",150,600);
+        }
+        if (special.equals("pokeball")) {
+          image(data.pokeballhover,160,392);
+          text("A basic POKé BALL.",150,600);
+        }
+        if (special.equals("masterball")){
+          image(data.masterballhover,160,392);
+          text("Always captures the\nopposing pokemon.",150,600);
+        }
+      }
+    }
   }
   
   void processClick(){
