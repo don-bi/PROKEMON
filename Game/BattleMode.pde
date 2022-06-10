@@ -56,7 +56,7 @@ public class BattleMode{
     } else {
       ally = player.team.get(parseInt(playerchoice));
       battle.attacker = ally;
-      animations.battleComment("You sent out " + battle.ally.name + "!","switchPokemon");
+      animations.battleComment("Go! " + battle.ally.name + "!","switchPokemon");
       animations.switchPoke();
     }
 

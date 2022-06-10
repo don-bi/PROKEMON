@@ -231,10 +231,9 @@ public class Button{
         }
         if (endturn) {
           if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
-            currentGui = data.fightOptions;
             battle.ally = player.team.get(parseInt(choice));
             animations.switchPoke();
-            animations.battleComment("You sent out " + battle.ally.name + "!","deadPokemon");
+            animations.battleComment("Go! " + battle.ally.name + "!","deadPokemon");
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;

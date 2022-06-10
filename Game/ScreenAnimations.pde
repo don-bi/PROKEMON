@@ -24,6 +24,7 @@ public class ScreenAnimations {
       inAnimation = true;
       fadein = true;
     }
+    println(choice);
     
     pushMatrix();
     if (frameCount > 0) {

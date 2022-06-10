@@ -20,10 +20,11 @@ public class Command {
           parts[i] = parts[i].toLowerCase();
         }
         if (parts[0].equals("set")) {
+          printArray(parts);
           int whichpoke = parseInt(parts[1])-1;
-          String pokename = parts[2].charAt(0) + parts[2].substring(1);
+          String pokename = parts[2].substring(0,1).toUpperCase() + parts[2].substring(1);
           int level = parseInt(parts[3]);
-          if (whichpoke < 7 && whichpoke > 0) player.team.set(whichpoke,new Pokemon(pokename,level,true));
+          if (whichpoke < 6 && whichpoke > -1) player.team.set(whichpoke,new Pokemon(pokename,level,true));
         }
         if (parts[1].equals("setmove")) {
           int whichpoke = parseInt(parts[1])-1;
@@ -37,7 +38,7 @@ public class Command {
       animations.inAnimation = false;
       currentcommand = "";
     } catch (Exception e) {
-      
+      println("bad command");
     }
   }
   
@@ -53,7 +54,7 @@ public class Command {
     
   void add(){
     if (key == BACKSPACE) remove();
-    else currentcommand += key;
+    else if (key != ENTER) currentcommand += key;
   }
   
   void remove(){
