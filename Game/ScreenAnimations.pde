@@ -229,6 +229,7 @@ public class ScreenAnimations {
           rect(0,0,1440,864);
           if (allywhiteflash && frame > 30) { //ally pokemon ui moving in
             pushMatrix();
+            textSize(40);
             int framediff = frame - 15;
             translate(580-round(framediff*19.3),0);
             image(data.allyUi,860,430);
@@ -243,7 +244,11 @@ public class ScreenAnimations {
           }
           if (frame == 45) {
             if (switchpoke) {
-              effectivenessMessage(1,1);
+              if (currentGui == data.fightOptions) { //if swtiching pokemon when dead, do this instead of letting other poke attack
+                battleComment("What will " + battle.ally.name + " do?","");
+              } else {
+                effectivenessMessage(1,1);
+              }
               switchpoke = false;
             } else if (allywhiteflash) { 
               currentGui = data.fightOptions;
@@ -348,10 +353,6 @@ public class ScreenAnimations {
             }
           }
           
-          else if (choice.equals("deadPokemon")) {
-            battleComment("What will " + battle.ally.name + " do?","");
-          }
-          
           else if (choice.equals("escape")) {
             returnHome();
           }
@@ -434,12 +435,12 @@ public class ScreenAnimations {
         }
       }
     }
-    if (battlecomment != null) {
+    if (battlecomment != null && !allywhiteflash) {
       fill(255);
       textSize(30);
       textFont(data.font);
       String section = battlecomment;
-      if (!hp && !faint && !exp && frame < battlecomment.length() || allywhiteflash) {
+      if (!hp && !faint && !exp && frame < battlecomment.length()) {
         section = battlecomment.substring(0,frame);
       }
       text(section,50,730);
@@ -724,11 +725,13 @@ public class ScreenAnimations {
     frame = 0;
     allywhiteflash = true;
     inAnimation = true;
+    commenting = false;
   }
   
   void switchPoke() {
     frame = 0;
     switchpoke = true;
     inAnimation = true;
+    commenting = false;
   }
 }
