@@ -83,5 +83,13 @@ Hanson: Fighting/bag changes + bug testing :)
 ### 6/7/2022 ###
 Donald: Implented catching pokemon and animated it using the parabolic equation for a very nice curve.
 
+### 6/8/2022 ###
+Donald: Finished status effects being applied and hurting/skipping the pokemon's turns. Finished animating the start of the battle, with throwing pokeballs at the start of the battle and when switching pokemon.
+
+### 6/9/2022 ###
+Donald: Touched up on the start throwing pokeball animation and also implemented the coming in of the wild pokemon sprite and their ui. Finished status effects by implementing sleep mechanics and fixed some bugs.
+
 ### 6/10/2022 ###
+Donald: Made a command class to cheat and set pokemons and set moves. Made trainers actually appear and load into the map, and be able to encounter them. Started working on the battle mechanics against trainers ie. the swapping and other stuff.
+
 Hanson: Out of building moving into barrier- stops character and cannot move
