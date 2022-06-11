@@ -130,6 +130,7 @@ public class Data {
       potionhover = loadImage("potion.png");
       pokeballhover = loadImage("pokeball.png");
       masterballhover = loadImage("masterball.png");
+      encounter = loadImage("encounter.png");
       
       //loads the font
       font = createFont("font.ttf",72);

@@ -32,26 +32,42 @@ public class NPC extends Character {
   
   void encounter(){
     if (!done) {
-      if (delay < 20){
-        if (delay < 10) {
-          image(data.encounter
       if (!encountered) {
         if (direction == 'u' && player.xpos == xpos && player.ypos > ypos-range && player.ypos < ypos) encountered = true;
         if (direction == 'd' && player.xpos == xpos && player.ypos < ypos+range && player.ypos > ypos) encountered = true;
         if (direction == 'l' && player.ypos == ypos && player.xpos > xpos-range && player.xpos < xpos) encountered = true;
         if (direction == 'r' && player.ypos == ypos && player.xpos < xpos+range && player.xpos > xpos) encountered = true;
       } else {
-        animations.inAnimation = true;
-        encountered = true;
-        int x = getFrontCoords()[0];
-        int y = getFrontCoords()[1];
-        if (x != player.xpos || y != player.ypos) {
-          move();
-        } else {
-          done = true;
-          loadSprite();
-          animations.overworldComment(comment,"trainer");
-          //battle = new BattleMode(this);
+        if (delay < 60){ //DOES THE BOUNCING EXCLAMATION FIRST
+          if (delay < 10) {
+            delay++;
+            int YOffset = sprite.height - 40 - delay*4;
+            int XOffset = (96 - sprite.width)/2 - 12;
+            image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
+          } else if (delay < 20) {
+            delay++;
+            int YOffset = sprite.height - 80 + (delay-10)*4;
+            int XOffset = (96 - sprite.width)/2 - 12;
+            image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
+          } else {
+            delay++;
+            int YOffset = sprite.height - 40;
+            int XOffset = (96 - sprite.width)/2 - 12;
+            image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
+          }
+        } else { //AFTER THE BOUNCING EXCLAMATION POINT, MAKES THE GUY WALK UP
+          animations.inAnimation = true;
+          encountered = true;
+          int x = getFrontCoords()[0];
+          int y = getFrontCoords()[1];
+          if (x != player.xpos || y != player.ypos) {
+            move();
+          } else { //WHEN THE GUY FINALLY REACHES THE PLAYER, IT STARTS THE BATTLE STUFF
+            done = true;
+            loadSprite();
+            animations.overworldComment(comment,"trainer");
+            //battle = new BattleMode(this);
+          }
         }
       }
     }
