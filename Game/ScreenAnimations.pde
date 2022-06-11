@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow;
+  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow, opponentswitch;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -249,7 +249,6 @@ public class ScreenAnimations {
           popMatrix();
         } else { //once done with the throw, does the white flahs
           enemywhiteFlash();
-          battleComment(trainer.type + " " + trainer.name + " sent out " + battle.enemy.name,"");
           opponentthrow = false;
           inAnimation = false;
         }
@@ -379,7 +378,11 @@ public class ScreenAnimations {
         if (battle.opponent == null) {
           battleComment("You have won the battle!","win");
         } else {
-          //NPC SENDS OUT POKEMON HERE
+          if (checkOpponentAlive()){
+            opponentSwitch();
+          } else {
+            battleComment("You have won the battle!","wintrainer");
+          }
         }
       }
     }
@@ -645,6 +648,22 @@ public class ScreenAnimations {
     }
   }
   
+  boolean checkOpponentAlive(){
+    boolean alive = false;
+    int n = 0;
+    for (int i = 0; i < battle.opponent.team.size(); i ++) {
+      if (!alive) {
+        Pokemon poke = battle.opponent.team.get(i);
+        if (poke.hp > 0) {
+          alive = true;
+          battle.enemy = poke;
+          n = i;
+        }
+      }
+    }
+    return alive;
+  }
+  
   void faint(Pokemon f){
     fainter = f;
     frame = 0;
@@ -856,6 +875,14 @@ public class ScreenAnimations {
     frame = 0;
     opponentthrow = true;
     inAnimation = true;
+    battlecomment = null;
+  }
+  
+  void opponentSwitch(){
+    frame = 0;
+    opponentswitch = true;
+    inAnimation = true;
+    battlecomment = null;
   }
   
   void allywhiteFlash(){
