@@ -389,6 +389,7 @@ public class Data {
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
     menu = new Gui(0,0);
+    pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
@@ -399,11 +400,11 @@ public class Data {
     
     menubutton = new Button(homeScreen,menu,1240,0,"");
     menubutton.texture = loadImage("menu.png");
-    menupokemon = new Button(menu,pokemons,1240,0,"");
+    menupokemon = new Button(menu,pokemons,1240,0,"menupokemon");
     menupokemon.texture = loadImage("menu.png");
     menusave = new Button(menu,1240,75,"save");
     menusave.texture = loadImage("menu.png");
-    menuexit = new Button(menu,homeScreen,1240,150);
+    menuexit = new Button(menu,homeScreen,1240,150,"");
     menuexit.texture = loadImage("menu.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);

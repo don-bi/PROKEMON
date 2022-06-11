@@ -30,10 +30,18 @@ public class Button{
     if (texture != null) image(texture,x,y);
     if (special != null){
       textSize(50);
-      fill(255);
-      if (this == data.menubutton){
-        text("MENU",1250,30);
-        println("YEA");
+      fill(255); 
+      if (this == data.menubutton){ //these three are to display the text on the menu buttons
+        text("MENU",1300,50);
+      }
+      if (this == data.menupokemon) {
+        text("POKéMON",1275,50);
+      }
+      if (this == data.menusave) {
+        text("SAVE",1300,125);
+      }
+      if (this == data.menuexit) {
+        text("EXIT",1300,200);
       }
       
       if (battle != null) {
@@ -59,7 +67,7 @@ public class Button{
         fill(0);
         PImage icon;
         switch (special){ //Displays the pokemon name and level in the switchpokemon screen
-          case "poke1":
+          case "poke1": case "menupoke1":
             poke = player.team.get(0);
             text(poke.name,270,250);
             text("Lv"+poke.level,300,290);
@@ -68,7 +76,7 @@ public class Button{
             icon.resize(96,0);
             image(icon,132,134+(96-icon.height)/2);
             break;
-          case "poke2":
+          case "poke2": case "menupoke2":
             poke = player.team.get(1);
             text(poke.name,690,120);
             text("Lv"+poke.level,720,160);
@@ -77,7 +85,7 @@ public class Button{
             icon.resize(96,0);
             image(icon,562,89+(96-icon.height)/2);
             break;
-          case "poke3":
+          case "poke3": case "menupoke3":
             poke = player.team.get(2);
             text(poke.name,690,240);
             text("Lv"+poke.level,720,280);
@@ -86,7 +94,7 @@ public class Button{
             icon.resize(96,0);
             image(icon,562,209+(96-icon.height)/2);
             break;
-          case "poke4":
+          case "poke4": case "menupoke4":
             poke = player.team.get(3);
             text(poke.name,690,360);
             text("Lv"+poke.level,720,400);
@@ -95,7 +103,7 @@ public class Button{
             icon.resize(96,0);
             image(icon,562,329+(96-icon.height)/2);
             break;
-          case "poke5":
+          case "poke5": case "menupoke5":
             poke = player.team.get(4);
             text(poke.name,690,480);
             text("Lv"+poke.level,720,520);
@@ -104,7 +112,7 @@ public class Button{
             image(icon,562,449+(96-icon.height)/2);
             image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
             break;
-          case "poke6":
+          case "poke6": case "menupoke6":
             poke = player.team.get(5);
             text(poke.name,690,600);
             text("Lv"+poke.level,720,640);
@@ -159,7 +167,7 @@ public class Button{
       if (special == null){
         currentGui = opensGui;
       } else {
-        if(this == data.menubutton || this == data.menupokemon || this == data.menusave) {
+        if(this == data.menubutton || this == data.menupokemon || this == data.menusave || this == data.menuexit) {
           currentGui = opensGui;
         }
         
