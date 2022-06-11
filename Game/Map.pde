@@ -48,6 +48,7 @@ public class Map {
         getTile(doorX,doorY).setWarp(warpX,warpY,doorInfo[4]);
       }
       
+      //reads in trainers
       int trainers = parseInt(reader.readLine());
       npcs = new NPC[trainers];
       for (int i = 0; i < trainers; i ++) {
@@ -73,7 +74,17 @@ public class Map {
           newguy.team.add(new Pokemon(pokename,lev));
         }
         npcs[i] = newguy;
-        currentMapTiles.getTile(newguy.xpos,newguy.ypos).modifyTile("BLOCK","add");
+        getTile(newguy.xpos,newguy.ypos).modifyTile("BLOCK","add");
+      }
+      
+      int interactables = parseInt(reader.readLine());
+      for (int i = 0; i < interactables; i ++) {
+          String[] coords = reader.readLine().split(" ");
+          int x = parseInt(coords[0]);
+          int y = parseInt(coords[1]);
+          String comment = reader.readLine();
+          getTile(x,y).modifyTile("INTERACT","add");
+          getTile(x,y).comment = comment;
       }
       
     } else {

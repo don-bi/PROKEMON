@@ -38,5 +38,6 @@ encounter
 Darkrai 45
 Empoleon 35
 Ludicolo 37
+0
 
 

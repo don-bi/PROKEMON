@@ -48,3 +48,12 @@ t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,
 39 9 1 9 Route1
 22 9 7 8 PokeCenter
 0
+4
+10 26
+Your house...
+23 30
+Joe's house!
+28 23
+ZAWAD DEWAN'S HOUSE
+15 9
+Professor tree's lab
