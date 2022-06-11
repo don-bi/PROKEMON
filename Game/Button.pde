@@ -3,6 +3,7 @@ public class Button{
   PImage texture;
   Gui opensGui;
   String special;
+  Pokemon whichpokemonsdata;
 
   public Button(Gui in,int X,int Y){
     in.buttons.add(this);
@@ -52,7 +53,9 @@ public class Button{
           poke = player.team.get(0);
           text(poke.name,270,250);
           text("Lv"+poke.level,300,290);
-          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,327);
+          int y = 327;
+          if (special.equals("menupoke1")) y -= 10;
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,y);
           icon = data.frontSprites.get(poke.name).get(poke.mode);
           icon.resize(96,0);
           image(icon,132,134+(96-icon.height)/2);
@@ -168,7 +171,7 @@ public class Button{
       if (special == null){
         currentGui = opensGui;
       } else {
-        if(this == data.menubutton || this == data.menupokemon || this == data.menusave || this == data.menuexit) {
+        if(opensGui != null) {
           currentGui = opensGui;
         }
         
@@ -176,27 +179,27 @@ public class Button{
             data.pokemons.buttons = new ArrayList<Button>();
             switch(player.team.size()){
               case(6):
-                data.menupoke6 = new Button(data.pokemons,560,562,"menupoke6");
+                data.menupoke6 = new Button(data.pokemons,data.pokemondata,560,562,"menupoke6");
                 data.menupoke6.texture = data.smallPoke;
                 data.pokemons.buttons.add(data.menupoke6);
               case(5):
-                data.menupoke5 = new Button(data.pokemons,560,442,"menupoke5");
+                data.menupoke5 = new Button(data.pokemons,data.pokemondata,560,442,"menupoke5");
                 data.menupoke5.texture = data.smallPoke;
                 data.pokemons.buttons.add(data.menupoke5);
               case(4):
-                data.menupoke4 = new Button(data.pokemons,560,322,"menupoke4");
+                data.menupoke4 = new Button(data.pokemons,data.pokemondata,560,322,"menupoke4");
                 data.menupoke4.texture = data.smallPoke;
                 data.pokemons.buttons.add(data.menupoke4);
               case(3):
-                data.menupoke3 = new Button(data.pokemons,560,202,"menupoke3");
+                data.menupoke3 = new Button(data.pokemons,data.pokemondata,560,202,"menupoke3");
                 data.menupoke3.texture = data.smallPoke;
                 data.pokemons.buttons.add(data.menupoke3);
               case(2):
-                data.menupoke2 = new Button(data.pokemons,560,82,"menupoke2");
+                data.menupoke2 = new Button(data.pokemons,data.pokemondata,560,82,"menupoke2");
                 data.menupoke2.texture = data.smallPoke;
                 data.pokemons.buttons.add(data.menupoke2);
               case(1):
-                data.menupoke1 = new Button(data.pokemons,130,122,"menupoke1");
+                data.menupoke1 = new Button(data.pokemons,data.pokemondata,130,122,"menupoke1");
                 data.menupoke1.texture = data.bigPoke;
                 data.pokemons.buttons.add(data.menupoke1);
             }
@@ -211,14 +214,14 @@ public class Button{
           String choice = "";
           poke.currentMove = null;
           
-          if (special.equals("endComment")) {
+          if (special.equals("endComment")) { //for when clicking something and needs to make there be no comment
             animations.battlecomment = null;
             animations.inAnimation = false;
             animations.commenting = false;
             currentGui = opensGui;
           }
           
-          if (special.equals("pokeball")) {
+          if (special.equals("pokeball")) { //when choosing to throw regular pokeball
             if (player.bag.pokeballs <= 0){
               animations.battleComment("You have no more POKé BALLS!","fightoptions");
               currentGui = null;
@@ -230,7 +233,7 @@ public class Button{
               animations.battleComment("You are unable to catch a trainer's POKéMON","fightoptions");
               currentGui = null;
             }
-          } else if (special.equals("masterball")) {
+          } else if (special.equals("masterball")) { //when choosing to throw masterball
             if (player.bag.masterballs <= 0){
               animations.battleComment("You have no more MASTER BALLS!","fightoptions");
               currentGui = null;
@@ -242,7 +245,7 @@ public class Button{
               currentGui = null;
             }
           }
-          if (special.equals("potion")) {
+          if (special.equals("potion")) { //when choosing to use a potion
             if (player.bag.potions <= 0){
               animations.battleComment("You have no more potions!","fightoptions");
               currentGui = null;
