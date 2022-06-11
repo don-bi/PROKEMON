@@ -35,7 +35,7 @@ void setup() {
   command = new Command();
   
   //loads initial hometop map
-  currentMap = "Route1";
+  currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
     currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));

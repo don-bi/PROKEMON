@@ -16,5 +16,5 @@ t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,
 8 9 22 10 Woodbury_Town
 0
 1
-8 5 
+8 4
 Your POKéMON has been healed!
