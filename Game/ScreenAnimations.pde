@@ -25,7 +25,7 @@ public class ScreenAnimations {
       inAnimation = true;
       fadein = true;
     }
-    println(choice);
+    //println(choice);
     pushMatrix();
     if (frameCount > 0) {
       if (owcomment) {
@@ -296,26 +296,37 @@ public class ScreenAnimations {
         }
       }
       if (enemywhiteflash) {
-        PImage guy = data.player1;
-        image(guy,425-guy.width,864-guy.height);
+        if (!opponentswitch) {
+          PImage guy = data.player1;
+          image(guy,425-guy.width,864-guy.height);
+        }
         if (frame <= 45) { //screen flashing white when opponent pokemon is sent out
           frame ++;
           fill(255,255-frame*5);
           rect(0,0,1440,864);
+          textSize(40);
+          fill(0);
           if (frame < 30) {
             pushMatrix();
-            textSize(40);
-            fill(0);
             translate(-720+frame*24,0);
             image(data.enemyUi,320,150);
             image(data.miniHpBar,476,218);
             text(battle.enemy.name,348,195);
             text("Lv"+battle.enemy.level,588,195);
             popMatrix();
+          } else if (frame <= 45) {
+            image(data.enemyUi,320,150);
+            image(data.miniHpBar,476,218);
+            text(battle.enemy.name,348,195);
+            text("Lv"+battle.enemy.level,588,195);
           }
           if (frame == 45) {
             if (opponentswitch) {
-              battleComment("What will " + battle.ally.name + " do?", "newturn");
+              opponentswitch = false;
+              enemywhiteflash = false;
+              inAnimation = false;
+              battleComment("What will " + battle.ally.name + " do?","");
+              currentGui = data.fightOptions;
             } else {
               enemywhiteflash = false;
               inAnimation = false;

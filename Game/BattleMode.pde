@@ -86,7 +86,7 @@ public class BattleMode{
     if (!animations.statusSkip(attacker)) animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
   }
   
-  void display(){
+  void display(){ //THERES A LOT OF BOOLEANS TO MAKE SURE CERTAIN IMAGES DON'T APPEAR DURING AN ANIMATION
     if (!animations.battlestart) { //when it's doing the battlestart animation, it doesn't show the stuffs
       image(data.battleBG,0,0);
       image(data.battleCircles,0,0);
@@ -94,15 +94,18 @@ public class BattleMode{
       //The bottom transparent rectangle and options
       textSize(40);
       fill(0);
-      if (animations.fainter != enemy && !animations.opponentthrow && !animations.opponentswitch) image(enemy.sprite,940,400-enemy.sprite.height);
-      if (animations.fainter != ally && !animations.switchpoke && !animations.enemywhiteflash || (animations.switchpoke && animations.allywhiteflash)) image(ally.sprite,130,830-ally.sprite.height);
-      fill(0,100);
-      rect(0,650,1440,214);
-      fill(255);
+      if (animations.fainter != enemy && !animations.opponentthrow && !animations.opponentswitch ||animations.enemywhiteflash) image(enemy.sprite,940,400-enemy.sprite.height);
+      if ((animations.fainter != ally && !animations.switchpoke || (animations.switchpoke && animations.allywhiteflash)) && !animations.enemywhiteflash || animations.opponentswitch) image(ally.sprite,130,830-ally.sprite.height);
+      
+      if (!animations.enemywhiteflash) {
+        fill(0,100);
+        rect(0,650,1440,214);
+        fill(255);
+      }
       
       fill(0);
       //displays ally stuff
-      if (!animations.allywhiteflash && !animations.enemywhiteflash && !animations.switchpoke) {
+      if (!animations.allywhiteflash && !animations.enemywhiteflash && !animations.switchpoke || animations.opponentswitch) {
         textSize(40);
         image(data.allyUi,860,430); //ui
         image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562); //expbar
@@ -114,7 +117,7 @@ public class BattleMode{
       }
       
       //displays enemy stuff
-      if (!animations.enemywhiteflash && !animations.opponentswitch || (animations.enemywhiteflash || animations.opponentswitch && animations.frame < 30)) {
+      if (!animations.enemywhiteflash && !animations.opponentswitch && !animations.opponentthrow) {
         image(data.enemyUi,320,150); //ui
         text("Lv"+enemy.level,588,195); //level
         text(enemy.name,348,195); //name
