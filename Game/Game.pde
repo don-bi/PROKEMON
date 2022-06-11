@@ -103,6 +103,17 @@ void keyPressed(){
         command.open();
       }
     }
+    if (key == ' ') {
+      if (player.getFrontTile().isInteractable){ //if the tile in front is an interactable, then it displays whatever its comment is, and if it's the one in the pokecenter, it heals all the pokemon too
+        animations.overworldComment(player.getFrontTile().comment,"commanderror");
+        if (player.getFrontTile().comment.equals("Your POKéMON has been healed!")) {
+          for (Pokemon poke:player.team) {
+            poke.hp = poke.stats.get("hp");
+            poke.nonvolStatus = "none";
+          }
+        }
+      }
+    }
   }
 }
 
