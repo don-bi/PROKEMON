@@ -391,7 +391,7 @@ public class Data {
     homeScreen = new Gui(0,0);
     menu = new Gui(0,0);
     pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
-    pokemondata = new Gui(loadImage("pokemondata.pmg"),0,0);
+    pokemondata = new Gui(loadImage("pokemondata.png"),0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
