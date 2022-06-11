@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment;
+  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -181,6 +181,10 @@ public class ScreenAnimations {
             text(battle.enemy.name,348,195);
             text("Lv"+battle.enemy.level,588,195);
             popMatrix();
+          } else {
+            battlestart = false;
+            inAnimation = false;
+            opponentThrow();
           }
         }  else {
           battlestart = false;
@@ -226,6 +230,20 @@ public class ScreenAnimations {
           inAnimation = false;
           allywhiteFlash();
         }
+      }
+      if (opponentthrow) {
+        frame ++;
+        image(data.battleBG,0,0);
+        image(data.battleCircles,0,0);
+        if (frame < 36) {
+        int x = 1440 - frame * 10;
+        int y = round(0.0046905458089669*pow(x,2)- 12.417397660819*x+8324.7368421053); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+        pushMatrix();
+        translate(x+48,y+48);
+        rotate(radians(frame*40));
+        image(battle.ally.pokeball,-48,-48);
+        popMatrix();
+        }        
       }
       if (allywhiteflash || enemywhiteflash) {
         if (frame <= 45) { //screen flashing white when ally pokemon is sent out
@@ -795,6 +813,12 @@ public class ScreenAnimations {
   void allyThrow(){
     frame = 0;
     allythrow = true;
+    inAnimation = true;
+  }
+  
+  void opponentThrow(){
+    frame = 0;
+    opponentthrow = true;
     inAnimation = true;
   }
   
