@@ -1,5 +1,6 @@
 public class Pokemon{
   String nickname,name;
+  PImage pokeball;
   String nature;
   HashMap<String, Integer> stats,IVs,EVs;
   int level,hp,exp,neededExp;
@@ -15,6 +16,7 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
+    pokeball = data.pokeball;
     nature = data.natures[(int)random(data.natures.length)]; 
     stats = new HashMap<String,Integer>(); //initializes stat data structures
     IVs = new HashMap<String,Integer>();
@@ -72,7 +74,7 @@ public class Pokemon{
       if (possiblemoves.size() > 0){
         String randmoveid = possiblemoves.remove((int)random(possiblemoves.size()));
         Move randmove = new Move(randmoveid); //gets a random move from posiblemoves and removes it from the list
-        if (!(randmove.damageClass.equals("status") && checkMoveEffects(randmove) == 0)) { //if the effect is not implemented, then it won't be added as a move
+        if ((!randmove.damageClass.equals("status") || checkMoveEffects(randmove)) && randmove.power != -1) { //if the effect is not implemented, then it won't be added as a move
           moves[i] = randmove;
         } else {
           i --;
@@ -146,23 +148,24 @@ public class Pokemon{
     return new float[]{((((2*level)/5.0 + 2) * currentMove.power * A/(1.0*D))/50.0 + 2) * weather * crit * random * STAB * effectiveness * burn,effectiveness}; //returns an array because the effectiveness is needed later for the comment
   }
     
-  private int checkMoveEffects(Move move){ //Checks for special move effects ie. swords dance and stuff and if it's not implemented, returns false
-    return 0;
+  private boolean checkMoveEffects(Move move){ //Checks if implemented the move's effects
+    switch (move.effect) {
+      case 44: case 7: case 6: case 5:  case 3: case 2:
+      return true;
+    }
+    return false;
   }
   
   float attack(Pokemon other){
     int damage = 0;
     float effectiveness = -1;
-    if (!currentMove.damageClass.equals("status")){
-      float[] holder = calcDamage(other);
-      damage = (int)holder[0];
-      effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
-    } else {
-      damage = checkMoveEffects(currentMove);
-    }
+    float[] holder = calcDamage(other);
+    damage = (int)holder[0];
+    effectiveness = holder[1]; //if the pokemon successfully attacks, the effectiveness is changed to what the move effectiveness is
+    if (currentMove.damageClass.equals("status")) damage = 0;
     other.hp -= damage;
     if (other.hp < 0) other.hp = 0;
-    println(name + ' ' + currentMove + ' ' + damage);
+    println(name + ' ' + currentMove + ' ' + damage + ' ' + currentMove.effect);
     return  effectiveness;
   }
   
@@ -172,7 +175,6 @@ public class Pokemon{
     int b = data.expGain.get(other.name).get("exp"); //base exp of the enemy pokemon
     println(b);
     float e = 1;
-    float f = 1;
     float L = other.level;
     println(L);
     float Lp = level;
@@ -180,8 +182,7 @@ public class Pokemon{
     float p  = 1;
     float s = 1;
     float t = 1;
-    float v = 1;
-    return (int)(((b*L*f*v)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5))*t*e*p);
+    return (int)(((a*b*L)/(5.0*s)*pow(((2.0*L+10)/(L+Lp+10.0)),2.5)+1)*t*e*p);
   }
     
   void recalcStats(){

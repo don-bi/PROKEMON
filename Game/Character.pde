@@ -14,7 +14,6 @@ public class Character {
     if (pixel < 16) {
       pixel ++;
     } else {
-      delay ++;
       pixel = 0;
       if (!isBiking && !isRunning) {
         switch (direction) {
@@ -46,7 +45,7 @@ public class Character {
     //offsets for sprite size
     int YOffset = sprite.height - 90 + movingOffsets[1];
     int XOffset = (96 - sprite.width)/2 + movingOffsets[0];
-    if (currentMapTiles.getTile(player.xpos, player.ypos).isGrass && player.pixel == 0) {
+    if (currentMapTiles.getTile(xpos, ypos).isGrass && pixel == 0) {
       image(sprite.get(0,0,sprite.width,96), xpos*16*6 + XOffset, ypos*16*6 - YOffset);
     } else {
       image(sprite, xpos*16*6 + XOffset, ypos*16*6 - YOffset);
@@ -68,5 +67,17 @@ public class Character {
         return currentMapTiles.getTile(xpos-1,ypos);
     }
     return currentMapTiles.getTile(xpos+1,ypos);
+  }
+  
+  int[] getFrontCoords(){
+    switch (direction){
+      case 'u':
+        return new int[]{xpos,ypos-1};
+      case 'd':
+        return new int[]{xpos,ypos+1};
+      case 'l':
+        return new int[]{xpos-1,ypos};
+    }
+    return new int[]{xpos+1,ypos};
   }
 }

@@ -23,3 +23,20 @@ t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,f,f t,f,f,f,f,
 2
 0 8 38 8 Woodbury_Town
 0 9 38 9 Woodbury_Town
+1
+3 2
+d
+5
+William
+Rich Guy
+Hah! I bought my Darkrai for $500000, you can't beat my money!
+H-how did my $500000 Darkrai lose???
+I told you my $500000 Darkrai is unstoppable!!
+encounter
+12000
+3
+Darkrai 45
+Empoleon 35
+Ludicolo 37
+
+

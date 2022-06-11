@@ -47,6 +47,35 @@ public class Map {
         getTile(doorX,doorY).modifyTile("DOOR","add");
         getTile(doorX,doorY).setWarp(warpX,warpY,doorInfo[4]);
       }
+      
+      int trainers = parseInt(reader.readLine());
+      npcs = new NPC[trainers];
+      for (int i = 0; i < trainers; i ++) {
+        String[] coords = reader.readLine().split(" ");
+        int x = parseInt(coords[0]);
+        int y = parseInt(coords[1]);
+        char dir = reader.readLine().charAt(0);
+        int range = parseInt(reader.readLine());
+        NPC newguy = new NPC(x, y, dir, range);
+        newguy.name = reader.readLine();
+        newguy.type = reader.readLine();
+        newguy.comment = reader.readLine();
+        newguy.losecomment = reader.readLine();
+        newguy.wincomment = reader.readLine();
+        newguy.isEncounter = reader.readLine().equals("encounter");
+        newguy.reward = parseInt(reader.readLine());
+        newguy.loadSprite();
+        int pokemons = parseInt(reader.readLine());
+        for (int p = 0; p < pokemons; p ++) {
+          String[] data = reader.readLine().split(" ");
+          String pokename = data[0];
+          int lev = parseInt(data[1]);
+          newguy.team.add(new Pokemon(pokename,lev));
+        }
+        npcs[i] = newguy;
+        currentMapTiles.getTile(newguy.xpos,newguy.ypos).modifyTile("BLOCK","add");
+      }
+      
     } else {
       println("File format not supported");
     }

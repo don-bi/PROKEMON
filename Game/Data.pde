@@ -7,6 +7,9 @@ public class Data {
 
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
+  
+  //NPC animations
+  HashMap<String, HashMap<String, PImage>> npcAnimations = new HashMap<String, HashMap<String, PImage>>();
 
   //Pokemon data
   HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
@@ -43,9 +46,13 @@ public class Data {
   //Pokemon sprites
   HashMap<String, HashMap<String, PImage>> frontSprites = new HashMap<String, HashMap<String, PImage>>();
   HashMap<String, HashMap<String, PImage>> backSprites = new HashMap<String, HashMap<String, PImage>>();
-
-  PImage battleBG, battleCircles, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   
+  //effects tags
+  HashMap<String, PImage> effects = new HashMap<String, PImage>(); 
+
+  PImage encounter, battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
+  PImage player1,player2,player3,player4;
+  PImage potionhover,pokeballhover,masterballhover;
   PFont font;
   
   //GUIS AND BUTTONS
@@ -94,10 +101,16 @@ public class Data {
   
       //loads player sprites
       loadPlayerSprites();
+      
+      //loads npc sprites
+      loadnpcSprites();
   
       //Sets images for battlemode
+      PImage playerSprites = loadImage("player.png");
       battleBG = loadImage("battlebackground.png");
       battleCircles = loadImage("battlecircles.png");
+      lefthalf = battleCircles.get(0,530,1440,334);
+      righthalf = battleCircles.get(0,0,1440,530);
       bigChosenPoke = loadImage("bigchosenpoke.png");
       bigPoke = loadImage("bigpoke.png");
       smallChosenPoke = loadImage("smallchosenpoke.png");
@@ -110,6 +123,14 @@ public class Data {
       PImage pokeballSet = loadImage("pokeballs.png"); //The pokeball set for being thrown when capturing
       pokeball = pokeballSet.get(192,0,96,96);
       masterball = pokeballSet.get(576,0,96,96);
+      player1 = playerSprites.get(839,1056,288,312);
+      player2 = playerSprites.get(1139,1062,384,306);
+      player3 = playerSprites.get(1529,1068,228,300);
+      player4 = playerSprites.get(1811,1074,384,294);
+      potionhover = loadImage("potion.png");
+      pokeballhover = loadImage("pokeball.png");
+      masterballhover = loadImage("masterball.png");
+      encounter = loadImage("encounter.png");
       
       //loads the font
       font = createFont("font.ttf",72);
@@ -132,14 +153,14 @@ public class Data {
       //loads guis and buttons
       loadGuis();
       
+      //loads move data
+      loadMoveData();
+      
       String[] moveidSet = moveData.keySet().toArray(new String[0]); //set of all the move ids in moveData
       for (String id : moveidSet) { 
         String move = moveData.get(id).get("name");
         moveNameId.put(move, id); //maps moves to their ids in moveNameId
       }
-      
-      //loads move data
-      loadMoveData();
       
       //loads nature data
       loadNatures();
@@ -156,6 +177,8 @@ public class Data {
       //loads in capture rates of pokemon
       loadCaptureRates();
       
+      //loads in effect tags
+      loadEffectTags();
     } catch (IOException e){}
   }
 
@@ -197,6 +220,18 @@ public class Data {
     playerAnimations.put("playerRLeftWalk", playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk", playerSprites.get(299, 264, 84, 126));
   }
+  
+  private void loadnpcSprites() {
+    PImage npcSprites = loadImage("NPCsprites.png");
+    HashMap<String, PImage> richguy = new HashMap<String, PImage>();
+    richguy.put("DStand", npcSprites.get(2040,3726,84,120));
+    richguy.put("DLeftWalk", npcSprites.get(2478,3726,84,120));
+    richguy.put("DRightWalk", npcSprites.get(2376,3726,84,120));
+    npcAnimations.put("Rich Guy",richguy);
+    
+  }
+    
+    
 
   private void loadPokemonData() throws IOException{
     BufferedReader reader = createReader("pokemon.csv");
@@ -421,6 +456,15 @@ public class Data {
       }
       line = reader.readLine();
     }
+  }
+  
+  private void loadEffectTags() {
+    PImage effectsheet = loadImage("effects.png");
+    effects.put("poison",effectsheet.get(18,288,60,24));
+    effects.put("burn",effectsheet.get(18,312,60,24));
+    effects.put("paralysis",effectsheet.get(114,288,60,24));
+    effects.put("sleep",effectsheet.get(210,288,60,24));
+    effects.put("freeze",effectsheet.get(306,288,60,24));
   }
     
   

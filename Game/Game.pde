@@ -5,9 +5,11 @@ Player player;
 
 Data data;
 ScreenAnimations animations;
+Command command;
 
 String currentMap;
 Map currentMapTiles;
+NPC[] npcs;
 
 BattleMode battle;
 Gui currentGui;
@@ -21,7 +23,6 @@ after map data, add warp data
 */
 
 void setup() {
-  PFont.list();
   frameRate(60);
   background(0);
   textSize(100);
@@ -31,6 +32,7 @@ void setup() {
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
+  command = new Command();
   
   //loads initial hometop map
   currentMap = "Route1";
@@ -42,18 +44,25 @@ void setup() {
     println("bad file");
   }
   //-------------------------
-
+  textFont(data.font);
   currentGui = data.homeScreen;
   size(1440, 864);
   player = new Player();
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Lucario", 32, true);
+  Pokemon poke2 = new Pokemon("Arceus", 30, true);
+  poke2.moves[0] = new Move("79");
+  poke2.moves[0].accuracy = 100;
+  poke2.moves[1] = new Move("261");
+  poke2.moves[1].accuracy = 100;
+  //poke2.moves[0].effect = 6;
+  //poke2.moves[0].effectChance = 100;
+  poke2.moves[0].power = 0;
   player.team.add(poke2);
-  Pokemon poke3 = new Pokemon("Torterra", 34, true);
+  Pokemon poke3 = new Pokemon("Torterra", 5, true);
   player.team.add(poke3);
-  Pokemon poke4 = new Pokemon("Zekrom", 20, true);
+  Pokemon poke4 = new Pokemon("Zekrom", 5, true);
   player.team.add(poke4);
 }
 
@@ -65,10 +74,11 @@ void draw() {
     pushMatrix();
     player.moveScreen();
     image(data.getMap(currentMap, "fg"), 0, 0);
-    player.showPlayer();
+    showCharacters();
     popMatrix();
     
     checkWASD();
+    if (command.commandmode) command.display();
   } else {
     battle.display();
   }
@@ -82,7 +92,24 @@ void draw() {
 
 void mouseClicked(){
   if (currentGui != null) currentGui.processButtons();
-  animations.startBattle();
+}
+
+void keyPressed(){
+  if (battle == null) {
+    if (key == ENTER) {
+      if (command.commandmode) {
+        command.execute();
+      } else {
+        command.open();
+      }
+    }
+  }
+}
+
+void keyTyped(){
+  if (command.commandmode){
+    command.add();
+  }
 }
 
 void checkWASD(){
@@ -92,21 +119,31 @@ void checkWASD(){
     case "A": 
     case "S": 
     case "D":
-      if (!player.inWalkAnimation) {
+      if (!player.inWalkAnimation && !animations.inAnimation) {
         player.changeDirection();
-        //if (player.delay == 0 ){
-        //  player.move();
-        //} else {
-        //  player.delay ++;
-        //  if (player.delay == 1) player.delay = 0;
-        //}
         player.move();
       }
     }
   }
 }
   
-
+void showCharacters(){
+  for (NPC npc:npcs){
+    if (npc.ypos > player.ypos) {
+      player.showPlayer();
+      npc.display();
+      npc.encounter();
+    } else if (npc.ypos < player.ypos) {
+      npc.display();
+      npc.encounter();
+      player.showPlayer();
+    } else {
+      npc.display();
+      npc.encounter();
+      player.showPlayer();
+    }
+  }
+}
 
 String getSubDir(String sub, String file){
   return dataPath(sub)+'/'+file;

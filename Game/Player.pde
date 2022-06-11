@@ -25,19 +25,24 @@ public class Player extends Character {
         } else {
           sprite = data.playerAnimations.get("player" + (""+direction).toUpperCase() + "RightWalk");
         }
-        if (pixel == 0) {
-          leftFoot = !leftFoot;
-          changeDirection();
-          if (currentMapTiles.getTile(xpos,ypos).isGrass){
-            if ((int)random(100) < 20){
-              int randnum = (int)random(649)+1;
-              println(""+randnum);
-              String randpokeid = data.getPokename(""+randnum);
-              println(randpokeid);
-              Pokemon randpoke = new Pokemon(randpokeid,(int)random(20)+15);
-              battle = new BattleMode(randpoke);
+        try {
+          if (pixel == 0) {
+            leftFoot = !leftFoot;
+            changeDirection();
+            if (currentMapTiles.getTile(xpos,ypos).isGrass){ //20% chance to encounter random pokemon when on grass
+              if ((int)random(100) < 20){
+                int randnum = (int)random(649)+1;
+                println(""+randnum);
+                String randpokename = data.getPokename(""+randnum);
+                println(randpokename);
+                Pokemon randpoke = new Pokemon(randpokename,(int)random(20)+15);
+                battle = new BattleMode(randpoke);
+              }
             }
           }
+        } catch (Exception e) {
+          battle = null;
+          animations.battleComment("An error has occurred, the battle has been aborted","commanderror");
         }
       }
     }

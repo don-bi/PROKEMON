@@ -20,6 +20,7 @@ public class Gui{
     if (texture != null) image(texture,x,y);
     for (int i = 0; i < buttons.size(); i ++){
       buttons.get(i).display();
+      buttons.get(i).processHover();
     }
   }
   
