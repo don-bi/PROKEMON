@@ -146,14 +146,14 @@ public class Data {
       //loads guis and buttons
       loadGuis();
       
+      //loads move data
+      loadMoveData();
+      
       String[] moveidSet = moveData.keySet().toArray(new String[0]); //set of all the move ids in moveData
       for (String id : moveidSet) { 
         String move = moveData.get(id).get("name");
         moveNameId.put(move, id); //maps moves to their ids in moveNameId
       }
-      
-      //loads move data
-      loadMoveData();
       
       //loads nature data
       loadNatures();

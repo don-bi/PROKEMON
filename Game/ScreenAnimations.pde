@@ -24,7 +24,6 @@ public class ScreenAnimations {
       inAnimation = true;
       fadein = true;
     }
-    println(choice);
     
     pushMatrix();
     if (frameCount > 0) {
@@ -459,6 +458,10 @@ public class ScreenAnimations {
             for (int i = 0; i < player.team.size(); i ++) {
               player.team.get(i).hp = player.team.get(i).stats.get("hp");
             }
+          }
+          
+          else if (choice.equals("commanderror")) {
+            battlecomment = null;
           }
           
         }

@@ -234,7 +234,7 @@ public class Button{
             currentGui = null;
             battle.ally = player.team.get(parseInt(choice));
             animations.switchPoke();
-            animations.battleComment("Go! " + battle.ally.name + "!","deadPokemon");
+            animations.battleComment("Go! " + battle.ally.name + "!","deadpokemon");
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;
