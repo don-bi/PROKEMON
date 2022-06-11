@@ -67,8 +67,7 @@ public class NPC extends Character {
             currentMapTiles.getTile(xpos,ypos).modifyTile("BLOCK","add");
             done = true;
             loadSprite();
-            animations.overworldComment(comment,"trainer");
-            //battle = new BattleMode(this);
+            animations.overworldComment(comment,"trainer",this);
           }
         }
       }

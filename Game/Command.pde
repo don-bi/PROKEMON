@@ -33,7 +33,7 @@ public class Command {
           if (!newmove.damageClass.equals("status") || poke.checkMoveEffects(newmove) && newmove.power != -1) {
             poke.moves[whichmove] = new Move(moveid);
           } else {
-            animations.battleComment("That move is not implemented yet, sorry!","commanderror");
+            animations.overworldComment("That move is not implemented yet, sorry!","commanderror");
           }
         }
         if (parts[0].equals("fight")) {
@@ -46,7 +46,7 @@ public class Command {
       animations.inAnimation = false;
       currentcommand = "";
     } catch (Exception e) {
-      animations.battleComment("Bad command","commanderror");
+      animations.overworldComment("Bad command","commanderror");
       commandmode = false;
       animations.inAnimation = false;
       currentcommand = "";

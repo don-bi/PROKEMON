@@ -130,19 +130,17 @@ void checkWASD(){
 void showCharacters(){
   for (NPC npc:npcs){
     if (npc.ypos > player.ypos) {
-      if (npc.direction == 'd') {
-        player.showPlayer();
-        npc.display();
-        npc.encounter();
-      } else if (npc.ypos < player.ypos) {
-        npc.display();
-        npc.encounter();
-        player.showPlayer();
-      } else {
-        npc.display();
-        npc.encounter();
-        player.showPlayer();
-      }
+      player.showPlayer();
+      npc.display();
+      npc.encounter();
+    } else if (npc.ypos < player.ypos) {
+      npc.display();
+      npc.encounter();
+      player.showPlayer();
+    } else {
+      npc.display();
+      npc.encounter();
+      player.showPlayer();
     }
   }
 }

@@ -8,6 +8,7 @@ public class ScreenAnimations {
   String choice;
   int frame, ballshakes;
   float effectiveness;
+  NPC trainer;
   
   public ScreenAnimations() {
     inAnimation = false;
@@ -337,8 +338,14 @@ public class ScreenAnimations {
         } else {
           commenting = false;
           inAnimation = false;
+          owcomment = false;
           
-          if (choice.equals("skip1")) {
+          if (choice.equals("trainer")) {
+            battle = new BattleMode(trainer);
+            battlecomment = null;
+          }
+          
+          else if (choice.equals("skip1")) {
             effectivenessMessage(1,1);
           }
           
@@ -497,6 +504,12 @@ public class ScreenAnimations {
   void overworldComment(String s, String nextChoice){
     battleComment(s,nextChoice);
     owcomment = true;
+  }
+  
+  void overworldComment(String s, String nextChoice, NPC t){
+    battleComment(s,nextChoice);
+    owcomment = true;
+    trainer = t;
   }
   
   void returnHome(){
