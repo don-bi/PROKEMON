@@ -5,6 +5,7 @@ Player player;
 
 Data data;
 ScreenAnimations animations;
+Command command;
 
 String currentMap;
 Map currentMapTiles;
@@ -30,6 +31,7 @@ void setup() {
   //info classes being loaded  
   animations = new ScreenAnimations();
   data = new Data();
+  command = new Command();
   
   //loads initial hometop map
   currentMap = "Route1";
@@ -48,7 +50,7 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Charmander", 5, true);
+  Pokemon poke2 = new Pokemon("Arceus", 30, true);
   poke2.moves[0] = new Move("79");
   poke2.moves[0].accuracy = 100;
   poke2.moves[1] = new Move("261");
@@ -75,6 +77,7 @@ void draw() {
     popMatrix();
     
     checkWASD();
+    if (command.commandmode) command.display();
   } else {
     battle.display();
   }
@@ -90,6 +93,24 @@ void mouseClicked(){
   if (currentGui != null) currentGui.processButtons();
 }
 
+void keyPressed(){
+  if (battle == null) {
+    if (key == ENTER) {
+      if (command.commandmode) {
+        command.execute();
+      } else {
+        command.open();
+      }
+    }
+  }
+}
+
+void keyTyped(){
+  if (command.commandmode){
+    command.add();
+  }
+}
+
 void checkWASD(){
   if (keyPressed){
     switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
@@ -97,14 +118,8 @@ void checkWASD(){
     case "A": 
     case "S": 
     case "D":
-      if (!player.inWalkAnimation) {
+      if (!player.inWalkAnimation && !animations.inAnimation) {
         player.changeDirection();
-        //if (player.delay == 0 ){
-        //  player.move();
-        //} else {
-        //  player.delay ++;
-        //  if (player.delay == 1) player.delay = 0;
-        //}
         player.move();
       }
     }

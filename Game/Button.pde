@@ -124,6 +124,24 @@ public class Button{
   }
   
   void processHover(){
+    if (mouseX > x && mouseX < x+texture.width && mouseY > y && mouseY < y+texture.height){
+      if (special != null) {
+        fill(0);
+        textSize(80);
+        if (special.equals("potion")) {
+          image(data.potionhover,160,392);
+          text("Heals your current\npokemon 50 HP.",150,600);
+        }
+        if (special.equals("pokeball")) {
+          image(data.pokeballhover,160,392);
+          text("A basic POKé BALL.",150,600);
+        }
+        if (special.equals("masterball")){
+          image(data.masterballhover,160,392);
+          text("Always captures the\nopposing pokemon.",150,600);
+        }
+      }
+    }
   }
   
   void processClick(){
@@ -213,10 +231,10 @@ public class Button{
         }
         if (endturn) {
           if (currentGui == data.deadPokemon){ //When choosing a pokemon after own died, it goes back to fight options
-            currentGui = data.fightOptions;
+            currentGui = null;
             battle.ally = player.team.get(parseInt(choice));
             animations.switchPoke();
-            animations.battleComment("You sent out " + battle.ally.name + "!","deadPokemon");
+            animations.battleComment("Go! " + battle.ally.name + "!","deadPokemon");
           } else { //regular switching just ends turn
             currentGui = null;
             battle.playerchoice = choice;
