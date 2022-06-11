@@ -94,7 +94,7 @@ public class BattleMode{
       //The bottom transparent rectangle and options
       textSize(40);
       fill(0);
-      if (animations.fainter != enemy && !animations.opponentthrow) image(enemy.sprite,940,400-enemy.sprite.height);
+      if (animations.fainter != enemy && !animations.opponentthrow && !animations.opponentswitch) image(enemy.sprite,940,400-enemy.sprite.height);
       if (animations.fainter != ally && !animations.switchpoke && !animations.enemywhiteflash || (animations.switchpoke && animations.allywhiteflash)) image(ally.sprite,130,830-ally.sprite.height);
       fill(0,100);
       rect(0,650,1440,214);
@@ -114,7 +114,7 @@ public class BattleMode{
       }
       
       //displays enemy stuff
-      if (!animations.enemywhiteflash) {
+      if (!animations.enemywhiteflash && !animations.opponentswitch || (animations.enemywhiteflash || animations.opponentswitch && animations.frame < 30)) {
         image(data.enemyUi,320,150); //ui
         text("Lv"+enemy.level,588,195); //level
         text(enemy.name,348,195); //name

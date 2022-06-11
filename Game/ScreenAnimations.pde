@@ -231,12 +231,14 @@ public class ScreenAnimations {
           allywhiteFlash();
         }
       }
-      if (opponentthrow) {
+      if (opponentthrow || opponentswitch && !enemywhiteflash) {
         frame ++;
-        image(data.battleBG,0,0);
-        image(data.battleCircles,0,0);
-        PImage guy = data.player1;
-        image(guy,425-guy.width,864-guy.height);
+        if (!opponentswitch) {
+          image(data.battleBG,0,0);
+          image(data.battleCircles,0,0);
+          PImage guy = data.player1;
+          image(guy,425-guy.width,864-guy.height);
+        }
         if (frame < 36) { //THE OPPONENT POKEMON THROW
           int x = 1440 - frame * 10;
           int y = round(0.0046905458089669*pow(x,2)- 12.417397660819*x+8324.7368421053); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
@@ -312,9 +314,13 @@ public class ScreenAnimations {
             popMatrix();
           }
           if (frame == 45) {
-            enemywhiteflash = false;
-            inAnimation = false;
-            allyThrow();
+            if (opponentswitch) {
+              battleComment("What will " + battle.ally.name + " do?", "newturn");
+            } else {
+              enemywhiteflash = false;
+              inAnimation = false;
+              allyThrow();
+            }
           }
         }
       }
