@@ -57,12 +57,27 @@ public class Data {
   
   //GUIS AND BUTTONS
   Gui homeScreen;
+  Gui menu;
+  Gui pokemons;
   Gui fightOptions;
   Gui moveOptions;
   Gui switchPokemon;
   Gui deadPokemon;
   Gui itembag;
   Gui pokeballbag;
+  
+  Button menupokemon;
+  Button menubutton;
+  Button menusave;
+  Button menuexit;
+  
+  Button menupoke1;
+  Button menupoke2;
+  Button menupoke3;
+  Button menupoke4;
+  Button menupoke5;
+  Button menupoke6;
+  Button menucancel;
   
   Button fight;
   Button pokemon;
@@ -373,12 +388,23 @@ public class Data {
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
+    menu = new Gui(0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
     deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
     itembag = new Gui(loadImage("items.png"),0,0);
     pokeballbag = new Gui(loadImage("pokeballbag.png"),0,0);
+    pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
+    
+    menubutton = new Button(homeScreen,menu,1240,0);
+    menubutton.texture = loadImage("menu.png");
+    menupokemon = new Button(menu,pokemons,1240,0);
+    menupokemon.texture = loadImage("menu.png");
+    menusave = new Button(menu,1315,0,"save");
+    menusave.texture = loadImage("menu.png");
+    menuexit = new Button(menu,homeScreen,1390,0);
+    menuexit.texture = loadImage("menu.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

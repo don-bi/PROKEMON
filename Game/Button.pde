@@ -30,8 +30,15 @@ public class Button{
     if (texture != null) image(texture,x,y);
     if (special != null){
       textSize(50);
+      fill(255);
+      if (this == data.menubutton){
+        text("MENU",1250,30);
+      }
+      
+      textSize(50);
       fill(0);
       Pokemon poke = battle.ally;
+      
       switch (special){ //displays the move buttons is battle
         case "move1":
           if (poke.moves[0] != null) text(poke.moves[0].toString(),x+10,y+texture.height/2);
@@ -154,6 +161,37 @@ public class Button{
         String choice = "";
         poke.currentMove = null;
         
+        if(this == data.menubutton || this == data.menupokemon || this == data.menusave) {
+          currentGui = opensGui;
+        }
+        
+        if (special.equals("menupokemon")) { //when opening the menu to view pokemon stats & stuff, it remakes the buttons according to current pokemon team
+          data.pokemons.buttons = new ArrayList<Button>();
+          switch(player.team.size()){
+            case(6):
+              data.menupoke6 = new Button(data.pokemons,560,562,"menupoke6");
+              data.menupoke6.texture = data.smallPoke;
+            case(5):
+              data.menupoke5 = new Button(data.pokemons,560,442,"menupoke5");
+              data.menupoke5.texture = data.smallPoke;
+            case(4):
+              data.menupoke4 = new Button(data.pokemons,560,322,"menupoke4");
+              data.menupoke4.texture = data.smallPoke;
+            case(3):
+              data.menupoke3 = new Button(data.pokemons,560,202,"menupoke3");
+              data.menupoke3.texture = data.smallPoke;
+            case(2):
+              data.menupoke2 = new Button(data.pokemons,560,82,"menupoke2");
+              data.menupoke2.texture = data.smallPoke;
+            case(1):
+              data.menupoke1 = new Button(data.pokemons,130,122,"menupoke1");
+              data.menupoke1.texture = data.bigPoke;
+          }
+          data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
+          data.cancel.texture = loadImage("cancel.png");
+        }
+
+        
         if (special.equals("endComment")) {
           animations.battlecomment = null;
           animations.inAnimation = false;
@@ -186,8 +224,21 @@ public class Button{
           }
         }
         if (special.equals("potion")) {
-          animations.battleComment("Your potion healed " + battle.ally.name + " for 50HP!","potion");
-          currentGui = null;
+          if (player.bag.potions <= 0){
+            animations.battleComment("You have no more potions!","fightoptions");
+            currentGui = null;
+          } else {
+            if (battle.ally.hp == battle.ally.stats.get("hp"))  {
+              animations.battleComment(battle.ally.name + " already has full HP!","fightoptions");
+              currentGui = null;
+            } else {
+              battle.playerchoice = "bag";
+              battle.doTurn();
+              animations.battleComment("Your potion healed " + battle.ally.name + " for 50HP!","potion");
+              player.bag.potions--;
+              currentGui = null;
+            }
+          }
         }
         
         if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons

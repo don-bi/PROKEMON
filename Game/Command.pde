@@ -12,7 +12,7 @@ public class Command {
     animations.inAnimation = true;
   }
   
-  void execute(){
+  void execute(){ //excutes the command when pressed enter again based on first word
     try {
       if (currentcommand.length() > 0) {
         String[] parts = currentcommand.split(" ");
@@ -53,7 +53,7 @@ public class Command {
     }
   }
   
-  void display(){
+  void display(){ //displays the command bar =
     fill(255);
     rect(0,392,1440,40);
     fill(0);

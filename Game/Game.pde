@@ -53,7 +53,7 @@ void setup() {
   //TESTING BATTLEMODE
   Pokemon poke2 = new Pokemon("Arceus", 30, true);
   poke2.moves[0] = new Move("79");
-  poke2.moves[0].accuracy = 100;
+  poke2.moves[0].accuracy = 0;
   poke2.moves[1] = new Move("261");
   poke2.moves[1].accuracy = 100;
   //poke2.moves[0].effect = 6;

@@ -83,7 +83,13 @@ public class BattleMode{
       attacker = enemy;
       defender = ally;
     }
-    if (!animations.statusSkip(attacker)) animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
+    if (!animations.statusSkip(attacker)) {
+      if (attacker.currentMove.accuracy > (int)random(100)) {    
+        animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
+      } else {
+        animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","miss1");
+      }
+    }
   }
   
   void display(){ //THERES A LOT OF BOOLEANS TO MAKE SURE CERTAIN IMAGES DON'T APPEAR DURING AN ANIMATION

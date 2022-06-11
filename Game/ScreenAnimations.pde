@@ -367,14 +367,19 @@ public class ScreenAnimations {
         image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
         hplowerer = null;
         hp = false;
-        if (choice.equals("fight")) {
-          setNewStatus(1);
-        } else if (choice.equals("secondAttack")) {
-          setNewStatus(2);
-        } else if (choice.equals("statusdamage2")) {
-          statusDamage(2);
-        } else if (choice.equals("statusdamage3")) {
-          battleComment("","newturn");
+        if (potion) {
+          if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+          potion = false;
+        } else {
+          if (choice.equals("fight")) {
+            setNewStatus(1);
+          } else if (choice.equals("secondAttack")) {
+            setNewStatus(2);
+          } else if (choice.equals("statusdamage2")) {
+            statusDamage(2);
+          } else if (choice.equals("statusdamage3")) {
+            battleComment("","newturn");
+          }
         }
       }
     }
@@ -436,6 +441,10 @@ public class ScreenAnimations {
             battleComment(battle.attacker.name + " used " + battle.attacker.currentMove + "!","fight");
           }
           
+          else if (choice.equals("miss1")) {
+            battleComment("The attack missed!","skip1");
+          }
+          
           else if (choice.equals("fight")) {
             if (!transition) hpBar(battle.attacker, battle.defender, "attack");
           } 
@@ -446,10 +455,20 @@ public class ScreenAnimations {
           
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
-              if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+              if (!statusSkip(battle.defender)) {
+                if (battle.defender.currentMove.accuracy > (int)random(100)) {
+                  battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+                } else {
+                  battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","miss2");
+                }
+              }
             } else {
               faint(battle.defender);
             }
+          }
+          
+          else if (choice.equals("miss2")) {
+            battleComment("The attack missed!","skip2");
           }
           
           else if (choice.equals("escape")) {
@@ -643,13 +662,14 @@ public class ScreenAnimations {
   void potion(){
     prevHp = battle.ally.hp;
     newHp = battle.ally.hp + 50;
+    if (newHp > battle.ally.stats.get("hp")) newHp = battle.ally.stats.get("hp");
     hplowerer = battle.ally;
     frame = 1;
     hp = true;
-    choice = "secondattack";
+    potion = true;
     inAnimation = true;
     transition = true;
-    comment = null;
+    battlecomment = null;
   }
   
   void expBar(){
