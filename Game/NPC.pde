@@ -41,17 +41,17 @@ public class NPC extends Character {
         if (delay < 60){ //DOES THE BOUNCING EXCLAMATION FIRST
           if (delay < 10) {
             delay++;
-            int YOffset = sprite.height - 40 - delay*4;
+            int YOffset = sprite.height + 30 + delay*4;
             int XOffset = (96 - sprite.width)/2 - 12;
             image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
           } else if (delay < 20) {
             delay++;
-            int YOffset = sprite.height - 80 + (delay-10)*4;
+            int YOffset = sprite.height + 70 - (delay-10)*4;
             int XOffset = (96 - sprite.width)/2 - 12;
             image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
           } else {
             delay++;
-            int YOffset = sprite.height - 40;
+            int YOffset = sprite.height + 30;
             int XOffset = (96 - sprite.width)/2 - 12;
             image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
           }
@@ -61,8 +61,10 @@ public class NPC extends Character {
           int x = getFrontCoords()[0];
           int y = getFrontCoords()[1];
           if (x != player.xpos || y != player.ypos) {
+            currentMapTiles.getTile(xpos,ypos).modifyTile("BLOCK","remove");
             move();
           } else { //WHEN THE GUY FINALLY REACHES THE PLAYER, IT STARTS THE BATTLE STUFF
+            currentMapTiles.getTile(xpos,ypos).modifyTile("BLOCK","add");
             done = true;
             loadSprite();
             animations.overworldComment(comment,"trainer");

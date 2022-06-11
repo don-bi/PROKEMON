@@ -73,6 +73,7 @@ public class Map {
           newguy.team.add(new Pokemon(pokename,lev));
         }
         npcs[i] = newguy;
+        currentMapTiles.getTile(newguy.xpos,newguy.ypos).modifyTile("BLOCK","add");
       }
       
     } else {

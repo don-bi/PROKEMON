@@ -74,8 +74,7 @@ void draw() {
     pushMatrix();
     player.moveScreen();
     image(data.getMap(currentMap, "fg"), 0, 0);
-    showNPCs();
-    player.showPlayer();
+    showCharacters();
     popMatrix();
     
     checkWASD();
@@ -128,10 +127,23 @@ void checkWASD(){
   }
 }
   
-void showNPCs(){
+void showCharacters(){
   for (NPC npc:npcs){
-    npc.display();
-    npc.encounter();
+    if (npc.ypos > player.ypos) {
+      if (npc.direction == 'd') {
+        player.showPlayer();
+        npc.display();
+        npc.encounter();
+      } else if (npc.ypos < player.ypos) {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      } else {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      }
+    }
   }
 }
 
