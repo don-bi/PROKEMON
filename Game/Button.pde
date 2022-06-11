@@ -43,11 +43,71 @@ public class Button{
       if (this == data.menuexit) {
         text("EXIT",1300,200);
       }
+      Pokemon poke;
+      textSize(40);
+      fill(0);
+      PImage icon;
+      switch (special){ //Displays the pokemon name and level in the switchpokemon screen and in the menupokemon screen in the overworld
+        case "poke1": case "menupoke1":
+          poke = player.team.get(0);
+          text(poke.name,270,250);
+          text("Lv"+poke.level,300,290);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,327);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,132,134+(96-icon.height)/2);
+          break;
+        case "poke2": case "menupoke2":
+          poke = player.team.get(1);
+          text(poke.name,690,120);
+          text("Lv"+poke.level,720,160);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,122);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,562,89+(96-icon.height)/2);
+          break;
+        case "poke3": case "menupoke3":
+          poke = player.team.get(2);
+          text(poke.name,690,240);
+          text("Lv"+poke.level,720,280);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,242);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,562,209+(96-icon.height)/2);
+          break;
+        case "poke4": case "menupoke4":
+          poke = player.team.get(3);
+          text(poke.name,690,360);
+          text("Lv"+poke.level,720,400);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,362);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,562,329+(96-icon.height)/2);
+          break;
+        case "poke5": case "menupoke5":
+          poke = player.team.get(4);
+          text(poke.name,690,480);
+          text("Lv"+poke.level,720,520);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,562,449+(96-icon.height)/2);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
+          break;
+        case "poke6": case "menupoke6":
+          poke = player.team.get(5);
+          text(poke.name,690,600);
+          text("Lv"+poke.level,720,640);
+          image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
+          icon = data.frontSprites.get(poke.name).get(poke.mode);
+          icon.resize(96,0);
+          image(icon,562,569+(96-icon.height)/2);
+          break;
+      }
       
       if (battle != null) {
         textSize(50);
         fill(0);
-        Pokemon poke = battle.ally;
+        poke = battle.ally;
         
         switch (special){ //displays the move buttons is battle
           case "move1":
@@ -61,65 +121,6 @@ public class Button{
             break;
           case "move4":
             if (poke.moves[3] != null) text(poke.moves[3].toString(),x+10,y+texture.height/2);
-            break;
-        }
-        textSize(40);
-        fill(0);
-        PImage icon;
-        switch (special){ //Displays the pokemon name and level in the switchpokemon screen
-          case "poke1": case "menupoke1":
-            poke = player.team.get(0);
-            text(poke.name,270,250);
-            text("Lv"+poke.level,300,290);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),280,327);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,132,134+(96-icon.height)/2);
-            break;
-          case "poke2": case "menupoke2":
-            poke = player.team.get(1);
-            text(poke.name,690,120);
-            text("Lv"+poke.level,720,160);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,122);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,562,89+(96-icon.height)/2);
-            break;
-          case "poke3": case "menupoke3":
-            poke = player.team.get(2);
-            text(poke.name,690,240);
-            text("Lv"+poke.level,720,280);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,242);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,562,209+(96-icon.height)/2);
-            break;
-          case "poke4": case "menupoke4":
-            poke = player.team.get(3);
-            text(poke.name,690,360);
-            text("Lv"+poke.level,720,400);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,362);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,562,329+(96-icon.height)/2);
-            break;
-          case "poke5": case "menupoke5":
-            poke = player.team.get(4);
-            text(poke.name,690,480);
-            text("Lv"+poke.level,720,520);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,562,449+(96-icon.height)/2);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,482);
-            break;
-          case "poke6": case "menupoke6":
-            poke = player.team.get(5);
-            text(poke.name,690,600);
-            text("Lv"+poke.level,720,640);
-            image(data.hpBar.get(0,0,poke.hp*240/poke.stats.get("hp"),15),1040,602);
-            icon = data.frontSprites.get(poke.name).get(poke.mode);
-            icon.resize(96,0);
-            image(icon,562,569+(96-icon.height)/2);
             break;
         }
         textSize(72);
@@ -171,38 +172,44 @@ public class Button{
           currentGui = opensGui;
         }
         
-        if (battle != null) {
-          Pokemon poke = battle.ally; //special cases for move buttons
-          boolean endturn = false;
-          String choice = "";
-          poke.currentMove = null;
-          
-          if (special.equals("menupokemon")) { //when opening the menu to view pokemon stats & stuff, it remakes the buttons according to current pokemon team
+        if (special.equals("menupokemon")) { //when opening the menu to view pokemon stats & stuff, it remakes the buttons according to current pokemon team
             data.pokemons.buttons = new ArrayList<Button>();
             switch(player.team.size()){
               case(6):
                 data.menupoke6 = new Button(data.pokemons,560,562,"menupoke6");
                 data.menupoke6.texture = data.smallPoke;
+                data.pokemons.buttons.add(data.menupoke6);
               case(5):
                 data.menupoke5 = new Button(data.pokemons,560,442,"menupoke5");
                 data.menupoke5.texture = data.smallPoke;
+                data.pokemons.buttons.add(data.menupoke5);
               case(4):
                 data.menupoke4 = new Button(data.pokemons,560,322,"menupoke4");
                 data.menupoke4.texture = data.smallPoke;
+                data.pokemons.buttons.add(data.menupoke4);
               case(3):
                 data.menupoke3 = new Button(data.pokemons,560,202,"menupoke3");
                 data.menupoke3.texture = data.smallPoke;
+                data.pokemons.buttons.add(data.menupoke3);
               case(2):
                 data.menupoke2 = new Button(data.pokemons,560,82,"menupoke2");
                 data.menupoke2.texture = data.smallPoke;
+                data.pokemons.buttons.add(data.menupoke2);
               case(1):
                 data.menupoke1 = new Button(data.pokemons,130,122,"menupoke1");
                 data.menupoke1.texture = data.bigPoke;
+                data.pokemons.buttons.add(data.menupoke1);
             }
-            data.cancel = new Button(data.switchPokemon,data.fightOptions,1040,702);
+            data.cancel = new Button(data.pokemons,data.menu,1040,702);
             data.cancel.texture = loadImage("cancel.png");
+            data.pokemons.buttons.add(data.cancel);
           }
-  
+        
+        if (battle != null) {
+          Pokemon poke = battle.ally; //special cases for move buttons
+          boolean endturn = false;
+          String choice = "";
+          poke.currentMove = null;
           
           if (special.equals("endComment")) {
             animations.battlecomment = null;
