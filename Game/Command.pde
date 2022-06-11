@@ -40,6 +40,11 @@ public class Command {
           Pokemon poke = new Pokemon(parts[1].substring(0,1).toUpperCase() + parts[1].substring(1),parseInt(parts[2]));
           battle = new BattleMode(poke);
         }
+        if (parts[0].equals("giveitems")) {
+          player.bag.pokeballs += 5;
+          player.bag.masterballs += 5;
+          player.bag.potions += 5;
+        }
           
       }
       commandmode = false;
