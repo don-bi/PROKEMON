@@ -8,7 +8,7 @@ public class NPC extends Character {
 
   public NPC(int x, int y, char dir, int r) {
     direction = dir;
-    sprite = data.playerAnimations.get(type + (""+dir).toUpperCase() + "Stand");
+    sprite = data.npcAnimations.get(type).get((""+dir).toUpperCase() + "Stand");
     xpos = x;
     ypos = y;
     pixel = 0;

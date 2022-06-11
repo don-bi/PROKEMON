@@ -63,11 +63,12 @@ public class Map {
         newguy.losecomment = reader.readLine();
         newguy.wincomment = reader.readLine();
         newguy.isEncounter = reader.readLine().equals("encounter");
-        newguy.reward = parseInt(reader.readLine();
-        int pokemons = parseInt(reader.readLine();
-        for (int p = 0; p < pokemons); p ++) {
-          String pokename = reader.readLine();
-          int lev = parseInt(reader.readLine());
+        newguy.reward = parseInt(reader.readLine());
+        int pokemons = parseInt(reader.readLine());
+        for (int p = 0; p < pokemons; p ++) {
+          String[] data = reader.readLine().split(" ");
+          String pokename = data[0];
+          int lev = parseInt(data[1]);
           newguy.team.add(new Pokemon(pokename,lev));
         }
         npcs[i] = newguy;

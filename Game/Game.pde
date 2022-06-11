@@ -75,6 +75,7 @@ void draw() {
     player.moveScreen();
     image(data.getMap(currentMap, "fg"), 0, 0);
     player.showPlayer();
+    showNPCs();
     popMatrix();
     
     checkWASD();
@@ -127,7 +128,11 @@ void checkWASD(){
   }
 }
   
-
+void showNPCs(){
+  for (NPC npc:npcs){
+    npc.display();
+  }
+}
 
 String getSubDir(String sub, String file){
   return dataPath(sub)+'/'+file;
