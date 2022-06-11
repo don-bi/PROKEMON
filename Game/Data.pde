@@ -397,13 +397,13 @@ public class Data {
     pokeballbag = new Gui(loadImage("pokeballbag.png"),0,0);
     pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
     
-    menubutton = new Button(homeScreen,menu,1240,0);
+    menubutton = new Button(homeScreen,menu,1240,0,"");
     menubutton.texture = loadImage("menu.png");
-    menupokemon = new Button(menu,pokemons,1240,0);
+    menupokemon = new Button(menu,pokemons,1240,0,"");
     menupokemon.texture = loadImage("menu.png");
-    menusave = new Button(menu,1315,0,"save");
+    menusave = new Button(menu,1240,75,"save");
     menusave.texture = loadImage("menu.png");
-    menuexit = new Button(menu,homeScreen,1390,0);
+    menuexit = new Button(menu,homeScreen,1240,150);
     menuexit.texture = loadImage("menu.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);
