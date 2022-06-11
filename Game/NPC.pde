@@ -8,7 +8,6 @@ public class NPC extends Character {
 
   public NPC(int x, int y, char dir, int r) {
     direction = dir;
-    sprite = data.npcAnimations.get(type).get((""+dir).toUpperCase() + "Stand");
     xpos = x;
     ypos = y;
     pixel = 0;
@@ -47,5 +46,9 @@ public class NPC extends Character {
         battle = new BattleMode(this);
       }
     }
+  }
+  
+  void loadSprite(){
+    sprite = data.npcAnimations.get(type).get((""+direction).toUpperCase() + "Stand");
   }
 }

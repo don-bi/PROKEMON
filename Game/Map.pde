@@ -64,6 +64,7 @@ public class Map {
         newguy.wincomment = reader.readLine();
         newguy.isEncounter = reader.readLine().equals("encounter");
         newguy.reward = parseInt(reader.readLine());
+        newguy.loadSprite();
         int pokemons = parseInt(reader.readLine());
         for (int p = 0; p < pokemons; p ++) {
           String[] data = reader.readLine().split(" ");

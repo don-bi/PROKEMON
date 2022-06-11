@@ -223,7 +223,7 @@ public class Data {
   private void loadnpcSprites() {
     PImage npcSprites = loadImage("NPCsprites.png");
     HashMap<String, PImage> richguy = new HashMap<String, PImage>();
-    richguy.put("Dstand", npcSprites.get(2040,3726,84,120));
+    richguy.put("DStand", npcSprites.get(2040,3726,84,120));
     richguy.put("DLeftWalk", npcSprites.get(2478,3726,84,120));
     richguy.put("DRightWalk", npcSprites.get(2376,3726,84,120));
     npcAnimations.put("Rich Guy",richguy);

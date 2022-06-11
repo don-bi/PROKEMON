@@ -74,8 +74,8 @@ void draw() {
     pushMatrix();
     player.moveScreen();
     image(data.getMap(currentMap, "fg"), 0, 0);
-    player.showPlayer();
     showNPCs();
+    player.showPlayer();
     popMatrix();
     
     checkWASD();
