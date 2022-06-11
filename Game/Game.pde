@@ -9,6 +9,7 @@ Command command;
 
 String currentMap;
 Map currentMapTiles;
+NPC[] npcs;
 
 BattleMode battle;
 Gui currentGui;

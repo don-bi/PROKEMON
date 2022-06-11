@@ -33,9 +33,9 @@ public class Player extends Character {
               if ((int)random(100) < 20){
                 int randnum = (int)random(649)+1;
                 println(""+randnum);
-                String randpokeid = data.getPokename(""+randnum);
-                println(randpokeid);
-                Pokemon randpoke = new Pokemon(randpokeid,(int)random(20)+15);
+                String randpokename = data.getPokename(""+randnum);
+                println(randpokename);
+                Pokemon randpoke = new Pokemon(randpokename,(int)random(20)+15);
                 battle = new BattleMode(randpoke);
               }
             }

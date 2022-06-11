@@ -7,6 +7,9 @@ public class Data {
 
   //Player animations
   HashMap<String, PImage> playerAnimations = new HashMap<String, PImage>();
+  
+  //NPC animations
+  HashMap<String, HashMap<String, PImage>> npcAnimations = new HashMap<String, HashMap<String, PImage>>();
 
   //Pokemon data
   HashMap<String, HashMap<String, String>> pokemonData = new HashMap<String, HashMap<String, String>>();
@@ -98,6 +101,9 @@ public class Data {
   
       //loads player sprites
       loadPlayerSprites();
+      
+      //loads npc sprites
+      loadnpcSprites();
   
       //Sets images for battlemode
       PImage playerSprites = loadImage("player.png");
@@ -213,6 +219,18 @@ public class Data {
     playerAnimations.put("playerRLeftWalk", playerSprites.get(293, 132, 84, 126));
     playerAnimations.put("playerRRightWalk", playerSprites.get(299, 264, 84, 126));
   }
+  
+  private void loadnpcSprites() {
+    PImage npcSprites = loadImage("NPCsprites.png");
+    HashMap<String, PImage> richguy = new HashMap<String, PImage>();
+    richguy.put("Dstand", npcSprites.get(2040,3726,84,120));
+    richguy.put("DLeftWalk", npcSprites.get(2478,3726,84,120));
+    richguy.put("DRightWalk", npcSprites.get(2376,3726,84,120));
+    npcAnimations.put("Rich Guy",richguy);
+    
+  }
+    
+    
 
   private void loadPokemonData() throws IOException{
     BufferedReader reader = createReader("pokemon.csv");

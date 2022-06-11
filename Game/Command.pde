@@ -23,7 +23,7 @@ public class Command {
           int whichpoke = parseInt(parts[1])-1;
           String pokename = parts[2].substring(0,1).toUpperCase() + parts[2].substring(1);
           int level = parseInt(parts[3]);
-          if (whichpoke < 6 && whichpoke > -1) player.team.set(whichpoke,new Pokemon(pokename,level,true));
+          if (whichpoke < player.team.size() && whichpoke > -1) player.team.set(whichpoke,new Pokemon(pokename,level,true));
         }
         if (parts[0].equals("setmove")) {
           Pokemon poke = player.team.get(parseInt(parts[1])-1);
@@ -37,7 +37,7 @@ public class Command {
           }
         }
         if (parts[0].equals("fight")) {
-          Pokemon poke = new Pokemon(parts[1], parseInt(parts[2]));
+          Pokemon poke = new Pokemon(parts[1].substring(0,1).toUpperCase() + parts[1].substring(1),parseInt(parts[2]));
           battle = new BattleMode(poke);
         }
           

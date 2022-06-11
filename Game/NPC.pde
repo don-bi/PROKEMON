@@ -1,9 +1,10 @@
 public class NPC extends Character {
   String name;
   String type;
-  String[] comments;
+  String comment, losecomment, wincomment;
   boolean isEncounter,encountered;
   int range;
+  int reward;
 
   public NPC(int x, int y, char dir, int r) {
     direction = dir;
