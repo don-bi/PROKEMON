@@ -59,6 +59,11 @@ public class Gui{
       } else {
         text(poke.type2.toUpperCase(),360,846);
       }
+      text("MOVES LEARNED",760,558);
+      if (poke.moves[0] != null) text(poke.moves[0].toString().toUpperCase(),800,630);
+      if (poke.moves[1] != null) text(poke.moves[1].toString().toUpperCase(),800,702);
+      if (poke.moves[2] != null) text(poke.moves[2].toString().toUpperCase(),800,774);
+      if (poke.moves[3] != null) text(poke.moves[3].toString().toUpperCase(),800,846);
     }
   }
   
