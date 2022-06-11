@@ -233,24 +233,31 @@ public class ScreenAnimations {
       }
       if (opponentthrow) {
         frame ++;
+        PImage guy = data.player1;
+        image(guy,425-guy.width,864-guy.height);
         image(data.battleBG,0,0);
         image(data.battleCircles,0,0);
-        if (frame < 36) {
-        int x = 1440 - frame * 10;
-        int y = round(0.0046905458089669*pow(x,2)- 12.417397660819*x+8324.7368421053); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
-        pushMatrix();
-        translate(x+48,y+48);
-        rotate(radians(frame*40));
-        image(battle.ally.pokeball,-48,-48);
-        popMatrix();
-        }        
+        if (frame < 36) { //THE OPPONENT POKEMON THROW
+          int x = 1440 - frame * 10;
+          int y = round(0.0046905458089669*pow(x,2)- 12.417397660819*x+8324.7368421053); //PARABOLA EQUATION TO MAKE CURVE FOR SENDING OUT POKEMON
+          pushMatrix();
+          translate(x+32,y+32);
+          rotate(radians(frame*40));
+          PImage balls = data.pokeball;
+          balls.resize(64,0);
+          image(balls,-32,-32);
+          popMatrix();
+        } else { //once done with the throw, does the white flahs
+          enemywhiteFlash();
+          battleComment(trainer.type + " " + trainer.name + " sent out " + battle.enemy,"");
+        }
       }
-      if (allywhiteflash || enemywhiteflash) {
+      if (allywhiteflash) {
         if (frame <= 45) { //screen flashing white when ally pokemon is sent out
           frame ++;
           fill(255,255-frame*5);
           rect(0,0,1440,864);
-          if (allywhiteflash && frame > 30) { //ally pokemon ui moving in
+          if (frame > 30) { //ally pokemon ui moving in
             pushMatrix();
             textSize(40);
             int framediff = frame - 15;
@@ -280,6 +287,29 @@ public class ScreenAnimations {
               currentGui = data.fightOptions;
             }
             allywhiteflash = false;
+            inAnimation = false;
+          }
+        }
+      }
+      if (enemywhiteflash) {
+        if (frame <= 45) { //screen flashing white when opponent pokemon is sent out
+          frame ++;
+          fill(255,255-frame*5);
+          rect(0,0,1440,864);
+          if (frame < 30) {
+            pushMatrix();
+            textSize(40);
+            fill(0);
+            translate(-720+frame*24,0);
+            image(data.enemyUi,320,150);
+            image(data.miniHpBar,476,218);
+            text(battle.enemy.name,348,195);
+            text("Lv"+battle.enemy.level,588,195);
+            popMatrix();
+          }
+          if (frame == 45) {
+            battleComment("What will " + battle.ally.name + " do?","");
+            currentGui = data.fightOptions;
             enemywhiteflash = false;
             inAnimation = false;
           }
@@ -496,7 +526,7 @@ public class ScreenAnimations {
         }
       }
     }
-    if (battlecomment != null && !allywhiteflash) {
+    if (battlecomment != null && !allywhiteflash && !enemywhiteflash) {
       fill(255);
       textSize(30);
       textFont(data.font);
@@ -825,6 +855,13 @@ public class ScreenAnimations {
   void allywhiteFlash(){
     frame = 0;
     allywhiteflash = true;
+    inAnimation = true;
+    commenting = false;
+  }
+  
+  void enemywhiteFlash(){
+    frame = 0;
+    enemywhiteflash = true;
     inAnimation = true;
     commenting = false;
   }

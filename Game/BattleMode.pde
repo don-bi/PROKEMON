@@ -90,7 +90,7 @@ public class BattleMode{
       //The bottom transparent rectangle and options
       textSize(40);
       fill(0);
-      if (animations.fainter != enemy) image(enemy.sprite,940,400-enemy.sprite.height);
+      if (animations.fainter != enemy && !animations.opponentthrow) image(enemy.sprite,940,400-enemy.sprite.height);
       if (animations.fainter != ally && !animations.switchpoke || (animations.switchpoke && animations.allywhiteflash)) image(ally.sprite,130,830-ally.sprite.height);
       fill(0,100);
       rect(0,650,1440,214);
@@ -98,7 +98,7 @@ public class BattleMode{
       
       fill(0);
       //displays ally stuff
-      if (!animations.allywhiteflash && !animations.switchpoke) {
+      if (!animations.allywhiteflash && !animations.enemywhiteflash && !animations.switchpoke) {
         textSize(40);
         image(data.allyUi,860,430); //ui
         image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562); //expbar
@@ -110,12 +110,13 @@ public class BattleMode{
       }
       
       //displays enemy stuff
-      image(data.enemyUi,320,150); //ui
-      text("Lv"+enemy.level,588,195); //level
-      text(enemy.name,348,195); //name
-      if (!enemy.nonvolStatus.equals("none")) image(data.effects.get(enemy.nonvolStatus),342,210); //effect tag
-      if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218); //hpbar
-      
+      if (!animations.enemywhiteflash) {
+        image(data.enemyUi,320,150); //ui
+        text("Lv"+enemy.level,588,195); //level
+        text(enemy.name,348,195); //name
+        if (!enemy.nonvolStatus.equals("none")) image(data.effects.get(enemy.nonvolStatus),342,210); //effect tag
+        if (animations.hplowerer != enemy) image(data.miniHpBar.get(0,0,enemy.hp*192/enemy.stats.get("hp"),8),476,218); //hpbar
+      }
     }
   }
   
