@@ -51,19 +51,19 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Arceus", 30, true);
+  Pokemon poke2 = new Pokemon("Blissey", 100, true);
   poke2.moves[0] = new Move("79");
-  poke2.moves[0].accuracy = 0;
   poke2.moves[1] = new Move("261");
-  poke2.moves[1].accuracy = 100;
-  //poke2.moves[0].effect = 6;
-  //poke2.moves[0].effectChance = 100;
-  poke2.moves[0].power = 0;
+  poke2.moves[2] = new Move("86");
+  poke2.moves[3] = new Move("58");
+  poke2.moves[3].effectChance = 100;
   player.team.add(poke2);
-  Pokemon poke3 = new Pokemon("Torterra", 5, true);
+  Pokemon poke3 = new Pokemon("Rayquaza", 40, true);
   player.team.add(poke3);
-  Pokemon poke4 = new Pokemon("Zekrom", 5, true);
+  Pokemon poke4 = new Pokemon("Arceus","dark", 45, true);
   player.team.add(poke4);
+  Pokemon poke5 = new Pokemon("Mewtwo",40,true);
+  player.team.add(poke5);
 }
 
 void draw() {

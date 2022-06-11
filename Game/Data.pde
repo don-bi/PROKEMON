@@ -80,6 +80,8 @@ public class Data {
   Button menupoke6;
   Button menucancel;
   
+  Button pokemondataexit;
+  
   Button fight;
   Button pokemon;
   Button bag;
@@ -408,6 +410,9 @@ public class Data {
     menusave.texture = loadImage("menu.png");
     menuexit = new Button(menu,homeScreen,1240,150,"");
     menuexit.texture = loadImage("menu.png");
+    
+    pokemondataexit = new Button(pokemondata,menu,1375,0);
+    pokemondataexit.texture = loadImage("x.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

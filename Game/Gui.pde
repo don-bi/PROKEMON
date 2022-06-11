@@ -28,7 +28,7 @@ public class Gui{
       PImage icon = data.frontSprites.get(poke.name).get(poke.mode).get();
       icon.resize(384,0);
       image(icon,933,77);
-      icon = poke.pokeball;
+      icon = poke.pokeball.get();
       icon.resize(48,0);
       image(icon,10,49);
       fill(255);
@@ -59,11 +59,11 @@ public class Gui{
       } else {
         text(poke.type2.toUpperCase(),360,846);
       }
-      text("MOVES LEARNED",760,558);
-      if (poke.moves[0] != null) text(poke.moves[0].toString().toUpperCase(),800,630);
-      if (poke.moves[1] != null) text(poke.moves[1].toString().toUpperCase(),800,702);
-      if (poke.moves[2] != null) text(poke.moves[2].toString().toUpperCase(),800,774);
-      if (poke.moves[3] != null) text(poke.moves[3].toString().toUpperCase(),800,846);
+      text("MOVES LEARNED",860,558);
+      if (poke.moves[0] != null) text(poke.moves[0].toString().toUpperCase(),900,630);
+      if (poke.moves[1] != null) text(poke.moves[1].toString().toUpperCase(),900,702);
+      if (poke.moves[2] != null) text(poke.moves[2].toString().toUpperCase(),900,774);
+      if (poke.moves[3] != null) text(poke.moves[3].toString().toUpperCase(),900,846);
     }
   }
   
