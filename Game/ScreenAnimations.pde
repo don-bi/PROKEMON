@@ -524,6 +524,10 @@ public class ScreenAnimations {
             transition = true;
           }
           
+          else if (choice.equals("wintrainer")) {
+            NPC guy = battle.opponent;
+            battleComment("You have won $" + guy.reward + " from " + guy.type + " " + guy.name + "!","win");
+          }
           
           else if (choice.equals("win")) {
             fainter = null;
@@ -587,10 +591,12 @@ public class ScreenAnimations {
   }
   
   void returnHome(){
+    NPC guy = battle.opponent;
     battle = null;
     currentGui = data.homeScreen;
     battlecomment = null;
     inAnimation = false;
+    if (choice.equals("win")) overworldComment(guy.losecomment,"commanderror"); //made choice commanderror to make the battlecomment null after
   }
   
   void effectivenessMessage(float effectiveness, int attack){
