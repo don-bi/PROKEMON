@@ -163,24 +163,31 @@ public class Button{
         
         if (special.equals("pokeball")) {
           if (player.bag.pokeballs <= 0){
-            animations.battleComment("You have no more POKé BALLS!","effective2");
+            animations.battleComment("You have no more POKé BALLS!","fightoptions");
+            currentGui = null;
+            
           } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
             animations.throwball(data.pokeball);
             player.bag.pokeballs --;
           } else {
-            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+            animations.battleComment("You are unable to catch a trainer's POKéMON","fightoptions");
+            currentGui = null;
           }
         } else if (special.equals("masterball")) {
           if (player.bag.masterballs <= 0){
-            animations.battleComment("You have no more MASTER BALLS!","effective2");
+            animations.battleComment("You have no more MASTER BALLS!","fightoptions");
+            currentGui = null;
           } else if (battle.opponent == null) { //cannot catch pokemon if you are fighting a trainer
             animations.throwball(data.masterball);
             player.bag.masterballs --;
           } else {
-            animations.battleComment("You are unable to catch a trainer's POKéMON","effective2");
+            animations.battleComment("You are unable to catch a trainer's POKéMON","fightoptions");
+            currentGui = null;
           }
         }
         if (special.equals("potion")) {
+          animations.battleComment("Your potion healed " + battle.ally.name + " for 50HP!","potion");
+          currentGui = null;
         }
         
         if (special.length() > 3 && special.substring(0,4).equals("move")) { //special interactions for move option buttons

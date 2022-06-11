@@ -128,20 +128,24 @@ void checkWASD(){
 }
   
 void showCharacters(){
-  for (NPC npc:npcs){
-    if (npc.ypos > player.ypos) {
-      player.showPlayer();
-      npc.display();
-      npc.encounter();
-    } else if (npc.ypos < player.ypos) {
-      npc.display();
-      npc.encounter();
-      player.showPlayer();
-    } else {
-      npc.display();
-      npc.encounter();
-      player.showPlayer();
+  if (npcs.length > 0) {
+    for (NPC npc:npcs){
+      if (npc.ypos > player.ypos) {
+        player.showPlayer();
+        npc.display();
+        npc.encounter();
+      } else if (npc.ypos < player.ypos) {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      } else {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      }
     }
+  } else {
+    player.showPlayer();
   }
 }
 

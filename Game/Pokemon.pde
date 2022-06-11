@@ -196,7 +196,10 @@ public class Pokemon{
     level ++;
     exp = 0;
     neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+    int oldhp = stats.get("hp");
     recalcStats();
+    int newhp = stats.get("hp");
+    hp += newhp-oldhp; //gives pokemon the hp it gained when leveling up
   }
     
 }

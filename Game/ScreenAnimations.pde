@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow, opponentswitch;
+  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow, opponentswitch, potion;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -419,6 +419,15 @@ public class ScreenAnimations {
             battlecomment = null;
           }
           
+          else if (choice.equals("fightoptions")) {
+            battleComment("What will " + battle.ally.name + " do?","");
+            currentGui = data.fightOptions;
+          }
+          
+          else if (choice.equals("potion")) {
+            potion();
+          }
+            
           else if (choice.equals("skip1")) {
             effectivenessMessage(1,1);
           }
@@ -535,6 +544,10 @@ public class ScreenAnimations {
             returnHome();
           }
           
+          else if (choice.equals("losetrainer")) {
+            battleComment("You have lost the battle...","lose");
+          }
+          
           else if (choice.equals("lose")) {
             fainter = null;
             captured = false;
@@ -596,7 +609,7 @@ public class ScreenAnimations {
     currentGui = data.homeScreen;
     battlecomment = null;
     inAnimation = false;
-    if (choice.equals("win")) overworldComment(guy.losecomment,"commanderror"); //made choice commanderror to make the battlecomment null after
+    if (choice.equals("win") && guy != null) overworldComment(guy.losecomment,"commanderror"); //made choice commanderror to make the battlecomment null after
   }
   
   void effectivenessMessage(float effectiveness, int attack){
@@ -625,6 +638,18 @@ public class ScreenAnimations {
     hp = true;
     inAnimation = true;
     transition = true;
+  }
+  
+  void potion(){
+    prevHp = battle.ally.hp;
+    newHp = battle.ally.hp + 50;
+    hplowerer = battle.ally;
+    frame = 1;
+    hp = true;
+    choice = "secondattack";
+    inAnimation = true;
+    transition = true;
+    comment = null;
   }
   
   void expBar(){
@@ -667,7 +692,8 @@ public class ScreenAnimations {
       fainter = null;
       battlecomment = null;
     } else {
-      battleComment("You have lost the battle...","lose");
+      NPC guy = battle.opponent;
+      battleComment(guy.wincomment,"losetrainer");
     }
   }
   
