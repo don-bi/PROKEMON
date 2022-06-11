@@ -39,6 +39,7 @@ public class NPC extends Character {
         if (direction == 'r' && player.ypos == ypos && player.xpos < xpos+range && player.xpos > xpos) encountered = true;
       } else {
         if (delay < 60){ //DOES THE BOUNCING EXCLAMATION FIRST
+        animations.inAnimation = true;
           if (delay < 10) {
             delay++;
             int YOffset = sprite.height + 30 + delay*4;
@@ -56,7 +57,6 @@ public class NPC extends Character {
             image(data.encounter,xpos*16*6 + XOffset, ypos*16*6 - YOffset);
           }
         } else { //AFTER THE BOUNCING EXCLAMATION POINT, MAKES THE GUY WALK UP
-          animations.inAnimation = true;
           encountered = true;
           int x = getFrontCoords()[0];
           int y = getFrontCoords()[1];

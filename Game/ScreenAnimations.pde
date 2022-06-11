@@ -25,7 +25,7 @@ public class ScreenAnimations {
       inAnimation = true;
       fadein = true;
     }
-    
+    println(choice);
     pushMatrix();
     if (frameCount > 0) {
       if (owcomment) {
@@ -243,13 +243,15 @@ public class ScreenAnimations {
           pushMatrix();
           translate(x+32,y+32);
           rotate(radians(frame*40));
-          PImage balls = data.pokeball;
+          PImage balls = data.pokeball.get(0,0,96,96);
           balls.resize(64,0);
           image(balls,-32,-32);
           popMatrix();
         } else { //once done with the throw, does the white flahs
           enemywhiteFlash();
-          battleComment(trainer.type + " " + trainer.name + " sent out " + battle.enemy,"");
+          battleComment(trainer.type + " " + trainer.name + " sent out " + battle.enemy.name,"");
+          opponentthrow = false;
+          inAnimation = false;
         }
       }
       if (allywhiteflash) {
@@ -308,10 +310,9 @@ public class ScreenAnimations {
             popMatrix();
           }
           if (frame == 45) {
-            battleComment("What will " + battle.ally.name + " do?","");
-            currentGui = data.fightOptions;
             enemywhiteflash = false;
             inAnimation = false;
+            allyThrow();
           }
         }
       }
@@ -361,12 +362,14 @@ public class ScreenAnimations {
     if (exp) {
       if (frame < 20) {
         frame ++;
+        if (battle.ally.level < 100) {
         battle.ally.exp += gainedExp/20.0;
-        if (battle.ally.exp > battle.ally.neededExp) {
-          float expOver = battle.ally.exp - battle.ally.neededExp;
-          battle.ally.levelUp();
-          battle.ally.exp += expOver;
-          println(battle.ally.exp);
+          if (battle.ally.exp > battle.ally.neededExp) {
+            float expOver = battle.ally.exp - battle.ally.neededExp;
+            battle.ally.levelUp();
+            battle.ally.exp += expOver;
+            println(battle.ally.exp);
+          }
         }
       } else {
         exp = false;
