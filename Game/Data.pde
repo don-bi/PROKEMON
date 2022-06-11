@@ -50,7 +50,7 @@ public class Data {
   //effects tags
   HashMap<String, PImage> effects = new HashMap<String, PImage>(); 
 
-  PImage battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
+  PImage encounter, battleBG, battleCircles, lefthalf, righthalf, bigChosenPoke, bigPoke, smallChosenPoke, smallPoke, hpBar, miniHpBar, enemyUi, allyUi, levelUp, expBar, pokeball, masterball;
   PImage player1,player2,player3,player4;
   PImage potionhover,pokeballhover,masterballhover;
   PFont font;

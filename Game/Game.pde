@@ -131,6 +131,7 @@ void checkWASD(){
 void showNPCs(){
   for (NPC npc:npcs){
     npc.display();
+    npc.encounter();
   }
 }
 

@@ -14,7 +14,6 @@ public class Character {
     if (pixel < 16) {
       pixel ++;
     } else {
-      delay ++;
       pixel = 0;
       if (!isBiking && !isRunning) {
         switch (direction) {

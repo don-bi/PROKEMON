@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash,switchpoke;
+  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -27,6 +27,10 @@ public class ScreenAnimations {
     
     pushMatrix();
     if (frameCount > 0) {
+      if (owcomment) {
+        fill(0,100);
+        rect(0,650,1440,214);
+      }
       if (fadein) {
         if (frame >= 250) {
           fadein = false;
@@ -490,6 +494,11 @@ public class ScreenAnimations {
     hp = false;
   }
   
+  void overworldComment(String s, String nextChoice){
+    battleComment(s,nextChoice);
+    owcomment = true;
+  }
+  
   void returnHome(){
     battle = null;
     currentGui = data.homeScreen;
@@ -676,7 +685,7 @@ public class ScreenAnimations {
         String statuscomment = "";
         String newstatus = null;
         if (usedmove.effect == 7) {
-          statuscomment = "became paralyzed!";
+          statuscomment = "became paralyzed! It may be unable to move!";
           newstatus = "paralysis";
         }
         else if (usedmove.effect == 6) {
@@ -726,7 +735,7 @@ public class ScreenAnimations {
           if (attacked.nonvolStatus.equals("burn")) c1 = " burned ";
           if (attacked.nonvolStatus.equals("poison")) c1 = " poisoned ";
           if (attacked.nonvolStatus.equals("sleep")) c1 = " asleep ";
-          if (usedmove.effect == 7) c2 = " bcame paralyzed";
+          if (usedmove.effect == 7) c2 = " become paralyzed";
           if (usedmove.effect == 6) c2 = " become frozen";
           if (usedmove.effect == 5) c2 = " become burned";
           if (usedmove.effect == 3) c2 = " become poisoned";
