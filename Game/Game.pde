@@ -57,6 +57,7 @@ void setup() {
   poke2.moves[2] = new Move("86");
   poke2.moves[3] = new Move("58");
   poke2.moves[3].effectChance = 100;
+  poke2.nonvolStatus = "paralysis";
   player.team.add(poke2);
   Pokemon poke3 = new Pokemon("Rayquaza", 40, true);
   player.team.add(poke3);

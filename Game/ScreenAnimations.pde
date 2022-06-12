@@ -376,7 +376,7 @@ public class ScreenAnimations {
           } else if (choice.equals("secondAttack")) {
             setNewStatus(2);
           } else if (choice.equals("statusdamage2")) {
-            statusDamage(2);
+            if (!statusDamage(2)) battleComment("","newturn");
           } else if (choice.equals("statusdamage3")) {
             battleComment("","newturn");
           }
@@ -446,7 +446,7 @@ public class ScreenAnimations {
           }
           
           else if (choice.equals("fight")) {
-            if (!transition) hpBar(battle.attacker, battle.defender, "attack");
+            if (!transition) hpBar(battle.attacker, battle.defender, "attack");  
           } 
           
           else if (choice.equals("status1")) {
@@ -833,7 +833,7 @@ public class ScreenAnimations {
       attacked = battle.attacker;
     }
     Move usedmove = attacker.currentMove;
-    if (usedmove.effect != 1) {
+    if (usedmove.effect != 1) {  
       if (usedmove.damageClass.equals("status")) effectiveness = 1; //if it's a status move, there will be no effectiveness message 
       if (attacked.nonvolStatus.equals("none")) { //checks for applying nonvolatile statuses
         
@@ -916,6 +916,8 @@ public class ScreenAnimations {
       if (allyStatus.equals("burn") || allyStatus.equals("poison")) {
         battleComment(battle.ally.name + " is hurt by its " + allyStatus + "!","statusdamage2");
         return true;
+      } else {
+        battleComment("","newturn");
       }
     } else {
       String enemyStatus = battle.enemy.nonvolStatus;

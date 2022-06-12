@@ -45,6 +45,10 @@ public class Command {
           player.bag.masterballs += 5;
           player.bag.potions += 5;
         }
+        if (parts[0].equals("teleport")) {
+          currentMap = "Route1";
+          currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
+        }
           
       }
       commandmode = false;
