@@ -37,11 +37,14 @@ public class Button{
       if (this == data.menupokemon) {
         text("POKéMON",1275,50);
       }
+      if (this == data.menuload) {
+        text("LOAD",1300,125);
+      }
       if (this == data.menusave) {
-        text("SAVE",1300,125);
+        text("SAVE",1300,200);
       }
       if (this == data.menuexit) {
-        text("EXIT",1300,200);
+        text("EXIT",1300,275);
       }
       Pokemon poke;
       textSize(40);
@@ -174,7 +177,7 @@ public class Button{
           currentGui = opensGui;
         }
         
-        if (special.equals("save")) {
+        if (special.equals("save")) { //when clicking the load button in the menu it calls this to export it into a file
           animations.overworldComment("SAVING....","commanderror");
           String exportfile = "prokemondata" + frameCount + ".txt";
           PrintWriter export = createWriter(exportfile);
@@ -191,6 +194,13 @@ public class Button{
             } else {
               export.println("masterball");
             }
+            String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
+            for (String stat:statnames) {
+              print(poke.stats.get(stat) + " ");
+              print(poke.EVs.get(stat) + " ");
+              print(poke.IVs.get(stat) + " ");
+              println();
+            }
             int movesAmt = 0;
             for (Move move:poke.moves) { //counts how many moves that are not null there are
               if (move != null) movesAmt ++;
@@ -202,6 +212,11 @@ public class Button{
           }
           export.flush();
           export.close();
+        }
+        
+        if (special.equals("load")) {
+          player.team = new ArrayList<Pokemon>();
+          selectInput("Select a file to load", "fileSelected");
         }
         
         switch(special) {

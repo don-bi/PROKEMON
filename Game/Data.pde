@@ -69,6 +69,7 @@ public class Data {
   
   Button menupokemon;
   Button menubutton;
+  Button menuload;
   Button menusave;
   Button menuexit;
   
@@ -410,9 +411,11 @@ public class Data {
     menubutton.texture = loadImage("menu.png");
     menupokemon = new Button(menu,pokemons,1240,0,"menupokemon");
     menupokemon.texture = loadImage("menu.png");
-    menusave = new Button(menu,homeScreen,1240,75,"save");
+    menuload = new Button(menu,homeScreen,1240,75,"load");
+    menuload.texture = loadImage("menu.png");
+    menusave = new Button(menu,homeScreen,1240,150,"save");
     menusave.texture = loadImage("menu.png");
-    menuexit = new Button(menu,homeScreen,1240,150,"");
+    menuexit = new Button(menu,homeScreen,1240,225,"");
     menuexit.texture = loadImage("menu.png");
     
     pokemondataexit = new Button(pokemondata,menu,1375,0);

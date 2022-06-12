@@ -123,6 +123,47 @@ void keyTyped(){
   }
 }
 
+void fileSelected(File file){ //this is called by selectInput in button class when pressing the load button
+  if (file != null) { //it loads in a file that was previously saved, if not previously saved, then it will do an error and be caught
+    try {
+      ArrayList<Pokemon> temp = new ArrayList<Pokemon>();
+      BufferedReader reader = createReader(file);
+      int pokeAmt = parseInt(reader.readLine());
+      for (int i = 0; i < pokeAmt; i ++){
+        String name = reader.readLine();
+        int level = parseInt(reader.readLine());
+        Pokemon newpoke = new Pokemon(name,level,true);
+        newpoke.hp = parseInt(reader.readLine());
+        newpoke.exp = parseInt(reader.readLine());
+        newpoke.nature = reader.readLine();
+        newpoke.nonvolStatus = reader.readLine();
+        String pokeball = reader.readLine();
+        if (pokeball.equals("pokeball")) { //gets pokeballtype the pokemon is in
+          newpoke.pokeball = data.pokeball;
+        } else {
+          newpoke.pokeball = data.masterball;
+        }
+        String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
+        for (String stat:statnames) {
+          String data[] = reader.readLine().split(" "); //the saved data file will have 6 lines each 3 values each corresponding to stat, evs, and ivs
+          newpoke.stats.put(stat,parseInt(data[0]));
+          newpoke.EVs.put(stat,parseInt(data[1]));
+          newpoke.IVs.put(stat,parseInt(data[2]));
+        }
+        int movesAmt = parseInt(reader.readLine());
+        for (int m = 0; m < movesAmt; m ++){
+          String moveid = reader.readLine();
+          newpoke.moves[m] = new Move(moveid);
+        }
+        temp.add(newpoke);
+      }
+      player.team = temp;
+    } catch (Exception e) {
+      animations.overworldComment("BAD FILE!!","commanderror");
+    }
+  }
+}
+
 void checkWASD(){
   if (keyPressed){
     switch ((""+key).toUpperCase()) { //makes it so you can move even with caps lock on
