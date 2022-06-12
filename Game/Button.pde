@@ -174,6 +174,36 @@ public class Button{
           currentGui = opensGui;
         }
         
+        if (special.equals("save")) {
+          animations.overworldComment("SAVING....","commanderror");
+          String exportfile = "prokemondata" + frameCount + ".txt";
+          PrintWriter export = createWriter(exportfile);
+          export.println(player.team.size());
+          for (Pokemon poke:player.team){
+            export.println(poke.name);
+            export.println(poke.level);
+            export.println(poke.hp);
+            export.println(poke.exp);
+            export.println(poke.nature);
+            export.println(poke.nonvolStatus);
+            if (poke.pokeball == data.pokeball) { //gets pokeballtype the pokemon is in
+              export.println("pokeball");
+            } else {
+              export.println("masterball");
+            }
+            int movesAmt = 0;
+            for (Move move:poke.moves) { //counts how many moves that are not null there are
+              if (move != null) movesAmt ++;
+            }
+            export.println(movesAmt);
+            for (Move move:poke.moves) {
+              if (move != null) export.println(move.id);
+            }
+          }
+          export.flush();
+          export.close();
+        }
+        
         switch(special) {
           case "menupoke1":
             data.pokemondata.whichpokesdata = player.team.get(0);

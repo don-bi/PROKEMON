@@ -410,7 +410,7 @@ public class Data {
     menubutton.texture = loadImage("menu.png");
     menupokemon = new Button(menu,pokemons,1240,0,"menupokemon");
     menupokemon.texture = loadImage("menu.png");
-    menusave = new Button(menu,1240,75,"save");
+    menusave = new Button(menu,homeScreen,1240,75,"save");
     menusave.texture = loadImage("menu.png");
     menuexit = new Button(menu,homeScreen,1240,150,"");
     menuexit.texture = loadImage("menu.png");
