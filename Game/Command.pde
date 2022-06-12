@@ -56,10 +56,10 @@ public class Command {
       animations.inAnimation = false;
       currentcommand = "";
     } catch (Exception e) {
-      animations.overworldComment("Bad command","commanderror");
       commandmode = false;
       animations.inAnimation = false;
       currentcommand = "";
+      animations.overworldComment("Bad command","commanderror");
     }
   }
   
