@@ -19,8 +19,10 @@ Pull from main branch and run Game.pde in processing.
   * Non-implemented status moves will display a message saying the move is not implemented yet
   * If the move name has a space, replace the space with a -, ie. hyper beam -> hyper-beam
   * Ex. setmove 1 1 thunder-wave - sets your party slot 1's first move to Thunder Wave
-* giveitems - gives 5 pokeballs, 5 masterballs, and 5 potions to the player
-* teleport - teleports the player to Route 1 instantly
+* giveitems
+  * gives 5 pokeballs, 5 masterballs, and 5 potions to the player
+* teleport
+  * teleports the player to Route 1 instantly
 
 ## Gameplay ##
 The game is mostly just standard pokemon. You could walk around, interact with signs and go inside buildings while you're in the map. When your pokemon are low on hp, you could go to the pokemon center to heal it by interacting with the desk.
