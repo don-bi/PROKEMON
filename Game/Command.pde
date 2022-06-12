@@ -46,6 +46,7 @@ public class Command {
           player.bag.potions += 5;
         }
         if (parts[0].equals("teleport")) {
+          player.teleport(7,7);
           currentMap = "Route1";
           currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
         }
