@@ -46,9 +46,13 @@ public class BattleMode{
     } else if (playerchoice.equals("bag")) {
     } else if (playerchoice.equals("run")) { //escape odds formula found in https://bulbapedia.bulbagarden.net/wiki/Escape
       if (opponent == null) {
-        int escapeOdds = (floor((ally.stats.get("spd")*128.0)/(1.0*enemy.stats.get("spd"))) + 30 * escapeAttempts ) % 256;
+        int allyspeed = ally.stats.get("spd");
+        if (ally.nonvolStatus.equals("paralysis")) allyspeed /= 2;
+        int enemyspeed = enemy.stats.get("spd");
+        if (enemy.nonvolStatus.equals("paralysis")) enemyspeed /= 2;
+        int escapeOdds = (floor((allyspeed*128.0)/(1.0*enemyspeed)) + 30 * escapeAttempts ) % 256;
         int rand = (int)random(256);
-        if (ally.stats.get("spd") > enemy.stats.get("spd") || escapeOdds > 255 || rand < escapeOdds) {
+        if (allyspeed > enemyspeed || escapeOdds > 255 || rand < escapeOdds) {
           animations.battleComment("You have successfully escaped!","escape");
         } else {
           animations.battleComment("You couldn't successfully escape.","noescape");
@@ -76,10 +80,14 @@ public class BattleMode{
   void fightOption(){
     int allyPriority = ally.currentMove.priority;
     int enemyPriority = enemy.currentMove.priority;
+    int allyspeed = ally.stats.get("spd");
+    if (ally.nonvolStatus.equals("paralysis")) allyspeed /= 2;
+    int enemyspeed = enemy.stats.get("spd");
+    if (enemy.nonvolStatus.equals("paralysis")) enemyspeed /= 2;
     if (allyPriority < enemyPriority) {
       attacker = enemy;
       defender = ally;
-    } else if (allyPriority == enemyPriority && ally.stats.get("spd") < enemy.stats.get("spd")) {
+    } else if (allyPriority == enemyPriority && allyspeed < enemyspeed) {
       attacker = enemy;
       defender = ally;
     }

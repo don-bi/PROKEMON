@@ -14,7 +14,19 @@ t,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,f,f f,f,f,f,f,
 2
 7 9 22 10 Woodbury_Town
 8 9 22 10 Woodbury_Town
+1
+8 3
+d
 0
+Joy
+Nurse
+Lol
+Lol
+Lol
+encounter
+1000000
+1
+Rayquaza 100
 1
 8 4
 Your POKéMON has been healed!

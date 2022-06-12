@@ -246,7 +246,11 @@ public class Data {
     richguy.put("DLeftWalk", npcSprites.get(2478,3726,84,120));
     richguy.put("DRightWalk", npcSprites.get(2376,3726,84,120));
     npcAnimations.put("Rich Guy",richguy);
-    
+    HashMap<String, PImage> nurse = new HashMap<String, PImage>();
+    nurse.put("DStand", npcSprites.get(6,2424,96,126));
+    nurse.put("DLeftWalk", npcSprites.get(6,2424,96,126));
+    nurse.put("DRightWalk", npcSprites.get(6,2424,96,126));
+    npcAnimations.put("Nurse",nurse);
   }
     
     
