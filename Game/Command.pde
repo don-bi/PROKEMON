@@ -1,5 +1,5 @@
 public class Command {
-  boolean commandmode,ctrl;
+  boolean commandmode;
   String currentcommand;
   
   public Command(){
