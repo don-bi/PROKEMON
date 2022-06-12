@@ -82,6 +82,8 @@ public class Data {
   Button menucancel;
   
   Button pokemondataexit;
+  Button itembagexit;
+  Button pokeballbagexit;
   
   Button fight;
   Button pokemon;
@@ -418,8 +420,12 @@ public class Data {
     menuexit = new Button(menu,homeScreen,1240,225,"");
     menuexit.texture = loadImage("menu.png");
     
-    pokemondataexit = new Button(pokemondata,menu,1375,0);
+    pokemondataexit = new Button(pokemondata,pokemons,1375,0);
     pokemondataexit.texture = loadImage("x.png");
+    itembagexit = new Button(itembag,fightOptions,1375,0);
+    itembagexit.texture = loadImage("x.png");
+    pokeballbagexit = new Button(pokeballbag,fightOptions,1375,0);
+    pokeballbagexit.texture = loadImage("x.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

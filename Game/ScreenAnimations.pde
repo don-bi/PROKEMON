@@ -578,6 +578,7 @@ public class ScreenAnimations {
             returnHome();
             for (int i = 0; i < player.team.size(); i ++) {
               player.team.get(i).hp = player.team.get(i).stats.get("hp");
+              player.team.get(i).nonvolStatus = "none";
             }
           }
           
