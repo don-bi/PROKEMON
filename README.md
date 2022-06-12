@@ -41,6 +41,8 @@ You can also encounter trainers (only one, Rich Guy William) and fight a preset 
 
 If you somehow lose and all your pokemon dies, you will automatically be teleported to the pokemon center where all your pokemon are healed.
 
+## Development Log ##
+
 ### 5/22/2022 ###
 **Donald**: Made MapModifier and finished the display, with color and tile classes. Added changing to different modes of placing and ways to print the map data too.
 
@@ -129,3 +131,6 @@ If you somehow lose and all your pokemon dies, you will automatically be telepor
 
 ### 6/11/2022 ###
 **Donald**: Fixed remaining bugs with trainer battles, and many other remaining bugs. Finished making potion mechanics. Made menu buttons and pokemondata Gui that shows the data of pokemon in your party. ALso implemented save and load buttons and made interactable tiles actually interactable now. Added nurse joy to the pokecenter.
+
+### 6/12/2022 ###
+**Donald**: Touched up on some small things such as bugs and quality of life features. Finished updating the readme to include everything required.
