@@ -60,6 +60,8 @@ public class Data {
   Gui menu;
   Gui pokemons;
   Gui pokemondata;
+  Gui pokemonevs;
+  Gui pokemonivs;
   Gui fightOptions;
   Gui moveOptions;
   Gui switchPokemon;
@@ -80,6 +82,10 @@ public class Data {
   Button menupoke5;
   Button menupoke6;
   Button menucancel;
+  
+  Button statswitch;
+  Button evswitch;
+  Button ivswitch;
   
   Button pokemondataexit;
   Button itembagexit;
@@ -401,6 +407,8 @@ public class Data {
     menu = new Gui(0,0);
     pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
     pokemondata = new Gui(loadImage("pokemondata.png"),0,0);
+    pokemonevs = new Gui(loadImage("pokemonevs.png"),0,0);
+    pokemonivs = new Gui(loadImage("pokemonivs.png"),0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
@@ -420,7 +428,19 @@ public class Data {
     menuexit = new Button(menu,homeScreen,1240,225,"");
     menuexit.texture = loadImage("menu.png");
     
+    statswitch = new Button(pokemonevs,pokemondata,846,437);
+    pokemonivs.buttons.add(statswitch);
+    statswitch.texture = loadImage("dataswitch.png");
+    evswitch = new Button(pokemondata,pokemonevs,995,437);
+    pokemonivs.buttons.add(evswitch);
+    evswitch.texture = loadImage("dataswitch.png");
+    ivswitch = new Button(pokemondata,pokemonivs,1144,437);
+    pokemonevs.buttons.add(ivswitch);
+    ivswitch.texture = loadImage("dataswitch.png");
+    
     pokemondataexit = new Button(pokemondata,pokemons,1375,0);
+    pokemonevs.buttons.add(pokemondataexit);
+    pokemonivs.buttons.add(pokemondataexit);
     pokemondataexit.texture = loadImage("x.png");
     itembagexit = new Button(itembag,fightOptions,1375,0);
     itembagexit.texture = loadImage("x.png");

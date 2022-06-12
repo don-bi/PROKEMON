@@ -222,21 +222,33 @@ public class Button{
         switch(special) {
           case "menupoke1":
             data.pokemondata.whichpokesdata = player.team.get(0);
+            data.pokemonevs.whichpokesdata = player.team.get(0);
+            data.pokemonivs.whichpokesdata = player.team.get(0);
             break;
           case "menupoke2":
             data.pokemondata.whichpokesdata = player.team.get(1);
+            data.pokemonevs.whichpokesdata = player.team.get(1);
+            data.pokemonivs.whichpokesdata = player.team.get(1);
             break;
           case "menupoke3":
             data.pokemondata.whichpokesdata = player.team.get(2);
+            data.pokemonevs.whichpokesdata = player.team.get(2);
+            data.pokemonivs.whichpokesdata = player.team.get(2);
             break;
           case "menupoke4":
             data.pokemondata.whichpokesdata = player.team.get(3);
+            data.pokemonevs.whichpokesdata = player.team.get(3);
+            data.pokemonivs.whichpokesdata = player.team.get(3);
             break;
           case "menupoke5":
             data.pokemondata.whichpokesdata = player.team.get(4);
+            data.pokemonevs.whichpokesdata = player.team.get(4);
+            data.pokemonivs.whichpokesdata = player.team.get(4);
             break;
           case "menupoke6":
             data.pokemondata.whichpokesdata = player.team.get(5);
+            data.pokemonevs.whichpokesdata = player.team.get(5);
+            data.pokemonivs.whichpokesdata = player.team.get(5);
             break;
         }
         

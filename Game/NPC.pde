@@ -40,6 +40,9 @@ public class NPC extends Character {
       } else {
         if (delay < 60){ //DOES THE BOUNCING EXCLAMATION FIRST
         animations.inAnimation = true;
+        player.pixel = 0;
+        player.changeDirection();
+        player.inWalkAnimation = false;
           if (delay < 10) {
             delay++;
             int YOffset = sprite.height + 30 + delay*4;
