@@ -196,10 +196,10 @@ public class Button{
             }
             String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
             for (String stat:statnames) {
-              print(poke.stats.get(stat) + " ");
-              print(poke.EVs.get(stat) + " ");
-              print(poke.IVs.get(stat) + " ");
-              println();
+              export.print(poke.stats.get(stat) + " ");
+              export.print(poke.EVs.get(stat) + " ");
+              export.print(poke.IVs.get(stat) + " ");
+              export.println();
             }
             int movesAmt = 0;
             for (Move move:poke.moves) { //counts how many moves that are not null there are

@@ -204,4 +204,11 @@ public class Pokemon{
     hp += newhp-oldhp; //gives pokemon the hp it gained when leveling up
   }
     
+  String toString(){
+    String s = "";
+    s += " name: " + name;
+    s += " level: " + level;
+    s += " nature: " + nature;
+    return s;
+  }
 }

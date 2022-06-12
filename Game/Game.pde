@@ -156,6 +156,7 @@ void fileSelected(File file){ //this is called by selectInput in button class wh
           newpoke.moves[m] = new Move(moveid);
         }
         temp.add(newpoke);
+        println(newpoke.toString());
       }
       player.team = temp;
     } catch (Exception e) {
