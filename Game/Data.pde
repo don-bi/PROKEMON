@@ -556,20 +556,4 @@ public class Data {
   String getMoveData(String id, String dataname) {
     return moveData.get(id).get(dataname);
   }
-  
-  
-  
-  
-  /*reader = createReader("pokemon_evolution.csv");  //POKEMON EVOLUTION DATA WRONG RN, MIGHT COME BACK TO FIX LATER IDK
-      line = reader.readLine();
-      categories = line.split(",");
-      line = reader.readLine();
-      while (line != null) {
-        String[] data = line.split(",");
-        String id = data[0];
-        String pokemon = getPokename(id);
-        pokemonData.get(pokemon).put(categories[1], data[1]); //puts evolved_species_id 
-        pokemonData.get(pokemon).put(categories[2], data[2]); //puts minimum_level id
-        line = reader.readLine();
-      }*/ 
 }

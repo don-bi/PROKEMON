@@ -1,4 +1,4 @@
-public class Button{
+  public class Button{
   int x,y;
   PImage texture;
   Gui opensGui;
