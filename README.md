@@ -93,3 +93,6 @@ Donald: Touched up on the start throwing pokeball animation and also implemented
 Donald: Made a command class to cheat and set pokemons and set moves. Made trainers actually appear and load into the map, and be able to encounter them. Started working on the battle mechanics against trainers ie. the swapping and other stuff.
 
 Hanson: Out of building moving into barrier- stops character and cannot move
+
+### 6/11/2022 ###
+Donald: Fixed remaining bugs with trainer battles, and many other remaining bugs. Finished making potion mechanics. Made menu buttons and pokemondata Gui that shows the data of pokemon in your party. ALso implemented save and load buttons and made interactable tiles actually interactable now. Added nurse joy to the pokecenter.
