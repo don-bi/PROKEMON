@@ -1,5 +1,6 @@
 public class Pokemon{
   String nickname,name;
+  int id;
   PImage pokeball;
   String nature;
   HashMap<String, Integer> stats,IVs,EVs;
@@ -16,6 +17,7 @@ public class Pokemon{
   
   public Pokemon(String n, int l){
     name = n;
+    id = parseInt(data.getPokeData(name,"id"));
     pokeball = data.pokeball;
     nature = data.natures[(int)random(data.natures.length)]; 
     stats = new HashMap<String,Integer>(); //initializes stat data structures
@@ -196,7 +198,17 @@ public class Pokemon{
     level ++;
     exp = 0;
     neededExp = data.expData.get(level).get(stats.get("exp")); //when leveling up, sets the new exp required based on expData
+    int oldhp = stats.get("hp");
     recalcStats();
+    int newhp = stats.get("hp");
+    hp += newhp-oldhp; //gives pokemon the hp it gained when leveling up
   }
     
+  String toString(){
+    String s = "";
+    s += " name: " + name;
+    s += " level: " + level;
+    s += " nature: " + nature;
+    return s;
+  }
 }

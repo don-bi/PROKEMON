@@ -57,12 +57,31 @@ public class Data {
   
   //GUIS AND BUTTONS
   Gui homeScreen;
+  Gui menu;
+  Gui pokemons;
+  Gui pokemondata;
   Gui fightOptions;
   Gui moveOptions;
   Gui switchPokemon;
   Gui deadPokemon;
   Gui itembag;
   Gui pokeballbag;
+  
+  Button menupokemon;
+  Button menubutton;
+  Button menuload;
+  Button menusave;
+  Button menuexit;
+  
+  Button menupoke1;
+  Button menupoke2;
+  Button menupoke3;
+  Button menupoke4;
+  Button menupoke5;
+  Button menupoke6;
+  Button menucancel;
+  
+  Button pokemondataexit;
   
   Button fight;
   Button pokemon;
@@ -228,7 +247,11 @@ public class Data {
     richguy.put("DLeftWalk", npcSprites.get(2478,3726,84,120));
     richguy.put("DRightWalk", npcSprites.get(2376,3726,84,120));
     npcAnimations.put("Rich Guy",richguy);
-    
+    HashMap<String, PImage> nurse = new HashMap<String, PImage>();
+    nurse.put("DStand", npcSprites.get(6,2424,96,126));
+    nurse.put("DLeftWalk", npcSprites.get(6,2424,96,126));
+    nurse.put("DRightWalk", npcSprites.get(6,2424,96,126));
+    npcAnimations.put("Nurse",nurse);
   }
     
     
@@ -373,12 +396,30 @@ public class Data {
   private void loadGuis(){
     //rect(0,650,1440,214);
     homeScreen = new Gui(0,0);
+    menu = new Gui(0,0);
+    pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
+    pokemondata = new Gui(loadImage("pokemondata.png"),0,0);
     fightOptions = new Gui(0,0);
     moveOptions = new Gui(0,0);
     switchPokemon = new Gui(loadImage("pokemonmenu.png"),0,0);
     deadPokemon = new Gui(loadImage("deadpokemonmenu.png"),0,0);
     itembag = new Gui(loadImage("items.png"),0,0);
     pokeballbag = new Gui(loadImage("pokeballbag.png"),0,0);
+    pokemons = new Gui(loadImage("pokemonmenu.png"),0,0);
+    
+    menubutton = new Button(homeScreen,menu,1240,0,"");
+    menubutton.texture = loadImage("menu.png");
+    menupokemon = new Button(menu,pokemons,1240,0,"menupokemon");
+    menupokemon.texture = loadImage("menu.png");
+    menuload = new Button(menu,homeScreen,1240,75,"load");
+    menuload.texture = loadImage("menu.png");
+    menusave = new Button(menu,homeScreen,1240,150,"save");
+    menusave.texture = loadImage("menu.png");
+    menuexit = new Button(menu,homeScreen,1240,225,"");
+    menuexit.texture = loadImage("menu.png");
+    
+    pokemondataexit = new Button(pokemondata,menu,1375,0);
+    pokemondataexit.texture = loadImage("x.png");
     
     fight = new Button(fightOptions,moveOptions,1000,650);
     fight.texture = loadImage("fight.png");

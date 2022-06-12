@@ -46,9 +46,13 @@ public class BattleMode{
     } else if (playerchoice.equals("bag")) {
     } else if (playerchoice.equals("run")) { //escape odds formula found in https://bulbapedia.bulbagarden.net/wiki/Escape
       if (opponent == null) {
-        int escapeOdds = (floor((ally.stats.get("spd")*128.0)/(1.0*enemy.stats.get("spd"))) + 30 * escapeAttempts ) % 256;
+        int allyspeed = ally.stats.get("spd");
+        if (ally.nonvolStatus.equals("paralysis")) allyspeed /= 2;
+        int enemyspeed = enemy.stats.get("spd");
+        if (enemy.nonvolStatus.equals("paralysis")) enemyspeed /= 2;
+        int escapeOdds = (floor((allyspeed*128.0)/(1.0*enemyspeed)) + 30 * escapeAttempts ) % 256;
         int rand = (int)random(256);
-        if (ally.stats.get("spd") > enemy.stats.get("spd") || escapeOdds > 255 || rand < escapeOdds) {
+        if (allyspeed > enemyspeed || escapeOdds > 255 || rand < escapeOdds) {
           animations.battleComment("You have successfully escaped!","escape");
         } else {
           animations.battleComment("You couldn't successfully escape.","noescape");
@@ -76,17 +80,27 @@ public class BattleMode{
   void fightOption(){
     int allyPriority = ally.currentMove.priority;
     int enemyPriority = enemy.currentMove.priority;
+    int allyspeed = ally.stats.get("spd");
+    if (ally.nonvolStatus.equals("paralysis")) allyspeed /= 2;
+    int enemyspeed = enemy.stats.get("spd");
+    if (enemy.nonvolStatus.equals("paralysis")) enemyspeed /= 2;
     if (allyPriority < enemyPriority) {
       attacker = enemy;
       defender = ally;
-    } else if (allyPriority == enemyPriority && ally.stats.get("spd") < enemy.stats.get("spd")) {
+    } else if (allyPriority == enemyPriority && allyspeed < enemyspeed) {
       attacker = enemy;
       defender = ally;
     }
-    if (!animations.statusSkip(attacker)) animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
+    if (!animations.statusSkip(attacker)) {
+      if (attacker.currentMove.accuracy > (int)random(100)) {    
+        animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","fight");
+      } else {
+        animations.battleComment(attacker.name + " used " + attacker.currentMove + "!","miss1");
+      }
+    }
   }
   
-  void display(){
+  void display(){ //THERES A LOT OF BOOLEANS TO MAKE SURE CERTAIN IMAGES DON'T APPEAR DURING AN ANIMATION
     if (!animations.battlestart) { //when it's doing the battlestart animation, it doesn't show the stuffs
       image(data.battleBG,0,0);
       image(data.battleCircles,0,0);
@@ -94,15 +108,18 @@ public class BattleMode{
       //The bottom transparent rectangle and options
       textSize(40);
       fill(0);
-      if (animations.fainter != enemy && !animations.opponentthrow && !animations.opponentswitch) image(enemy.sprite,940,400-enemy.sprite.height);
-      if (animations.fainter != ally && !animations.switchpoke && !animations.enemywhiteflash || (animations.switchpoke && animations.allywhiteflash)) image(ally.sprite,130,830-ally.sprite.height);
-      fill(0,100);
-      rect(0,650,1440,214);
-      fill(255);
+      if (animations.fainter != enemy && !animations.opponentthrow && !animations.opponentswitch ||animations.enemywhiteflash) image(enemy.sprite,940,400-enemy.sprite.height);
+      if ((animations.fainter != ally && !animations.switchpoke || (animations.switchpoke && animations.allywhiteflash)) && !animations.enemywhiteflash || animations.opponentswitch) image(ally.sprite,130,830-ally.sprite.height);
+      
+      if (!animations.enemywhiteflash) {
+        fill(0,100);
+        rect(0,650,1440,214);
+        fill(255);
+      }
       
       fill(0);
       //displays ally stuff
-      if (!animations.allywhiteflash && !animations.enemywhiteflash && !animations.switchpoke) {
+      if (!animations.allywhiteflash && !animations.enemywhiteflash && !animations.switchpoke || animations.opponentswitch) {
         textSize(40);
         image(data.allyUi,860,430); //ui
         image(data.expBar.get(0,0,ally.exp*256/ally.neededExp,8),984,562); //expbar
@@ -114,7 +131,7 @@ public class BattleMode{
       }
       
       //displays enemy stuff
-      if (!animations.enemywhiteflash && !animations.opponentswitch || (animations.enemywhiteflash || animations.opponentswitch && animations.frame < 30)) {
+      if (!animations.enemywhiteflash && !animations.opponentswitch && !animations.opponentthrow) {
         image(data.enemyUi,320,150); //ui
         text("Lv"+enemy.level,588,195); //level
         text(enemy.name,348,195); //name

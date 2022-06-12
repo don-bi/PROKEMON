@@ -35,7 +35,7 @@ void setup() {
   command = new Command();
   
   //loads initial hometop map
-  currentMap = "Route1";
+  currentMap = "HomeTop";
   currentMapTiles = new Map();
   try {
     currentMapTiles.loadMap(getSubDir("Maps",currentMap+".txt"));
@@ -51,19 +51,20 @@ void setup() {
   player.teleport(7, 7);
   
   //TESTING BATTLEMODE
-  Pokemon poke2 = new Pokemon("Arceus", 30, true);
+  Pokemon poke2 = new Pokemon("Blissey", 100, true);
   poke2.moves[0] = new Move("79");
-  poke2.moves[0].accuracy = 100;
   poke2.moves[1] = new Move("261");
-  poke2.moves[1].accuracy = 100;
-  //poke2.moves[0].effect = 6;
-  //poke2.moves[0].effectChance = 100;
-  poke2.moves[0].power = 0;
+  poke2.moves[2] = new Move("86");
+  poke2.moves[3] = new Move("58");
+  poke2.moves[3].effectChance = 100;
+  poke2.nonvolStatus = "paralysis";
   player.team.add(poke2);
-  Pokemon poke3 = new Pokemon("Torterra", 5, true);
+  Pokemon poke3 = new Pokemon("Rayquaza", 40, true);
   player.team.add(poke3);
-  Pokemon poke4 = new Pokemon("Zekrom", 5, true);
+  Pokemon poke4 = new Pokemon("Arceus","dark", 45, true);
   player.team.add(poke4);
+  Pokemon poke5 = new Pokemon("Mewtwo",40,true);
+  player.team.add(poke5);
 }
 
 void draw() {
@@ -103,12 +104,65 @@ void keyPressed(){
         command.open();
       }
     }
+    if (key == ' ') {
+      if (player.getFrontTile().isInteractable){ //if the tile in front is an interactable, then it displays whatever its comment is, and if it's the one in the pokecenter, it heals all the pokemon too
+        animations.overworldComment(player.getFrontTile().comment,"commanderror");
+        if (player.getFrontTile().comment.equals("Your POKéMON has been healed!")) {
+          for (Pokemon poke:player.team) {
+            poke.hp = poke.stats.get("hp");
+            poke.nonvolStatus = "none";
+          }
+        }
+      }
+    }
   }
 }
 
 void keyTyped(){
   if (command.commandmode){
     command.add();
+  }
+}
+
+void fileSelected(File file){ //this is called by selectInput in button class when pressing the load button
+  if (file != null) { //it loads in a file that was previously saved, if not previously saved, then it will do an error and be caught
+    try {
+      ArrayList<Pokemon> temp = new ArrayList<Pokemon>();
+      BufferedReader reader = createReader(file);
+      int pokeAmt = parseInt(reader.readLine());
+      for (int i = 0; i < pokeAmt; i ++){
+        String name = reader.readLine();
+        int level = parseInt(reader.readLine());
+        Pokemon newpoke = new Pokemon(name,level,true);
+        newpoke.hp = parseInt(reader.readLine());
+        newpoke.exp = parseInt(reader.readLine());
+        newpoke.nature = reader.readLine();
+        newpoke.nonvolStatus = reader.readLine();
+        String pokeball = reader.readLine();
+        if (pokeball.equals("pokeball")) { //gets pokeballtype the pokemon is in
+          newpoke.pokeball = data.pokeball;
+        } else {
+          newpoke.pokeball = data.masterball;
+        }
+        String[] statnames = {"hp","atk","def","spatk","spdef","spd"};
+        for (String stat:statnames) {
+          String data[] = reader.readLine().split(" "); //the saved data file will have 6 lines each 3 values each corresponding to stat, evs, and ivs
+          newpoke.stats.put(stat,parseInt(data[0]));
+          newpoke.EVs.put(stat,parseInt(data[1]));
+          newpoke.IVs.put(stat,parseInt(data[2]));
+        }
+        int movesAmt = parseInt(reader.readLine());
+        for (int m = 0; m < movesAmt; m ++){
+          String moveid = reader.readLine();
+          newpoke.moves[m] = new Move(moveid);
+        }
+        temp.add(newpoke);
+        println(newpoke.toString());
+      }
+      player.team = temp;
+    } catch (Exception e) {
+      animations.overworldComment("BAD FILE!!","commanderror");
+    }
   }
 }
 
@@ -128,20 +182,24 @@ void checkWASD(){
 }
   
 void showCharacters(){
-  for (NPC npc:npcs){
-    if (npc.ypos > player.ypos) {
-      player.showPlayer();
-      npc.display();
-      npc.encounter();
-    } else if (npc.ypos < player.ypos) {
-      npc.display();
-      npc.encounter();
-      player.showPlayer();
-    } else {
-      npc.display();
-      npc.encounter();
-      player.showPlayer();
+  if (npcs.length > 0) {
+    for (NPC npc:npcs){
+      if (npc.ypos > player.ypos) {
+        player.showPlayer();
+        npc.display();
+        npc.encounter();
+      } else if (npc.ypos < player.ypos) {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      } else {
+        npc.display();
+        npc.encounter();
+        player.showPlayer();
+      }
     }
+  } else {
+    player.showPlayer();
   }
 }
 

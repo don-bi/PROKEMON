@@ -1,6 +1,6 @@
 public class ScreenAnimations {
   boolean inAnimation, fadein, fadeout, commenting, hp, exp, transition, faint, balling, ballshake, captured, battlestart, allythrow;
-  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow, opponentswitch;
+  boolean allywhiteflash,enemywhiteflash,switchpoke, owcomment, opponentthrow, opponentswitch, potion;
   PImage savedSprite, ballType;
   Pokemon hplowerer, fainter;
   int prevHp,newHp,prevExp,gainedExp;
@@ -25,7 +25,7 @@ public class ScreenAnimations {
       inAnimation = true;
       fadein = true;
     }
-    println(choice);
+    //println(choice);
     pushMatrix();
     if (frameCount > 0) {
       if (owcomment) {
@@ -296,26 +296,37 @@ public class ScreenAnimations {
         }
       }
       if (enemywhiteflash) {
-        PImage guy = data.player1;
-        image(guy,425-guy.width,864-guy.height);
+        if (!opponentswitch) {
+          PImage guy = data.player1;
+          image(guy,425-guy.width,864-guy.height);
+        }
         if (frame <= 45) { //screen flashing white when opponent pokemon is sent out
           frame ++;
           fill(255,255-frame*5);
           rect(0,0,1440,864);
+          textSize(40);
+          fill(0);
           if (frame < 30) {
             pushMatrix();
-            textSize(40);
-            fill(0);
             translate(-720+frame*24,0);
             image(data.enemyUi,320,150);
             image(data.miniHpBar,476,218);
             text(battle.enemy.name,348,195);
             text("Lv"+battle.enemy.level,588,195);
             popMatrix();
+          } else if (frame <= 45) {
+            image(data.enemyUi,320,150);
+            image(data.miniHpBar,476,218);
+            text(battle.enemy.name,348,195);
+            text("Lv"+battle.enemy.level,588,195);
           }
           if (frame == 45) {
             if (opponentswitch) {
-              battleComment("What will " + battle.ally.name + " do?", "newturn");
+              opponentswitch = false;
+              enemywhiteflash = false;
+              inAnimation = false;
+              battleComment("What will " + battle.ally.name + " do?","");
+              currentGui = data.fightOptions;
             } else {
               enemywhiteflash = false;
               inAnimation = false;
@@ -356,14 +367,19 @@ public class ScreenAnimations {
         image(data.miniHpBar.get(0,0,battle.enemy.hp*192/battle.enemy.stats.get("hp"),8),476,218);
         hplowerer = null;
         hp = false;
-        if (choice.equals("fight")) {
-          setNewStatus(1);
-        } else if (choice.equals("secondAttack")) {
-          setNewStatus(2);
-        } else if (choice.equals("statusdamage2")) {
-          statusDamage(2);
-        } else if (choice.equals("statusdamage3")) {
-          battleComment("","newturn");
+        if (potion) {
+          if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+          potion = false;
+        } else {
+          if (choice.equals("fight")) {
+            setNewStatus(1);
+          } else if (choice.equals("secondAttack")) {
+            setNewStatus(2);
+          } else if (choice.equals("statusdamage2")) {
+            if (!statusDamage(2)) battleComment("","newturn");
+          } else if (choice.equals("statusdamage3")) {
+            battleComment("","newturn");
+          }
         }
       }
     }
@@ -408,6 +424,15 @@ public class ScreenAnimations {
             battlecomment = null;
           }
           
+          else if (choice.equals("fightoptions")) {
+            battleComment("What will " + battle.ally.name + " do?","");
+            currentGui = data.fightOptions;
+          }
+          
+          else if (choice.equals("potion")) {
+            potion();
+          }
+            
           else if (choice.equals("skip1")) {
             effectivenessMessage(1,1);
           }
@@ -416,8 +441,12 @@ public class ScreenAnimations {
             battleComment(battle.attacker.name + " used " + battle.attacker.currentMove + "!","fight");
           }
           
+          else if (choice.equals("miss1")) {
+            battleComment("The attack missed!","skip1");
+          }
+          
           else if (choice.equals("fight")) {
-            if (!transition) hpBar(battle.attacker, battle.defender, "attack");
+            if (!transition) hpBar(battle.attacker, battle.defender, "attack");  
           } 
           
           else if (choice.equals("status1")) {
@@ -426,10 +455,20 @@ public class ScreenAnimations {
           
           else if (choice.equals("effective1")) {
             if (battle.checkDefenderAlive()) {
-              if (!statusSkip(battle.defender)) battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+              if (!statusSkip(battle.defender)) {
+                if (battle.defender.currentMove.accuracy > (int)random(100)) {
+                  battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","secondAttack");
+                } else {
+                  battleComment(battle.defender.name + " used " + battle.defender.currentMove + "!","miss2");
+                }
+              }
             } else {
               faint(battle.defender);
             }
+          }
+          
+          else if (choice.equals("miss2")) {
+            battleComment("The attack missed!","skip2");
           }
           
           else if (choice.equals("escape")) {
@@ -513,11 +552,19 @@ public class ScreenAnimations {
             transition = true;
           }
           
+          else if (choice.equals("wintrainer")) {
+            NPC guy = battle.opponent;
+            battleComment("You have won $" + guy.reward + " from " + guy.type + " " + guy.name + "!","win");
+          }
           
           else if (choice.equals("win")) {
             fainter = null;
             captured = false;
             returnHome();
+          }
+          
+          else if (choice.equals("losetrainer")) {
+            battleComment("You have lost the battle...","lose");
           }
           
           else if (choice.equals("lose")) {
@@ -576,10 +623,12 @@ public class ScreenAnimations {
   }
   
   void returnHome(){
+    NPC guy = battle.opponent;
     battle = null;
     currentGui = data.homeScreen;
     battlecomment = null;
     inAnimation = false;
+    if (choice.equals("win") && guy != null) overworldComment(guy.losecomment,"commanderror"); //made choice commanderror to make the battlecomment null after
   }
   
   void effectivenessMessage(float effectiveness, int attack){
@@ -608,6 +657,19 @@ public class ScreenAnimations {
     hp = true;
     inAnimation = true;
     transition = true;
+  }
+  
+  void potion(){
+    prevHp = battle.ally.hp;
+    newHp = battle.ally.hp + 50;
+    if (newHp > battle.ally.stats.get("hp")) newHp = battle.ally.stats.get("hp");
+    hplowerer = battle.ally;
+    frame = 1;
+    hp = true;
+    potion = true;
+    inAnimation = true;
+    transition = true;
+    battlecomment = null;
   }
   
   void expBar(){
@@ -650,7 +712,8 @@ public class ScreenAnimations {
       fainter = null;
       battlecomment = null;
     } else {
-      battleComment("You have lost the battle...","lose");
+      NPC guy = battle.opponent;
+      battleComment(guy.wincomment,"losetrainer");
     }
   }
   
@@ -770,7 +833,7 @@ public class ScreenAnimations {
       attacked = battle.attacker;
     }
     Move usedmove = attacker.currentMove;
-    if (usedmove.effect != 1) {
+    if (usedmove.effect != 1) {  
       if (usedmove.damageClass.equals("status")) effectiveness = 1; //if it's a status move, there will be no effectiveness message 
       if (attacked.nonvolStatus.equals("none")) { //checks for applying nonvolatile statuses
         
@@ -853,6 +916,8 @@ public class ScreenAnimations {
       if (allyStatus.equals("burn") || allyStatus.equals("poison")) {
         battleComment(battle.ally.name + " is hurt by its " + allyStatus + "!","statusdamage2");
         return true;
+      } else {
+        battleComment("","newturn");
       }
     } else {
       String enemyStatus = battle.enemy.nonvolStatus;

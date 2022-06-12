@@ -12,7 +12,7 @@ public class Command {
     animations.inAnimation = true;
   }
   
-  void execute(){
+  void execute(){ //excutes the command when pressed enter again based on first word
     try {
       if (currentcommand.length() > 0) {
         String[] parts = currentcommand.split(" ");
@@ -40,6 +40,15 @@ public class Command {
           Pokemon poke = new Pokemon(parts[1].substring(0,1).toUpperCase() + parts[1].substring(1),parseInt(parts[2]));
           battle = new BattleMode(poke);
         }
+        if (parts[0].equals("giveitems")) {
+          player.bag.pokeballs += 5;
+          player.bag.masterballs += 5;
+          player.bag.potions += 5;
+        }
+        if (parts[0].equals("teleport")) {
+          currentMap = "Route1";
+          currentMapTiles.loadMap(getSubDir("Maps","Route1.txt"));
+        }
           
       }
       commandmode = false;
@@ -53,7 +62,7 @@ public class Command {
     }
   }
   
-  void display(){
+  void display(){ //displays the command bar =
     fill(255);
     rect(0,392,1440,40);
     fill(0);
