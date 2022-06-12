@@ -701,6 +701,7 @@ public class ScreenAnimations {
         }
       }
     }
+    battle.ally.recalcStats();
   }
   
   void checkAllyAlive(){
