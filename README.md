@@ -13,19 +13,19 @@ https://docs.google.com/document/d/1yVzZRDgaRQPYU-O_Df970VfCovaV3XTKwuiIwCcpgyU/
 Pull from main branch and run Game.pde in processing.
 
 ## Cheat Commands ##
-*set partyNumber(1-6) pokemonName level(1-100)
-  *Ex. set 1 arceus 100 - sets your party slot 1 to a level 100 Arceus
-*setmove partyNumber(1-6) moveNumber(1-4) moveName
-  *Non-implemented status moves will display a message saying the move is not implemented yet
-  *If the move name has a space, replace the space with a -, ie. hyper beam -> hyper-beam
-  *Ex. setmove 1 1 thunder-wave - sets your party slot 1's first move to Thunder Wave
-*giveitems - gives 5 pokeballs, 5 masterballs, and 5 potions to the player
-*teleport - teleports the player to Route 1 instantly
+* set partyNumber(1-6) pokemonName level(1-100)
+  * Ex. set 1 arceus 100 - sets your party slot 1 to a level 100 Arceus
+* setmove partyNumber(1-6) moveNumber(1-4) moveName
+  * Non-implemented status moves will display a message saying the move is not implemented yet
+  * If the move name has a space, replace the space with a -, ie. hyper beam -> hyper-beam
+  * Ex. setmove 1 1 thunder-wave - sets your party slot 1's first move to Thunder Wave
+* giveitems - gives 5 pokeballs, 5 masterballs, and 5 potions to the player
+* teleport - teleports the player to Route 1 instantly
 
 ## Gameplay ##
 The game is mostly just standard pokemon. You could walk around, interact with signs and go inside buildings while you're in the map. When your pokemon are low on hp, you could go to the pokemon center to heal it by interacting with the desk.
 
-We also mimicked the pokemon battling to a large degree, except with certain move effects such as bone rush and water shuriken hitting for multiple times, or leech seed having a lingering effect. To battle, simply choose one of the four options: fight, pokemon, bag, run when prompted. 
+We also mimicked the pokemon battling to a large degree, except with certain move effects such as bone rush and water shuriken hitting for multiple times, or leech seed having a lingering effect. To battle, simply choose one of the four options: fight, pokemon, bag, run when prompted.
 
 When choosing fight, there will be four moves to choose from for your pokemon's learned moves before initiating the turn and causing each pokemon to attack each other.
 
