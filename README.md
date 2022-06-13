@@ -134,4 +134,5 @@ If you somehow lose and all your pokemon dies, you will automatically be telepor
 
 ### 6/12/2022 ###
 **Donald**: Touched up on some small things such as bugs and quality of life features. Finished updating the readme to include everything required.
+
 **Hanson**: Presentation and documentation updates
