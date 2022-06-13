@@ -13,6 +13,7 @@ https://docs.google.com/document/d/1yVzZRDgaRQPYU-O_Df970VfCovaV3XTKwuiIwCcpgyU/
 Pull from main branch and run Game.pde in processing.
 
 ## Cheat Commands ##
+**Press ENTER to open command line**
 * set partyNumber(1-6) pokemonName level(1-100)
   * Ex. set 1 arceus 100 - sets your party slot 1 to a level 100 Arceus
 * setmove partyNumber(1-6) moveNumber(1-4) moveName
@@ -40,6 +41,8 @@ When choosing run, you will escape from the battle if your pokemon's speed is hi
 You can also encounter trainers (only one, Rich Guy William) and fight a preset team that he has. There's nothing much different from fighting wild pokemon, but you can't capture and run in trainer battles.
 
 If you somehow lose and all your pokemon dies, you will automatically be teleported to the pokemon center where all your pokemon are healed.
+
+If you want to save your team, just click the save button in the menu and then load it later using the file that was saved.
 
 ## Development Log ##
 
