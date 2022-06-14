@@ -44,6 +44,8 @@ If you somehow lose and all your pokemon dies, you will automatically be telepor
 
 If you want to save your team, just click the save button in the menu and then load it later using the file that was saved.
 
+**PRESS SPACEBAR WHEN FACING SIGNS OR INTERACTABLE STUFF TO INTERACT WITH THEM**
+
 ## Development Log ##
 
 ### 5/22/2022 ###
