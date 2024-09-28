@@ -1,3 +1,13 @@
+## Showcase ##
+- Gif of user encountering a Pokemon and capturing it
+![](https://github.com/don-bi/PROKEMON/blob/main/java_Yflx8cMWa9.gif)
+
+- Gif of user encountering a trainer and being affected by the paralysis status
+![](https://github.com/don-bi/PROKEMON/blob/main/java_JRwXEduIJ3.gif)
+
+- Gif of user swapping Pokemon out and using an attack
+![](https://github.com/don-bi/PROKEMON/blob/main/java_6bg5sfiQs7.gif)
+
 ## Brief Description ##
 We created a Pokémon remake with some main features, mainly from Pokémon Emerald and Black and White, using Processing. The game will include the player walking around and exploring the map, encountering wild Pokémon in the grass, and fighting NPC trainers that have their own teams. Every Pokémon up to Generation 5 will be available to use and implemented through different datasets found online, and moves that don't have special conditions, such as solar beam that requires a few turns to use or TMs and egg moves that are learned differently, could be used.
 
@@ -37,3 +47,26 @@ If you somehow lose and all your pokemon dies, you will automatically be telepor
 If you want to save your team, just click the save button in the menu and then load it later using the file that was saved.
 
 **PRESS SPACEBAR WHEN FACING SIGNS OR INTERACTABLE STUFF TO INTERACT WITH THEM**
+
+## Most of the mechanics we implemented ##
+- Main status effects (freeze, sleep, paralysis, poison, toxic, burn)
+- Super effectiveness, ineffectiveness, immunities, quadruple effectiveness
+- Healing at the pokecenter
+- Healing Pokemon with potions
+- Capturing Pokemon with correct odds based on each specific Pokemon
+- Pokemon leveling system
+- Pokemon fainting at 0 hp
+- Teleported to pokecenter when all your Pokemon die
+- Trainer encounters where the guy walks up to you, and you can't flee
+- Save and load using text files
+- Wild Pokemon spawn with randomized IVs
+- When you faint opposing Pokemon your own Pokemon gain the correct EV values, affecting stats
+- *SIGNS* are readable by pressing space bar
+- Certain objects on the map that have models that only cover half of the tile (eg. trees/ boxes) cover the respective player model part but doesn't obstruct the walking
+- Walking animations
+- Every Pokemon and move (not all of ones with special effects work) up to Gen 5 (Included)
+- Implemented stat stage icreases (eg. swords dance sharply raising attack)
+- Built my own custom maps using the tiler software with free tile maps I found online
+- Added an interactive map such as blocing  the player movement and teleportation zones through the MapModifier software in this repo, that lets me make a csv file with terms like BLOCK, BLOCK, GRASS, DOOR, to portray the map
+- Made every Pokemon sprite fit on that circle in the battle background by making a software to chop excess top and bottom pixels
+- Scraped the sprite images off some website
